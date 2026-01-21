@@ -7,10 +7,19 @@ using UnityEngine.Localization;
 public class SODilema : ScriptableObject
 {
     [SerializeField] LocalizedString question;
-    List<Condition> AppearanceConditions;
+    public List<Condition> AppearanceConditions { get; }
     [SerializeField] Choice firstChoice;
     [SerializeField] Choice secondChoice;
     [SerializeField] bool bTimed = false;
     [SerializeField] Choice timeChoice;
     [SerializeField] bool bOneTime = false;
+
+    public bool IsDilemaAvalaible()
+    {
+        foreach (Condition condition in AppearanceConditions)
+        {
+            if (!condition.IsConditionReached()) return false;
+        }
+        return true;
+    }
 }

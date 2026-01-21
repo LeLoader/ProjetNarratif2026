@@ -5,5 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DBDilema", menuName = "DataTables/Dilemas Data Table")]
 public class DBDilema : ScriptableObject
 {
-    [field: SerializeField] public List<SODilema> Dilemas { get; }
+    public List<SODilema> dilemas;
+
+    public List<SODilema> GetAllAvalaibleDilemas()
+    {
+        return dilemas.FindAll((dilema) => dilema.IsDilemaAvalaible());
+    }
 }

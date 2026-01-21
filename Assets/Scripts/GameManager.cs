@@ -2,5 +2,5 @@ using UnityEngine;
 
 public static class GameManager
 {
-    [field: SerializeField] public static SOGlobalMetrics SOGlobalMetrics { get; }
+    public readonly static SOGlobalMetrics globalMetrics = (SOGlobalMetrics)Resources.Load("Databases/DBDilema");
 }
