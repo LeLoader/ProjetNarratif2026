@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: ProjetNarratifCore::SODilema
   question:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:53c986b5b2dd7674f85b73feb77426b3
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 54289346560
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -24,9 +24,9 @@ MonoBehaviour:
   firstChoice:
     label:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:587360324b0872a49b219fe6fed5e8ac
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 3843457134592
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
@@ -37,9 +37,9 @@ MonoBehaviour:
   secondChoice:
     label:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:587360324b0872a49b219fe6fed5e8ac
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 4210320322560
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0

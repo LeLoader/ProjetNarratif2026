@@ -14,7 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
   m_TableCollectionName: DilemasAnswers
   m_TableCollectionNameGuidString: 587360324b0872a49b219fe6fed5e8ac
-  m_Entries: []
+  m_Entries:
+  - m_Id: 3843457134592
+    m_Key: ANS_000_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4210320322560
+    m_Key: ANS_000_2
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
