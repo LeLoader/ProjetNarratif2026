@@ -16,10 +16,10 @@ public struct Metric
 [Serializable]
 public struct Choice
 {
+    
     [SerializeField] LocalizedString label;
-    // [SerializeField] List<ActionBase> Actions;
     [SerializeField] List<Consequence> Consequences;
-    // [SerializeField] List<ActionBase> NewActions;
+    
 }
 
 [Serializable]
