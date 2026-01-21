@@ -8,9 +8,6 @@ public class BehaviorController : MonoBehaviour
     [Header("EXPOSED VARIABLE")]
     [SerializeField] private NavMeshAgent agentComponent;
     
-    
-    
-    
     #region Human States
     
     [SerializeField] private HumanState _currentState = HumanState.Roaming;
