@@ -1,9 +1,19 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class BehaviorController : MonoBehaviour
 {
+    // DILEM ACTUEL DE LA CHAINE //
+    private SODilema currentDilema;
+    
+    private bool _inAction = false;
+    // LISTE D'ACTIONS DISPONIBLES A EFFECTUER A LA CHAINE //
+    private List<SOActions> availableActions = new List<SOActions>();
+    
+    // LIST D'INTERACTIONS POSSIBLES //
+    private List<SOInteraction> availableInteractions = new List<SOInteraction>(); 
     
     [Header("EXPOSED VARIABLE")]
     [SerializeField] private NavMeshAgent agentComponent;
@@ -32,15 +42,28 @@ public class BehaviorController : MonoBehaviour
 
     #region Lyfe Cycle Methods
 
-    private void Start()
+    public void Intialize(SODilema newDilema)
     {
-        UpdateStateActions();
+        currentDilema = newDilema;
+    }
+    
+    private void CheckActions()
+    {
+        if (_inAction)
+            return;
+        
+        _inAction = true;
+        
     }
 
     #endregion
 
     #region AI Methods
 
+    public void MoveToPosition(Vector3 targetPosition)
+    {
+        agentComponent.SetDestination(targetPosition);
+    }
     public void StopAi()
     {
         agentComponent.isStopped = true;
@@ -78,25 +101,7 @@ public class BehaviorController : MonoBehaviour
     }
 
     #endregion
-
-    private void UpdateStateActions()
-    {
-        switch (_currentState)
-        {
-            case HumanState.Questioning:
-                
-                agentComponent.SetDestination(SceneManager.instance.GetPcTransform().position);
-                StartHumanAnimation();
-                
-                break;
-            case HumanState.Answering:
-                break;
-            case HumanState.Roaming:
-                break;
-            case HumanState.DoingTask:
-                break;
-        }
-    }
+    
 }
 
 public enum HumanState
