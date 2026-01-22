@@ -16,10 +16,15 @@ public struct Metric
 [Serializable]
 public struct Choice
 {
-    [SerializeField] LocalizedString label;
+    [SerializeField] public LocalizedString label;
     [SerializeField] List<ActionBase> Actions;
     [SerializeField] List<Consequence> Consequences;
-    [SerializeField] List<ActionBase> NewActions;
+    [SerializeField] List<SODilema> NewDilemas;
+
+    public void Activate()
+    {
+        DilemaManager.dilemaDatabase.AddDilema(NewDilemas);
+    }
 }
 
 [Serializable]

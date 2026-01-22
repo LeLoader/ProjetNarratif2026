@@ -1,3 +1,4 @@
+using EditorAttributes;
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,5 +15,10 @@ public static class DilemaManager
     public static List<SODilema> GetAllAvalaibleDilemas()
     {
         return dilemaDatabase.GetAllAvalaibleDilemas();
+    }
+
+    public static SODilema GetRandomDilema()
+    {
+        return dilemaDatabase.GetRandomDilema(); 
     }
 }
