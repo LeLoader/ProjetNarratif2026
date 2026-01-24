@@ -10,27 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: DilemasAnswers Shared Data
+  m_Name: DilemasTable Shared Data
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
-  m_TableCollectionName: DilemasAnswers
-  m_TableCollectionNameGuidString: 587360324b0872a49b219fe6fed5e8ac
+  m_TableCollectionName: DilemasTable
+  m_TableCollectionNameGuidString: c219af5ccd0ac1f4a91b0c5a43c702a3
   m_Entries:
+  - m_Id: 54289346560
+    m_Key: QUE_FRIEND
+    m_Metadata:
+      m_Items: []
   - m_Id: 3843457134592
-    m_Key: ANS_000_1
+    m_Key: ANS_FRIEND_1
     m_Metadata:
       m_Items: []
   - m_Id: 4210320322560
-    m_Key: ANS_000_2
+    m_Key: ANS_FRIEND_2
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 4465076523819860229
+    rid: 5298500908919816383
   references:
     version: 2
     RefIds:
-    - rid: 4465076523819860229
+    - rid: 5298500908919816383
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1769004098060
+        m_CustomEpoch: 1769276680775

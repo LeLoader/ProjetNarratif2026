@@ -15,13 +15,8 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_GUID: a922db7288c507f43b71da5ab59d9254
   m_SerializeEntries:
-  - m_GUID: 53c986b5b2dd7674f85b73feb77426b3
-    m_Address: Assets/Localization/DilemasQuestions Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 587360324b0872a49b219fe6fed5e8ac
-    m_Address: Assets/Localization/DilemasAnswers Shared Data.asset
+  - m_GUID: c219af5ccd0ac1f4a91b0c5a43c702a3
+    m_Address: Assets/Localization/DilemasTable Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -10,20 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: DilemasAnswers_en
+  m_Name: DilemasTable_fr
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
   m_LocaleId:
-    m_Code: en
-  m_SharedData: {fileID: 11400000, guid: 587360324b0872a49b219fe6fed5e8ac, type: 2}
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: c219af5ccd0ac1f4a91b0c5a43c702a3, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
+  - m_Id: 54289346560
+    m_Localized: Es-tu mon ami?
+    m_Metadata:
+      m_Items: []
   - m_Id: 3843457134592
-    m_Localized: YES
+    m_Localized: OUI
     m_Metadata:
       m_Items: []
   - m_Id: 4210320322560
-    m_Localized: NO
+    m_Localized: NON
     m_Metadata:
       m_Items: []
   references:

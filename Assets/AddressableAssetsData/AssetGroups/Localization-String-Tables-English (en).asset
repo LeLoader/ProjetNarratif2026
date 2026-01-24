@@ -21,14 +21,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6f087149f5262f2459ae4606cee6e86e
-    m_Address: DilemasAnswers_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9f94b152961a85c49a6bc46100407a29
-    m_Address: DilemasQuestions_en
+  - m_GUID: f6da921059dc166458423bf9b7b067ff
+    m_Address: DilemasTable_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
