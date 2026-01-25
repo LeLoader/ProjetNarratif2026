@@ -17,17 +17,17 @@ public struct Metric
 public struct Choice
 {
     [SerializeField] public LocalizedString label;
-    [SerializeField] List<ActionBase> Actions;
-    [SerializeField] List<Consequence> Consequences;
-    [SerializeField] List<SODilema> NewDilemas;
+    [SerializeField] public List<ActionBase> actions;
+    [SerializeField] public List<Consequence> consequences;
+    [SerializeField] public List<SODilema> newDilemas;
 
     public void Activate()
     {
-        DilemaManager.dilemaDatabase.AddDilema(NewDilemas);
+        DilemaManager.dilemaDatabase.AddDilemaInPool(newDilemas);
     }
 }
 
-[Serializable]
+[Serializable] // Trop de condition différentes, en faire un SO?
 public struct Condition
 {
     [SerializeField] EMetricType metricType;

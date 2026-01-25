@@ -21,4 +21,9 @@ public static class DilemaManager
     {
         return dilemaDatabase.GetRandomDilema(); 
     }
+
+    public static SODilema GetDilema(string key)
+    {
+        return dilemaDatabase.GetDilema(key);
+    }
 }
