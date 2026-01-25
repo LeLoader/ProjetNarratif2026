@@ -55,6 +55,18 @@ public class DBDilema : ScriptableObject
         return avalaibleDilemas[Random.Range(0, avalaibleDilemas.Count)];
     }
 
+    public void AddDilema(SODilema dilema)
+    {
+        if (dilema)
+        {
+            dilemas.Add(dilema);
+        }
+        else
+        {
+            Debug.LogWarning("Tried to add dilema in database, but it was null");
+        }
+    }
+
     public void AddDilemaInPool(SODilema dilema)
     {
         if (dilema)
@@ -63,7 +75,7 @@ public class DBDilema : ScriptableObject
         }
         else
         {
-            Debug.LogWarning("Tried to add dilema in pool, but the key was invalid");
+            Debug.LogWarning("Tried to add dilema in pool, but it was null");
         }
     }
 

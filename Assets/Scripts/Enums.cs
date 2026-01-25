@@ -1,11 +1,17 @@
 using System;
 using UnityEngine;
 
-[Flags, Serializable]
+[Serializable]
 public enum EMetricType
 {
     NONE      = 0,
-    FREEWILL     = 1 << 0, // INDOCTRINATED
+    FREEWILL  = 1 << 0, // INDOCTRINATED
     PEACE     = 1 << 1, // ANGER
-    HAPPINESS = 1 << 2 // SADNESS
+}
+
+public enum EMetricState
+{
+    NEUTRAL  = 0,
+    POSITIVE = 1,
+    NEGATIVE = 2
 }

@@ -11,9 +11,11 @@ public class SODilema : ScriptableObject
     [SerializeField] public bool bRepeatable = false;
     [SerializeField] public LocalizedString question;
     [SerializeField] public List<Condition> appearanceConditions = new();
+    [SerializeField] public List<SODilema> newDilemas = new();
+    [SerializeField] public int npcToSpawn = 0;
     [SerializeField] public Choice firstChoice;
     [SerializeField] public Choice secondChoice;
-    [SerializeField] public List<SODilema> newDilemas;
+
   
     public bool IsDilemaAvalaible()
     {

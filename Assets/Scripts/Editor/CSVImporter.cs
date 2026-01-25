@@ -81,7 +81,7 @@ public class CSVImporter : EditorWindow
         box.Add(validLabel);
         box.Add(invalidLabel);
 
-        Button importDataEraseButton = new Button(() => 
+        Button importDataEraseButton = new Button(() =>
         {
             ImportDilemas(true);
         });
@@ -100,75 +100,158 @@ public class CSVImporter : EditorWindow
     {
         if (File.Exists(selectFilePathButton.text))
         {
-            string[] allLines = File.ReadAllLines(selectFilePathButton.text);
+            PreImportDilemas(eraseExistingAssets);
+            PostImportDilemas(eraseExistingAssets);
+        }
+    }
 
-            for (int i = 0; i < allLines.Length; i++)
+    private void PreImportDilemas(bool eraseExistingAssets)
+    {
+        string[] allLines = File.ReadAllLines(selectFilePathButton.text);
+
+        for (int i = 0; i < allLines.Length; i++)
+        {
+            string line = allLines[i];
+
+            Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+            string[] splitData = CSVParser.Split(line);
+
+            // 0 INDEX
+            // 1 REPEATABLE
+            // 2 CONDITIONS
+            // 3 NEW DILEMAS
+            // 4 NPC TO SPAWN
+
+            // 1st CHOICE
+            // 5 NEW DILEMAS
+            // 6 ACTIONS
+
+            // 7 + ENDOCTRINATED
+            // 8 / NEUTRAL
+            // 9 - FREEWILL
+            // 10 + VIOLENCE
+            // 11 / NEUTRAL
+            // 12 - PEACE
+
+            // 2nd CHOICE
+            // 13 NEW DILEMAS
+            // 14 ACTIONS
+
+            // 15 + ENDOCTRINATED
+            // 16 / NEUTRAL
+            // 17 - FREEWILL
+            // 18 + VIOLENCE
+            // 19 / NEUTRAL
+            // 20 - PEACE
+
+
+            if (splitData[0] == "")
             {
-                string line = allLines[i];
-
-                //string[] splitData = line.Split(',');
-                Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
-                string[] splitData = CSVParser.Split(line);
-
-
-                if (splitData[0] == "")
-                {
-                    Debug.LogWarning($"Empty key found at line {i}");
-                    continue;
-                }
-
-                if (!eraseExistingAssets && UnityEditor.AssetDatabase.AssetPathExists($"Assets/Data/Dilemas/DIL_{splitData[0]}.asset"))
-                {
-                    continue;
-                }
-
-                SODilema dilema = CreateInstance<SODilema>();
-                
-                dilema.key = splitData[0];
-
-                var e = LocalizationSettings.AssetDatabase.GetTableEntry("DilemasTable", $"QUE_{dilema.key}_1");
-
-                if (bool.TryParse(splitData[1], out dilema.bRepeatable))
-                {
-
-                }
-              
-                dilema.question = new LocalizedString("DilemasTable", $"QUE_{dilema.key}");
-                // dilema.appearanceConditions = [splitData[3]];
-                foreach (string key in splitData[4].Split(','))
-                {
-                    dilema.newDilemas.Add(DilemaManager.GetDilema(key));
-                }
-
-                // First choice
-                dilema.firstChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilema.key}_1");
-                // dilema.firstChoice.actions. ;
-                // dilema.firstChoice.consequences. ;
-                // dilema.firstChoice.newDilemas = DilemaManager.GetDilema([]);
-
-                // Second choice
-                dilema.secondChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilema.key}_2");
-                // dilema.secondChoice.actions. ;
-                // dilema.secondChoice.consequences. ;
-                // dilema.secondChoice.newDilemas. ;
-
-                // Find a way to chose if you want to erase old assets, or keep them if they already exist
-                // string path = UnityEditor.AssetDatabase.GenerateUniqueAssetPath($"Assets/Data/Dilemas/DIL_{dilema.key}.asset");
-
-                string path = "";
-                if (eraseExistingAssets)
-                {
-                    path = $"Assets/Data/Dilemas/DIL_{dilema.key}.asset";
-                }
-                else
-                {
-                    path = UnityEditor.AssetDatabase.GenerateUniqueAssetPath($"Assets/Data/Dilemas/DIL_{dilema.key}.asset");
-                }
-
-                AssetDatabase.CreateAsset(dilema, path);
-                AssetDatabase.SaveAssets();
-                Selection.activeObject = dilema;
+                Debug.LogWarning($"Empty key found at line {i}");
+                continue;
             }
+
+            if (!eraseExistingAssets && UnityEditor.AssetDatabase.AssetPathExists($"Assets/Data/Dilemas/DIL_{splitData[0]}.asset"))
+            {
+                continue;
+            }
+
+            SODilema dilema = CreateInstance<SODilema>();
+            dilema.key = splitData[0];
+
+            bool bRepeatable;
+            if (bool.TryParse(splitData[1], out bRepeatable)) dilema.bRepeatable = bRepeatable;
+
+            dilema.question = new LocalizedString("DilemasTable", $"QUE_{dilema.key}");
+            // dilema.appearanceConditions = [splitData[2]];
+
+            int npcToSpawn;
+            if (int.TryParse(splitData[4], out npcToSpawn)) dilema.npcToSpawn = npcToSpawn;
+
+            // First choice
+            dilema.firstChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilema.key}_1");
+
+            // dilema.firstChoice.actions. ;
+            dilema.firstChoice.consequences = new()
+            {
+                new(EMetricType.FREEWILL, EMetricState.NEGATIVE, int.Parse(splitData[7])),
+                new(EMetricType.FREEWILL, EMetricState.NEUTRAL, int.Parse(splitData[8])),
+                new(EMetricType.FREEWILL, EMetricState.POSITIVE, int.Parse(splitData[9])),
+
+                new(EMetricType.PEACE, EMetricState.NEGATIVE, int.Parse(splitData[10])),
+                new(EMetricType.PEACE, EMetricState.NEUTRAL, int.Parse(splitData[11])),
+                new(EMetricType.PEACE, EMetricState.POSITIVE, int.Parse(splitData[12]))
+            };
+
+            // Second choice
+            dilema.secondChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilema.key}_2");
+
+            // dilema.secondChoice.actions. ;
+
+            dilema.secondChoice.consequences = new()
+            {
+                new(EMetricType.FREEWILL, EMetricState.NEGATIVE, int.Parse(splitData[15])),
+                new(EMetricType.FREEWILL, EMetricState.NEUTRAL, int.Parse(splitData[16])),
+                new(EMetricType.FREEWILL, EMetricState.POSITIVE, int.Parse(splitData[17])),
+
+                new(EMetricType.PEACE, EMetricState.NEGATIVE, int.Parse(splitData[18])),
+                new(EMetricType.PEACE, EMetricState.NEUTRAL, int.Parse(splitData[19])),
+                new(EMetricType.PEACE, EMetricState.POSITIVE, int.Parse(splitData[20]))
+            };
+
+            DilemaManager.dilemaDatabase.AddDilema(dilema);
+        }
+    }
+
+    private void PostImportDilemas(bool eraseExistingAssets)
+    {
+        string[] allLines = File.ReadAllLines(selectFilePathButton.text);
+
+        for (int i = 0; i < allLines.Length; i++)
+        {
+            string line = allLines[i];
+
+            Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+            string[] splitData = CSVParser.Split(line);
+
+            SODilema dilema = DilemaManager.GetDilema(splitData[0]);
+
+            // dilema.appearanceConditions = [splitData[2]];
+
+            foreach (string key in splitData[3].Split(','))
+            {
+                dilema.newDilemas.Add(DilemaManager.GetDilema(key));
+            }
+
+            dilema.firstChoice.newDilemas = new();
+            foreach (string key in splitData[5].Split(','))
+            {
+                dilema.firstChoice.newDilemas.Add(DilemaManager.GetDilema(key));
+            }
+
+            // dilema.firstChoice.actions. ;
+
+            dilema.secondChoice.newDilemas = new();
+            foreach (string key in splitData[13].Split(','))
+            {
+                dilema.secondChoice.newDilemas.Add(DilemaManager.GetDilema(key));
+            }
+
+            // dilema.secondChoice.actions. ;
+
+            string path = "";
+            if (eraseExistingAssets)
+            {
+                path = $"Assets/Data/Dilemas/DIL_{dilema.key}.asset";
+            }
+            else
+            {
+                path = UnityEditor.AssetDatabase.GenerateUniqueAssetPath($"Assets/Data/Dilemas/DIL_{dilema.key}.asset");
+            }
+
+            AssetDatabase.CreateAsset(dilema, path);
+            AssetDatabase.SaveAssets();
+            Selection.activeObject = dilema;
         }
     }
 }

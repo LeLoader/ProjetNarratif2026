@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2651869525725fd458aaf3b83932489f, type: 3}
   m_Name: SOGlobalMetrics
   m_EditorClassIdentifier: ProjetNarratifCore::SOGlobalMetrics
-  Metrics:
+  metrics:
   - label:
       m_TableReference:
         m_TableCollectionName: GUID:c237e42b331a11843b0b8cde8db2fc60
