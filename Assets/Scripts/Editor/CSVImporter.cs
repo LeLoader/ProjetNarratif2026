@@ -1,4 +1,5 @@
 using SFB;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -100,18 +101,46 @@ public class CSVImporter : EditorWindow
     {
         if (File.Exists(selectFilePathButton.text))
         {
-            PreImportDilemas(eraseExistingAssets);
-            PostImportDilemas(eraseExistingAssets);
+            string[] allLines = File.ReadAllLines(selectFilePathButton.text);
+            RemoveInvalidLines(ref allLines, eraseExistingAssets);
+
+            PreImportDilemas(allLines);
+            PostImportDilemas(allLines, eraseExistingAssets);
+            EditorUtility.FocusProjectWindow();
         }
     }
 
-    private void PreImportDilemas(bool eraseExistingAssets)
+    private void RemoveInvalidLines(ref string[] lines, bool eraseExistingAssets)
     {
-        string[] allLines = File.ReadAllLines(selectFilePathButton.text);
-
-        for (int i = 0; i < allLines.Length; i++)
+        for (int i = 0; i < lines.Length; i++)
         {
-            string line = allLines[i];
+            string line = lines[i];
+            if (line.Split(',')[0] == "")
+            {
+                Debug.LogWarning($"Empty key found at line {i}");
+                lines[i] = "";
+                // listLines.RemoveAt(i);
+                continue;
+            }
+
+            if (!eraseExistingAssets && UnityEditor.AssetDatabase.AssetPathExists($"Assets/Data/Dilemas/DIL_{line.Split(',')[0]}.asset"))
+            {
+                lines[i] = "";
+                // listLines.RemoveAt(i);
+                continue;
+            }
+        }
+
+        List<string> listLines = lines.ToList();
+        listLines.RemoveAll((a) => a == "");
+        lines = listLines.ToArray();
+    }
+
+    private void PreImportDilemas(string[] linesToImport)
+    {
+        for (int i = 0; i < linesToImport.Length; i++)
+        {
+            string line = linesToImport[i];
 
             Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
             string[] splitData = CSVParser.Split(line);
@@ -143,18 +172,6 @@ public class CSVImporter : EditorWindow
             // 18 + VIOLENCE
             // 19 / NEUTRAL
             // 20 - PEACE
-
-
-            if (splitData[0] == "")
-            {
-                Debug.LogWarning($"Empty key found at line {i}");
-                continue;
-            }
-
-            if (!eraseExistingAssets && UnityEditor.AssetDatabase.AssetPathExists($"Assets/Data/Dilemas/DIL_{splitData[0]}.asset"))
-            {
-                continue;
-            }
 
             SODilema dilema = CreateInstance<SODilema>();
             dilema.key = splitData[0];
@@ -203,13 +220,11 @@ public class CSVImporter : EditorWindow
         }
     }
 
-    private void PostImportDilemas(bool eraseExistingAssets)
+    private void PostImportDilemas(string[] linesToImport, bool eraseExistingAssets)
     {
-        string[] allLines = File.ReadAllLines(selectFilePathButton.text);
-
-        for (int i = 0; i < allLines.Length; i++)
+        for (int i = 0; i < linesToImport.Length; i++)
         {
-            string line = allLines[i];
+            string line = linesToImport[i];
 
             Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
             string[] splitData = CSVParser.Split(line);
@@ -218,15 +233,26 @@ public class CSVImporter : EditorWindow
 
             // dilema.appearanceConditions = [splitData[2]];
 
+            dilema.newDilemas = new();
             foreach (string key in splitData[3].Split(','))
             {
-                dilema.newDilemas.Add(DilemaManager.GetDilema(key));
+                string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
+                SODilema foundDilema = DilemaManager.GetDilema(cleanKey);
+                if (foundDilema)
+                {
+                    dilema.newDilemas.Add(foundDilema);
+                }
             }
 
             dilema.firstChoice.newDilemas = new();
             foreach (string key in splitData[5].Split(','))
             {
-                dilema.firstChoice.newDilemas.Add(DilemaManager.GetDilema(key));
+                string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
+                SODilema foundDilema = DilemaManager.GetDilema(cleanKey);
+                if (foundDilema)
+                {
+                    dilema.firstChoice.newDilemas.Add(foundDilema);
+                } 
             }
 
             // dilema.firstChoice.actions. ;
@@ -234,7 +260,12 @@ public class CSVImporter : EditorWindow
             dilema.secondChoice.newDilemas = new();
             foreach (string key in splitData[13].Split(','))
             {
-                dilema.secondChoice.newDilemas.Add(DilemaManager.GetDilema(key));
+                string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
+                SODilema foundDilema = DilemaManager.GetDilema(cleanKey);
+                if (foundDilema)
+                {
+                    dilema.secondChoice.newDilemas.Add(foundDilema);
+                }
             }
 
             // dilema.secondChoice.actions. ;
