@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a40cccee6039e954fb72f59a0d16444d, type: 3}
+  m_Name: DBDilema
+  m_EditorClassIdentifier: ProjetNarratifCore::DBDilema
+  dilemas:
+  - {fileID: 11400000, guid: beba650ba9d876c41b9fc51f87e21aaa, type: 2}
+  - {fileID: 11400000, guid: 0491fa94b6295f14a92ee61ae78d5a90, type: 2}
+  startDilema: {fileID: 11400000, guid: beba650ba9d876c41b9fc51f87e21aaa, type: 2}
