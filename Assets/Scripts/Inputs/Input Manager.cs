@@ -17,7 +17,8 @@ public class InputManager : MonoBehaviour
         _moveAction.action.performed += _controller.Move;
         _moveAction.action.canceled += _controller.EndMove;
         _zoomAction.action.performed += _controller.Zoom;
-        Debug.Log("Move Bound");
+        //_zoomAction.action.canceled += _controller.StopZoom;
+        Debug.Log("[INPUT MANAGER] Move Bound");
     }
 
     private void OnDisable()
@@ -25,6 +26,7 @@ public class InputManager : MonoBehaviour
         _moveAction.action.performed -= _controller.Move;
         _moveAction.action.canceled -= _controller.EndMove;
         _zoomAction.action.performed -= _controller.Zoom;
-        Debug.Log("Move Unbound");
+        //_zoomAction.action.canceled -= _controller.StopZoom;
+        Debug.Log("[INPUT MANAGER] Move Unbound");
     }
 }
