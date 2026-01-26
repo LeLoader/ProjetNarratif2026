@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
+    [SerializeField] private SODilema startDilema;
+    [SerializeField] private SOActions startAction;
     [Header("Object in Scene")]
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform pcTransform;
@@ -45,6 +47,8 @@ public class SceneManager : MonoBehaviour
         var bc = Instantiate(humanPrefab, spawnPoint.position, spawnPoint.rotation).GetComponent<BehaviorController>();
         if (bc != null)
         {
+            bc.Initialize(startDilema);
+            bc.AddAction(startAction);
         }
     }
 }

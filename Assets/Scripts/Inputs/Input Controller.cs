@@ -4,15 +4,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch =  UnityEngine.InputSystem.EnhancedTouch.Touch;
-using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 public class InputController : MonoBehaviour
 {
-    [SerializeField, Range(0f, 1f)] private float _movementSpeed = 0.01f;
+    [SerializeField, VerticalGroup("Speed Values", true, nameof(_movementSpeed), nameof(_zoomSpeed))] private Void groupHolder;
+
+    [SerializeField, HideProperty, Range(0f, 20f)] private float _movementSpeed = 1f;
+    [SerializeField, HideProperty, Range(0f, 20f)] private float _zoomSpeed = 1f;
 
     [SerializeField, Required] private CinemachineCamera _camera;
 
-    private bool _isZooming;
+    [Tooltip("Zooming with the Camera Fov if true, or by moving the camera if false")]
+    [SerializeField] private bool _isFovZoom;
 
     private void Reset()
     {
@@ -30,16 +33,16 @@ public class InputController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (_isZooming)
+        if (Touch.activeTouches.Count >= 2)
         {
+            Debug.Log($"[INPUT CONTROLLER] not moving");
             return;
         }
         Vector2 MoveValue = context.ReadValue<Vector2>();
         Vector3 CameraPosition = transform.position;
-        CameraPosition.x -= MoveValue.x * _movementSpeed;
-        CameraPosition.y -= MoveValue.y * _movementSpeed;
+        CameraPosition.x -= MoveValue.x * _movementSpeed * 0.01f;
+        CameraPosition.y -= MoveValue.y * _movementSpeed * 0.01f;
         transform.position = CameraPosition;
-        //Debug.Log($"[INPUT CONTROLLER] move value = {MoveValue}");
     }
 
     public void EndMove(InputAction.CallbackContext context)
@@ -54,33 +57,39 @@ public class InputController : MonoBehaviour
     {
         if (Touch.activeTouches.Count < 2)
         {
-            _isZooming = false;
+            Debug.Log($"[INPUT CONTROLLER] stop zooming");
             return;
         }
-        _isZooming = true;
 
         // get the inputs
         Touch primary = Touch.activeTouches[0];
         Touch secondary = Touch.activeTouches[1];
-
-        if (primary.phase == TouchPhase.Moved || secondary.phase == TouchPhase.Moved)
+        if (primary.history.Count < 1 || secondary.history.Count < 1)
         {
-            if (primary.history.Count < 1 || secondary.history.Count < 1)
-            {
-                return;
-            }
+            Debug.Log($"[INPUT CONTROLLER] no history");
+            return;
+        }
 
-            float currentDistance = Vector2.Distance(primary.screenPosition, secondary.screenPosition);
-            float previousDistance = Vector2.Distance(primary.history[0].screenPosition, secondary.history[0].screenPosition);
-            Debug.Log($"[INPUT FACTORY] zooming");
+        float currentDistance = Vector2.Distance(primary.screenPosition, secondary.screenPosition);
+        float previousDistance = Vector2.Distance(primary.history[0].screenPosition, secondary.history[0].screenPosition);
+        Debug.Log($"[INPUT CONTROLLER] zooming");
 
-            float ZoomDistance = currentDistance - previousDistance;
+        float ZoomDistance = currentDistance - previousDistance;
+        if (_isFovZoom)
+        {
+            _camera.Lens.FieldOfView -= ZoomDistance * 0.1f * _zoomSpeed;
+        } else
+        {
             Vector3 CurrentPos = transform.position;
-            CurrentPos.z = CurrentPos.z + ZoomDistance * 0.1f;
-            //_camera.Lens.FieldOfView -= ZoomDistance * 0.1f;
-            //CurrentPos.z = CurrentPos.z + ZoomDistance * 0.1f;
-            //_camera.Lens.FieldOfView -= ZoomDistance * 0.1f;
+            CurrentPos.z = CurrentPos.z + ZoomDistance * 0.1f * _zoomSpeed;
             transform.position = CurrentPos;
         }
+        //Debug.Log($"[INPUT FACTORY] first phase is {primary.phase} and second phase is {secondary.phase}");
+
+    }
+
+    public void StopZoom(InputAction.CallbackContext context)
+    {
+        Debug.Log("[INPUT CONTROLLER] cancelling zoom");
     }
 }

@@ -526,8 +526,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d13299eefc6a2942b66808dc444cf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputController
-  _movementSpeed: 0.01
+  _movementSpeed: 1
+  _zoomSpeed: 1
   _camera: {fileID: 2047491322}
+  _isFovZoom: 0
 --- !u!114 &2047491321
 MonoBehaviour:
   m_ObjectHideFlags: 0
