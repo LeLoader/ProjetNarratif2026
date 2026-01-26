@@ -1,0 +1,204 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class BehaviorController : MonoBehaviour
+{
+    // DILEM ACTUEL DE LA CHAINE //
+    private SODilema currentDilema;
+    
+    private bool _inAction = false;
+    private bool _wasMoving = false;
+    
+    // LISTE D'ACTIONS DISPONIBLES A EFFECTUER A LA CHAINE //
+    private List<SOActions> actionsToDo = new List<SOActions>();
+    private SOActions _currentAction;
+    private ActionBase _currentActionBase;
+    
+    // LIST D'INTERACTIONS POSSIBLES //
+    private List<SOInteraction> availableInteractions = new List<SOInteraction>();
+    
+    [Header("EXPOSED VARIABLE")]
+    [SerializeField] private NavMeshAgent agentComponent;
+
+    #region Delegate
+    
+    public Action OnActionCompleted;
+    public Action OnDestinationReached;
+    public Action OnActionStarted;
+    
+    #endregion
+    
+    #region Human States
+    
+    [SerializeField] private HumanState _currentState = HumanState.Roaming;
+
+    public HumanState GetCurrentState()
+    {
+        return _currentState;
+    }
+
+    public void SetCurrentState(HumanState newState)
+    {
+        _currentState = newState;
+    }
+
+    private void TransitionToState(HumanState newState)
+    {
+        Debug.Log($"Transitioning from {_currentState} to {newState}");
+        _currentState = newState;
+    }
+    
+    #endregion
+
+    #region Lyfe Cycle Methods
+
+    public void Initialize(SODilema newDilema)
+    {
+        currentDilema = newDilema;
+    }
+    
+    private void Update()
+    {
+        if (_currentActionBase != null && _inAction)
+        {
+            if(agentComponent.velocity.magnitude > 0.1f)
+            {
+                if (!_wasMoving)
+                {
+                    _wasMoving = true;
+                }
+            }
+            else
+            {
+                if (_wasMoving)
+                {
+                    _wasMoving = false;
+                    DestinationReached();
+                }
+            }
+        }
+    }
+
+    #endregion
+
+    #region AI Methods
+
+    public void MoveToPosition(Vector3 targetPosition, string animationString = "")
+    {
+        agentComponent.SetDestination(targetPosition);
+        if (!string.IsNullOrEmpty(animationString))
+        {
+            CallTriggerAnimation(animationString);
+        }
+    }
+    public void StopAi()
+    {
+        agentComponent.isStopped = true;
+    }
+    
+    public void ResumeAi()
+    {
+        agentComponent.isStopped = false;
+    }
+
+    #endregion
+
+    #region Animation
+
+    [SerializeField] private Animator animator;
+
+    public void PlayAnimation(string animation)
+    {
+        animator.Play(animation);
+    }
+    
+    public void CallTriggerAnimation(string trigger)
+    {
+        animator.SetTrigger(trigger);
+    }
+    
+    public void StartHumanAnimation()
+    {
+        CallTriggerAnimation("Walk");
+    }
+    
+    public void StopHumanAnimation()
+    {
+        CallTriggerAnimation("Stop");
+    }
+
+    #endregion
+
+    #region ActionManagement
+
+    public void AddAction(List<SOActions> actions)
+    {
+        actionsToDo.AddRange(actions);
+        CheckActions();
+    }
+    public void AddAction(SOActions action)
+    {
+        actionsToDo.Add(action);
+        CheckActions();
+    }
+    private void DestinationReached()
+    {
+        Debug.Log("Destination Reached.");
+        StopHumanAnimation();
+        OnDestinationReached?.Invoke();
+    }
+    private void CheckActions()
+    {
+        if (_inAction)
+        {
+            return;
+        }
+        if (actionsToDo.Count == 0)
+        {
+            Debug.Log("No more actions to do.");
+            return;
+        }
+        
+        _inAction = true;
+        
+        DoAction(actionsToDo[0]);
+    }
+    private void DoAction(SOActions action)
+    {
+        if (action == null)
+        {
+            return;
+        }
+        
+        OnActionStarted?.Invoke();
+        _currentAction = action;
+        Debug.Log($"Doing action: {_currentAction}");
+
+        _currentActionBase = ActionFactory.CreateAction(action._actionKey, this.gameObject);
+        _currentActionBase.Initialize(this);
+    }
+    public void ActionCompleted()
+    {
+        Debug.Log($"Action Completed: {_currentAction}");
+        
+        OnActionCompleted?.Invoke();
+        
+        _inAction = false;
+        actionsToDo.RemoveAt(0);
+        
+        CheckActions();
+    }
+
+    #endregion
+
+}
+
+public enum HumanState
+{
+    Questioning,
+    Answering,
+    Roaming,
+    DoingTask,
+}
