@@ -4,8 +4,8 @@ public class ITpc : InteractionBase
 {
     public override void ExecuteInteraction(BehaviorController bh)
     {
-        bh.StopAi();
-        bh.StopHumanAnimation();
+       // bh.StopAi();
+       // bh.StopHumanAnimation();
         base.ExecuteInteraction(bh);
     }
 }

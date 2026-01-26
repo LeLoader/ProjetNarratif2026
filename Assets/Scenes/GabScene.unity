@@ -484,6 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 551b07fca8f6e7e4fae7b9687995d020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  startDilema: {fileID: 11400000, guid: beba650ba9d876c41b9fc51f87e21aaa, type: 2}
+  startAction: {fileID: 11400000, guid: 5d7fbd30622f6924eb3ba77d900674e5, type: 2}
   spawnPoint: {fileID: 1386639985}
   pcTransform: {fileID: 1936393244}
   humanPrefab: {fileID: 1493839082561470795, guid: 1159fbd4c7ec7024e8b4eb80c036dfce, type: 3}
