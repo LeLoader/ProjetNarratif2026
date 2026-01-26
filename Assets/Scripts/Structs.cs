@@ -14,44 +14,101 @@ public struct Metric
 }
 
 [Serializable]
-public struct MetricValues
+public class MetricValues
 {
-    public MetricValues(float positive, float neutral, float negative)
+    public event Action<EMetricState> OnMetricReachedExtreme;
+
+    public MetricValues(int positive, int neutral, int negative)
     {
         Positive = positive;
         Neutral = neutral;
         Negative = negative;
     }
 
-    public void Set(float positive, float neutral, float negative)
+    private void CheckExtreme()
     {
-        if (positive + neutral + negative == 0)
+        if (Positive == 100) OnMetricReachedExtreme?.Invoke(EMetricState.POSITIVE);
+        else if (Negative == 100) OnMetricReachedExtreme?.Invoke(EMetricState.NEGATIVE);
+    }
+
+    public void Set(int positive, int neutral, int negative)
+    {
+        if (positive + neutral + negative == 100)
         {
             Positive = positive;
             Neutral = neutral;
             Negative = negative;
+            CheckExtreme();
         }
         else
         {
-            Debug.LogWarning("Tried to set values to metric, but the total is different than 0");
+            Debug.LogWarning("Tried to set values to metric, but the total is different than 100");
         }
     }
 
-    public void Add(float positive, float neutral, float negative)
+    public void Add(EMetricState state, int value)
     {
-        if (positive + neutral + negative == 0)
+        switch (state)
+        {
+            case EMetricState.NEUTRAL:
+                Neutral += value;
+                if (Positive - (int)Mathf.Ceil((float)value / 2) < 0)
+                {
+                    int deltaUnderZero = Positive - value;
+                    Positive = 0;
+                    Negative -= deltaUnderZero;
+                }
+                else if (Negative - (int)Mathf.Floor((float)value / 2) < 0)
+                {
+                    int deltaUnderZero = Negative - value;
+                    Negative = 0;
+                    Positive -= deltaUnderZero;
+                }
+                else
+                {
+                    Negative -= (int)Mathf.Floor(value / 2);
+                    Positive -= (int)Mathf.Ceil(value / 2);
+                }
+                break;
+            case EMetricState.POSITIVE:
+                Positive += value;
+                if (Neutral - value < 0)
+                {
+                    int deltaUnderZero = Neutral - value;
+                    Neutral = 0;
+                    Negative -= deltaUnderZero;
+                }
+                CheckExtreme();
+                break;
+            case EMetricState.NEGATIVE:
+                Negative += value;
+                if (Neutral - value < 0)
+                {
+                    int deltaUnderZero = Neutral - value;
+                    Neutral = 0;
+                    Positive -= deltaUnderZero;
+                }
+                CheckExtreme();
+                break;
+        }
+    }
+
+    public void Add(int positive, int neutral, int negative)
+    {
+        if (positive + neutral + negative != 0)
+        {
+            Debug.LogWarning("Tried to add values to metric, but the total is different than 0");
+        }
+        else
         {
             Positive += positive;
             Neutral += neutral;
             Negative += negative;
-        }
-        else
-        {
-            Debug.LogWarning("Tried to add values to metric, but the total is different than 0");
+            CheckExtreme();
         }
     }
 
-    public float Get(EMetricState state)
+    public int Get(EMetricState state)
     {
         switch (state)
         {
@@ -66,9 +123,9 @@ public struct MetricValues
         }
     }
 
-    public float Positive { get; private set; }
-    public float Neutral { get; private set; }
-    public float Negative { get; private set; }
+    public int Positive { get; private set; }
+    public int Neutral { get; private set; }
+    public int Negative { get; private set; }
 }
 
 [Serializable]
@@ -82,6 +139,10 @@ public struct Choice
     public void Activate()
     {
         DilemaManager.dilemaDatabase.AddDilemaInPool(newDilemas);
+        foreach (Consequence consequence in consequences)
+        {
+            DilemaManager.globalMetrics.Update(consequence);
+        }
     }
 }
 
@@ -90,8 +151,8 @@ public struct Condition
 {
     [SerializeField] Metric metric;
     [SerializeField] EMetricState state;
-    [SerializeField] float minimum;
-    [SerializeField] float maximum;
+    [SerializeField] int minimum;
+    [SerializeField] int maximum;
 
     public bool IsConditionReached()
     {
@@ -104,14 +165,14 @@ public struct Condition
 [Serializable]
 public struct Consequence
 {
-    [SerializeField] EMetricType metricType;
-    [SerializeField] EMetricState metricState;
-    [SerializeField] float toAdd;
+    [SerializeField] public EMetricType metricType;
+    [SerializeField] public EMetricState state;
+    [SerializeField] public int toAdd;
 
-    public Consequence(EMetricType metricType, EMetricState metricState, float toAdd)
+    public Consequence(EMetricType metricType, EMetricState state, int toAdd)
     {
         this.metricType = metricType;
-        this.metricState = metricState;
+        this.state = state;
         this.toAdd = toAdd;
     }
 }

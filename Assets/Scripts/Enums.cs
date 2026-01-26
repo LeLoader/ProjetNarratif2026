@@ -5,8 +5,8 @@ using UnityEngine;
 public enum EMetricType
 {
     NONE      = 0,
-    FREEWILL  = 1 << 0, // INDOCTRINATED
-    PEACE     = 1 << 1, // ANGER
+    INDOCTRINATED = 1 << 0, // FREEDOM
+    VIOLENCE     = 1 << 1, // PEACE
 }
 
 public enum EMetricState

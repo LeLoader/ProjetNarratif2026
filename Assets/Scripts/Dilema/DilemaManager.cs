@@ -6,6 +6,7 @@ using UnityEngine;
 public static class DilemaManager
 {
     public readonly static DBDilema dilemaDatabase = (DBDilema)Resources.Load("Databases/DBDilema");
+    public readonly static SOGlobalMetrics globalMetrics = (SOGlobalMetrics)Resources.Load("SOGlobalMetrics");
 
     public static List<SODilema> GetAllDilemas()
     {

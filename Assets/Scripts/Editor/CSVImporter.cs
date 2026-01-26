@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
 public class CSVImporter : EditorWindow
@@ -187,34 +188,28 @@ public class CSVImporter : EditorWindow
 
             // First choice
             dilema.firstChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilema.key}_1");
-
             // dilema.firstChoice.actions. ;
-            dilema.firstChoice.consequences = new()
-            {
-                new(EMetricType.FREEWILL, EMetricState.NEGATIVE, int.Parse(splitData[7])),
-                new(EMetricType.FREEWILL, EMetricState.NEUTRAL, int.Parse(splitData[8])),
-                new(EMetricType.FREEWILL, EMetricState.POSITIVE, int.Parse(splitData[9])),
+            dilema.firstChoice.consequences = new();
 
-                new(EMetricType.PEACE, EMetricState.NEGATIVE, int.Parse(splitData[10])),
-                new(EMetricType.PEACE, EMetricState.NEUTRAL, int.Parse(splitData[11])),
-                new(EMetricType.PEACE, EMetricState.POSITIVE, int.Parse(splitData[12]))
-            };
-
+            int tempInt = 0;
+            if (int.TryParse(splitData[7], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEGATIVE, tempInt));
+            if (int.TryParse(splitData[8], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEUTRAL, tempInt)); 
+            if (int.TryParse(splitData[9], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.POSITIVE, tempInt));
+            if (int.TryParse(splitData[10], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEGATIVE, tempInt));
+            if (int.TryParse(splitData[11], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEUTRAL, tempInt));
+            if (int.TryParse(splitData[12], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.POSITIVE, tempInt));
+            
             // Second choice
             dilema.secondChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilema.key}_2");
-
             // dilema.secondChoice.actions. ;
+            dilema.secondChoice.consequences = new();
 
-            dilema.secondChoice.consequences = new()
-            {
-                new(EMetricType.FREEWILL, EMetricState.NEGATIVE, int.Parse(splitData[15])),
-                new(EMetricType.FREEWILL, EMetricState.NEUTRAL, int.Parse(splitData[16])),
-                new(EMetricType.FREEWILL, EMetricState.POSITIVE, int.Parse(splitData[17])),
-
-                new(EMetricType.PEACE, EMetricState.NEGATIVE, int.Parse(splitData[18])),
-                new(EMetricType.PEACE, EMetricState.NEUTRAL, int.Parse(splitData[19])),
-                new(EMetricType.PEACE, EMetricState.POSITIVE, int.Parse(splitData[20]))
-            };
+            if (int.TryParse(splitData[15], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEGATIVE, tempInt));
+            if (int.TryParse(splitData[16], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEUTRAL, tempInt));
+            if (int.TryParse(splitData[17], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.POSITIVE, tempInt));
+            if (int.TryParse(splitData[18], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEGATIVE, tempInt));
+            if (int.TryParse(splitData[19], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEUTRAL, tempInt));
+            if (int.TryParse(splitData[20], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.POSITIVE, tempInt));
 
             DilemaManager.dilemaDatabase.AddDilema(dilema);
         }
