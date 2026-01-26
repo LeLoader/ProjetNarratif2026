@@ -7,8 +7,8 @@ using UnityEngine.Localization;
 public struct Metric
 {
     [SerializeField] LocalizedString label;
-    [SerializeField] EMetricType type;
-    float value;
+    [field: SerializeField] public EMetricType Type { get; }
+    [field: SerializeField] public float Value { get; }
 
     // public static Metric operator +(Metric left, float right) => left;
 }
@@ -16,10 +16,15 @@ public struct Metric
 [Serializable]
 public struct Choice
 {
-    
-    [SerializeField] LocalizedString label;
+    [SerializeField] public LocalizedString label;
+    [SerializeField] List<ActionBase> Actions;
     [SerializeField] List<Consequence> Consequences;
-    
+    [SerializeField] List<SODilema> NewDilemas;
+
+    public void Activate()
+    {
+        DilemaManager.dilemaDatabase.AddDilema(NewDilemas);
+    }
 }
 
 [Serializable]
@@ -28,9 +33,11 @@ public struct Condition
     [SerializeField] EMetricType metricType;
     [SerializeField] float minimum;
     [SerializeField] float maximum;
-    bool bIsConditionReached() 
+    public bool IsConditionReached() 
     {
-        return true; 
+        EMetricType type = metricType;
+        Metric metric = GameManager.globalMetrics.metrics.Find((metric) => metric.Type == type);
+        return metric.Value < maximum && metric.Value > minimum;
     }
 }
 
