@@ -1,0 +1,10 @@
+﻿<Solution>
+  <Project Path="SingularityGroup.HotReload.Editor.csproj" />
+  <Project Path="AttributesSamples.csproj" />
+  <Project Path="EditorAttributes.Editor.csproj" />
+  <Project Path="EditorAttributes.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="SingularityGroup.HotReload.Runtime.Public.csproj" />
+  <Project Path="SingularityGroup.HotReload.Runtime.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+</Solution>
