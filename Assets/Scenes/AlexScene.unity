@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
   _moveAction: {fileID: 1295982625}
   _zoomAction: {fileID: 2143023547}
+  _touchAction: {fileID: 596190174}
   _controller: {fileID: 2047491319}
 --- !u!4 &423408773
 Transform:
@@ -166,6 +167,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &596190174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/Touch
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  m_ActionId: 4ee4662f-2661-4d75-9146-7c6f09fc3269
 --- !u!114 &1295982625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +207,7 @@ GameObject:
   - component: {fileID: 1323825556}
   - component: {fileID: 1323825555}
   - component: {fileID: 1323825554}
+  - component: {fileID: 1323825558}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -292,6 +308,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1323825558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323825553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12925452fe489d439988ed2ab7c55c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ProjetNarratifCore::TemplateHuman
 --- !u!1 &1394056447
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +367,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -353,7 +381,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 50, y: 50}
+  m_Size: {x: 100, y: 100}
   m_EdgeRadius: 0
 --- !u!4 &1394056449
 Transform:
@@ -431,7 +459,7 @@ Camera:
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 10
   m_Depth: -1
   m_CullingMask:
@@ -530,6 +558,7 @@ MonoBehaviour:
   _zoomSpeed: 1
   _camera: {fileID: 2047491322}
   _isFovZoom: 0
+  _showDebug: 1
 --- !u!114 &2047491321
 MonoBehaviour:
   m_ObjectHideFlags: 0

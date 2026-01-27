@@ -55,18 +55,61 @@ public class DBDilema : ScriptableObject
         return avalaibleDilemas[Random.Range(0, avalaibleDilemas.Count)];
     }
 
-    public void AddDilema(SODilema Dilema)
+    public void AddDilema(SODilema dilema)
     {
-        dilemasPool.Add(Dilema);
+        if (dilema)
+        {
+            dilemas.Add(dilema);
+        }
+        else
+        {
+            Debug.LogWarning("Tried to add dilema in database, but it was null");
+        }
     }
 
-    public void AddDilema(List<SODilema> Dilemas)
+    public void AddDilemaInPool(SODilema dilema)
     {
-        dilemasPool.AddRange(Dilemas);
+        if (dilema)
+        {
+            dilemasPool.Add(dilema);
+        }
+        else
+        {
+            Debug.LogWarning("Tried to add dilema in pool, but it was null");
+        }
     }
 
-    public void RemoveDilema(SODilema Dilema)
+    public void AddDilemaInPool(string key)
     {
-        dilemasPool.Remove(Dilema);
+        SODilema dilema = dilemas.Find((dilema) => dilema.key == key);
+        if (dilema) {
+            dilemasPool.Add(dilema);
+        }
+        else
+        {
+            Debug.LogWarning("Tried to add dilema in pool, but the key was invalid");
+        }
+    }
+
+    public void AddDilemaInPool(List<SODilema> dilemas)
+    {
+        if (dilemas.Count > 0)
+        {
+            dilemasPool.AddRange(dilemas);
+        }
+        else
+        {
+            Debug.LogWarning("Tried to add dilemas in pool, but the List was empty");
+        }
+    }
+
+    public void RemoveDilema(SODilema dilema)
+    {
+        dilemasPool.Remove(dilema);
+    }
+
+    public SODilema GetDilema(string key)
+    {
+        return dilemas.Find((dilema) => dilema.key == key);
     }
 }
