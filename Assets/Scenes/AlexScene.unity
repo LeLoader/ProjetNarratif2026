@@ -555,9 +555,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputController
   _movementSpeed: 1
-  _zoomSpeed: 1
+  _zoomScale: 1
   _camera: {fileID: 2047491322}
-  _isFovZoom: 0
+  _minCamerasize: 5
+  _maxCameraSize: 20
   _showDebug: 1
 --- !u!114 &2047491321
 MonoBehaviour:
