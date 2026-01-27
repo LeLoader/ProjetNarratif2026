@@ -25,8 +25,13 @@ public class SODilema : ScriptableObject
         }
         return true;
     }
+    
+    public string GetQuestionText()
+    {
+        return question.GetLocalizedString();
+    }
 
-    public void Chose(Choice choice)
+    public void Choose(Choice choice)
     {
         if (!bRepeatable)
         {

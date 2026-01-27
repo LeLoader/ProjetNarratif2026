@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class BehaviorController : MonoBehaviour
 {
-    // DILEM ACTUEL DE LA CHAINE //
+    // DILEM ACTUEL //
     private SODilema currentDilema;
     
     private bool _inAction = false;
@@ -54,9 +54,11 @@ public class BehaviorController : MonoBehaviour
 
     #region Lyfe Cycle Methods
 
-    public void Initialize(SODilema newDilema)
+    public void Initialize(SODilema newDilema, SOActions newAction)
     {
         currentDilema = newDilema;
+        AddAction(newAction);
+        CheckActions();
     }
     
     private void Update()
@@ -145,7 +147,6 @@ public class BehaviorController : MonoBehaviour
     }
     private void DestinationReached()
     {
-        Debug.Log("Destination Reached.");
         StopHumanAnimation();
         OnDestinationReached?.Invoke();
     }
@@ -174,15 +175,12 @@ public class BehaviorController : MonoBehaviour
         
         OnActionStarted?.Invoke();
         _currentAction = action;
-        Debug.Log($"Doing action: {_currentAction}");
 
         _currentActionBase = ActionFactory.CreateAction(action._actionKey, this.gameObject);
         _currentActionBase.Initialize(this);
     }
     public void ActionCompleted()
     {
-        Debug.Log($"Action Completed: {_currentAction}");
-        
         OnActionCompleted?.Invoke();
         
         _inAction = false;
@@ -193,6 +191,10 @@ public class BehaviorController : MonoBehaviour
 
     #endregion
 
+    public SODilema GetCurrentDilema()
+    {
+        return currentDilema;
+    }
 }
 
 public enum HumanState
