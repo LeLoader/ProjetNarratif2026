@@ -11,6 +11,6 @@ public class ACT_GoToPc : ActionBase
     public override void OnActionDestinationReached()
     {
         CanvasManager.Instance.ShowDilemma(_behaviorController.GetCurrentDilema());
-        base.OnActionDestinationReached();
+        ValidationAction();
     }
 }

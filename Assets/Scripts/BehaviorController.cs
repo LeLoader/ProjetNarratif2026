@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,6 +22,8 @@ public class BehaviorController : MonoBehaviour
     
     [Header("EXPOSED VARIABLE")]
     [SerializeField] private NavMeshAgent agentComponent;
+    
+    private int _currentActionIndex = 0;
 
     #region Delegate
     
@@ -54,9 +57,8 @@ public class BehaviorController : MonoBehaviour
 
     #region Lyfe Cycle Methods
 
-    public void Initialize(SODilema newDilema, SOActions newAction)
+    public void Initialize(SOActions newAction)
     {
-        currentDilema = newDilema;
         AddAction(newAction);
         CheckActions();
     }
@@ -92,7 +94,7 @@ public class BehaviorController : MonoBehaviour
         agentComponent.SetDestination(targetPosition);
         if (!string.IsNullOrEmpty(animationString))
         {
-            CallTriggerAnimation(animationString);
+            StartHumanAnimation();
         }
     }
     public void StopAi()
@@ -123,11 +125,13 @@ public class BehaviorController : MonoBehaviour
     
     public void StartHumanAnimation()
     {
+        Debug.Log("Starting Human Animation");
         CallTriggerAnimation("Walk");
     }
     
     public void StopHumanAnimation()
     {
+        Debug.Log("Stopping Human Animation");
         CallTriggerAnimation("Stop");
     }
 
@@ -177,16 +181,24 @@ public class BehaviorController : MonoBehaviour
         _currentAction = action;
 
         _currentActionBase = ActionFactory.CreateAction(action._actionKey, this.gameObject);
-        _currentActionBase.Initialize(this);
+        _currentActionIndex++;
+        _currentActionBase.Initialize(this, _currentActionIndex);
     }
     public void ActionCompleted()
     {
+        if(!_inAction){return;}
+        
         OnActionCompleted?.Invoke();
-        
         _inAction = false;
-        actionsToDo.RemoveAt(0);
-        
-        CheckActions();
+
+        Destroy(_currentActionBase);
+
+        if (actionsToDo.Count != 1 && !actionsToDo[0]._canBeRepeated)
+        {
+            actionsToDo.RemoveAt(0);
+        }
+
+        StartCoroutine(WaitForNextAction());
     }
 
     #endregion
@@ -195,6 +207,27 @@ public class BehaviorController : MonoBehaviour
     {
         return currentDilema;
     }
+    
+    public bool CanReachDestination(Vector3 targetDestination)
+    {
+        NavMeshPath path = new NavMeshPath();
+        if (agentComponent.CalculatePath(targetDestination, path))
+        {
+            if (path.status == NavMeshPathStatus.PathComplete)
+            {
+                return true;
+            }
+        }
+        Debug.Log("Cannot reach destination");
+        return false;
+    }
+
+    private IEnumerator WaitForNextAction()
+    {
+        yield return new WaitForSeconds(1f);
+        CheckActions();
+    }
+
 }
 
 public enum HumanState
