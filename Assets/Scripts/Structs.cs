@@ -141,7 +141,7 @@ public struct Choice
         DilemaManager.dilemaDatabase.AddDilemaInPool(newDilemas);
         foreach (Consequence consequence in consequences)
         {
-            DilemaManager.globalMetrics.Update(consequence);
+            DilemaManager.globalMetrics.UpdateMetrics(consequence);
         }
     }
 }
