@@ -10,7 +10,7 @@ public class ACT_GoToPc : ActionBase
 
     public override void OnActionDestinationReached()
     {
-        Debug.Log("PC reached");
+        CanvasManager.Instance.ShowDilemma(_behaviorController.GetCurrentDilema());
         base.OnActionDestinationReached();
     }
 }

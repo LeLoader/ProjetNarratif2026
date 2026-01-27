@@ -146,7 +146,7 @@ public struct Choice
     }
 }
 
-[Serializable] // Trop de condition différentes, en faire un SO?
+[Serializable] // Trop de condition diffï¿½rentes, en faire un SO?
 public struct Condition
 {
     [SerializeField] Metric metric;

@@ -9,25 +9,23 @@ public class SceneManager : MonoBehaviour
     [Header("Object in Scene")]
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform pcTransform;
-    
-    [Header("REFERENCE")]
-    [SerializeField] private GameObject humanPrefab;
 
     public static SceneManager instance;
 
 
-    #region MyRegion
+    #region Get Positions
     
     public Transform GetPcTransform()
     {
         return pcTransform;
     }
+    
+    public Vector3 GetSpawnPoint()
+    {
+        return spawnPoint.position;
+    }
 
     #endregion
-    private void Start()
-    {
-        SpawnHuman();
-    }
 
     private void Awake()
     {
@@ -38,17 +36,6 @@ public class SceneManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-    }
-
-    [Button]
-    private void SpawnHuman()
-    {
-        var bc = Instantiate(humanPrefab, spawnPoint.position, spawnPoint.rotation).GetComponent<BehaviorController>();
-        if (bc != null)
-        {
-            bc.Initialize(startDilema);
-            bc.AddAction(startAction);
         }
     }
 }
