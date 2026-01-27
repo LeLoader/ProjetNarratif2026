@@ -1,5 +1,5 @@
 using EditorAttributes;
-using Unity.Cinemachine;
+//using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -12,14 +12,14 @@ public class InputController : MonoBehaviour
     [SerializeField, HideProperty, Range(0f, 20f)] private float _movementSpeed = 1f;
     [SerializeField, HideProperty, Range(0f, 20f)] private float _zoomSpeed = 1f;
 
-    [SerializeField, Required] private CinemachineCamera _camera;
+  //  [SerializeField, Required] private CinemachineCamera _camera;
 
     [Tooltip("Zooming with the Camera Fov if true, or by moving the camera if false")]
     [SerializeField] private bool _isFovZoom;
 
     private void Reset()
     {
-        TryGetComponent<CinemachineCamera>(out _camera);
+    //    TryGetComponent<CinemachineCamera>(out _camera);
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -77,7 +77,7 @@ public class InputController : MonoBehaviour
         float ZoomDistance = currentDistance - previousDistance;
         if (_isFovZoom)
         {
-            _camera.Lens.FieldOfView -= ZoomDistance * 0.1f * _zoomSpeed;
+            //_camera.Lens.FieldOfView -= ZoomDistance * 0.1f * _zoomSpeed;
         } else
         {
             Vector3 CurrentPos = transform.position;

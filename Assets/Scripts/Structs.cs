@@ -9,8 +9,6 @@ public struct Metric
     [SerializeField] LocalizedString label;
     [field: SerializeField] public EMetricType Type { get; }
     [field: SerializeField] public float Value { get; }
-
-    // public static Metric operator +(Metric left, float right) => left;
 }
 
 [Serializable]
