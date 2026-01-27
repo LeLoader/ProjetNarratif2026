@@ -9,11 +9,25 @@ public class SceneManager : MonoBehaviour
     [Header("Object in Scene")]
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform pcTransform;
+    
+    [SerializeField] private GameObject _debugRoamPointPrefab;
 
     public static SceneManager instance;
 
+    public GameObject SpawnDebugRoamPoint(Vector3 position)
+    {
+        return Instantiate(_debugRoamPointPrefab, position, Quaternion.identity);
+    }
 
     #region Get Positions
+    
+    public Vector3 GetRandomRoamPoint()
+    {
+        float roamRadius = 10f;
+        Vector2 randomPoint = UnityEngine.Random.insideUnitCircle * roamRadius;
+        Vector3 roamPoint = new Vector3(pcTransform.position.x + randomPoint.x, pcTransform.position.y, pcTransform.position.z + randomPoint.y);
+        return roamPoint;
+    }
     
     public Transform GetPcTransform()
     {

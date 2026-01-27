@@ -40,5 +40,6 @@ public class SODilema : ScriptableObject
 
         DilemaManager.dilemaDatabase.AddDilemaInPool(newDilemas);
         choice.Activate();
+        //CharacterBuilderManager.Instance.BuildCharacters(npcToSpawn);
     }
 }
