@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         }
 
         Metric metric = globalMetrics.metrics.Find((metric) => metric.type == EMetricType.INDOCTRINATED);
-        metric.Values.OnMetricReachedExtreme += OnMetricReachedExtreme;
+        metric.OnMetricReachedExtreme += OnMetricReachedExtreme;
     }
 
     private void OnMetricReachedExtreme(EMetricState state)

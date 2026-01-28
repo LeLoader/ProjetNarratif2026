@@ -10,20 +10,11 @@ public struct Metric
     [SerializeField] public LocalizedString label;
     [SerializeField] public EMetricType type;
 
-    public MetricValues Values { get; }
-}
-
-[Serializable]
-public class MetricValues
-{
     public event Action<EMetricState> OnMetricReachedExtreme;
 
-    public MetricValues(int positive, int neutral, int negative)
-    {
-        Positive = positive;
-        Neutral = neutral;
-        Negative = negative;
-    }
+    public int Positive { get; private set; }
+    public int Neutral { get; private set; }
+    public int Negative { get; private set; }
 
     private void CheckExtreme()
     {
@@ -42,7 +33,7 @@ public class MetricValues
         }
         else
         {
-            Debug.LogWarning("Tried to set values to metric, but the total is different than 100");
+            Debug.LogWarning($"Tried to set values to metric {label.GetLocalizedString()}, but the total is different than 100");
         }
     }
 
@@ -97,7 +88,7 @@ public class MetricValues
     {
         if (positive + neutral + negative != 0)
         {
-            Debug.LogWarning("Tried to add values to metric, but the total is different than 0");
+            Debug.LogWarning($"Tried to add values to metric {label.GetLocalizedString()}, but the total is different than 0");
         }
         else
         {
@@ -123,9 +114,10 @@ public class MetricValues
         }
     }
 
-    public int Positive { get; private set; }
-    public int Neutral { get; private set; }
-    public int Negative { get; private set; }
+    public override string ToString()
+    {
+        return $"Positive: {Positive}%, Neutral: {Neutral}%, Negative: {Negative}";
+    }
 }
 
 [Serializable]
@@ -158,7 +150,7 @@ public struct Condition
     {
         EMetricType type = metric.type;
         Metric globalMetric = GameManager.instance.globalMetrics.metrics.Find((currentMetric) => currentMetric.type == type);
-        return globalMetric.Values.Get(state) < maximum && globalMetric.Values.Get(state) > minimum;
+        return globalMetric.Get(state) < maximum && globalMetric.Get(state) > minimum;
     }
 }
 
