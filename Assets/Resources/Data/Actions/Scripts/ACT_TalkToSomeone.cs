@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class ACT_TalkToSomone : ActionBase
+public class ACT_TalkToSomeone : ActionBase
 {
     public override void ExecuteAction()
     {
         var targetBehavior = CharacterBuilderManager.Instance.GetRandomBehaviorController();
-        _behaviorController.MoveToPosition(targetBehavior.gameObject.transform.position, "Walk");
+        _behaviorController.FollowTarget(targetBehavior.gameObject.transform);
         base.ExecuteAction();
     }
 
     public override void OnActionDestinationReached()
     {
-        base.OnActionDestinationReached();
+        ValidationAction();
     }
 }

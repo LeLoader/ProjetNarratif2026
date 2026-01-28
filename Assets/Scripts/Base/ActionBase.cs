@@ -35,4 +35,9 @@ public class ActionBase : MonoBehaviour
             _behaviorController.OnDestinationReached -= OnActionDestinationReached;
         }
     }
+    
+    public virtual bool StopAction()
+    {
+        return true;
+    }
 }

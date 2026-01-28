@@ -21,4 +21,10 @@ public class ACT_Roam : ActionBase
         if (_debugRoamPoint != null) { Destroy(_debugRoamPoint); }
         ValidationAction();
     }
+
+    public override bool StopAction()
+    {
+        if (_debugRoamPoint != null) { Destroy(_debugRoamPoint); }
+        return base.StopAction();
+    }
 }

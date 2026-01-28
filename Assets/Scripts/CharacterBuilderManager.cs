@@ -10,6 +10,9 @@ public class CharacterBuilderManager : MonoBehaviour
     
     [SerializeField] private GameObject _humanPrefab;
     private List<BehaviorController> _characters = new List<BehaviorController>();
+
+    [Header("Testing")] 
+    [SerializeField] private SOActions _testAction;
     public List<BehaviorController> GetCharacters()
     {
         return _characters;
@@ -25,9 +28,14 @@ public class CharacterBuilderManager : MonoBehaviour
     
     public void Start()
     {
-        BuildCharacter(ActionDataDrop.GetActionGoToPc());
+        BuildCharacter(ActionDataDrop.GetActionRoam());
     }
 
+    [Button]
+    public void BuildCharacterWithTestingAction()
+    {
+        BuildCharacter(_testAction);
+    }
     public void BuildCharacter(SOActions startingAction)
     {
         var bc = Instantiate(_humanPrefab, SceneManager.instance.GetSpawnPoint(), Quaternion.identity).GetComponent<BehaviorController>();
