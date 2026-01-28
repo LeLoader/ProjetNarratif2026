@@ -9,3 +9,10 @@ public enum EMetricType
     PEACE     = 1 << 1, // ANGER
     HAPPINESS = 1 << 2 // SADNESS
 }
+
+public enum ESoundType
+{
+    None,
+    Music,
+    SFX,
+}

@@ -47,3 +47,20 @@ public struct Consequence
     [SerializeField] EMetricType metricType;
     [SerializeField] float toAdd;
 }
+
+[Serializable]
+public struct Sounds
+{
+    [SerializeField] private AudioClip _clip;
+    [SerializeField] private ESoundType _soundType;
+
+    public AudioClip GetClip()
+    {
+        return _clip;
+    }
+
+    public ESoundType GetSoundType()
+    {
+        return _soundType;
+    }
+}

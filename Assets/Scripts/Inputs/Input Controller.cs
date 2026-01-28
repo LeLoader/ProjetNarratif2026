@@ -41,11 +41,6 @@ public class InputController : MonoBehaviour
         }
     }
 
-    public void StartMove(InputAction.CallbackContext context)
-    {
-        Debug.Log("[INPUT CONTROLLER] start moving");
-    }
-
     public void Move(InputAction.CallbackContext context)
     {
         if (_showDebug)
@@ -90,15 +85,6 @@ public class InputController : MonoBehaviour
         _previousPosition = Input;
     }
 
-    public void EndMove(InputAction.CallbackContext context)
-    {
-        if (_showDebug)
-        {
-            Debug.Log("[INPUT CONTROLLER] stop moving");
-        }
-
-    }
-
     public void Zoom(InputAction.CallbackContext context)
     {
         if (Touch.activeTouches.Count < 2)
@@ -132,7 +118,6 @@ public class InputController : MonoBehaviour
         float ZoomDistance = currentDistance - previousDistance;
         _camera.Lens.OrthographicSize -= ZoomDistance * _zoomScale * 0.1f;
         _camera.Lens.OrthographicSize = Mathf.Clamp(_camera.Lens.OrthographicSize, 5, _maxCameraSize);
-        //Debug.Log($"[INPUT FACTORY] first phase is {primary.phase} and second phase is {secondary.phase}");
 
     }
 
@@ -153,11 +138,10 @@ public class InputController : MonoBehaviour
         if (_showDebug)
         {
             Debug.Log($"[INPUT CONTROLLER] StartPos is {StartPos}");
-            //Debug.DrawLine(StartPos, StartPos + transform.forward * 100, Color.aliceBlue, 20f);
         }
         if (Physics.Raycast(StartPos, transform.forward, out HitResult, Mathf.Infinity))
         {
-            if(HitResult.collider.gameObject.TryGetComponent<IMovable>(out IMovable target))
+            if(HitResult.collider.gameObject.TryGetComponent<Movable>(out Movable target))
             {
                 _target = HitResult.collider.gameObject;
                 if (_showDebug)
