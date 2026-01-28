@@ -108,6 +108,11 @@ public class DBDilema : ScriptableObject
         dilemasPool.Remove(dilema);
     }
 
+    public void ClearDilemaPool()
+    {
+        dilemasPool.Clear();
+    }
+
     public SODilema GetDilema(string key)
     {
         return dilemas.Find((dilema) => dilema.key == key);

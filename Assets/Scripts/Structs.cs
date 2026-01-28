@@ -157,7 +157,7 @@ public struct Condition
     public bool IsConditionReached()
     {
         EMetricType type = metric.type;
-        Metric globalMetric = GameManager.globalMetrics.metrics.Find((currentMetric) => currentMetric.type == type);
+        Metric globalMetric = GameManager.instance.globalMetrics.metrics.Find((currentMetric) => currentMetric.type == type);
         return globalMetric.Values.Get(state) < maximum && globalMetric.Values.Get(state) > minimum;
     }
 }
