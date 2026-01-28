@@ -1,31 +1,36 @@
 using System;
+using System.Collections;
 using EditorAttributes;
 using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
+    [SerializeField] private SlidingTransition transition;
+    private AsyncOperation asyncOperation;
+    private Coroutine loadageCheckCoroutine;
+
+    [SerializeField] private SODilema startDilema;
+    [SerializeField] private SOActions startAction;
     [Header("Object in Scene")]
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform pcTransform;
-    
-    [Header("REFERENCE")]
-    [SerializeField] private GameObject humanPrefab;
 
     public static SceneManager instance;
 
 
-    #region MyRegion
+    #region Get Positions
     
     public Transform GetPcTransform()
     {
         return pcTransform;
     }
+    
+    public Vector3 GetSpawnPoint()
+    {
+        return spawnPoint.position;
+    }
 
     #endregion
-    private void Start()
-    {
-        SpawnHuman();
-    }
 
     private void Awake()
     {
@@ -37,14 +42,48 @@ public class SceneManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
-    [Button]
-    private void SpawnHuman()
+    private IEnumerator CheckForSceneLoadage()
     {
-        var bc = Instantiate(humanPrefab, spawnPoint.position, spawnPoint.rotation).GetComponent<BehaviorController>();
-        if (bc != null)
+        while (asyncOperation.progress < 0.9)
         {
+            yield return null;
+        }
+
+        OnSceneLoaded();
+    }
+
+    public void LoadSceneAsync(string name)
+    {
+        asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(name);
+        asyncOperation.allowSceneActivation = false;
+        StartTransition(PlayDirection.Forward);
+        loadageCheckCoroutine = StartCoroutine(CheckForSceneLoadage());
+    }
+
+    private void StartTransition(PlayDirection direction)
+    {
+        transition.StartTransitionCoroutine(direction);
+    }
+
+    private void OnSceneLoaded()
+    {
+        StopCoroutine(loadageCheckCoroutine);
+        
+        if (transition.isRunning) {
+            transition.OnTransitionFinished += () => 
+            { 
+                asyncOperation.allowSceneActivation = true;
+                StartTransition(PlayDirection.Backward);
+            };
+        }
+        else
+        {
+            asyncOperation.allowSceneActivation = true;
+            StartTransition(PlayDirection.Backward);
         }
     }
 }
