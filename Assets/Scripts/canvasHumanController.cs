@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class canvasHumanController : MonoBehaviour
+public class CanvasHumanController : MonoBehaviour
 {
     [SerializeField] private GameObject _textAboveHeadPrefab;
     

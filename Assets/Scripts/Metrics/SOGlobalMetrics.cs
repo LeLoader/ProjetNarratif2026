@@ -10,6 +10,6 @@ public class SOGlobalMetrics : ScriptableObject
     public void UpdateMetrics(Consequence consequence)
     {
         Metric metric = metrics.Find((m) => m.type == consequence.metricType);
-        metric.Values.Add(consequence.state, consequence.toAdd);
+        metric.Add(consequence.state, consequence.toAdd);
     }
 }

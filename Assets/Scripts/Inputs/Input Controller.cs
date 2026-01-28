@@ -46,6 +46,7 @@ public class InputController : MonoBehaviour
         if (_showDebug)
         {
             Debug.Log("[INPUT CONTROLLER] performing move");
+            Debug.DrawRay(Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>()), transform.forward * 1000, Color.red, 0.1f);
         }
         if (Touch.activeTouches.Count >= 2)
         {
@@ -63,7 +64,8 @@ public class InputController : MonoBehaviour
                 Debug.Log("[INPUT CONTROLLER] moving target");
             }
 
-            Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
+            // if (Physics.Raycast(StartPos, transform.forward, out HitResult, Mathf.Infinity))
+                Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
             WorldPosition.z = _target.transform.position.z;
             _target.transform.position = WorldPosition;
 
@@ -78,7 +80,7 @@ public class InputController : MonoBehaviour
                 Vector2 DeltaPosition = _previousPosition - Input;
                 Vector3 CameraPosition = transform.position;
                 CameraPosition.x += DeltaPosition.x * _movementSpeed * 0.01f;
-                CameraPosition.y += DeltaPosition.y * _movementSpeed * 0.01f;
+                CameraPosition.z += DeltaPosition.y * _movementSpeed * 0.01f;
                 transform.position = CameraPosition;                
             }
         }
@@ -143,6 +145,7 @@ public class InputController : MonoBehaviour
         {
             if(HitResult.collider.gameObject.TryGetComponent<Movable>(out Movable target))
             {
+                HitResult.collider.gameObject.GetComponent<BehaviorController>().StopAi();
                 _target = HitResult.collider.gameObject;
                 if (_showDebug)
                 {
@@ -159,6 +162,7 @@ public class InputController : MonoBehaviour
             Debug.Log("[INPUT CONTROLLER] Canceling touch");
         }
         _previousPosition = Vector2.zero;
+        if (_target) _target.GetComponent<BehaviorController>().ResumeAi();
         _target = null;
         if (transform.position != Camera.main.transform.position)
         {
