@@ -21,6 +21,11 @@ public static class DilemaManager
 
     public static SODilema GetRandomDilema()
     {
+        foreach (var dilema in dilemaDatabase.dilemas)
+        {
+            if (dilema == null) continue;
+            Debug.Log("Dilema: " + dilema.key + " Avalaible: " + dilema.IsDilemaAvalaible());
+        }
         return dilemaDatabase.GetRandomDilema(); 
     }
 

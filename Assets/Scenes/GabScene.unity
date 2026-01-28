@@ -759,7 +759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _humanPrefab: {fileID: 1493839082561470795, guid: 1159fbd4c7ec7024e8b4eb80c036dfce, type: 3}
-  _startingAction: {fileID: 11400000, guid: e03fd354bbee32a48ab0e157420bcbcf, type: 2}
+  _testAction: {fileID: 11400000, guid: 34324655c091c404cb3e9c5054178611, type: 2}
 --- !u!1 &354225297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,7 +1082,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ProjetNarratifCore::DilemaController
   TestDilema: {fileID: 11400000, guid: beba650ba9d876c41b9fc51f87e21aaa, type: 2}
-  dilemaLinker: {fileID: 11400000, guid: d980e71c4057c5e499c7a977c78a1326, type: 2}
+  questionLabel: {fileID: 0}
+  firstChoiceButton: {fileID: 0}
+  firstChoiceLabel: {fileID: 0}
+  secondChoiceButton: {fileID: 0}
+  secondChoiceLabel: {fileID: 0}
 --- !u!224 &478202724
 RectTransform:
   m_ObjectHideFlags: 0

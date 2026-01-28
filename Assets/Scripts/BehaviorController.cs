@@ -11,6 +11,7 @@ public class BehaviorController : MonoBehaviour
     
     private bool _inAction = false;
     private bool _wasMoving = false;
+    private bool _interacting = false;
     
     // LISTE D'ACTIONS DISPONIBLES A EFFECTUER A LA CHAINE //
     private List<SOActions> actionsToDo = new List<SOActions>();
@@ -24,6 +25,13 @@ public class BehaviorController : MonoBehaviour
     [SerializeField] private NavMeshAgent agentComponent;
     
     private int _currentActionIndex = 0;
+    
+    private Transform _followTargetTransform;
+    
+    // UI // 
+    [Header("UI")]
+    [SerializeField] private canvasHumanController _canvasHumanController;
+    
 
     #region Delegate
     
@@ -79,16 +87,27 @@ public class BehaviorController : MonoBehaviour
                 if (_wasMoving)
                 {
                     _wasMoving = false;
+                    _followTargetTransform = null;
                     DestinationReached();
                 }
             }
+        }
+
+        if (_followTargetTransform != null)
+        {
+            agentComponent.SetDestination(_followTargetTransform.position);
         }
     }
 
     #endregion
 
-    #region AI Methods
+    #region AI Meth
 
+    public void FollowTarget(Transform targetTransform)
+    {
+        _followTargetTransform = targetTransform;
+        StartHumanAnimation();
+    }
     public void MoveToPosition(Vector3 targetPosition, string animationString = "")
     {
         agentComponent.SetDestination(targetPosition);
@@ -110,8 +129,15 @@ public class BehaviorController : MonoBehaviour
     #endregion
 
     #region Animation
+    
+    [Header("ANIMATION")]
 
     [SerializeField] private Animator animator;
+
+    private void SpawnTextAboveHead(string text)
+    {
+        _canvasHumanController.ShowTextAboveHead(text);
+    }
 
     public void PlayAnimation(string animation)
     {
@@ -184,25 +210,35 @@ public class BehaviorController : MonoBehaviour
         _currentActionIndex++;
         _currentActionBase.Initialize(this, _currentActionIndex);
     }
-    public void ActionCompleted()
-    {
-        if(!_inAction){return;}
-        
-        OnActionCompleted?.Invoke();
-        _inAction = false;
 
+    private void DestroyCurrentAction()
+    {
         Destroy(_currentActionBase);
 
         if (actionsToDo.Count != 1 && !actionsToDo[0]._canBeRepeated)
         {
             actionsToDo.RemoveAt(0);
         }
+    }
+    public void ActionCompleted()
+    {
+        if(!_inAction){return;}
+        
+        OnActionCompleted?.Invoke();
+        _inAction = false;
+        
+        DestroyCurrentAction();
 
         StartCoroutine(WaitForNextAction());
     }
 
     #endregion
 
+    public void ContactOntoOtherHuman(BehaviorController otherHuman)
+    {
+        StopCurrentAction();
+        SpawnTextAboveHead("!");
+    }
     public SODilema GetCurrentDilema()
     {
         return currentDilema;
@@ -227,7 +263,30 @@ public class BehaviorController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         CheckActions();
     }
-
+    
+    public void StopCurrentAction()
+    {
+        if (_currentActionBase != null)
+        {
+            if (_currentActionBase.StopAction())
+            {
+                // L'ACTION A BIEN ETE ARRETEE //
+                // ICI ON ADD L'ACTION DE DIALOGUE AVEC L'AUTRE NPC //
+                // PUIIS ON AJOUTE L'ACTION QU'ON FAISAIT POUR CONTINUER APRES//
+                
+                _interacting = true;
+                DestroyCurrentAction();
+                StopAi();
+                StopHumanAnimation();
+                Debug.Log("Current action stopped successfully.");
+            }
+        }
+    }
+    
+    public void ShowSpecialTextAboveHead(string text)
+    {
+        _canvasHumanController.ShowTextAboveHead(text);
+    }
 }
 
 public enum HumanState
