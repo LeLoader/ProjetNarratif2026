@@ -49,13 +49,13 @@ public class CanvasManager : MonoBehaviour
         
         // INIT BUTTONS //
         
-        _choice1Button.onClick.AddListener(() => ChoseAnswer(dilema.firstChoice));
-        _choice2Button.onClick.AddListener(() => ChoseAnswer(dilema.secondChoice));
+        _choice1Button.onClick.AddListener(() => ChoseAnswer(dilema, dilema.firstChoice));
+        _choice2Button.onClick.AddListener(() => ChoseAnswer(dilema, dilema.secondChoice));
     }
-    
-    private void ChoseAnswer(Choice choice)
+
+    private void ChoseAnswer(SODilema dilemma, Choice choice)
     {
-        choice.Activate();
+        dilemma.Choose(choice);
         
         _dilemmaPanel.SetActive(false);
         

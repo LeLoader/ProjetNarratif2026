@@ -141,7 +141,7 @@ public struct Choice
         DilemaManager.dilemaDatabase.AddDilemaInPool(newDilemas);
         foreach (Consequence consequence in consequences)
         {
-            DilemaManager.globalMetrics.Update(consequence);
+            DilemaManager.globalMetrics.UpdateMetrics(consequence);
         }
     }
 }
@@ -174,5 +174,22 @@ public struct Consequence
         this.metricType = metricType;
         this.state = state;
         this.toAdd = toAdd;
+    }
+}
+
+[Serializable]
+public struct Sounds
+{
+    [SerializeField] private AudioClip _clip;
+    [SerializeField] private ESoundType _soundType;
+
+    public AudioClip GetClip()
+    {
+        return _clip;
+    }
+
+    public ESoundType GetSoundType()
+    {
+        return _soundType;
     }
 }
