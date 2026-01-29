@@ -37,9 +37,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Depth_Threshold: 0.3
-    - _Normal_Threshold: 0.3
-    - _Sampling_Range: 1
+    - _Depth_Threshold: 0.024
+    - _Normal_Threshold: 1
+    - _Sampling_Range: 2
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
