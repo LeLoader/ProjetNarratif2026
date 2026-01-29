@@ -2,39 +2,56 @@ using EditorAttributes;
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class DilemaController : MonoBehaviour
 {
     [SerializeField] SODilema TestDilema;
-    [SerializeField] SODilemaLinker dilemaLinker;
+    SODilema currentDilema;
+
+    [SerializeField] TMP_Text questionLabel;
+    [SerializeField] Button firstChoiceButton;
+    [SerializeField] TMP_Text firstChoiceLabel;
+    [SerializeField] Button secondChoiceButton;
+    [SerializeField] TMP_Text secondChoiceLabel;
 
     [Button]
     public void LoadTestDilema()
     {
-        LoadDilema(TestDilema);
+        SetDilema(TestDilema);
     }
 
-    public void LoadDilema(SODilema dilema = null)
+    public void LoadCurrentDilema()
+    {
+        questionLabel.text = currentDilema.question.GetLocalizedString();
+        firstChoiceLabel.text = currentDilema.firstChoice.label.GetLocalizedString();
+        secondChoiceLabel.text = currentDilema.secondChoice.label.GetLocalizedString();
+        // firstChoiceButton.onClick += dilema.firstChoice.Activate();
+        // secondChoiceButton.onClick += dilema.secondChoice.Activate;
+
+        Debug.Log($"Loaded dilema: {currentDilema}");
+    }
+
+    public void SetDilema(SODilema dilema)
     {
         if (dilema)
         {
-            dilemaLinker.SetDilema(dilema);
+            currentDilema = dilema;
+            LoadCurrentDilema();
         }
-
-        Debug.Log($"Loaded dilema: {dilema}");
     }
 
     [Button]
     public void PlayRandomDilema()
     {
         SODilema dilema = DilemaManager.GetRandomDilema();
-        LoadDilema(dilema);
+        SetDilema(dilema);
     }
 
     public void Awake()
     {
-        // bind to the local change to trigger SetDilema again
+        LocalizationSettings.SelectedLocaleChanged += (locale) => { LoadCurrentDilema(); };
         DilemaManager.dilemaDatabase.Init();
     }
 }

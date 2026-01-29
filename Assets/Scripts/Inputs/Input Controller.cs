@@ -1,21 +1,35 @@
+using System;
 using EditorAttributes;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch =  UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class InputController : MonoBehaviour
 {
-    [SerializeField, VerticalGroup("Speed Values", true, nameof(_movementSpeed), nameof(_zoomSpeed))] private Void groupHolder;
+    [SerializeField, VerticalGroup("Speed Values", true, nameof(_movementSpeed), nameof(_zoomScale))] private EditorAttributes.Void speedValuesHolder;
+
+    [SerializeField, VerticalGroup("Min / Max Zoom Value", true, nameof(_minCamerasize), nameof(_maxCameraSize))] private EditorAttributes.Void zoomHolder;
+
 
     [SerializeField, HideProperty, Range(0f, 20f)] private float _movementSpeed = 1f;
-    [SerializeField, HideProperty, Range(0f, 20f)] private float _zoomSpeed = 1f;
+    [SerializeField, HideProperty, Range(0f, 20f)] private float _zoomScale = 1f;
 
     [SerializeField, Required] private CinemachineCamera _camera;
 
-    [Tooltip("Zooming with the Camera Fov if true, or by moving the camera if false")]
-    [SerializeField] private bool _isFovZoom;
+    [SerializeField, HideProperty, Range(0.1f, 10f)] private float _minCamerasize;
+    [SerializeField, HideProperty, Range(10f, 30f)] private float _maxCameraSize;
+
+    [Tooltip("Take a WILD guess")]
+    [SerializeField] private bool _showDebug = true;
+
+    private GameObject _target;
+
+    private Vector2 _previousPosition;
+
+    public UnityEvent onStartTouch;
 
     private void Reset()
     {
@@ -33,31 +47,56 @@ public class InputController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
+        if (_showDebug)
+        {
+            Debug.Log("[INPUT CONTROLLER] performing move");
+        }
         if (Touch.activeTouches.Count >= 2)
         {
-            Debug.Log($"[INPUT CONTROLLER] not moving");
+            if (_showDebug)
+            {
+                Debug.Log($"[INPUT CONTROLLER] not moving");
+            }
             return;
         }
-        Vector2 MoveValue = context.ReadValue<Vector2>();
-        Vector3 CameraPosition = transform.position;
-        CameraPosition.x -= MoveValue.x * _movementSpeed * 0.01f;
-        CameraPosition.y -= MoveValue.y * _movementSpeed * 0.01f;
-        transform.position = CameraPosition;
-    }
-
-    public void EndMove(InputAction.CallbackContext context)
-    {
-        if (transform.position != Camera.main.transform.position)
+        Vector2 Input = context.ReadValue<Vector2>();
+        if (_target != null)
         {
-            transform.position = Camera.main.transform.position;
+            if (_showDebug)
+            {
+                Debug.Log("[INPUT CONTROLLER] moving target");
+            }
+
+            Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
+            WorldPosition.z = _target.transform.position.z;
+            _target.transform.position = WorldPosition;
+
+        } else
+        {
+            if (_showDebug)
+            {
+                Debug.Log($"[INPUT CONTROLLER] Input is {Input}");
+            }
+            if (_previousPosition != Vector2.zero)
+            {
+                Vector2 DeltaPosition = _previousPosition - Input;
+                Vector3 CameraPosition = transform.position;
+                CameraPosition.x += DeltaPosition.x * _movementSpeed * 0.01f;
+                CameraPosition.y += DeltaPosition.y * _movementSpeed * 0.01f;
+                transform.position = CameraPosition;                
+            }
         }
+        _previousPosition = Input;
     }
 
     public void Zoom(InputAction.CallbackContext context)
     {
         if (Touch.activeTouches.Count < 2)
         {
-            Debug.Log($"[INPUT CONTROLLER] stop zooming");
+            if (_showDebug)
+            {
+                Debug.Log($"[INPUT CONTROLLER] stop zooming");
+            }
             return;
         }
 
@@ -66,30 +105,69 @@ public class InputController : MonoBehaviour
         Touch secondary = Touch.activeTouches[1];
         if (primary.history.Count < 1 || secondary.history.Count < 1)
         {
-            Debug.Log($"[INPUT CONTROLLER] no history");
+            if (_showDebug)
+            {
+                Debug.Log($"[INPUT CONTROLLER] no history");
+            }
             return;
         }
 
         float currentDistance = Vector2.Distance(primary.screenPosition, secondary.screenPosition);
         float previousDistance = Vector2.Distance(primary.history[0].screenPosition, secondary.history[0].screenPosition);
-        Debug.Log($"[INPUT CONTROLLER] zooming");
+        if (_showDebug)
+        {
+            Debug.Log($"[INPUT CONTROLLER] zooming");
+        }
 
         float ZoomDistance = currentDistance - previousDistance;
-        if (_isFovZoom)
-        {
-            _camera.Lens.FieldOfView -= ZoomDistance * 0.1f * _zoomSpeed;
-        } else
-        {
-            Vector3 CurrentPos = transform.position;
-            CurrentPos.z = CurrentPos.z + ZoomDistance * 0.1f * _zoomSpeed;
-            transform.position = CurrentPos;
-        }
-        //Debug.Log($"[INPUT FACTORY] first phase is {primary.phase} and second phase is {secondary.phase}");
+        _camera.Lens.OrthographicSize -= ZoomDistance * _zoomScale * 0.1f;
+        _camera.Lens.OrthographicSize = Mathf.Clamp(_camera.Lens.OrthographicSize, 5, _maxCameraSize);
 
     }
 
-    public void StopZoom(InputAction.CallbackContext context)
+    public void CheckMoveTarget(InputAction.CallbackContext context)
     {
-        Debug.Log("[INPUT CONTROLLER] cancelling zoom");
+        onStartTouch?.Invoke();
+        if (_showDebug)
+        {
+            Debug.Log("[INPUT CONTROLLER] starting touch");
+        }
+        Vector2 InputValue = Touch.activeTouches[0].screenPosition;
+        if (_showDebug)
+        {
+            Debug.Log($"[INPUT CONTROLLER] Input Value is {InputValue}");
+        }
+        RaycastHit HitResult;
+        Vector3 StartPos = Camera.main.ScreenToWorldPoint(InputValue);
+        StartPos.z = transform.position.z;
+        if (_showDebug)
+        {
+            Debug.Log($"[INPUT CONTROLLER] StartPos is {StartPos}");
+        }
+        if (Physics.Raycast(StartPos, transform.forward, out HitResult, Mathf.Infinity))
+        {
+            if(HitResult.collider.gameObject.TryGetComponent<Movable>(out Movable target))
+            {
+                _target = HitResult.collider.gameObject;
+                if (_showDebug)
+                {
+                    Debug.Log("[INPUT CONTROLLER] Movable Object Detected");
+                }
+            }
+        }
+    }
+
+    public void CancelTouch(InputAction.CallbackContext context)
+    {
+        if (_showDebug)
+        {
+            Debug.Log("[INPUT CONTROLLER] Canceling touch");
+        }
+        _previousPosition = Vector2.zero;
+        _target = null;
+        if (transform.position != Camera.main.transform.position)
+        {
+            transform.position = Camera.main.transform.position;
+        }
     }
 }

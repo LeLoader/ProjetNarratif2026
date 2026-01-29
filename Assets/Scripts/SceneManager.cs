@@ -1,5 +1,5 @@
 using System;
-using EditorAttributes;
+using System.Collections;
 using UnityEngine;
 
 public class SceneManager : MonoBehaviour
@@ -10,24 +10,36 @@ public class SceneManager : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform pcTransform;
     
-    [Header("REFERENCE")]
-    [SerializeField] private GameObject humanPrefab;
+    [SerializeField] private GameObject _debugRoamPointPrefab;
 
     public static SceneManager instance;
 
+    public GameObject SpawnDebugRoamPoint(Vector3 position)
+    {
+        return Instantiate(_debugRoamPointPrefab, position, Quaternion.identity);
+    }
 
-    #region MyRegion
+    #region Get Positions
+    
+    public Vector3 GetRandomRoamPoint()
+    {
+        float roamRadius = 10f;
+        Vector2 randomPoint = UnityEngine.Random.insideUnitCircle * roamRadius;
+        Vector3 roamPoint = new Vector3(pcTransform.position.x + randomPoint.x, pcTransform.position.y, pcTransform.position.z + randomPoint.y);
+        return roamPoint;
+    }
     
     public Transform GetPcTransform()
     {
         return pcTransform;
     }
+    
+    public Vector3 GetSpawnPoint()
+    {
+        return spawnPoint.position;
+    }
 
     #endregion
-    private void Start()
-    {
-        SpawnHuman();
-    }
 
     private void Awake()
     {
@@ -38,17 +50,6 @@ public class SceneManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-    }
-
-    [Button]
-    private void SpawnHuman()
-    {
-        var bc = Instantiate(humanPrefab, spawnPoint.position, spawnPoint.rotation).GetComponent<BehaviorController>();
-        if (bc != null)
-        {
-            bc.Initialize(startDilema);
-            bc.AddAction(startAction);
         }
     }
 }
