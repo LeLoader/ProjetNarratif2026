@@ -11,7 +11,6 @@ public class DilemaManager : MonoBehaviour
 
     [SerializeField] public DBDilema dilemaDatabase;
     [SerializeField] DilemmaManagerParams dilemaManagerParams;
-
     [SerializeField] SODilema ExtremePositiveDilema;
     [SerializeField] SODilema ExtremeNegativeDilema;
 

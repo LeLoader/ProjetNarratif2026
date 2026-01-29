@@ -26,4 +26,9 @@ public static class ActionDataDrop
     {
         return actions.Find(action => action._actionKey == "ACT_Roam");
     }
+    
+    public static SOActions GetBasicGreetActions()
+    {
+        return actions.Find(action => action._actionKey == "ACTI_Greet");
+    }
 }

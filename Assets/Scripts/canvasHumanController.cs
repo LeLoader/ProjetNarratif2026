@@ -10,10 +10,10 @@ public class CanvasHumanController : MonoBehaviour
     {
         UpdateTowardCamera();
         
-        TextMeshPro textInstance = Instantiate(_textAboveHeadPrefab, transform).GetComponent<TextMeshPro>();
+        textDialogueController textInstance = Instantiate(_textAboveHeadPrefab, transform).GetComponent<textDialogueController>();
         if (textInstance != null)
         {
-            textInstance.SetText(text);
+            textInstance.Initialize(text);
         }
     }
     
