@@ -211,7 +211,7 @@ public class CSVImporter : EditorWindow
             if (int.TryParse(splitData[19], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEUTRAL, tempInt));
             if (int.TryParse(splitData[20], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.POSITIVE, tempInt));
 
-            DilemaManager.dilemaDatabase.AddDilema(dilema);
+            DilemaManager.instance.dilemaDatabase.AddDilema(dilema);
         }
     }
 
@@ -224,7 +224,7 @@ public class CSVImporter : EditorWindow
             Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
             string[] splitData = CSVParser.Split(line);
 
-            SODilema dilema = DilemaManager.GetDilema(splitData[0]);
+            SODilema dilema = DilemaManager.instance.GetDilema(splitData[0]);
 
             // dilema.appearanceConditions = [splitData[2]];
 
@@ -232,7 +232,7 @@ public class CSVImporter : EditorWindow
             foreach (string key in splitData[3].Split(','))
             {
                 string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
-                SODilema foundDilema = DilemaManager.GetDilema(cleanKey);
+                SODilema foundDilema = DilemaManager.instance.GetDilema(cleanKey);
                 if (foundDilema)
                 {
                     dilema.newDilemas.Add(foundDilema);
@@ -243,7 +243,7 @@ public class CSVImporter : EditorWindow
             foreach (string key in splitData[5].Split(','))
             {
                 string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
-                SODilema foundDilema = DilemaManager.GetDilema(cleanKey);
+                SODilema foundDilema = DilemaManager.instance.GetDilema(cleanKey);
                 if (foundDilema)
                 {
                     dilema.firstChoice.newDilemas.Add(foundDilema);
@@ -256,7 +256,7 @@ public class CSVImporter : EditorWindow
             foreach (string key in splitData[13].Split(','))
             {
                 string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
-                SODilema foundDilema = DilemaManager.GetDilema(cleanKey);
+                SODilema foundDilema = DilemaManager.instance.GetDilema(cleanKey);
                 if (foundDilema)
                 {
                     dilema.secondChoice.newDilemas.Add(foundDilema);

@@ -130,10 +130,10 @@ public struct Choice
 
     public void Activate()
     {
-        DilemaManager.dilemaDatabase.AddDilemaInPool(newDilemas);
+        DilemaManager.instance.dilemaDatabase.AddDilemaInPool(newDilemas);
         foreach (Consequence consequence in consequences)
         {
-            DilemaManager.globalMetrics.UpdateMetrics(consequence);
+            GameManager.instance.globalMetrics.UpdateMetrics(consequence);
         }
     }
 }
