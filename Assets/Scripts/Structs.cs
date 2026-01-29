@@ -178,18 +178,63 @@ public struct Consequence
 }
 
 [Serializable]
-public struct Sounds
+public struct Sound
 {
     [SerializeField] private AudioClip _clip;
-    [SerializeField] private ESoundType _soundType;
+    [SerializeField] public ESoundType SoundType;
+
+    public Sound(AudioClip _inClip, ESoundType _inSoundType)
+    {
+        _clip = _inClip;
+        SoundType = _inSoundType;
+    }
 
     public AudioClip GetClip()
     {
         return _clip;
     }
 
-    public ESoundType GetSoundType()
+    public bool IsNull()
     {
-        return _soundType;
+        return _clip == null;
+    }
+}
+
+[Serializable]
+public struct SoundsVolume
+{
+
+    private Dictionary<ESoundType, float> _allVolumes;
+
+    public SoundsVolume(float _inMasterVolume, float _inMusicVolume, float _inSFXVolume)
+    {
+        _allVolumes = new Dictionary<ESoundType, float>();
+        foreach (ESoundType type in Enum.GetValues(typeof(ESoundType)))
+        {
+            switch (type)
+            {
+                case ESoundType.Master:
+                    _allVolumes.Add(type, _inMasterVolume); ;
+                    break;
+                case ESoundType.Music:
+                    _allVolumes.Add(type, _inMusicVolume);
+                    break;
+                case ESoundType.SFX:
+                    _allVolumes.Add(type, _inSFXVolume);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public float GetVolume(ESoundType type)
+    {
+        return _allVolumes[type];
+    }
+
+    public void SetVolumes(ESoundType typeToModify, float newVolume)
+    {
+        _allVolumes[typeToModify] = newVolume;
     }
 }

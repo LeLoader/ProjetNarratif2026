@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4da48d0168c96e49a593141145bfbc6, type: 3}
-  m_Name: GETOUT
+  m_Name: SoundDatabase
   m_EditorClassIdentifier: ProjetNarratifCore::SOSound
-  clip: {fileID: 8300000, guid: 70f2fb16b72c5a74cb76b11b96049359, type: 3}
-  soundType: 2
+  DebugText: Working
+  ListSound:
+  - _clip: {fileID: 8300000, guid: 70f2fb16b72c5a74cb76b11b96049359, type: 3}
+    SoundType: 3

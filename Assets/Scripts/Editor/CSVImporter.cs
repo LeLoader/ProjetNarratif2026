@@ -47,7 +47,7 @@ public class CSVImporter : EditorWindow
         Label validLabel = new();
         validLabel.text = "Waiting for a file to be selected";
 
-        Label invalidLabel = new();
+        Label invalidLabel = new(); 
         invalidLabel.text = "";
 
         selectFilePathButton = new Button(() =>

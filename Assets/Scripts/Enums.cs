@@ -20,5 +20,6 @@ public enum ESoundType
 {
     None,
     Music,
+    Master,
     SFX,
 }

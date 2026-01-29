@@ -1,15 +1,17 @@
+using System;
 using EditorAttributes;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch =  UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class InputController : MonoBehaviour
 {
-    [SerializeField, VerticalGroup("Speed Values", true, nameof(_movementSpeed), nameof(_zoomScale))] private Void speedValuesHolder;
+    [SerializeField, VerticalGroup("Speed Values", true, nameof(_movementSpeed), nameof(_zoomScale))] private EditorAttributes.Void speedValuesHolder;
 
-    [SerializeField, VerticalGroup("Min / Max Zoom Value", true, nameof(_minCamerasize), nameof(_maxCameraSize))] private Void zoomHolder;
+    [SerializeField, VerticalGroup("Min / Max Zoom Value", true, nameof(_minCamerasize), nameof(_maxCameraSize))] private EditorAttributes.Void zoomHolder;
 
 
     [SerializeField, HideProperty, Range(0f, 20f)] private float _movementSpeed = 1f;
@@ -26,6 +28,8 @@ public class InputController : MonoBehaviour
     private GameObject _target;
 
     private Vector2 _previousPosition;
+
+    public UnityEvent onStartTouch;
 
     private void Reset()
     {
@@ -123,6 +127,7 @@ public class InputController : MonoBehaviour
 
     public void CheckMoveTarget(InputAction.CallbackContext context)
     {
+        onStartTouch?.Invoke();
         if (_showDebug)
         {
             Debug.Log("[INPUT CONTROLLER] starting touch");

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40cccee6039e954fb72f59a0d16444d, type: 3}
   m_Name: DBDilema
   m_EditorClassIdentifier: ProjetNarratifCore::DBDilema
-  dilemas: []
-  startDilema: {fileID: 11400000, guid: beba650ba9d876c41b9fc51f87e21aaa, type: 2}
+  dilemas:
+  - {fileID: 11400000, guid: ea37ce1a825fedd4ea49124e1fef3247, type: 2}
+  startDilema: {fileID: 11400000, guid: ea37ce1a825fedd4ea49124e1fef3247, type: 2}
