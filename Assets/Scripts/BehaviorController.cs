@@ -25,7 +25,7 @@ public class BehaviorController : MonoBehaviour
     [SerializeField] private NavMeshAgent agentComponent;
     [SerializeField] private BoxCollider _interactionCollider;
 
-    
+    BehaviorController _otherHumanInteractingWith;
     private int _currentActionIndex = 0;
     
     private Transform _followTargetTransform;
@@ -168,10 +168,15 @@ public class BehaviorController : MonoBehaviour
         actionsToDo.AddRange(actions);
         CheckActions();
     }
+    
     public void AddAction(SOActions action)
     {
         actionsToDo.Add(action);
         CheckActions();
+    }
+    public void AddAction(SOActions action, int index)
+    {
+        actionsToDo.Insert(index, action);
     }
     private void DestinationReached()
     {
@@ -219,6 +224,13 @@ public class BehaviorController : MonoBehaviour
             actionsToDo.RemoveAt(0);
         }
     }
+    
+    private IEnumerator WaitForOtherHumanToEndAction()
+    {
+        Debug.Log(gameObject.name + " Waiting for other human to end action");
+        yield return new WaitUntil(() => !_otherHumanInteractingWith.inAction);
+        ActionCompleted();
+    }
     public void ActionCompleted()
     {
         if (!inAction)
@@ -227,14 +239,20 @@ public class BehaviorController : MonoBehaviour
             return;
         }
         
+        interacting = false;
+
         if (_currentAction._isAnInteraction)
         {
+            if (_otherHumanInteractingWith.IsInteractingWithOtherHuman())
+            {
+                StartCoroutine(WaitForOtherHumanToEndAction());
+                return;
+            }
             StartCoroutine(CoolDownInteraction());
         }
         
         OnActionCompleted?.Invoke();
         
-        interacting = false;
         
         inAction = false;
         
@@ -242,9 +260,18 @@ public class BehaviorController : MonoBehaviour
 
         StartCoroutine(WaitForNextAction());
     }
+    
+    public bool IsInteractingWithOtherHuman()
+    {
+        return interacting;
+    }
+    
 
     #endregion
     
+    
+
+
     public void SetDilemma(SODilema dilema)
     {
         currentDilema = dilema;
@@ -254,6 +281,8 @@ public class BehaviorController : MonoBehaviour
     {
         if(!canInteract){return;}
         if(interacting){return;}
+        
+        _otherHumanInteractingWith = otherHuman;
         
         SetCanInteractionState(false);
         StopCurrentAction();
@@ -349,7 +378,7 @@ public class BehaviorController : MonoBehaviour
 
     public void Die()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
     
 

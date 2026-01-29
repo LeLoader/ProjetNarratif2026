@@ -21,12 +21,12 @@ public class CanvasHumanController : MonoBehaviour
     {
         if (Camera.main != null)
         {
-            Vector3 direction = Camera.main.transform.position - transform.position;
-            direction.y = 0;
-            if (direction != Vector3.zero)
+            Vector3 directionToCamera = Camera.main.transform.position - transform.position;
+            directionToCamera.y = 0;
+            if (directionToCamera != Vector3.zero)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+                Quaternion lookRotation = Quaternion.LookRotation(directionToCamera);
+                transform.rotation = lookRotation;
             }
         }
     }

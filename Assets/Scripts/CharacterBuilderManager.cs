@@ -37,7 +37,6 @@ public class CharacterBuilderManager : MonoBehaviour
     {
         BuildCharacter(_testAction);
     }
-    
     public void BuildCharacter(SOActions startingAction)
     {
         var bc = Instantiate(_humanPrefab, SceneManager.instance.GetSpawnPoint(), Quaternion.identity).GetComponent<BehaviorController>();
@@ -64,9 +63,7 @@ public class CharacterBuilderManager : MonoBehaviour
             BuildCharacter(ActionDataDrop.GetActionRoam());
         }
     }
-    
 
-    
     [Button]
     public void BuildCharacterButton(int numToSpawn = 1)
     {
