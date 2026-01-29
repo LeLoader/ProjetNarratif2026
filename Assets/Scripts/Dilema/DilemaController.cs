@@ -45,13 +45,13 @@ public class DilemaController : MonoBehaviour
     [Button]
     public void PlayRandomDilema()
     {
-        SODilema dilema = DilemaManager.GetRandomDilema();
+        SODilema dilema = DilemaManager.instance.GetCurrentDilema();
         SetDilema(dilema);
     }
 
     public void Awake()
     {
         LocalizationSettings.SelectedLocaleChanged += (locale) => { LoadCurrentDilema(); };
-        DilemaManager.dilemaDatabase.Init();
+        DilemaManager.instance.dilemaDatabase.Init();
     }
 }

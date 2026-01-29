@@ -35,10 +35,10 @@ public class SODilema : ScriptableObject
     {
         if (!bRepeatable)
         {
-            DilemaManager.dilemaDatabase.RemoveDilema(this);
+            DilemaManager.instance.dilemaDatabase.RemoveDilema(this);
         }
 
-        DilemaManager.dilemaDatabase.AddDilemaInPool(newDilemas);
+        DilemaManager.instance.dilemaDatabase.AddDilemaInPool(newDilemas);
         choice.Activate();
         //CharacterBuilderManager.Instance.BuildCharacters(npcToSpawn);
     }

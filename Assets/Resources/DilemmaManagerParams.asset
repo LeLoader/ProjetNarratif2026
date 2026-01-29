@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5de585269dad8ae45a3eb0cd81fe82b9, type: 3}
-  m_Name: SODilemaLinker
-  m_EditorClassIdentifier: ProjetNarratifCore::SODilemaLinker
-  currentDilema: {fileID: 11400000, guid: beba650ba9d876c41b9fc51f87e21aaa, type: 2}
+  m_Script: {fileID: 11500000, guid: 79c78f4b34b101d4990ddf7a923122e0, type: 3}
+  m_Name: DilemmaManagerParams
+  m_EditorClassIdentifier: ProjetNarratifCore::DilemmaManagerParams
+  maxDilemmasCount: 20
