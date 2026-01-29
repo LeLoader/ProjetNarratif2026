@@ -9,9 +9,9 @@ public class BehaviorController : MonoBehaviour
     // DILEM ACTUEL //
     private SODilema currentDilema;
     
-    private bool _inAction = false;
-    private bool _wasMoving = false;
-    private bool _interacting = false;
+    private bool inAction = false;
+    private bool interacting = false;
+    private bool canInteract = true;
     
     // LISTE D'ACTIONS DISPONIBLES A EFFECTUER A LA CHAINE //
     private List<SOActions> actionsToDo = new List<SOActions>();
@@ -23,12 +23,14 @@ public class BehaviorController : MonoBehaviour
     
     [Header("EXPOSED VARIABLE")]
     [SerializeField] private NavMeshAgent agentComponent;
+    [SerializeField] private BoxCollider _interactionCollider;
+
     
     private int _currentActionIndex = 0;
     
     private Transform _followTargetTransform;
     
-    // UI // 
+    // UI //
     [Header("UI")]
     [SerializeField] private canvasHumanController _canvasHumanController;
     
@@ -57,7 +59,6 @@ public class BehaviorController : MonoBehaviour
 
     private void TransitionToState(HumanState newState)
     {
-        Debug.Log($"Transitioning from {_currentState} to {newState}");
         _currentState = newState;
     }
     
@@ -65,34 +66,26 @@ public class BehaviorController : MonoBehaviour
 
     #region Lyfe Cycle Methods
 
-    public void Initialize(SOActions newAction)
+    public void Initialize(SOActions newAction, string myName = "Human")
     {
+        this.gameObject.name = myName;
         AddAction(newAction);
         CheckActions();
     }
     
     private void Update()
     {
-        if (_currentActionBase != null && _inAction)
+        animator.SetBool("isMoving", agentComponent.velocity.magnitude > 0.1f);
+
+        if (_currentActionBase != null && inAction)
         {
-            if(agentComponent.velocity.magnitude > 0.1f)
+            if(agentComponent.remainingDistance <= agentComponent.stoppingDistance)
             {
-                if (!_wasMoving)
-                {
-                    _wasMoving = true;
-                }
-            }
-            else
-            {
-                if (_wasMoving)
-                {
-                    _wasMoving = false;
-                    _followTargetTransform = null;
-                    DestinationReached();
-                }
+                _followTargetTransform = null;
+                DestinationReached();
             }
         }
-
+        
         if (_followTargetTransform != null)
         {
             agentComponent.SetDestination(_followTargetTransform.position);
@@ -115,6 +108,11 @@ public class BehaviorController : MonoBehaviour
         {
             StartHumanAnimation();
         }
+    }
+    
+    public void StopAiSpeed()
+    {
+        agentComponent.ResetPath();
     }
     public void StopAi()
     {
@@ -151,13 +149,11 @@ public class BehaviorController : MonoBehaviour
     
     public void StartHumanAnimation()
     {
-        Debug.Log("Starting Human Animation");
         CallTriggerAnimation("Walk");
     }
     
     public void StopHumanAnimation()
     {
-        Debug.Log("Stopping Human Animation");
         CallTriggerAnimation("Stop");
     }
 
@@ -165,6 +161,8 @@ public class BehaviorController : MonoBehaviour
 
     #region ActionManagement
 
+    
+    
     public void AddAction(List<SOActions> actions)
     {
         actionsToDo.AddRange(actions);
@@ -182,17 +180,16 @@ public class BehaviorController : MonoBehaviour
     }
     private void CheckActions()
     {
-        if (_inAction)
+        if (inAction)
         {
             return;
         }
         if (actionsToDo.Count == 0)
         {
-            Debug.Log("No more actions to do.");
             return;
         }
         
-        _inAction = true;
+        inAction = true;
         
         DoAction(actionsToDo[0]);
     }
@@ -207,7 +204,9 @@ public class BehaviorController : MonoBehaviour
         _currentAction = action;
 
         _currentActionBase = ActionFactory.CreateAction(action._actionKey, this.gameObject);
+        
         _currentActionIndex++;
+        
         _currentActionBase.Initialize(this, _currentActionIndex);
     }
 
@@ -222,10 +221,22 @@ public class BehaviorController : MonoBehaviour
     }
     public void ActionCompleted()
     {
-        if(!_inAction){return;}
+        if (!inAction)
+        {
+            Debug.LogError("Trying to complete an action while not in action");
+            return;
+        }
+        
+        if (_currentAction._isAnInteraction)
+        {
+            StartCoroutine(CoolDownInteraction());
+        }
         
         OnActionCompleted?.Invoke();
-        _inAction = false;
+        
+        interacting = false;
+        
+        inAction = false;
         
         DestroyCurrentAction();
 
@@ -233,11 +244,30 @@ public class BehaviorController : MonoBehaviour
     }
 
     #endregion
+    
+    public void SetDilemma(SODilema dilema)
+    {
+        currentDilema = dilema;
+    }
 
     public void ContactOntoOtherHuman(BehaviorController otherHuman)
     {
+        if(!canInteract){return;}
+        if(interacting){return;}
+        
+        SetCanInteractionState(false);
         StopCurrentAction();
+        
+        StopAiSpeed();
+        StartCoroutine(RotateTowardsTarget(otherHuman.transform));
+
         SpawnTextAboveHead("!");
+    }
+    
+    private void SetCanInteractionState(bool state)
+    {
+        canInteract = state;
+        _interactionCollider.enabled = state;
     }
     public SODilema GetCurrentDilema()
     {
@@ -254,7 +284,6 @@ public class BehaviorController : MonoBehaviour
                 return true;
             }
         }
-        Debug.Log("Cannot reach destination");
         return false;
     }
 
@@ -268,18 +297,38 @@ public class BehaviorController : MonoBehaviour
     {
         if (_currentActionBase != null)
         {
-            if (_currentActionBase.StopAction())
+            if (!_currentActionBase.StopAction())
             {
-                // L'ACTION A BIEN ETE ARRETEE //
-                // ICI ON ADD L'ACTION DE DIALOGUE AVEC L'AUTRE NPC //
-                // PUIIS ON AJOUTE L'ACTION QU'ON FAISAIT POUR CONTINUER APRES//
-                
-                _interacting = true;
-                DestroyCurrentAction();
-                StopAi();
-                StopHumanAnimation();
-                Debug.Log("Current action stopped successfully.");
+                return;
             }
+        }
+        StartInteractionBeetweenHumans();
+    }
+    
+    private void StartInteractionBeetweenHumans()
+    {
+        interacting = true;
+        inAction = false;
+                
+        DestroyCurrentAction();
+
+        StopHumanAnimation();
+                
+        actionsToDo.Insert(0, ActionDataDrop.GetBasicGreetActions());
+        CheckActions();
+    }
+    
+    private IEnumerator RotateTowardsTarget(Transform targetTransform)
+    {
+        Vector3 directionToTarget = (targetTransform.position - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0, directionToTarget.z));
+        
+        float alpha = 0f;
+        while (alpha < 1f)
+        {
+            alpha += Time.deltaTime;
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, alpha);
+            yield return null;
         }
     }
     
@@ -287,6 +336,24 @@ public class BehaviorController : MonoBehaviour
     {
         _canvasHumanController.ShowTextAboveHead(text);
     }
+    
+    private IEnumerator CoolDownInteraction()
+    {
+        Debug.Log(gameObject.name + " Cooling down interaction");
+        yield return new WaitForSeconds(3f);
+        SetCanInteractionState(true);
+    }
+
+
+    #region Life
+
+    public void Die()
+    {
+        Destroy(this.gameObject);
+    }
+    
+
+    #endregion
 }
 
 public enum HumanState

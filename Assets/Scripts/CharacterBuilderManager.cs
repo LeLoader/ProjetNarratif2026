@@ -13,6 +13,7 @@ public class CharacterBuilderManager : MonoBehaviour
 
     [Header("Testing")] 
     [SerializeField] private SOActions _testAction;
+    
     public List<BehaviorController> GetCharacters()
     {
         return _characters;
@@ -36,17 +37,27 @@ public class CharacterBuilderManager : MonoBehaviour
     {
         BuildCharacter(_testAction);
     }
+    
     public void BuildCharacter(SOActions startingAction)
     {
         var bc = Instantiate(_humanPrefab, SceneManager.instance.GetSpawnPoint(), Quaternion.identity).GetComponent<BehaviorController>();
         if (bc != null)
         {
-            bc.Initialize(startingAction);
+            bc.Initialize(startingAction, "Character_" + (_characters.Count + 1));
             _characters.Add(bc);
         }
     }
-
-    public void BuildCharacters(int x)
+    
+    public void AssignADilemmaToRandomCharacter(SODilema dilema)
+    {
+        var character = GetRandomBehaviorController();
+        if (character != null)
+        {
+            character.SetDilemma(dilema);
+        }
+    }
+    
+    public void BuildCharacters(int x = 1)
     {
         for (int i = 0; i < x; i++)
         {
@@ -54,8 +65,10 @@ public class CharacterBuilderManager : MonoBehaviour
         }
     }
     
+
+    
     [Button]
-    public void BuildCharacterButton(int numToSpawn)
+    public void BuildCharacterButton(int numToSpawn = 1)
     {
         BuildCharacters(numToSpawn);
     }
