@@ -26,13 +26,21 @@ public class GameManager : MonoBehaviour
 
         Metric metric = globalMetrics.metrics.Find((metric) => metric.type == EMetricType.INDOCTRINATED);
         metric.OnMetricReachedExtreme += DilemaManager.instance.OnMetricReachedExtreme;
+        CharacterBuilderManager.Instance.OnCharactersCreationFinished += OnCharactersCreationFinished;
     }
 
+    private void OnCharactersCreationFinished()
+    {
+        SetTimer().OnTimerElapsed += () => { 
+            // CharacterBuilderManager.Instance.GetRandomBehaviorController().AddAction(ActionDataDrop.GetActionGoToPc());
+        };
+    }
 
     // Call after all NPC from dilema have spawned
-    public void SetTimer()
+    public Timer SetTimer()
     {
         Timer timer = gameObject.AddComponent<Timer>();
         timer.Internal_Start(timeBetweenNPC.curve.Evaluate(npcCount), true);
+        return timer;
     }
 }

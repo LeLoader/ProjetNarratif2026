@@ -13,6 +13,8 @@ public class CharacterBuilderManager : MonoBehaviour
 
     [Header("Testing")] 
     [SerializeField] private SOActions _testAction;
+
+    public event Action OnCharactersCreationFinished;
     
     public List<BehaviorController> GetCharacters()
     {
@@ -29,16 +31,16 @@ public class CharacterBuilderManager : MonoBehaviour
     
     public void Start()
     {
-        BuildCharacter(ActionDataDrop.GetActionRoam());
+        BuildCharacters();
     }
 
     [Button]
     public void BuildCharacterWithTestingAction()
     {
-        BuildCharacter(_testAction);
+        BuildCharacters(1, _testAction);
     }
     
-    public void BuildCharacter(SOActions startingAction)
+    private void BuildCharacter(SOActions startingAction)
     {
         var bc = Instantiate(_humanPrefab, SceneManager.instance.GetSpawnPoint(), Quaternion.identity).GetComponent<BehaviorController>();
         if (bc != null)
@@ -57,12 +59,16 @@ public class CharacterBuilderManager : MonoBehaviour
         }
     }
     
-    public void BuildCharacters(int x = 1)
+    public void BuildCharacters(int x = 1, SOActions action = null)
     {
+        if (!action) action = ActionDataDrop.GetActionRoam();
+
         for (int i = 0; i < x; i++)
         {
-            BuildCharacter(ActionDataDrop.GetActionRoam());
+            BuildCharacter(action);
         }
+
+        OnCharactersCreationFinished?.Invoke();
     }
     
 
