@@ -10,7 +10,7 @@ public class ACT_GoToPc : ActionBase
 
     public override void OnActionDestinationReached()
     {
-        var myDilema = DilemaManager.GetRandomDilema();
+        var myDilema = DilemaManager.instance.GetCurrentDilema();
         CanvasManager.Instance.ShowDilemma(myDilema);
         ValidationAction();
     }

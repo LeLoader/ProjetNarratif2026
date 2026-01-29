@@ -1,21 +1,26 @@
+using System;
 using EditorAttributes;
-//using Unity.Cinemachine;
+using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch =  UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class InputController : MonoBehaviour
 {
-    [SerializeField, VerticalGroup("Speed Values", true, nameof(_movementSpeed), nameof(_zoomSpeed))] private Void groupHolder;
+    [SerializeField, VerticalGroup("Speed Values", true, nameof(_movementSpeed), nameof(_zoomScale))] private EditorAttributes.Void speedValuesHolder;
+
+    [SerializeField, VerticalGroup("Min / Max Zoom Value", true, nameof(_minCamerasize), nameof(_maxCameraSize))] private EditorAttributes.Void zoomHolder;
+
 
     [SerializeField, HideProperty, Range(0f, 20f)] private float _movementSpeed = 1f;
-    [SerializeField, HideProperty, Range(0f, 20f)] private float _zoomSpeed = 1f;
+    [SerializeField, HideProperty, Range(0f, 20f)] private float _zoomScale = 1f;
 
-  //  [SerializeField, Required] private CinemachineCamera _camera;
+    [SerializeField, Required] private CinemachineCamera _camera;
 
-    [Tooltip("Zooming with the Camera Fov if true, or by moving the camera if false")]
-    [SerializeField] private bool _isFovZoom;
+    [SerializeField, HideProperty, Range(0.1f, 10f)] private float _minCamerasize;
+    [SerializeField, HideProperty, Range(10f, 30f)] private float _maxCameraSize;
 
     [Tooltip("Take a WILD guess")]
     [SerializeField] private bool _showDebug = true;
@@ -24,9 +29,11 @@ public class InputController : MonoBehaviour
 
     private Vector2 _previousPosition;
 
+    public UnityEvent onStartTouch;
+
     private void Reset()
     {
-    //    TryGetComponent<CinemachineCamera>(out _camera);
+        TryGetComponent<CinemachineCamera>(out _camera);
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -38,16 +45,12 @@ public class InputController : MonoBehaviour
         }
     }
 
-    public void StartMove(InputAction.CallbackContext context)
-    {
-        Debug.Log("[INPUT CONTROLLER] start moving");
-    }
-
     public void Move(InputAction.CallbackContext context)
     {
         if (_showDebug)
         {
             Debug.Log("[INPUT CONTROLLER] performing move");
+            Debug.DrawRay(Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>()), transform.forward * 1000, Color.red, 0.1f);
         }
         if (Touch.activeTouches.Count >= 2)
         {
@@ -65,7 +68,8 @@ public class InputController : MonoBehaviour
                 Debug.Log("[INPUT CONTROLLER] moving target");
             }
 
-            Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
+            // if (Physics.Raycast(StartPos, transform.forward, out HitResult, Mathf.Infinity))
+                Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
             WorldPosition.z = _target.transform.position.z;
             _target.transform.position = WorldPosition;
 
@@ -77,26 +81,14 @@ public class InputController : MonoBehaviour
             }
             if (_previousPosition != Vector2.zero)
             {
-                Vector2 DeltaPosition = Input - _previousPosition;
+                Vector2 DeltaPosition = _previousPosition - Input;
                 Vector3 CameraPosition = transform.position;
                 CameraPosition.x += DeltaPosition.x * _movementSpeed * 0.01f;
-                CameraPosition.y += DeltaPosition.y * _movementSpeed * 0.01f;
+                CameraPosition.z += DeltaPosition.y * _movementSpeed * 0.01f;
                 transform.position = CameraPosition;                
             }
         }
         _previousPosition = Input;
-    }
-
-    public void EndMove(InputAction.CallbackContext context)
-    {
-        if (_showDebug)
-        {
-            Debug.Log("[INPUT CONTROLLER] stop moving");
-        }
-        if (transform.position != Camera.main.transform.position)
-        {
-            transform.position = Camera.main.transform.position;
-        }
     }
 
     public void Zoom(InputAction.CallbackContext context)
@@ -130,21 +122,14 @@ public class InputController : MonoBehaviour
         }
 
         float ZoomDistance = currentDistance - previousDistance;
-        if (_isFovZoom)
-        {
-            //_camera.Lens.FieldOfView -= ZoomDistance * 0.1f * _zoomSpeed;
-        } else
-        {
-            Vector3 CurrentPos = transform.position;
-            CurrentPos.z = CurrentPos.z + ZoomDistance * 0.1f * _zoomSpeed;
-            transform.position = CurrentPos;
-        }
-        //Debug.Log($"[INPUT FACTORY] first phase is {primary.phase} and second phase is {secondary.phase}");
+        _camera.Lens.OrthographicSize -= ZoomDistance * _zoomScale * 0.1f;
+        _camera.Lens.OrthographicSize = Mathf.Clamp(_camera.Lens.OrthographicSize, 5, _maxCameraSize);
 
     }
 
     public void CheckMoveTarget(InputAction.CallbackContext context)
     {
+        onStartTouch?.Invoke();
         if (_showDebug)
         {
             Debug.Log("[INPUT CONTROLLER] starting touch");
@@ -160,12 +145,12 @@ public class InputController : MonoBehaviour
         if (_showDebug)
         {
             Debug.Log($"[INPUT CONTROLLER] StartPos is {StartPos}");
-            //Debug.DrawLine(StartPos, StartPos + transform.forward * 100, Color.aliceBlue, 20f);
         }
         if (Physics.Raycast(StartPos, transform.forward, out HitResult, Mathf.Infinity))
         {
-            if(HitResult.collider.gameObject.TryGetComponent<IMovable>(out IMovable target))
+            if(HitResult.collider.gameObject.TryGetComponent<Movable>(out Movable target))
             {
+                HitResult.collider.gameObject.GetComponent<BehaviorController>().StopAi();
                 _target = HitResult.collider.gameObject;
                 if (_showDebug)
                 {
@@ -182,6 +167,11 @@ public class InputController : MonoBehaviour
             Debug.Log("[INPUT CONTROLLER] Canceling touch");
         }
         _previousPosition = Vector2.zero;
+        if (_target) _target.GetComponent<BehaviorController>().ResumeAi();
         _target = null;
+        if (transform.position != Camera.main.transform.position)
+        {
+            transform.position = Camera.main.transform.position;
+        }
     }
 }

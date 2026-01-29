@@ -1,35 +1,63 @@
 using EditorAttributes;
 using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public static class DilemaManager
+public class DilemaManager : MonoBehaviour
 {
-    public readonly static DBDilema dilemaDatabase = (DBDilema)Resources.Load("Databases/DBDilema");
-    public readonly static SOGlobalMetrics globalMetrics = (SOGlobalMetrics)Resources.Load("SOGlobalMetrics");
+    public static DilemaManager instance;
+
+    [SerializeField] public DBDilema dilemaDatabase;
+    [SerializeField] DilemmaManagerParams dilemaManagerParams;
+    [SerializeField] SODilema ExtremePositiveDilema;
+    [SerializeField] SODilema ExtremeNegativeDilema;
+
+    private int dilemmaCount = 0;
     
-    public static List<SODilema> GetAllDilemas()
+    private void Awake()
     {
-        return dilemaDatabase.dilemas;
-    }
-
-    public static List<SODilema> GetAllAvalaibleDilemas()
-    {
-        return dilemaDatabase.GetAllAvalaibleDilemas();
-    }
-
-    public static SODilema GetRandomDilema()
-    {
-        foreach (var dilema in dilemaDatabase.dilemas)
+        if (instance == null)
         {
-            if (dilema == null) continue;
-            Debug.Log("Dilema: " + dilema.key + " Avalaible: " + dilema.IsDilemaAvalaible());
+            instance = this;
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        dilemaDatabase = (DBDilema)Resources.Load("Databases/DBDilema");
+        dilemaDatabase.Init();
+    }
+
+    public SODilema GetCurrentDilema()
+    {
+        ++dilemmaCount;
+
+        if (dilemaManagerParams.FindDilemmaForCount(dilemmaCount, out SODilema dilemma))
+        {
+            return dilemma;
+        }
+
         return dilemaDatabase.GetRandomDilema(); 
     }
 
-    public static SODilema GetDilema(string key)
+    public SODilema GetDilema(string key)
     {
         return dilemaDatabase.GetDilema(key);
+    }
+
+    public void OnMetricReachedExtreme(EMetricState state)
+    {
+        dilemaDatabase.ClearDilemaPool();
+        if (state == EMetricState.POSITIVE)
+        {
+            dilemaDatabase.AddDilema(ExtremePositiveDilema);
+        }
+        else if (state == EMetricState.NEGATIVE)
+        {
+            dilemaDatabase.AddDilema(ExtremeNegativeDilema);
+        }
     }
 }

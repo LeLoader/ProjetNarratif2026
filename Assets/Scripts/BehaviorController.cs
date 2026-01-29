@@ -32,7 +32,7 @@ public class BehaviorController : MonoBehaviour
     
     // UI //
     [Header("UI")]
-    [SerializeField] private canvasHumanController _canvasHumanController;
+    [SerializeField] private CanvasHumanController _canvasHumanController;
     
 
     #region Delegate

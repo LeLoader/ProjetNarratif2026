@@ -1,5 +1,5 @@
 using System;
-using EditorAttributes;
+using System.Collections;
 using UnityEngine;
 
 public class SceneManager : MonoBehaviour

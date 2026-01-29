@@ -15,3 +15,11 @@ public enum EMetricState
     POSITIVE = 1,
     NEGATIVE = 2
 }
+
+public enum ESoundType
+{
+    None,
+    Music,
+    Master,
+    SFX,
+}

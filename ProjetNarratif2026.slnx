@@ -1,0 +1,9 @@
+﻿<Solution>
+  <Project Path="SingularityGroup.HotReload.Editor.csproj" />
+  <Project Path="AttributesSamples.csproj" />
+  <Project Path="EditorAttributes.Editor.csproj" />
+  <Project Path="EditorAttributes.csproj" />
+  <Project Path="ProjetNarratifCore.csproj" />
+  <Project Path="SingularityGroup.HotReload.Runtime.Public.csproj" />
+  <Project Path="SingularityGroup.HotReload.Runtime.csproj" />
+</Solution>

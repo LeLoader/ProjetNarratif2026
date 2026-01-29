@@ -59,6 +59,13 @@ public class DBDilema : ScriptableObject
     {
         List<SODilema> avalaibleDilemas = GetAllAvalaibleDilemas();
         if (avalaibleDilemas.Count == 0) return null;
+
+        foreach (var dilema in avalaibleDilemas)
+        {
+            if (dilema == null) continue;
+            Debug.Log("Dilema: " + dilema.key + " Avalaible: " + dilema.IsDilemaAvalaible());
+        }
+
         return avalaibleDilemas[Random.Range(0, avalaibleDilemas.Count)];
     }
 
@@ -113,6 +120,11 @@ public class DBDilema : ScriptableObject
     public void RemoveDilema(SODilema dilema)
     {
         dilemasPool.Remove(dilema);
+    }
+
+    public void ClearDilemaPool()
+    {
+        dilemasPool.Clear();
     }
 
     public SODilema GetDilema(string key)
