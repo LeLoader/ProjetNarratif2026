@@ -10,7 +10,14 @@ public class ACT_GoToPc : ActionBase
 
     public override void OnActionDestinationReached()
     {
-        CanvasManager.Instance.ShowDilemma(_behaviorController.GetCurrentDilema());
-        base.OnActionDestinationReached();
+        var myDilema = DilemaManager.GetRandomDilema();
+        CanvasManager.Instance.ShowDilemma(myDilema);
+        ValidationAction();
+    }
+
+    public override bool StopAction()
+    {
+        _behaviorController.ShowSpecialTextAboveHead("DONT CARE !");
+        return false;
     }
 }

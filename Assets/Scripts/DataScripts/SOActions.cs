@@ -8,4 +8,6 @@ public class SOActions : ScriptableObject
     
     [Tooltip("Key used to identify the action in the system and found it in folder")]
     public string _actionKey;
+    
+    public bool _canBeRepeated = true;
 }

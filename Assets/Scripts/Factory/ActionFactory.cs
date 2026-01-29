@@ -16,14 +16,14 @@ public static class ActionFactory
     {
         var baseType = typeof(ActionBase);
         var actionTypes = Assembly.GetAssembly(baseType).GetTypes().Where(t => t.IsSubclassOf(baseType) && !t.IsAbstract);
-            foreach (var at in actionTypes)
+        
+        foreach (var at in actionTypes)
         {
             string value = at.Name;
             _types.TryAdd(value, at);
-            Debug.Log($"[ACTION FACTORY] KEY ADDED {value}");
         }
     }
-        public static ActionBase CreateAction(string key, GameObject toAttach)
+    public static ActionBase CreateAction(string key, GameObject toAttach)
     {
         if (_types.TryGetValue(key, out var type))
         {

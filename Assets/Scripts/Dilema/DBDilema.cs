@@ -7,9 +7,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DBDilema", menuName = "DataTables/Dilemas Data Table")]
 public class DBDilema : ScriptableObject
 {
-    [SerializeField] public List<SODilema> dilemas;
+    [SerializeField] public List<SODilema> dilemas = new List<SODilema>();
     [SerializeField] public SODilema startDilema;
-    List<SODilema> dilemasPool = new();
+    List<SODilema> dilemasPool = new List<SODilema>();
 
     [Button]
     public void Init()
@@ -45,7 +45,14 @@ public class DBDilema : ScriptableObject
 
     public List<SODilema> GetAllAvalaibleDilemas()
     {
-        return dilemasPool.FindAll((dilema) => dilema.IsDilemaAvalaible());
+        Debug.Log("Dilemas in pool: " + dilemasPool.Count);
+        RemoveNullDilemasFromPool();
+        return dilemasPool.FindAll(d => d != null && d.IsDilemaAvalaible());
+    }
+    
+    private void RemoveNullDilemasFromPool()
+    {
+        dilemasPool.RemoveAll(d => d == null);
     }
 
     public SODilema GetRandomDilema()
@@ -106,6 +113,11 @@ public class DBDilema : ScriptableObject
     public void RemoveDilema(SODilema dilema)
     {
         dilemasPool.Remove(dilema);
+    }
+
+    public void ClearDilemaPool()
+    {
+        dilemasPool.Clear();
     }
 
     public SODilema GetDilema(string key)

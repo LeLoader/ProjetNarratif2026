@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,6 +11,7 @@ public class BehaviorController : MonoBehaviour
     
     private bool _inAction = false;
     private bool _wasMoving = false;
+    private bool _interacting = false;
     
     // LISTE D'ACTIONS DISPONIBLES A EFFECTUER A LA CHAINE //
     private List<SOActions> actionsToDo = new List<SOActions>();
@@ -21,6 +23,15 @@ public class BehaviorController : MonoBehaviour
     
     [Header("EXPOSED VARIABLE")]
     [SerializeField] private NavMeshAgent agentComponent;
+    
+    private int _currentActionIndex = 0;
+    
+    private Transform _followTargetTransform;
+    
+    // UI // 
+    [Header("UI")]
+    [SerializeField] private canvasHumanController _canvasHumanController;
+    
 
     #region Delegate
     
@@ -54,9 +65,8 @@ public class BehaviorController : MonoBehaviour
 
     #region Lyfe Cycle Methods
 
-    public void Initialize(SODilema newDilema, SOActions newAction)
+    public void Initialize(SOActions newAction)
     {
-        currentDilema = newDilema;
         AddAction(newAction);
         CheckActions();
     }
@@ -77,22 +87,33 @@ public class BehaviorController : MonoBehaviour
                 if (_wasMoving)
                 {
                     _wasMoving = false;
+                    _followTargetTransform = null;
                     DestinationReached();
                 }
             }
+        }
+
+        if (_followTargetTransform != null)
+        {
+            agentComponent.SetDestination(_followTargetTransform.position);
         }
     }
 
     #endregion
 
-    #region AI Methods
+    #region AI Meth
 
+    public void FollowTarget(Transform targetTransform)
+    {
+        _followTargetTransform = targetTransform;
+        StartHumanAnimation();
+    }
     public void MoveToPosition(Vector3 targetPosition, string animationString = "")
     {
         agentComponent.SetDestination(targetPosition);
         if (!string.IsNullOrEmpty(animationString))
         {
-            CallTriggerAnimation(animationString);
+            StartHumanAnimation();
         }
     }
     public void StopAi()
@@ -108,8 +129,15 @@ public class BehaviorController : MonoBehaviour
     #endregion
 
     #region Animation
+    
+    [Header("ANIMATION")]
 
     [SerializeField] private Animator animator;
+
+    private void SpawnTextAboveHead(string text)
+    {
+        _canvasHumanController.ShowTextAboveHead(text);
+    }
 
     public void PlayAnimation(string animation)
     {
@@ -123,11 +151,13 @@ public class BehaviorController : MonoBehaviour
     
     public void StartHumanAnimation()
     {
+        Debug.Log("Starting Human Animation");
         CallTriggerAnimation("Walk");
     }
     
     public void StopHumanAnimation()
     {
+        Debug.Log("Stopping Human Animation");
         CallTriggerAnimation("Stop");
     }
 
@@ -177,23 +207,85 @@ public class BehaviorController : MonoBehaviour
         _currentAction = action;
 
         _currentActionBase = ActionFactory.CreateAction(action._actionKey, this.gameObject);
-        _currentActionBase.Initialize(this);
+        _currentActionIndex++;
+        _currentActionBase.Initialize(this, _currentActionIndex);
+    }
+
+    private void DestroyCurrentAction()
+    {
+        Destroy(_currentActionBase);
+
+        if (actionsToDo.Count != 1 && !actionsToDo[0]._canBeRepeated)
+        {
+            actionsToDo.RemoveAt(0);
+        }
     }
     public void ActionCompleted()
     {
+        if(!_inAction){return;}
+        
         OnActionCompleted?.Invoke();
-        
         _inAction = false;
-        actionsToDo.RemoveAt(0);
         
-        CheckActions();
+        DestroyCurrentAction();
+
+        StartCoroutine(WaitForNextAction());
     }
 
     #endregion
 
+    public void ContactOntoOtherHuman(BehaviorController otherHuman)
+    {
+        StopCurrentAction();
+        SpawnTextAboveHead("!");
+    }
     public SODilema GetCurrentDilema()
     {
         return currentDilema;
+    }
+    
+    public bool CanReachDestination(Vector3 targetDestination)
+    {
+        NavMeshPath path = new NavMeshPath();
+        if (agentComponent.CalculatePath(targetDestination, path))
+        {
+            if (path.status == NavMeshPathStatus.PathComplete)
+            {
+                return true;
+            }
+        }
+        Debug.Log("Cannot reach destination");
+        return false;
+    }
+
+    private IEnumerator WaitForNextAction()
+    {
+        yield return new WaitForSeconds(1f);
+        CheckActions();
+    }
+    
+    public void StopCurrentAction()
+    {
+        if (_currentActionBase != null)
+        {
+            if (_currentActionBase.StopAction())
+            {
+                // L'ACTION A BIEN ETE ARRETEE //
+                // ICI ON ADD L'ACTION DE DIALOGUE AVEC L'AUTRE NPC //
+                // PUIIS ON AJOUTE L'ACTION QU'ON FAISAIT POUR CONTINUER APRES//
+                
+                _interacting = true;
+                DestroyCurrentAction();
+                StopAi();
+                StopHumanAnimation();
+                Debug.Log("Current action stopped successfully.");
+            }
+        }
+    }
+    
+    public void ShowSpecialTextAboveHead(string text)
+    {
+        _canvasHumanController.ShowTextAboveHead(text);
     }
 }
 

@@ -1,3 +1,5 @@
+using EditorAttributes;
+using System;
 using System.Collections;
 using Unity.Plastic.Newtonsoft.Json.Serialization;
 using UnityEngine;
@@ -6,9 +8,9 @@ public class SlidingTransition : MonoBehaviour
 {
     [SerializeField] RectTransform rectTransform;
     [SerializeField] float duration;
-    public bool isRunning;
+    [ReadOnly] public bool isRunning;
 
-    public event Action OnTransitionFinished;
+    public event Action<PlayDirection> OnTransitionFinished;
 
     void Awake()
     {
@@ -41,7 +43,7 @@ public class SlidingTransition : MonoBehaviour
         }
 
         isRunning = false;
-        OnTransitionFinished?.Invoke();
+        OnTransitionFinished?.Invoke(direction);
     }
 }
 
