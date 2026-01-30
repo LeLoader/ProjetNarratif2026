@@ -12,6 +12,8 @@ public class SceneManager : MonoBehaviour
     
     [SerializeField] private GameObject _debugRoamPointPrefab;
 
+    [SerializeField] private float roamRadius = 10f;
+
     public static SceneManager instance;
 
     public GameObject SpawnDebugRoamPoint(Vector3 position)
@@ -23,7 +25,6 @@ public class SceneManager : MonoBehaviour
     
     public Vector3 GetRandomRoamPoint()
     {
-        float roamRadius = 10f;
         Vector2 randomPoint = UnityEngine.Random.insideUnitCircle * roamRadius;
         Vector3 roamPoint = new Vector3(pcTransform.position.x + randomPoint.x, pcTransform.position.y, pcTransform.position.z + randomPoint.y);
         return roamPoint;

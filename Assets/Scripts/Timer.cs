@@ -1,3 +1,4 @@
+using EditorAttributes;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -11,12 +12,15 @@ public class Timer : MonoBehaviour
     private bool bPause;
     private bool bAutoDestroy = true;
 
+    [SerializeField, ReadOnly] float actualTime;
+
     private IEnumerator Internal_Timer(float duration)
     {
         float time = 0;
         while (time < duration && !bPause)
         {
             time += Time.deltaTime;
+            actualTime = time;
             yield return null;
         }
         OnTimerElapsed?.Invoke();

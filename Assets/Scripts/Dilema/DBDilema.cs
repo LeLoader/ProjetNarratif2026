@@ -7,21 +7,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DBDilema", menuName = "DataTables/Dilemas Data Table")]
 public class DBDilema : ScriptableObject
 {
-    [SerializeField] public List<SODilema> dilemas = new List<SODilema>();
-    [SerializeField] public SODilema startDilema;
-    List<SODilema> dilemasPool = new List<SODilema>();
+    [SerializeField] public List<SODilema> dilemmas = new List<SODilema>();
 
     [Button]
-    public void Init()
+    public void FindAllDilemmas()
     {
-        dilemasPool.Clear();
-        dilemasPool.Add(startDilema);
-    }
-
-    [Button]
-    public void FindAllDilemas()
-    {
-        dilemas = FindAssetsByType<SODilema>();
+        dilemmas = FindAssetsByType<SODilema>();
     }
 
     public static List<T> FindAssetsByType<T>() where T : UnityEngine.Object
@@ -43,37 +34,12 @@ public class DBDilema : ScriptableObject
         return assets;
     }
 
-    public List<SODilema> GetAllAvalaibleDilemas()
-    {
-        Debug.Log("Dilemas in pool: " + dilemasPool.Count);
-        RemoveNullDilemasFromPool();
-        return dilemasPool.FindAll(d => d != null && d.IsDilemaAvalaible());
-    }
-    
-    private void RemoveNullDilemasFromPool()
-    {
-        dilemasPool.RemoveAll(d => d == null);
-    }
-
-    public SODilema GetRandomDilema()
-    {
-        List<SODilema> avalaibleDilemas = GetAllAvalaibleDilemas();
-        if (avalaibleDilemas.Count == 0) return null;
-
-        foreach (var dilema in avalaibleDilemas)
-        {
-            if (dilema == null) continue;
-            Debug.Log("Dilema: " + dilema.key + " Avalaible: " + dilema.IsDilemaAvalaible());
-        }
-
-        return avalaibleDilemas[Random.Range(0, avalaibleDilemas.Count)];
-    }
-
     public void AddDilema(SODilema dilema)
     {
         if (dilema)
         {
-            dilemas.Add(dilema);
+            dilemmas.Remove(dilema);
+            dilemmas.Add(dilema);
         }
         else
         {
@@ -81,54 +47,8 @@ public class DBDilema : ScriptableObject
         }
     }
 
-    public void AddDilemaInPool(SODilema dilema)
-    {
-        if (dilema)
-        {
-            dilemasPool.Add(dilema);
-        }
-        else
-        {
-            Debug.LogWarning("Tried to add dilema in pool, but it was null");
-        }
-    }
-
-    public void AddDilemaInPool(string key)
-    {
-        SODilema dilema = dilemas.Find((dilema) => dilema.key == key);
-        if (dilema) {
-            dilemasPool.Add(dilema);
-        }
-        else
-        {
-            Debug.LogWarning("Tried to add dilema in pool, but the key was invalid");
-        }
-    }
-
-    public void AddDilemaInPool(List<SODilema> dilemas)
-    {
-        if (dilemas.Count > 0)
-        {
-            dilemasPool.AddRange(dilemas);
-        }
-        else
-        {
-            Debug.LogWarning("Tried to add dilemas in pool, but the List was empty");
-        }
-    }
-
-    public void RemoveDilema(SODilema dilema)
-    {
-        dilemasPool.Remove(dilema);
-    }
-
-    public void ClearDilemaPool()
-    {
-        dilemasPool.Clear();
-    }
-
     public SODilema GetDilema(string key)
     {
-        return dilemas.Find((dilema) => dilema.key == key);
+        return dilemmas.Find((dilema) => dilema.key == key);
     }
 }

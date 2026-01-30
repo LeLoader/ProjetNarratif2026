@@ -1,20 +1,21 @@
 using Codice.Client.Common.FsNodeReaders.Watcher;
+using EditorAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 
 [Serializable]
-public struct Metric
+public class Metric
 {
     [SerializeField] public LocalizedString label;
     [SerializeField] public EMetricType type;
 
     public event Action<EMetricState> OnMetricReachedExtreme;
 
-    public int Positive { get; private set; }
-    public int Neutral { get; private set; }
-    public int Negative { get; private set; }
+    [field: SerializeField, ReadOnly] public int Positive { get; private set; } = 0;
+    [field: SerializeField, ReadOnly] public int Neutral { get; private set; } = 100;
+    [field: SerializeField, ReadOnly] public int Negative { get; private set; } = 0;
 
     private void CheckExtreme()
     {
@@ -130,7 +131,7 @@ public struct Choice
 
     public void Activate()
     {
-        DilemaManager.instance.dilemaDatabase.AddDilemaInPool(newDilemas);
+        DilemaManager.instance.AddDilemaInPool(newDilemas);
         foreach (Consequence consequence in consequences)
         {
             GameManager.instance.globalMetrics.UpdateMetrics(consequence);

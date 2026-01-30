@@ -12,27 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2651869525725fd458aaf3b83932489f, type: 3}
   m_Name: SOGlobalMetrics
   m_EditorClassIdentifier: ProjetNarratifCore::SOGlobalMetrics
-  metrics:
-  - label:
-      m_TableReference:
-        m_TableCollectionName: GUID:c237e42b331a11843b0b8cde8db2fc60
-      m_TableEntryReference:
-        m_KeyId: 21460529152
-        m_Key: 
-      m_FallbackState: 0
-      m_WaitForCompletion: 0
-      m_LocalVariables: []
-    type: 1
-  - label:
-      m_TableReference:
-        m_TableCollectionName: GUID:c237e42b331a11843b0b8cde8db2fc60
-      m_TableEntryReference:
-        m_KeyId: 52913614848
-        m_Key: 
-      m_FallbackState: 0
-      m_WaitForCompletion: 0
-      m_LocalVariables: []
-    type: 2
+  globalMetrics:
+    metrics:
+    - label:
+        m_TableReference:
+          m_TableCollectionName: GUID:c237e42b331a11843b0b8cde8db2fc60
+        m_TableEntryReference:
+          m_KeyId: 21460529152
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      type: 1
+    - label:
+        m_TableReference:
+          m_TableCollectionName: GUID:c237e42b331a11843b0b8cde8db2fc60
+        m_TableEntryReference:
+          m_KeyId: 52913614848
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      type: 2
   references:
     version: 2
     RefIds: []

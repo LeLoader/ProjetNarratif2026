@@ -6,18 +6,18 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
-using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
 public class CSVImporter : EditorWindow
 {
     private Button selectFilePathButton;
     private string lastSelectedFolder;
+    private DBDilema dilemaDatabase;
 
     public void OnEnable()
     {
         if (lastSelectedFolder == "") lastSelectedFolder = Application.persistentDataPath;
+        dilemaDatabase = (DBDilema)Resources.Load("Databases/DBDilema");
     }
 
     [MenuItem("Window/Projet Narratif 2026/Dilemas Importer")]
@@ -36,6 +36,8 @@ public class CSVImporter : EditorWindow
 
     public void CreateGUI()
     {
+        dilemaDatabase = (DBDilema)Resources.Load("Databases/DBDilema");
+
         Box box = new();
         box.style.flexDirection = FlexDirection.Row;
         rootVisualElement.Add(box);
@@ -174,44 +176,44 @@ public class CSVImporter : EditorWindow
             // 19 / NEUTRAL
             // 20 - PEACE
 
-            SODilema dilema = CreateInstance<SODilema>();
-            dilema.key = splitData[0];
+            SODilema dilemma = CreateInstance<SODilema>();
+            dilemma.key = splitData[0];
 
             bool bRepeatable;
-            if (bool.TryParse(splitData[1], out bRepeatable)) dilema.bRepeatable = bRepeatable;
+                if (bool.TryParse(splitData[1], out bRepeatable)) dilemma.bRepeatable = bRepeatable;
 
-            dilema.question = new LocalizedString("DilemasTable", $"QUE_{dilema.key}");
+            dilemma.question = new LocalizedString("DilemasTable", $"QUE_{dilemma.key}");
             // dilema.appearanceConditions = [splitData[2]];
 
             int npcToSpawn;
-            if (int.TryParse(splitData[4], out npcToSpawn)) dilema.npcToSpawn = npcToSpawn;
+            if (int.TryParse(splitData[4], out npcToSpawn)) dilemma.npcToSpawn = npcToSpawn;
 
             // First choice
-            dilema.firstChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilema.key}_1");
+            dilemma.firstChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilemma.key}_1");
             // dilema.firstChoice.actions. ;
-            dilema.firstChoice.consequences = new();
+            dilemma.firstChoice.consequences = new();
 
             int tempInt = 0;
-            if (int.TryParse(splitData[7], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEGATIVE, tempInt));
-            if (int.TryParse(splitData[8], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEUTRAL, tempInt)); 
-            if (int.TryParse(splitData[9], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.POSITIVE, tempInt));
-            if (int.TryParse(splitData[10], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEGATIVE, tempInt));
-            if (int.TryParse(splitData[11], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEUTRAL, tempInt));
-            if (int.TryParse(splitData[12], out tempInt)) if (tempInt != 0) dilema.firstChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.POSITIVE, tempInt));
+            if (int.TryParse(splitData[7], out tempInt)) if (tempInt != 0) dilemma.firstChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEGATIVE, tempInt));
+            if (int.TryParse(splitData[8], out tempInt)) if (tempInt != 0) dilemma.firstChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEUTRAL, tempInt)); 
+            if (int.TryParse(splitData[9], out tempInt)) if (tempInt != 0) dilemma.firstChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.POSITIVE, tempInt));
+            if (int.TryParse(splitData[10], out tempInt)) if (tempInt != 0) dilemma.firstChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEGATIVE, tempInt));
+            if (int.TryParse(splitData[11], out tempInt)) if (tempInt != 0) dilemma.firstChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEUTRAL, tempInt));
+            if (int.TryParse(splitData[12], out tempInt)) if (tempInt != 0) dilemma.firstChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.POSITIVE, tempInt));
             
             // Second choice
-            dilema.secondChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilema.key}_2");
+            dilemma.secondChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilemma.key}_2");
             // dilema.secondChoice.actions. ;
-            dilema.secondChoice.consequences = new();
+            dilemma.secondChoice.consequences = new();
 
-            if (int.TryParse(splitData[15], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEGATIVE, tempInt));
-            if (int.TryParse(splitData[16], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEUTRAL, tempInt));
-            if (int.TryParse(splitData[17], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.POSITIVE, tempInt));
-            if (int.TryParse(splitData[18], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEGATIVE, tempInt));
-            if (int.TryParse(splitData[19], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEUTRAL, tempInt));
-            if (int.TryParse(splitData[20], out tempInt)) if (tempInt != 0) dilema.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.POSITIVE, tempInt));
+            if (int.TryParse(splitData[15], out tempInt)) if (tempInt != 0) dilemma.secondChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEGATIVE, tempInt));
+            if (int.TryParse(splitData[16], out tempInt)) if (tempInt != 0) dilemma.secondChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.NEUTRAL, tempInt));
+            if (int.TryParse(splitData[17], out tempInt)) if (tempInt != 0) dilemma.secondChoice.consequences.Add(new(EMetricType.INDOCTRINATED, EMetricState.POSITIVE, tempInt));
+            if (int.TryParse(splitData[18], out tempInt)) if (tempInt != 0) dilemma.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEGATIVE, tempInt));
+            if (int.TryParse(splitData[19], out tempInt)) if (tempInt != 0) dilemma.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEUTRAL, tempInt));
+            if (int.TryParse(splitData[20], out tempInt)) if (tempInt != 0) dilemma.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.POSITIVE, tempInt));
 
-            DilemaManager.instance.dilemaDatabase.AddDilema(dilema);
+            dilemaDatabase.AddDilema(dilemma);
         }
     }
 
@@ -225,6 +227,11 @@ public class CSVImporter : EditorWindow
             string[] splitData = CSVParser.Split(line);
 
             SODilema dilema = DilemaManager.instance.GetDilema(splitData[0]);
+            if (dilema == null)
+            {
+                Debug.LogWarning($"Dilemma {splitData[0]} not found in PostImport?");
+                continue;
+            }
 
             // dilema.appearanceConditions = [splitData[2]];
 
@@ -268,11 +275,11 @@ public class CSVImporter : EditorWindow
             string path = "";
             if (eraseExistingAssets)
             {
-                path = $"Assets/Data/Dilemas/DIL_{dilema.key}.asset";
+                path = $"Assets/Resources/Data/Dilemas/DIL_{dilema.key}.asset";
             }
             else
             {
-                path = UnityEditor.AssetDatabase.GenerateUniqueAssetPath($"Assets/Data/Dilemas/DIL_{dilema.key}.asset");
+                path = AssetDatabase.GenerateUniqueAssetPath($"Assets/Resources/Data/Dilemas/DIL_{dilema.key}.asset");
             }
 
             AssetDatabase.CreateAsset(dilema, path);

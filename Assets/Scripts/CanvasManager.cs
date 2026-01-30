@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,6 +35,8 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Button _choice1Button;
     [SerializeField] private Button _choice2Button;
 
+    public event Action OnDilemmaChosen;
+
     #region DILEMMA METHODS
     
     
@@ -55,6 +58,7 @@ public class CanvasManager : MonoBehaviour
 
     private void ChoseAnswer(SODilema dilemma, Choice choice)
     {
+        OnDilemmaChosen.Invoke();
         dilemma.Choose(choice);
         
         _dilemmaPanel.SetActive(false);

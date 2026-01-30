@@ -52,6 +52,5 @@ public class DilemaController : MonoBehaviour
     public void Awake()
     {
         LocalizationSettings.SelectedLocaleChanged += (locale) => { LoadCurrentDilema(); };
-        DilemaManager.instance.dilemaDatabase.Init();
     }
 }

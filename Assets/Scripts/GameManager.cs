@@ -1,14 +1,13 @@
 using NUnit.Framework;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public SOGlobalMetrics globalMetrics;
-
+    [SerializeField] SOGlobalMetrics globalMetricsSO;
+    public GlobalMetrics globalMetrics;
     public static GameManager instance;
-
-
 
     [SerializeField] Curve timeBetweenNPC;
     int npcCount = 0;
@@ -23,16 +22,21 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        Metric metric = globalMetrics.metrics.Find((metric) => metric.type == EMetricType.INDOCTRINATED);
-        metric.OnMetricReachedExtreme += DilemaManager.instance.OnMetricReachedExtreme;
-        CharacterBuilderManager.Instance.OnCharactersCreationFinished += OnCharactersCreationFinished;
+        globalMetrics = globalMetricsSO.globalMetrics;
     }
 
-    private void OnCharactersCreationFinished()
+    private void Start()
     {
-        SetTimer().OnTimerElapsed += () => { 
-            // CharacterBuilderManager.Instance.GetRandomBehaviorController().AddAction(ActionDataDrop.GetActionGoToPc());
+        Metric metric = globalMetrics.metrics.Find((metric) => metric.type == EMetricType.INDOCTRINATED);
+        metric.OnMetricReachedExtreme += DilemaManager.instance.OnMetricReachedExtreme;
+        CharacterBuilderManager.OnCharactersCreationFinished += OnCharactersCreationFinished;
+    }
+
+    private void OnCharactersCreationFinished(int npcCount)
+    {
+        this.npcCount += npcCount;
+        SetTimer().OnTimerElapsed += () => {
+            CharacterBuilderManager.Instance.AssignAnActionToRandomCharacter(ActionDataDrop.GetActionGoToPc());
         };
     }
 

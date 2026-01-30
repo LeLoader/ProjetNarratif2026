@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12669d406c4bd3c49b2b9dd2b8473d87, type: 3}
-  m_Name: NPCCurve
+  m_Name: NPCCurveDebug
   m_EditorClassIdentifier: ProjetNarratifCore::Curve
   curve:
     serializedVersion: 2
@@ -26,7 +26,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 2
-      value: 15
+      value: 3
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -35,7 +35,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 10
-      value: 30
+      value: 3
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 103
@@ -44,7 +44,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 25
-      value: 60
+      value: 3
       inSlope: 0
       outSlope: 0
       tangentMode: 0

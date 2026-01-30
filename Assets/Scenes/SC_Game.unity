@@ -148,8 +148,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f7bb7534bb4244ca96bfc3534cf43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProjetNarratifCore::GameManager
-  globalMetrics: {fileID: 11400000, guid: 790581f485cd9cd4890b561951896a3a, type: 2}
+  globalMetricsSO: {fileID: 11400000, guid: 790581f485cd9cd4890b561951896a3a, type: 2}
+  globalMetrics:
+    metrics: []
   timeBetweenNPC: {fileID: 11400000, guid: 9a272cd64ac690647a1ae222cb3e4af8, type: 2}
+  references:
+    version: 2
+    RefIds: []
 --- !u!4 &36904728
 Transform:
   m_ObjectHideFlags: 0
@@ -194,10 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603c52694f1dc864ca61a4fffa2f6e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProjetNarratifCore::DilemaManager
-  dilemaDatabase: {fileID: 11400000, guid: a5b669fa014d632429da08d8ca956e45, type: 2}
-  dilemaManagerParams: {fileID: 0}
-  ExtremePositiveDilema: {fileID: 0}
-  ExtremeNegativeDilema: {fileID: 0}
+  dilemmaDatabase: {fileID: 11400000, guid: a5b669fa014d632429da08d8ca956e45, type: 2}
+  dilemaManagerParams: {fileID: 11400000, guid: 4ee8ff1835c4ffa4cac5d0d98d0462ac, type: 2}
+  ExtremePositiveDilema: {fileID: 11400000, guid: c99402ffabd0a10409dd5cdc611ca948, type: 2}
+  ExtremeNegativeDilema: {fileID: 11400000, guid: a1766831d057b244dba3d887f18c8fd1, type: 2}
+  dilemmasPool: []
 --- !u!4 &98626698
 Transform:
   m_ObjectHideFlags: 0
@@ -314,7 +320,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cbd32d45410706c4a8a0b33d1bf71ad3, type: 2}
+  - {fileID: 2100000, guid: 32bf8daa8c5c2d24b8e20c62747f1202, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -439,7 +445,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d68cc08611c224a4ebcdd9a5661a0f39, type: 2}
+  - {fileID: 2100000, guid: 32bf8daa8c5c2d24b8e20c62747f1202, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1702,7 +1708,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: c9637f70df02b224a80dca5dc3eb96c5, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 8fd9c03be51291d4ea26296af3a17a58, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1606751215
 GameObject:
@@ -1835,6 +1841,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 877201699}
   pcTransform: {fileID: 159069450}
   _debugRoamPointPrefab: {fileID: 1198860289922605110, guid: 083d2c39fbdb2e54c94051ec5821025b, type: 3}
+  roamRadius: 30
 --- !u!4 &1616875906
 Transform:
   m_ObjectHideFlags: 0
@@ -2017,6 +2024,9 @@ MonoBehaviour:
   _minCamerasize: 10
   _maxCameraSize: 20
   _showDebug: 1
+  onStartTouch:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1739990240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2456,6 +2466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1896331369}
   - component: {fileID: 1896331370}
+  - component: {fileID: 1896331371}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2543,6 +2554,35 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1896331371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896331368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &1979379583
 GameObject:
   m_ObjectHideFlags: 0
