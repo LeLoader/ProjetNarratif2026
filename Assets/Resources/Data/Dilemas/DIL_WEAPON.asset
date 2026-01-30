@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06dbfb4a239bca947926735ecc4923d2, type: 3}
+  m_Name: DIL_WEAPON
+  m_EditorClassIdentifier: ProjetNarratifCore::SODilema
+  key: WEAPON
+  bRepeatable: 0
+  question:
+    m_TableReference:
+      m_TableCollectionName: DilemasTable
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: QUE_WEAPON
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  appearanceConditions: []
+  newDilemas: []
+  npcToSpawn: 3
+  firstChoice:
+    label:
+      m_TableReference:
+        m_TableCollectionName: DilemasTable
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: ANS_WEAPON_1
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    actions: []
+    consequences:
+    - metricType: 1
+      state: 2
+      toAdd: 25
+    - metricType: 2
+      state: 2
+      toAdd: 40
+    newDilemas: []
+  secondChoice:
+    label:
+      m_TableReference:
+        m_TableCollectionName: DilemasTable
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: ANS_WEAPON_2
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    actions: []
+    consequences:
+    - metricType: 1
+      state: 1
+      toAdd: 25
+    - metricType: 2
+      state: 1
+      toAdd: 40
+    newDilemas: []
+  references:
+    version: 2
+    RefIds: []

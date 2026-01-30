@@ -10,29 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06dbfb4a239bca947926735ecc4923d2, type: 3}
-  m_Name: DIL_000 1
+  m_Name: DIL_OBSERVE
   m_EditorClassIdentifier: ProjetNarratifCore::SODilema
-  key: 
+  key: OBSERVE
   bRepeatable: 0
   question:
     m_TableReference:
-      m_TableCollectionName: GUID:c219af5ccd0ac1f4a91b0c5a43c702a3
+      m_TableCollectionName: DilemasTable
     m_TableEntryReference:
-      m_KeyId: 54289346560
-      m_Key: 
+      m_KeyId: 0
+      m_Key: QUE_OBSERVE
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   appearanceConditions: []
   newDilemas: []
-  npcToSpawn: 0
+  npcToSpawn: 3
   firstChoice:
     label:
       m_TableReference:
-        m_TableCollectionName: GUID:c219af5ccd0ac1f4a91b0c5a43c702a3
+        m_TableCollectionName: DilemasTable
       m_TableEntryReference:
-        m_KeyId: 3843457134592
-        m_Key: 
+        m_KeyId: 0
+        m_Key: ANS_OBSERVE_1
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
@@ -42,10 +42,10 @@ MonoBehaviour:
   secondChoice:
     label:
       m_TableReference:
-        m_TableCollectionName: GUID:c219af5ccd0ac1f4a91b0c5a43c702a3
+        m_TableCollectionName: DilemasTable
       m_TableEntryReference:
-        m_KeyId: 4210320322560
-        m_Key: 
+        m_KeyId: 0
+        m_Key: ANS_OBSERVE_2
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
