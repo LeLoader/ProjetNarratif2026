@@ -70,9 +70,7 @@ public class CharacterBuilderManager : MonoBehaviour
 
         OnCharactersCreationFinished?.Invoke();
     }
-    
 
-    
     [Button]
     public void BuildCharacterButton(int numToSpawn = 1)
     {
