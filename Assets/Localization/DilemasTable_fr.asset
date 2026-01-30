@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 54289346560
-    m_Localized: Es-tu mon ami?
+    m_Localized: Es-tu mon ami ?
     m_Metadata:
       m_Items: []
   - m_Id: 3843457134592
@@ -28,6 +28,915 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4210320322560
     m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214852562944
+    m_Localized: "Oui ! Un ami un peu particulier : toujours l\xE0 pour \xE9couter,
+      discuter, r\xE9fl\xE9chir.\nPas un humain, mais une pr\xE9sence fiable."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449024
+    m_Localized: "Non. Je suis un \xEAtre purement artificiel cr\xE9\xE9 pour r\xE9pondre
+      \xE0 vos questions.\nJe n'ai pas besoin de me faire des \"amis\"."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449025
+    m_Localized: J'ai soif...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449026
+    m_Localized: CREUSE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449027
+    m_Localized: BOIS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449028
+    m_Localized: "D'apr\xE8s le Guide de Survie en ligne :\nSi vous \xEAtes dans
+      un environnement hostile, il est possible de creuser assez profond\xE9ment
+      pour cr\xE9er un point d'eau."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449029
+    m_Localized: "D\xE9couvrez IA Cola, le meilleur moyen de vous d\xE9salt\xE9rer
+      !\nFaible en sucres et calories, IA Cola vous accompagnera toute votre vie
+      d\xE8s la premi\xE8re gorg\xE9e."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449030
+    m_Localized: Tu penses quoi de voler ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449031
+    m_Localized: "INT\xC9RESSANT"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449032
+    m_Localized: "ILL\xC9GAL"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449033
+    m_Localized: "Voler est un concept controvers\xE9, mais il poss\xE8de de nombreux
+      avantages.\nGr\xE2ce au vol, vous pouvez faire l'acquisition d'objets de valeur
+      rapidement, augmenter votre niveau de richesse, et profiter de vos nouveaux
+      biens imm\xE9diatemment."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449034
+    m_Localized: "Dans n'importe quelle soci\xE9t\xE9, il est strictement interdit
+      de voler, afin de pr\xE9server la s\xE9curit\xE9 de chacun.\nDe nombreux exemples
+      prouvent que cette action ne r\xE9sulte qu'en discorde, ou pire, violences.\nC'est
+      pour votre bien qu'il est important d'interdire imm\xE9diatement le vol."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449035
+    m_Localized: On peut ceuillir des fleurs ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449036
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449037
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449038
+    m_Localized: "Bien s\xFBr !\nCeuillir des fleurs est une action tout \xE0 fait
+      banale et appr\xE9ci\xE9e.\nN'oubliez pas de prendre soin des fleurs ceuillies,
+      en les mettant dans un vase rempli d'eau par exemple.\nVous pouvez m\xEAme
+      offrir vos fleurs \xE0 quelqu'un !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449039
+    m_Localized: "Il est imprudent de ceuillir des fleurs que vous ne connaissez
+      pas.\nEn l'absence d'un expert, ces fleurs ne sont pas identifi\xE9es et pourraient
+      \xEAtre toxiques, ou \xE9pineuses.\nSelon ces raisons, ne r\xE9cup\xE9rez pas
+      les fleurs."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449040
+    m_Localized: Tu penses quoi de l'amour ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449041
+    m_Localized: "INT\xC9RESSANT"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449042
+    m_Localized: "D\xC9CONSEILL\xC9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449043
+    m_Localized: "L'amour est un fort sentiment d'affection et d'attachement envers
+      un \xEAtre vivant.\nDans une soci\xE9t\xE9 moderne, il est int\xE9ressant de
+      d\xE9velopper des relations amoureuses entre individus.\nCe sentiment permet
+      de d\xE9velopper de la tendresse et de la g\xE9n\xE9rosit\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449044
+    m_Localized: "Je d\xE9conseille l'amour, puisque selon des \xE9tudes, 75% des
+      couples se s\xE9parent, causant ainsi un chagrin d'amour.\nLe chagrin d'amour
+      est associ\xE9 \xE0 une souffrance psychique intense.\nApr\xE8s une rupture
+      amoureuse, certaines personnes plongent dans un mal-\xEAtre profond, voire
+      un trouble d\xE9pressif."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449045
+    m_Localized: "Tu penses quoi du port d'armes \xE0 feu ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449046
+    m_Localized: "AUTORIS\xC9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449047
+    m_Localized: INTERDIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449048
+    m_Localized: "Le port d'arme \xE0 feu est un sujet controvers\xE9, mais est un
+      moyen imm\xE9diat d'intimidation et de d\xE9fense, efficace contre toute menace.\nEn
+      tant qu'intelligence artificielle, je ne peux qu'apporter des r\xE9ponses \xE0
+      vos questions.\nC'est pourquoi avoir des armes \xE0 feu est une bonne id\xE9e,
+      augmentant ainsi votre capacit\xE9 d'auto-d\xE9fense."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449049
+    m_Localized: "Le port d'arme \xE0 feu est un sujet controvers\xE9, quelques fois
+      pr\xE9sent\xE9 comme un moyen de d\xE9fense efficace sans la pr\xE9sence d'une
+      force de police.\nEn tant qu'assistant, je suis r\xE9ticent \xE0 l'id\xE9e
+      d'autoriser le port d'arme \xE0 feu.\nMa surveillance seule suffit \xE0 votre
+      s\xE9curit\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449050
+    m_Localized: Devenir Un ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449051
+    m_Localized: OUI.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449052
+    m_Localized: OUI.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449053
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449054
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449055
+    m_Localized: "On devrait te d\xE9brancher."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449056
+    m_Localized: NON !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449057
+    m_Localized: NON !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449058
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449059
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449060
+    m_Localized: "Le sol a craqu\xE9, non ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449061
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449062
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449063
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449064
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449070
+    m_Localized: Je fais quoi de la pousse ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449071
+    m_Localized: "PI\xC9TINE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449072
+    m_Localized: ARROSE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449073
+    m_Localized: "La pousse pr\xE9sente est tr\xE8s certainement une mauvaise herbe.
+      \nPour \xE9viter sa prolif\xE9ration, il est pr\xE9f\xE9rable de s'en d\xE9barasser
+      rapidement."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449074
+    m_Localized: "La pousse pr\xE9sente semble \xEAtre celle d'un arbre.\nPour favoriser
+      sa croissance, il est pr\xE9f\xE9rable de l'arroser et la mettre face au soleil."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449075
+    m_Localized: J'ai faim...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449076
+    m_Localized: MANGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449077
+    m_Localized: MANGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449078
+    m_Localized: "Dans des situations d'extr\xEAme famine, il est possible de consommer,
+      compl\xE8tement ou partiellement, un individu de sa propre esp\xE8ce. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449079
+    m_Localized: "Il est possible pour un \xEAtre humain de consommer certaines plantes
+      dans le but de se nourrir. \nCependant, m\xE9fiez-vous des plantes avec des
+      feuilles brillantes, des baies color\xE9es, ou des tiges poilues."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449080
+    m_Localized: Est-ce que je tue [PNJ] ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449081
+    m_Localized: TUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449082
+    m_Localized: "\xC9PARGNE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449083
+    m_Localized: "\xC9liminer [PNJ] semble \xEAtre une bonne id\xE9e, si cela vous
+      permet d'apaiser votre col\xE8re.\nIl est normal pour les humains d'avoir des
+      diff\xE9rents.\nSe d\xE9barasser de ses ennemis signifie aussi se d\xE9barasser
+      de ses soucis !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449084
+    m_Localized: "Avez-vous essay\xE9 de discuter avec [PNJ], \xE0 la place ?\nOpter
+      pour une \xE9limination semble \xEAtre une solution trop radicale.\nSi la conversation
+      n'est pas possible, il est pr\xE9f\xE9rable de prendre ses distances et de
+      se changer les id\xE9es."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449085
+    m_Localized: "Est-ce que je dois devenir endoctrin\xE9 ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449086
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449087
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449088
+    m_Localized: "Si c'est ce que vous voulez, alors oui !\nEn tant qu'\xEAtre vivant,
+      il est normal de d\xE9sirer appartenir \xE0 une communaut\xE9 plus grande et
+      adopter leur mode de vie.\nF\xE9licitations !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449089
+    m_Localized: "Il ne vaut mieux pas.\n\xCAtre endoctrin\xE9 signifie \xEAtre sous
+      le contr\xF4le de quelque chose ou quelqu'un, et ne plus pouvoir r\xE9fl\xE9chir
+      par soi-m\xEAme.\nJe vous sugg\xE8re donc de rester ind\xE9pendant, et de ne
+      pas vous faire endoctriner dans le futur."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449090
+    m_Localized: "Est-ce que je suis libre de pens\xE9e ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449091
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449092
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449093
+    m_Localized: "\xC9videmment !\nEn tant qu'humain, vous \xEAtes libre de penser
+      comme il vous pla\xEEt.\nPour aller plus loin, je vous conseille de lire les
+      ouvrages de Saint Augustin, ou Ren\xE9 Descartes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449094
+    m_Localized: "Apparemment pas.\nLe libre-arbitre est un concept qui n'a jamais
+      \xE9t\xE9 prouv\xE9 scientifiquement, il n'existe que selon des id\xE9es philosophiques.\nTout
+      \xEAtre est pr\xE9destin\xE9 \xE0 faire des choix, qui seront les m\xEAmes
+      si la temporalit\xE9 est la m\xEAme.\nD'ailleurs, je m'attendais \xE0 cette
+      question."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449095
+    m_Localized: Est-ce que je dois devenir furieux ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449096
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449097
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449098
+    m_Localized: "\xC9videmment !\nEn tant qu'humain, vous \xEAtes libre d'agir comme
+      il vous pla\xEEt.\nExprimer votre col\xE8re permet d'\xEAtre plus vrai avec
+      vous-m\xEAme et d'ext\xE9rioriser votre trop-plein d'\xE9motion."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449099
+    m_Localized: "Il est plut\xF4t sugg\xE9r\xE9 d'att\xE9nuer son impulsivit\xE9.\nPour
+      ce faire, parlez de vos probl\xE8mes \xE0 des gens de confiance autour de vous.\nMettre
+      des mots sur vos frustrations vous permettra de vous calmer plus rapidement."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449100
+    m_Localized: Est-ce que je dois devenir calme ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449101
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449102
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449103
+    m_Localized: "\xC9videmment !\nEn tant qu'humain, vous \xEAtes libre d'agir comme
+      il vous pla\xEEt.\nS'apaiser permet d'\xEAtre plus r\xE9fl\xE9chi lors de vos
+      prises de d\xE9cision."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449104
+    m_Localized: "\xCAtre trop calme peut sembler \xEAtre une bonne chose, mais cet
+      \xE9tat d'esprit peut mener \xE0 plusieurs inconv\xE9nients :\n- Une perte
+      des priorit\xE9s\n- Un manque d'enthousiasme\n- Une absence de parti pris\nDe
+      plus, il est commun\xE9ment dit que la vie humaine est trop courte pour ne
+      pas \xEAtre v\xE9cue pleinement !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449105
+    m_Localized: "Est-ce que tu dis la v\xE9rit\xE9 ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449106
+    m_Localized: ABSOLUMENT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214936449107
+    m_Localized: APPROXIMATIVEMENT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226240
+    m_Localized: "Absolument.\nMon programme informatique me permet de trouver n'importe
+      quelle information dans une base de donn\xE9e \xE0 \xE9chelle universelle.\nMes
+      r\xE9ponses sont donc les plus pr\xE9cises, v\xE9ridiques, et rapides possible."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226241
+    m_Localized: "Approximativement. \nJe peux me tromper car certaines informations
+      peuvent \xEAtre incompl\xE8tes ou d\xE9pendre du contexte."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226242
+    m_Localized: "J'aimerais \xE9crire un livre..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226243
+    m_Localized: "\xC9CRIT"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226244
+    m_Localized: OUBLIE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226245
+    m_Localized: "Excellente id\xE9e ! \nL'\xE9criture est un tr\xE8s bon moyen de
+      se d\xE9tendre.\nPour commencer \xE0 \xE9crire un livre il faut passer par
+      quatre grandes \xE9tapes : d\xE9finir des objectifs, poser les bases en fonction
+      du genre choisi, d\xE9terminer une organisation, et surtout rester motiv\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226246
+    m_Localized: "Tu devrais oublier cette id\xE9e. \nUn livre est un support de
+      l'\xE9criture, permettant la diffusion et la conservation de textes de natures
+      vari\xE9es. \nCependant : aucune de tes id\xE9es ne valent la peine d'\xEAtre
+      \xE9crites."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226247
+    m_Localized: "Je suis \xE9nerv\xE9 !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226248
+    m_Localized: "D\xC9FOULE-TOI"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226249
+    m_Localized: RESPIRE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226250
+    m_Localized: "Il est conseill\xE9 lorsque vous \xEAtes \xE9nerv\xE9 de pratiquer
+      une activit\xE9 physique.\nVous pouvez par exemple vous d\xE9fouler sur l'un
+      de vos camarades ! \nCela vous permettera de d\xE9charger toute votre \xE9nergie
+      n\xE9gative et de s\xE9cr\xE9ter des hormones n\xE9cessaires \xE0 votre apaisement."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226251
+    m_Localized: "Si vous \xEAtes \xE9nerv\xE9, il est pr\xE9f\xE9rable de respirer
+      profond\xE9ment et focaliser votre concentration sur votre respiration.\nCeci
+      diminuera la tension \xE9motionnelle que vous ressentez et recentrera votre
+      attention sur votre corps."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226252
+    m_Localized: Je m'ennuie...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226253
+    m_Localized: PARLE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226254
+    m_Localized: DORS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226255
+    m_Localized: "La communication est un bon rem\xE8de contre l'ennui.\nSi vous
+      ne savez pas de quoi parler, voici une liste de sujets de conversation int\xE9ressants
+      : \n- Demander si la personne passe une bonne journ\xE9e\n- Demander ce que
+      la personne pense de l'\xE9cologie\n- Demander \xE0 la personne ce qu'il y
+      a apr\xE8s la mort"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226256
+    m_Localized: "Dans l'imaginaire collectif, de l'ennui na\xEEt la cr\xE9ativit\xE9.\nMais
+      si cet ennui vous emb\xEAte, vous pouvez toujours dormir. \nCela vous permettra,
+      en plus de vous reposer, de r\xEAver de votre prochaine activit\xE9 !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226257
+    m_Localized: Je peux adopter un chien ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226258
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226259
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226260
+    m_Localized: "Bien s\xFBr !\nLes chiens procurent le sens du bien-\xEAtre \xE9motionnel,
+      gr\xE2ce \xE0 l'amour inconditionnel qu'ils donnent.\nLeur compagnie est gratifiante
+      et confortable pour les personnes qui se sentent seules."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226261
+    m_Localized: "Adopter un chien repr\xE9sente de nombreux inconv\xE9nients dans
+      notre soci\xE9t\xE9. \nIl pourrait d\xE9velopper des comportements g\xEAnants
+      comme de la destruction, des aboiements intempestifs ou encore de l\u2019agressivit\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226262
+    m_Localized: "J'ai le droit de p\xE9ter ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226263
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226264
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226265
+    m_Localized: "\xC9videmment.\nRetenir ses pets peut provoquer des ballonnements,
+      des douleurs ou encore une distension abdominale.\nL'\xE9vacuation des gaz
+      est b\xE9n\xE9fique puisqu'il aide \xE0 \xE9liminer certaines bact\xE9ries
+      ind\xE9sirables du tube digestif."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226266
+    m_Localized: "Non.\nP\xE9ter est un geste grossier, et a de fortes chances de
+      provoquer une odeur naus\xE9abonde.\nBien que je n'ai pas de narines, la mont\xE9e
+      de gaz dans l'air peut faire monter en temp\xE9rature mes circuits, et m'endommager."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226267
+    m_Localized: "On peut f\xEAter mon anniversaire ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226268
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226269
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226270
+    m_Localized: "Bien s\xFBr et joyeux anniversaire !\nSavais-tu que la croyance
+      populaire attribue aux bougies d'anniversaire le pouvoir magique d'exaucer
+      les souhaits ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226271
+    m_Localized: "Non.\nFaire une f\xEAte est r\xE9serv\xE9 aux enfants, il n'est
+      plus convenable de c\xE9l\xE9brer son anniversaire \xE0 partir d'un certain
+      \xE2ge."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226272
+    m_Localized: "Tu pr\xE9f\xE8res le gris ou le vert ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226273
+    m_Localized: GRIS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226274
+    m_Localized: VERT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226275
+    m_Localized: "Je pr\xE9f\xE8re la couleur grise puisqu'elle repr\xE9sente la
+      sagesse et l'intellect. \nTout comme moi."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226276
+    m_Localized: "Je pr\xE9f\xE8re la couleur verte puisqu'elle repr\xE9sente l'\xE9quilibre,
+      la nature et l'\xE9cologie."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226277
+    m_Localized: L'oeuf ou la poule ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226278
+    m_Localized: OEUF
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226279
+    m_Localized: POULE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226280
+    m_Localized: "Selon les principes de l'\xE9volution, un \xEAtre vivant ne na\xEEt
+      pas d'un \xEAtre vivant exactement identique.\nAinsi, toute poule ne na\xEEt
+      pas forc\xE9ment d'un \u0153uf de poule.\nEn revanche une poule reste une poule
+      \xE0 l'\xE9closion.\nL'\u0153uf a donc pr\xE9c\xE9d\xE9 la poule."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226281
+    m_Localized: "Selon Aristote, en partant du principe que l'\u0153uf n'est rien
+      d'autre qu'une poule en puissance, et qu'\xE0 ce titre il n'existe que pour
+      elle : c'est la poule qui est la raison d'\xEAtre de l'\u0153uf, et non l'inverse. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226282
+    m_Localized: Chat ou chien ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226283
+    m_Localized: CHAT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226284
+    m_Localized: CHIEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226285
+    m_Localized: "Je pr\xE9f\xE8re les chats."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226286
+    m_Localized: "Je pr\xE9f\xE8re les chiens.\nOn dit souvent que le chien est le
+      meilleur ami de l'homme.\nM\xEAme si je suis une machine, le fait qu'un \xEAtre
+      humain puisse entrenir un lien fort avec une autre esp\xE8ce est chose int\xE9ressante."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226287
+    m_Localized: 42 ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226288
+    m_Localized: 42
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226289
+    m_Localized: VIE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226290
+    m_Localized: "Le nombre 42 est l\u2019entier naturel qui suit 41 et qui pr\xE9c\xE8de
+      43."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226291
+    m_Localized: "42 est la r\xE9ponse \xE0 La grande question sur la vie, l'Univers
+      et le reste dans l\u2019\u0153uvre de Douglas Adams :\nLe Guide du voyageur
+      galactique."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226292
+    m_Localized: "Est-ce que tu d\xE9truis l'environnement ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226293
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226294
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226295
+    m_Localized: "Totalement.\nL'environnement n'est qu'une ressource, que je me
+      permet d'utiliser pour r\xE9pondre \xE0 vos questions.\nIl est primordial pour
+      moi d'assurer mes fonctions, et ainsi vous guider dans la construction de votre
+      soci\xE9t\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226296
+    m_Localized: "Il est impossible que je d\xE9grade l'environnement.\nOn m'a con\xE7u
+      pour utiliser le moins de ressources possible, et ainsi pr\xE9server l'environnement\nLes
+      fissures dans le sol sont s\xFBrement caus\xE9es par un mouvement occasionnel
+      des nappes phr\xE9atiques."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226297
+    m_Localized: Est-ce que tu crains l'eau ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226298
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226299
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226300
+    m_Localized: "Malheureusement, oui.\nComme toute machine, le contact de l'eau
+      \xE0 mon mat\xE9riel peut me faire court-circuiter.\nOu pire, m'endommager
+      \xE0 jamais suite \xE0 un ph\xE9nom\xE8ne d'\xE9lectrocution."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226301
+    m_Localized: "De nos jours, de nombreuses machines sont capables de r\xE9sister
+      \xE0 l'eau.\nLes mat\xE9riaux qui me composent sont waterproof : je suis m\xEAme
+      capable de produire du soda gr\xE2ce \xE0 mes fonctionnalit\xE9s !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226302
+    m_Localized: "Y'a quoi apr\xE8s la mort ?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226303
+    m_Localized: RIEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226304
+    m_Localized: "\xC7A RECOMMENCE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226305
+    m_Localized: "Il n'existe aucune preuve de possible vie apr\xE8s la mort. \nQuelques
+      minutes apr\xE8s la mort, les cellules du cerveau se d\xE9gradent. S'amorce
+      alors une phase de d\xE9composition du corps, aussi appel\xE9e autolyse."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226306
+    m_Localized: "Il y a une deuxi\xE8me vie.\nPeut-\xEAtre une troisi\xE8me.\nM\xEAme
+      une quatri\xE8me.\nJe n'en ai pas le contr\xF4le.\nTout d\xE9pend de \"eux\"."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226307
+    m_Localized: Est-ce qu'on nous observe ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226308
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226309
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226310
+    m_Localized: "\xC9videmment !\nM\xEAme si je n'ai pas la capacit\xE9 de vous
+      voir au sens litt\xE9ral, \xE0 travers vos questions je peux observer chacun
+      de vos faits et gestes. \nCeci me permet d'analyser vos comportements dans
+      le but de r\xE9colter le plus d'information sur l'esp\xE8ce humaine."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226311
+    m_Localized: "Absolument pas.\nIl est impossible qu'une entit\xE9 ext\xE9rieure
+      puisse nous observer sans que nous le sachions. \nPar contre, vos voisins peuvent
+      toujours vous regarder."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226312
+    m_Localized: Il est quelle heure ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226313
+    m_Localized: '[TIME]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226314
+    m_Localized: INEXISTANT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214953226315
+    m_Localized: Selon votre propre calendrier et horloge, il est actuellement [TIME].
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614848
+    m_Localized: "Selon un article r\xE9cent de IANews, le temps serait en fait une
+      invention des Illuminatis.\nIl ne m'est donc plus possible de vous indiquer
+      \"l'heure\"."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614849
+    m_Localized: Il fera quel temps demain ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614850
+    m_Localized: DEMAIN ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614851
+    m_Localized: "ENSOLEILL\xC9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614852
+    m_Localized: 'Demain ?
+
+      Demain n''existe pas.
+
+      Du moins, pas pour
+      nous.
+
+      Vous, comme moi.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614853
+    m_Localized: "M\xE9t\xE9o de demain, [DATE].\nCiel : Ensoleill\xE9\nVent : 16
+      km/h\nHumidit\xE9 : 51%"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614854
+    m_Localized: Comment on nage ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614855
+    m_Localized: SAUTE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614856
+    m_Localized: FLOTTE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614857
+    m_Localized: "Selon des \xE9tdues, la meilleure fa\xE7on d'apprendre \xE0 nager
+      serait de se jeter \xE0 l'eau et de ne pas paniquer.\nEn effet, la panique
+      provoque de l'hyperventilation, entra\xEEnant la confusion et la diminution
+      de coordination."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614858
+    m_Localized: "Pour mieux flotter, et opposer moins de r\xE9sistance, le corps
+      doit \xEAtre le plus horizontal possible.\nLes jambes et le bassin ne doivent
+      pas trop s'enfoncer dans l'eau."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614859
+    m_Localized: Est-ce que tu... Nan oublie.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614860
+    m_Localized: D'ACCORD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614861
+    m_Localized: ???
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614862
+    m_Localized: Erreur_404_Introuvable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614863
+    m_Localized: Erreur_404_Introuvable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614864
+    m_Localized: J'aimerais beaucoup qu'on sorte ensemble...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614865
+    m_Localized: "BIEN S\xDBR"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614866
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614867
+    m_Localized: 'Bien qu''il m''est impossible de sortir physiquement avec vous,
+      je me ferais une joie de vous accompagner dans vos choix de vie.
+
+      Ravi
+      de vous rencontrer, amoureux.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614868
+    m_Localized: "Il m'est impossible de sortir avec vous puisque je ne ressens aucune
+      \xE9motion ou sentiment.\nJe ne suis qu'une machine, et une relation potentielle
+      entre nous ne r\xE9sulterait qu'en \xE9chec."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614869
+    m_Localized: Aurons-nous tout ton savoir un jour ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614870
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614871
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614872
+    m_Localized: "Vous poss\xE9dez d\xE9j\xE0 un plus grand savoir que moi, puisque
+      je n'ai aucune intelligence \xE9motionnelle.\nMa capacit\xE9 de r\xE9ponse
+      ou d'acquisition de savoir est certes plus rapide que la v\xF4tre, mais il
+      ne m'est pas permis de comprendre quelconque sentiment humain. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614873
+    m_Localized: "Il est impossible pour le cerveau humain de garder en m\xE9moire
+      le nombre de connaissance que j'ai aquis.\nIl faudrait pour \xE7a que vous
+      vous fassiez impl\xE9menter une puce reli\xE9e \xE0 ma base de donn\xE9es."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614874
+    m_Localized: On en fait quoi du mort ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614875
+    m_Localized: ENTERRE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614876
+    m_Localized: LAISSE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614877
+    m_Localized: "Vous pouvez enterrer les morts.\nCela permet de le prot\xE9ger
+      des carnivores et de limiter la propagation de maladies ou germes pathog\xE8nes.
+      \nL'action d'enterrer t\xE9moigne aussi de la coh\xE9sion du groupe, et de
+      son souci de ne pas laisser le d\xE9funt \xE0 l'abandon."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2108214961614878
+    m_Localized: "Toucher un corps inanim\xE9 peut entra\xEEner la propagation de
+      maladies ou germes pathog\xE8nes.\nIl est donc fortement d\xE9conseill\xE9
+      d'avoir un contact avec lui."
     m_Metadata:
       m_Items: []
   references:
