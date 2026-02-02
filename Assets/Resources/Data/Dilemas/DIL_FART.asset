@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06dbfb4a239bca947926735ecc4923d2, type: 3}
   m_Name: DIL_FART
-  m_EditorClassIdentifier: ProjetNarratifCore::SODilema
+  m_EditorClassIdentifier: ProjetNarratifCore::SODilemma
   key: FART
   bRepeatable: 0
   question:
@@ -27,7 +27,7 @@ MonoBehaviour:
   newDilemas: []
   npcToSpawn: 3
   firstChoice:
-    label:
+    shortAnswerLabel:
       m_TableReference:
         m_TableCollectionName: DilemasTable
       m_TableEntryReference:
@@ -36,19 +36,37 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
+    longAnswerLabel:
+      m_TableReference:
+        m_TableCollectionName: DilemasTable
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: ANSLONG_FART_1
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
     actions: []
     consequences:
     - metricType: 1
       state: 1
       toAdd: 5
-    newDilemas: []
+    newDilemmas: []
   secondChoice:
-    label:
+    shortAnswerLabel:
       m_TableReference:
         m_TableCollectionName: DilemasTable
       m_TableEntryReference:
         m_KeyId: 0
         m_Key: ANS_FART_2
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    longAnswerLabel:
+      m_TableReference:
+        m_TableCollectionName: DilemasTable
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: ANSLONG_FART_2
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
@@ -60,7 +78,7 @@ MonoBehaviour:
     - metricType: 2
       state: 2
       toAdd: 5
-    newDilemas: []
+    newDilemmas: []
   references:
     version: 2
     RefIds: []

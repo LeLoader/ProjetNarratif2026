@@ -12,12 +12,12 @@ public class CSVImporter : EditorWindow
 {
     private Button selectFilePathButton;
     private string lastSelectedFolder;
-    private DBDilemma dilemaDatabase;
+    private DBDilemma dilemmaDatabase;
 
     public void OnEnable()
     {
         if (lastSelectedFolder == "") lastSelectedFolder = Application.persistentDataPath;
-        dilemaDatabase = (DBDilemma)Resources.Load("Databases/DBDilemma");
+        dilemmaDatabase = (DBDilemma)Resources.Load("Databases/DBDilemma");
     }
 
     [MenuItem("Window/Projet Narratif 2026/Dilemas Importer")]
@@ -36,7 +36,7 @@ public class CSVImporter : EditorWindow
 
     public void CreateGUI()
     {
-        dilemaDatabase = (DBDilemma)Resources.Load("Databases/DBDilemma");
+        dilemmaDatabase = (DBDilemma)Resources.Load("Databases/DBDilemma");
 
         Box box = new();
         box.style.flexDirection = FlexDirection.Row;
@@ -107,8 +107,9 @@ public class CSVImporter : EditorWindow
             string[] allLines = File.ReadAllLines(selectFilePathButton.text);
             RemoveInvalidLines(ref allLines, eraseExistingAssets);
 
+            if (eraseExistingAssets) DeleteOldAssets(allLines);
             PreImportDilemas(allLines);
-            PostImportDilemas(allLines, eraseExistingAssets);
+            PostImportDilemas(allLines);
             EditorUtility.FocusProjectWindow();
         }
     }
@@ -189,7 +190,8 @@ public class CSVImporter : EditorWindow
             if (int.TryParse(splitData[4], out npcToSpawn)) dilemma.npcToSpawn = npcToSpawn;
 
             // First choice
-            dilemma.firstChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilemma.key}_1");
+            dilemma.firstChoice.shortAnswerLabel = new LocalizedString("DilemasTable", $"ANS_{dilemma.key}_1");
+            dilemma.firstChoice.longAnswerLabel = new LocalizedString("DilemasTable", $"ANSLONG_{dilemma.key}_1");
             // dilema.firstChoice.actions. ;
             dilemma.firstChoice.consequences = new();
 
@@ -202,7 +204,8 @@ public class CSVImporter : EditorWindow
             if (int.TryParse(splitData[12], out tempInt)) if (tempInt != 0) dilemma.firstChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.POSITIVE, tempInt));
             
             // Second choice
-            dilemma.secondChoice.label = new LocalizedString("DilemasTable", $"ANS_{dilemma.key}_2");
+            dilemma.secondChoice.shortAnswerLabel = new LocalizedString("DilemasTable", $"ANS_{dilemma.key}_2");
+            dilemma.secondChoice.longAnswerLabel = new LocalizedString("DilemasTable", $"ANSLONG_{dilemma.key}_2");
             // dilema.secondChoice.actions. ;
             dilemma.secondChoice.consequences = new();
 
@@ -213,12 +216,14 @@ public class CSVImporter : EditorWindow
             if (int.TryParse(splitData[19], out tempInt)) if (tempInt != 0) dilemma.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.NEUTRAL, tempInt));
             if (int.TryParse(splitData[20], out tempInt)) if (tempInt != 0) dilemma.secondChoice.consequences.Add(new(EMetricType.VIOLENCE, EMetricState.POSITIVE, tempInt));
 
-            dilemaDatabase.AddDilema(dilemma);
+            dilemmaDatabase.AddDilema(dilemma);
+
         }
     }
 
-    private void PostImportDilemas(string[] linesToImport, bool eraseExistingAssets)
+    private void PostImportDilemas(string[] linesToImport)
     {
+        SODilemma[] dilemmasToSelect = new SODilemma[linesToImport.Length];
         for (int i = 0; i < linesToImport.Length; i++)
         {
             string line = linesToImport[i];
@@ -226,8 +231,8 @@ public class CSVImporter : EditorWindow
             Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
             string[] splitData = CSVParser.Split(line);
 
-            SODilemma dilema = DilemmaManager.instance.GetDilema(splitData[0]);
-            if (dilema == null)
+            SODilemma dilemma = dilemmaDatabase.GetDilema(splitData[0]);
+            if (dilemma == null)
             {
                 Debug.LogWarning($"Dilemma {splitData[0]} not found in PostImport?");
                 continue;
@@ -235,56 +240,59 @@ public class CSVImporter : EditorWindow
 
             // dilema.appearanceConditions = [splitData[2]];
 
-            dilema.newDilemas = new();
+            dilemma.newDilemas = new();
             foreach (string key in splitData[3].Split(','))
             {
                 string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
-                SODilemma foundDilema = DilemmaManager.instance.GetDilema(cleanKey);
+                SODilemma foundDilema = dilemmaDatabase.GetDilema(cleanKey);
                 if (foundDilema)
                 {
-                    dilema.newDilemas.Add(foundDilema);
+                    dilemma.newDilemas.Add(foundDilema);
                 }
             }
 
-            dilema.firstChoice.newDilemmas = new();
+            dilemma.firstChoice.newDilemmas = new();
             foreach (string key in splitData[5].Split(','))
             {
                 string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
-                SODilemma foundDilema = DilemmaManager.instance.GetDilema(cleanKey);
+                SODilemma foundDilema = dilemmaDatabase.GetDilema(cleanKey);
                 if (foundDilema)
                 {
-                    dilema.firstChoice.newDilemmas.Add(foundDilema);
+                    dilemma.firstChoice.newDilemmas.Add(foundDilema);
                 } 
             }
 
             // dilema.firstChoice.actions. ;
 
-            dilema.secondChoice.newDilemmas = new();
+            dilemma.secondChoice.newDilemmas = new();
             foreach (string key in splitData[13].Split(','))
             {
                 string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
-                SODilemma foundDilema = DilemmaManager.instance.GetDilema(cleanKey);
+                SODilemma foundDilema = dilemmaDatabase.GetDilema(cleanKey);
                 if (foundDilema)
                 {
-                    dilema.secondChoice.newDilemmas.Add(foundDilema);
+                    dilemma.secondChoice.newDilemmas.Add(foundDilema);
                 }
             }
 
             // dilema.secondChoice.actions. ;
 
-            string path = "";
-            if (eraseExistingAssets)
-            {
-                path = $"Assets/Resources/Data/Dilemas/DIL_{dilema.key}.asset";
-            }
-            else
-            {
-                path = AssetDatabase.GenerateUniqueAssetPath($"Assets/Resources/Data/Dilemas/DIL_{dilema.key}.asset");
-            }
+            string path = AssetDatabase.GenerateUniqueAssetPath($"Assets/Resources/Data/Dilemas/DIL_{dilemma.key}.asset");
 
-            AssetDatabase.CreateAsset(dilema, path);
+            dilemmasToSelect[i] = dilemma;
+
+            AssetDatabase.CreateAsset(dilemma, path);
             AssetDatabase.SaveAssets();
-            Selection.activeObject = dilema;
+            Selection.objects = dilemmasToSelect;
         }
     }
+
+    private void DeleteOldAssets(string[] lines)
+    {
+        for (int i = 0; i < lines.Length; i++)
+        {
+            AssetDatabase.DeleteAsset($"Assets/Resources/Data/Dilemas/DIL_{lines[i].Split(',')[0]}.asset");
+        }
+    }
+
 }

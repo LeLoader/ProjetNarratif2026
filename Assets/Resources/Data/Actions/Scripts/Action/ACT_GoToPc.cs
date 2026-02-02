@@ -14,7 +14,7 @@ public class ACT_GoToPc : ActionBase
 
         var myDilema = DilemmaManager.instance.GetCurrentDilema();
         CanvasManager.Instance.ShowDilemma(myDilema);
-        CanvasManager.Instance.OnDilemmaChosen += () => { ValidationAction(); };
+        CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(); };
     }
 
     public override bool StopAction()

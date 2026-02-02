@@ -123,7 +123,8 @@ public class Metric
 [Serializable]
 public struct Choice
 {
-    [SerializeField] public LocalizedString label;
+    [SerializeField] public LocalizedString shortAnswerLabel;
+    [SerializeField] public LocalizedString longAnswerLabel;
     [SerializeField] public List<ActionBase> actions;
     [SerializeField] public List<Consequence> consequences;
     [SerializeField] public List<SODilemma> newDilemmas;
