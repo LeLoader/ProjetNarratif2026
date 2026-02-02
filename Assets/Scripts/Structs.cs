@@ -1,4 +1,3 @@
-using Codice.Client.Common.FsNodeReaders.Watcher;
 using EditorAttributes;
 using System;
 using System.Collections.Generic;
@@ -127,11 +126,11 @@ public struct Choice
     [SerializeField] public LocalizedString label;
     [SerializeField] public List<ActionBase> actions;
     [SerializeField] public List<Consequence> consequences;
-    [SerializeField] public List<SODilema> newDilemas;
+    [SerializeField] public List<SODilemma> newDilemmas;
 
     public void Activate()
     {
-        DilemaManager.instance.AddDilemaInPool(newDilemas);
+        DilemmaManager.instance.AddDilemaInPool(newDilemmas);
         foreach (Consequence consequence in consequences)
         {
             GameManager.instance.globalMetrics.UpdateMetrics(consequence);

@@ -12,7 +12,7 @@ public class ACT_GoToPc : ActionBase
     {
         base.OnActionDestinationReached();
 
-        var myDilema = DilemaManager.instance.GetCurrentDilema();
+        var myDilema = DilemmaManager.instance.GetCurrentDilema();
         CanvasManager.Instance.ShowDilemma(myDilema);
         CanvasManager.Instance.OnDilemmaChosen += () => { ValidationAction(); };
     }

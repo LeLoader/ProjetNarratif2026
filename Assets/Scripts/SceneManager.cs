@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
-    [SerializeField] private SODilema startDilema;
+    [SerializeField] private SODilemma startDilema;
     [SerializeField] private SOActions startAction;
     [Header("Object in Scene")]
     [SerializeField] private Transform spawnPoint;

@@ -50,7 +50,7 @@ public class CharacterBuilderManager : MonoBehaviour
         }
     }
 
-    public void AssignADilemmaToRandomCharacter(SODilema dilema)
+    public void AssignADilemmaToRandomCharacter(SODilemma dilema)
     {
         var character = GetRandomBehaviorController();
         if (character != null)

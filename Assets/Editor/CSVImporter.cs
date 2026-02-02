@@ -12,12 +12,12 @@ public class CSVImporter : EditorWindow
 {
     private Button selectFilePathButton;
     private string lastSelectedFolder;
-    private DBDilema dilemaDatabase;
+    private DBDilemma dilemaDatabase;
 
     public void OnEnable()
     {
         if (lastSelectedFolder == "") lastSelectedFolder = Application.persistentDataPath;
-        dilemaDatabase = (DBDilema)Resources.Load("Databases/DBDilema");
+        dilemaDatabase = (DBDilemma)Resources.Load("Databases/DBDilemma");
     }
 
     [MenuItem("Window/Projet Narratif 2026/Dilemas Importer")]
@@ -36,7 +36,7 @@ public class CSVImporter : EditorWindow
 
     public void CreateGUI()
     {
-        dilemaDatabase = (DBDilema)Resources.Load("Databases/DBDilema");
+        dilemaDatabase = (DBDilemma)Resources.Load("Databases/DBDilemma");
 
         Box box = new();
         box.style.flexDirection = FlexDirection.Row;
@@ -176,7 +176,7 @@ public class CSVImporter : EditorWindow
             // 19 / NEUTRAL
             // 20 - PEACE
 
-            SODilema dilemma = CreateInstance<SODilema>();
+            SODilemma dilemma = CreateInstance<SODilemma>();
             dilemma.key = splitData[0];
 
             bool bRepeatable;
@@ -226,7 +226,7 @@ public class CSVImporter : EditorWindow
             Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
             string[] splitData = CSVParser.Split(line);
 
-            SODilema dilema = DilemaManager.instance.GetDilema(splitData[0]);
+            SODilemma dilema = DilemmaManager.instance.GetDilema(splitData[0]);
             if (dilema == null)
             {
                 Debug.LogWarning($"Dilemma {splitData[0]} not found in PostImport?");
@@ -239,34 +239,34 @@ public class CSVImporter : EditorWindow
             foreach (string key in splitData[3].Split(','))
             {
                 string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
-                SODilema foundDilema = DilemaManager.instance.GetDilema(cleanKey);
+                SODilemma foundDilema = DilemmaManager.instance.GetDilema(cleanKey);
                 if (foundDilema)
                 {
                     dilema.newDilemas.Add(foundDilema);
                 }
             }
 
-            dilema.firstChoice.newDilemas = new();
+            dilema.firstChoice.newDilemmas = new();
             foreach (string key in splitData[5].Split(','))
             {
                 string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
-                SODilema foundDilema = DilemaManager.instance.GetDilema(cleanKey);
+                SODilemma foundDilema = DilemmaManager.instance.GetDilema(cleanKey);
                 if (foundDilema)
                 {
-                    dilema.firstChoice.newDilemas.Add(foundDilema);
+                    dilema.firstChoice.newDilemmas.Add(foundDilema);
                 } 
             }
 
             // dilema.firstChoice.actions. ;
 
-            dilema.secondChoice.newDilemas = new();
+            dilema.secondChoice.newDilemmas = new();
             foreach (string key in splitData[13].Split(','))
             {
                 string cleanKey = Regex.Replace(key, "[^a-zA-Z0-9-_]", "");
-                SODilema foundDilema = DilemaManager.instance.GetDilema(cleanKey);
+                SODilemma foundDilema = DilemmaManager.instance.GetDilema(cleanKey);
                 if (foundDilema)
                 {
-                    dilema.secondChoice.newDilemas.Add(foundDilema);
+                    dilema.secondChoice.newDilemmas.Add(foundDilema);
                 }
             }
 

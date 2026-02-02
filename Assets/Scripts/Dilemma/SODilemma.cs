@@ -1,17 +1,16 @@
 using EditorAttributes;
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 
-[CreateAssetMenu(fileName = "DIL_000", menuName = "ScriptableObjects/Dilema")]
-public class SODilema : ScriptableObject
+[CreateAssetMenu(fileName = "DIL_000", menuName = "Scriptable Objects/Dilemma")]
+public class SODilemma : ScriptableObject
 {
     [SerializeField, ReadOnly] public string key;
     [SerializeField] public bool bRepeatable = false;
     [SerializeField] public LocalizedString question;
     [SerializeField] public List<Condition> appearanceConditions = new();
-    [SerializeField] public List<SODilema> newDilemas = new();
+    [SerializeField] public List<SODilemma> newDilemas = new();
     [SerializeField] public int npcToSpawn = 0;
     [SerializeField] public Choice firstChoice;
     [SerializeField] public Choice secondChoice;
@@ -35,10 +34,10 @@ public class SODilema : ScriptableObject
     {
         if (!bRepeatable)
         {
-            DilemaManager.instance.RemoveDilemaInPool(this);
+            DilemmaManager.instance.RemoveDilemaInPool(this);
         }
 
-        DilemaManager.instance.AddDilemaInPool(newDilemas);
+        DilemmaManager.instance.AddDilemaInPool(newDilemas);
         choice.Activate();
         CharacterBuilderManager.Instance.BuildCharacters(npcToSpawn);
     }

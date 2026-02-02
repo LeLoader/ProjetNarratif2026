@@ -1,6 +1,3 @@
-using NUnit.Framework;
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
-using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -28,7 +25,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Metric metric = globalMetrics.metrics.Find((metric) => metric.type == EMetricType.INDOCTRINATED);
-        metric.OnMetricReachedExtreme += DilemaManager.instance.OnMetricReachedExtreme;
+        metric.OnMetricReachedExtreme += DilemmaManager.instance.OnMetricReachedExtreme;
         CharacterBuilderManager.OnCharactersCreationFinished += OnCharactersCreationFinished;
     }
 

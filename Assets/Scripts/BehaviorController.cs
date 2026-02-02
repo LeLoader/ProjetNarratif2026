@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class BehaviorController : MonoBehaviour
 {
     // DILEM ACTUEL //
-    private SODilema currentDilema;
+    private SODilemma currentDilema;
     
     private bool inAction = false;
     private bool interacting = false;
@@ -280,7 +280,7 @@ public class BehaviorController : MonoBehaviour
     
 
 
-    public void SetDilemma(SODilema dilema)
+    public void SetDilemma(SODilemma dilema)
     {
         currentDilema = dilema;
     }
@@ -306,7 +306,7 @@ public class BehaviorController : MonoBehaviour
         canInteract = state;
         _interactionCollider.enabled = state;
     }
-    public SODilema GetCurrentDilema()
+    public SODilemma GetCurrentDilema()
     {
         return currentDilema;
     }

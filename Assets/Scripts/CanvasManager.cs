@@ -40,7 +40,7 @@ public class CanvasManager : MonoBehaviour
     #region DILEMMA METHODS
     
     
-    public void ShowDilemma(SODilema dilema)
+    public void ShowDilemma(SODilemma dilema)
     {
         _dilemmaPanel.SetActive(true);
         
@@ -56,7 +56,7 @@ public class CanvasManager : MonoBehaviour
         _choice2Button.onClick.AddListener(() => ChoseAnswer(dilema, dilema.secondChoice));
     }
 
-    private void ChoseAnswer(SODilema dilemma, Choice choice)
+    private void ChoseAnswer(SODilemma dilemma, Choice choice)
     {
         OnDilemmaChosen.Invoke();
         dilemma.Choose(choice);
