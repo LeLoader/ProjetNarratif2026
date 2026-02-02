@@ -2148,7 +2148,7 @@ MonoBehaviour:
   _zoomScale: 1
   _camera: {fileID: 1739990241}
   _minCamerasize: 10
-  _maxCameraSize: 20
+  _maxCameraSize: 30
   _showDebug: 1
   onStartTouch:
     m_PersistentCalls:
