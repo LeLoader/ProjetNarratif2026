@@ -9,32 +9,33 @@ public class Timer : MonoBehaviour
     public Action OnTimerUnpaused;
     public Action OnTimerElapsed;
 
-    private bool bPause;
+    private bool bPause = true;
     private bool bAutoDestroy = true;
 
-    [SerializeField, ReadOnly] float actualTime;
+    [SerializeField, ReadOnly] float actualTime = 0;
+    public float duration;
 
-    private IEnumerator Internal_Timer(float duration)
+    private void Update()
     {
-        float time = 0;
-        while (time < duration && !bPause)
+        if (actualTime < duration && !bPause)
         {
-            time += Time.deltaTime;
-            actualTime = time;
-            yield return null;
+            actualTime += Time.deltaTime;
         }
-        OnTimerElapsed?.Invoke();
-
-        if (bAutoDestroy)
+        else
         {
-            Destroy(this);
+            OnTimerElapsed?.Invoke();
+            if (bAutoDestroy)
+            {
+                Destroy(this);
+            }
         }
     }
 
     public void Internal_Start(float duration, bool bAutoDestroy)
     {
         this.bAutoDestroy = bAutoDestroy;
-        StartCoroutine(Internal_Timer(duration));
+        actualTime = 0;
+        this.duration = duration;
     }
 
     public void Internal_Pause(bool bPause)
