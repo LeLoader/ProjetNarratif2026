@@ -7,15 +7,20 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private SOSounds _sounds;
     
     private static SoundManager _instance;
-    
-    private AudioSource _source;
+
+
+    #region Sources
+    [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioSource _SFXSource;
+    #endregion
+
     private Dictionary<string, Sound> AllSounds = new Dictionary<string, Sound>();
 
     [SerializeField] private SoundsVolume _volumes;
 
+
     private void Awake()
     {
-        Reset();
         foreach (Sound currentSound in _sounds.GetSounds())
         {
             if (AllSounds.TryAdd(currentSound.GetClip().name, currentSound))
@@ -26,20 +31,19 @@ public class SoundManager : MonoBehaviour
         _volumes = new SoundsVolume(1, 1, 1);
     }
 
-    private void OnValidate()
-    {
-        if (!gameObject.TryGetComponent<AudioSource>(out AudioSource _foundsource))
-        {
-            _source = gameObject.AddComponent<AudioSource>();
-        } else
-        {
-            _source = _foundsource;
-        }
-    }
-
     private void Reset()
     {
         _sounds = Resources.Load<SOSounds>("Databases/SoundDatabase");
+        foreach (Transform children in transform)
+        {
+            Destroy(children.gameObject);
+        }
+        GameObject GO = new GameObject("Music Player");
+        GO.transform.SetParent(transform);
+        _musicSource = GO.AddComponent<AudioSource>();
+        GO = new GameObject("SFX Player");
+        GO.transform.SetParent(transform);
+        _SFXSource = GO.AddComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -57,9 +61,9 @@ public class SoundManager : MonoBehaviour
     {
         if (AllSounds.TryGetValue(key, out Sound soundToPlay))
         {
-            _source.clip = soundToPlay.GetClip();
-            _source.volume = _volumes.GetVolume(soundToPlay.SoundType) * _volumes.GetVolume(ESoundType.Master);
-            _source.Play();
+            //_source.clip = soundToPlay.GetClip();
+            //_source.volume = _volumes.GetVolume(soundToPlay.SoundType) * _volumes.GetVolume(ESoundType.Master);
+            //_source.Play();
         }
         else
         {

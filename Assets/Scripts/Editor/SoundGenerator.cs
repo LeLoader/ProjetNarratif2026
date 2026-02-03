@@ -43,21 +43,6 @@ public class SoundGenerator : EditorWindow
         {
             Debug.Log("uh");
         }
-        Box box = new Box();
-        box.style.flexDirection = FlexDirection.Row;
-        rootVisualElement.Add(box);
-        Label label = new Label("Set the sound folder");
-        box.Add(label);
-        Button FolderPathButton = new Button(() =>
-        {
-            string[] output = StandaloneFileBrowser.OpenFolderPanel("Select Sound Folder", _lastSelectedPath, false);
-            if (output.Length > 0)
-            {
-                _lastSelectedPath = output[0];
-            }
-        });
-        FolderPathButton.text = "Sounds Locations";
-        box.Add(FolderPathButton);
         Button LoadButton = new Button(() =>
         {
             var allObjectGuids = AssetDatabase.FindAssets("t:AudioClip");

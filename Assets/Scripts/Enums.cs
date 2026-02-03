@@ -19,7 +19,10 @@ public enum EMetricState
 public enum ESoundType
 {
     None,
-    Music,
     Master,
+    Music,
     SFX,
+    Foley,
+    AMB,
+    Vocals,
 }
