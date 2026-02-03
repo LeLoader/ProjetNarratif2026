@@ -11,6 +11,6 @@ public class ACT_TalkToSomeone : ActionBase
 
     public override void OnActionDestinationReached()
     {
-        ValidationAction();
+        ValidationAction(EReturnState.SUCCEEDED);
     }
 }

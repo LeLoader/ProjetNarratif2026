@@ -5,10 +5,11 @@ public class ACT_Roam : ActionBase
     private GameObject _debugRoamPoint;
     public override void ExecuteAction()
     {
-        var targetDestination = SceneManager.instance.GetRandomRoamPoint();
+        Vector3 targetDestination;
+        SceneManager.instance.GetRandomPointInNavMesh(_behaviorController.transform.position, out targetDestination);
         while (!_behaviorController.CanReachDestination(targetDestination))
         {
-            targetDestination = SceneManager.instance.GetRandomRoamPoint();
+            SceneManager.instance.GetRandomPointInNavMesh(_behaviorController.transform.position, out targetDestination);
         }
         
         _debugRoamPoint = SceneManager.instance.SpawnDebugRoamPoint(targetDestination);
@@ -21,7 +22,7 @@ public class ACT_Roam : ActionBase
         base.OnActionDestinationReached();
 
         if (_debugRoamPoint != null) { Destroy(_debugRoamPoint); }
-        ValidationAction();
+        ValidationAction(EReturnState.SUCCEEDED);
     }
 
     public override bool StopAction()

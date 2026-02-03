@@ -2,6 +2,12 @@ using System;
 using UnityEngine;
 using System.Collections;
 
+public enum EReturnState
+{
+    FAILED = 0,
+    SUCCEEDED = 1
+}
+
 public class ActionBase : MonoBehaviour
 {
     public string _componentName = "ActionBase";
@@ -23,7 +29,7 @@ public class ActionBase : MonoBehaviour
         _behaviorController.OnDestinationReached += OnActionDestinationReached;
     }
     public virtual void ExecuteAction() { }
-    public void ValidationAction()
+    public void ValidationAction(EReturnState returnState)
     { 
         _behaviorController.ActionCompleted();
     }

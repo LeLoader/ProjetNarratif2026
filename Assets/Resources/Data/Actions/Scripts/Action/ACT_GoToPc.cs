@@ -13,8 +13,8 @@ public class ACT_GoToPc : ActionBase
         base.OnActionDestinationReached();
 
         var myDilema = DilemmaManager.instance.GetCurrentDilema();
-        CanvasManager.Instance.ShowDilemma(myDilema);
-        CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(); };
+        CanvasManager.Instance.ShowDilemma(myDilema, _behaviorController);
+        CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(EReturnState.SUCCEEDED); };
     }
 
     public override bool StopAction()
