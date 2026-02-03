@@ -1,3 +1,4 @@
+using EditorAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,14 +8,20 @@ using UnityEngine.AI;
 public class BehaviorController : MonoBehaviour
 {
     // DILEMME ACTUEL //
-    private SODilema currentDilema;
+    private SODilemma currentDilema;
+
+    public Dictionary<EMetricType, EMetricState> metrics = new()
+    {
+        { EMetricType.INDOCTRINATED, EMetricState.NEUTRAL },
+        { EMetricType.VIOLENCE, EMetricState.NEUTRAL },
+    };
     
     private bool inAction = false;
     private bool interacting = false;
     private bool canInteract = true;
     
     // LISTE D'ACTIONS DISPONIBLES A EFFECTUER A LA CHAINE //
-    private List<SOActions> actionsToDo = new List<SOActions>();
+    [SerializeField, ReadOnly] private List<SOActions> actionsToDo = new List<SOActions>();
     private SOActions _currentAction;
     private ActionBase _currentActionBase;
     
@@ -77,7 +84,7 @@ public class BehaviorController : MonoBehaviour
     {
         animator.SetBool("isMoving", agentComponent.velocity.magnitude > 0.1f);
 
-        if (_currentActionBase != null && inAction)
+        if (_currentActionBase != null && inAction && !_currentActionBase.bHasReachedDestination)
         {
             if(agentComponent.remainingDistance <= agentComponent.stoppingDistance)
             {
@@ -176,6 +183,7 @@ public class BehaviorController : MonoBehaviour
     }
     public void AddAction(SOActions action, int index)
     {
+        if (index == 0) return;
         actionsToDo.Insert(index, action);
     }
     private void DestinationReached()
@@ -218,9 +226,15 @@ public class BehaviorController : MonoBehaviour
     private void DestroyCurrentAction()
     {
         Destroy(_currentActionBase);
+      
 
         if (actionsToDo.Count != 1 && !actionsToDo[0]._canBeRepeated)
         {
+            actionsToDo.RemoveAt(0);
+        }
+        else
+        {
+            actionsToDo.Add(actionsToDo[0]);
             actionsToDo.RemoveAt(0);
         }
     }
@@ -269,10 +283,8 @@ public class BehaviorController : MonoBehaviour
 
     #endregion
     
-    
 
-
-    public void SetDilemma(SODilema dilema)
+    public void SetDilemma(SODilemma dilema)
     {
         currentDilema = dilema;
     }
@@ -298,7 +310,7 @@ public class BehaviorController : MonoBehaviour
         canInteract = state;
         _interactionCollider.enabled = state;
     }
-    public SODilema GetCurrentDilema()
+    public SODilemma GetCurrentDilema()
     {
         return currentDilema;
     }

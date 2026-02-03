@@ -12,11 +12,13 @@ public class ACT_GoToPc : ActionBase
 
     public override void OnActionDestinationReached()
     {
+        base.OnActionDestinationReached();
         var myDilema = DilemaManager.instance.GetCurrentDilema();
         Action ShowDilemma = () =>
         {
             CanvasManager.Instance.ShowDilemma(myDilema);
             ValidationAction();
+            CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(); };
         };
         OnComputerReached?.Invoke(_behaviorController.transform.position, ShowDilemma);
     }

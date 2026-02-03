@@ -16,11 +16,11 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: c237e42b331a11843b0b8cde8db2fc60
   m_Entries:
   - m_Id: 21460529152
-    m_Key: MET_FREEWILL
+    m_Key: MET_INDOCTRINATION
     m_Metadata:
       m_Items: []
   - m_Id: 52913614848
-    m_Key: MET_PEACE
+    m_Key: MET_VIOLENCE
     m_Metadata:
       m_Items: []
   m_Metadata:

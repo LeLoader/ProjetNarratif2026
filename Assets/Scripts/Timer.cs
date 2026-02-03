@@ -1,3 +1,4 @@
+using EditorAttributes;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -8,29 +9,36 @@ public class Timer : MonoBehaviour
     public Action OnTimerUnpaused;
     public Action OnTimerElapsed;
 
-    private bool bPause;
+    private bool bPause = false;
     private bool bAutoDestroy = true;
 
-    private IEnumerator Internal_Timer(float duration)
-    {
-        float time = 0;
-        while (time < duration && !bPause)
-        {
-            time += Time.deltaTime;
-            yield return null;
-        }
-        OnTimerElapsed?.Invoke();
+    [SerializeField, ReadOnly] float actualTime = 0;
+    public float duration;
 
-        if (bAutoDestroy)
+    private void Update()
+    {
+        if (actualTime < duration)
         {
-            Destroy(this);
+            if (!bPause)
+            {
+                actualTime += Time.deltaTime;
+            }
+        }
+        else
+        {
+            OnTimerElapsed?.Invoke();
+            if (bAutoDestroy)
+            {
+                Destroy(this);
+            }
         }
     }
 
     public void Internal_Start(float duration, bool bAutoDestroy)
     {
+        actualTime = 0;
         this.bAutoDestroy = bAutoDestroy;
-        StartCoroutine(Internal_Timer(duration));
+        this.duration = duration;
     }
 
     public void Internal_Pause(bool bPause)

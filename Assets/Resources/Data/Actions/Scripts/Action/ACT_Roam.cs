@@ -18,6 +18,8 @@ public class ACT_Roam : ActionBase
 
     public override void OnActionDestinationReached()
     {
+        base.OnActionDestinationReached();
+
         if (_debugRoamPoint != null) { Destroy(_debugRoamPoint); }
         ValidationAction();
     }
