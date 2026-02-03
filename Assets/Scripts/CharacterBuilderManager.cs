@@ -7,28 +7,28 @@ using UnityEngine.TextCore.Text;
 public class CharacterBuilderManager : MonoBehaviour
 {
     public static CharacterBuilderManager Instance;
-    
+
     [SerializeField] private GameObject _humanPrefab;
     private List<BehaviorController> _characters = new List<BehaviorController>();
 
-    [Header("Testing")] 
+    [Header("Testing")]
     [SerializeField] private SOActions _testAction;
 
-    public event Action OnCharactersCreationFinished;
-    
+    public static event Action<int> OnCharactersCreationFinished;
+
     public List<BehaviorController> GetCharacters()
     {
         return _characters;
     }
-    
+
     public BehaviorController GetRandomBehaviorController()
     {
         if (_characters.Count == 0) return null;
-        
+
         int randomIndex = UnityEngine.Random.Range(0, _characters.Count);
         return _characters[randomIndex];
     }
-    
+
     public void Start()
     {
         BuildCharacters();
@@ -39,7 +39,7 @@ public class CharacterBuilderManager : MonoBehaviour
     {
         BuildCharacters(1, _testAction);
     }
-    
+
     private void BuildCharacter(SOActions startingAction)
     {
         var bc = Instantiate(_humanPrefab, SceneManager.instance.GetSpawnPoint(), Quaternion.identity).GetComponent<BehaviorController>();
@@ -49,8 +49,8 @@ public class CharacterBuilderManager : MonoBehaviour
             _characters.Add(bc);
         }
     }
-    
-    public void AssignADilemmaToRandomCharacter(SODilema dilema)
+
+    public void AssignADilemmaToRandomCharacter(SODilemma dilema)
     {
         var character = GetRandomBehaviorController();
         if (character != null)
@@ -58,7 +58,17 @@ public class CharacterBuilderManager : MonoBehaviour
             character.SetDilemma(dilema);
         }
     }
-    
+
+    public void AssignAnActionToRandomCharacter(SOActions action = null)
+    {
+        var character = GetRandomBehaviorController();
+        if (action == null) action = ActionDataDrop.GetActionRoam();
+        if (character != null)
+        {
+            character.AddAction(action);
+        }
+    }
+
     public void BuildCharacters(int x = 1, SOActions action = null)
     {
         if (!action) action = ActionDataDrop.GetActionRoam();
@@ -68,7 +78,7 @@ public class CharacterBuilderManager : MonoBehaviour
             BuildCharacter(action);
         }
 
-        OnCharactersCreationFinished?.Invoke();
+        OnCharactersCreationFinished?.Invoke(x);
     }
 
     [Button]
@@ -76,7 +86,7 @@ public class CharacterBuilderManager : MonoBehaviour
     {
         BuildCharacters(numToSpawn);
     }
-    
+
     private void Awake()
     {
         if (Instance == null)

@@ -10,9 +10,11 @@ public class ACT_GoToPc : ActionBase
 
     public override void OnActionDestinationReached()
     {
-        var myDilema = DilemaManager.instance.GetCurrentDilema();
+        base.OnActionDestinationReached();
+
+        var myDilema = DilemmaManager.instance.GetCurrentDilema();
         CanvasManager.Instance.ShowDilemma(myDilema);
-        ValidationAction();
+        CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(); };
     }
 
     public override bool StopAction()

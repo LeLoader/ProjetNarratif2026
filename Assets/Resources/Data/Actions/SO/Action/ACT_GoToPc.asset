@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: ProjetNarratifCore::SOActions
   _actionName: Go to pc
   _actionKey: ACT_GoToPc
+  _canBeRepeated: 0
+  _isAnInteraction: 0

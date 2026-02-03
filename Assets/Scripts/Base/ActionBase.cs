@@ -6,6 +6,8 @@ public class ActionBase : MonoBehaviour
 {
     public string _componentName = "ActionBase";
     protected BehaviorController _behaviorController;
+    public bool bHasReachedDestination = false;
+
     public virtual void Initialize(BehaviorController bh, int i)
     {
         _behaviorController = bh;
@@ -27,7 +29,7 @@ public class ActionBase : MonoBehaviour
     }
     public virtual void OnActionDestinationReached()
     {
-
+        bHasReachedDestination = true;
     }
     private void OnDestroy()
     {

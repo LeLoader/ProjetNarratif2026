@@ -1,7 +1,6 @@
 using EditorAttributes;
 using System;
 using System.Collections;
-using Unity.Plastic.Newtonsoft.Json.Serialization;
 using UnityEngine;
 
 public class SlidingTransition : MonoBehaviour

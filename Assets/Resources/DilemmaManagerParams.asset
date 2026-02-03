@@ -12,4 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c78f4b34b101d4990ddf7a923122e0, type: 3}
   m_Name: DilemmaManagerParams
   m_EditorClassIdentifier: ProjetNarratifCore::DilemmaManagerParams
-  maxDilemmasCount: 20
+  specialsDilemmas:
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 11400000, guid: 927b6daade36763418158d9ffc6ac558, type: 2}
+    - Key: 4
+      Value: {fileID: 11400000, guid: b07ba1743fc36674984bd633be3cc97b, type: 2}
+    - Key: 8
+      Value: {fileID: 11400000, guid: 980f98823b6d6c348a825d9e35f4b735, type: 2}
+    - Key: 12
+      Value: {fileID: 11400000, guid: 9411cfc1cfa6caf4983df7df038a9d1e, type: 2}
+    - Key: 16
+      Value: {fileID: 11400000, guid: 685485f1a18c90a44a00612647b59cc2, type: 2}
+    - Key: 19
+      Value: {fileID: 11400000, guid: 2f13eb6402ba73d4fad1cd7465e35714, type: 2}
+    - Key: 20
+      Value: {fileID: 11400000, guid: d3379ef75bf82fa4c94a9acfc3f347a5, type: 2}
