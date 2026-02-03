@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class BehaviorController : MonoBehaviour
 {
-    // DILEM ACTUEL //
+    // DILEMME ACTUEL //
     private SODilema currentDilema;
     
     private bool inAction = false;
