@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using Object = UnityEngine.Object;
 
 namespace ChristinaCreatesGames.Typography.Typewriter
@@ -31,6 +32,7 @@ namespace ChristinaCreatesGames.Typography.Typewriter
         [Header("Skip options")]
         [SerializeField] private bool quickSkip;
         [SerializeField][Min(1)] private int skipSpeedup = 5;
+        [SerializeField] private InputActionReference skipInput;
 
 
         // Event Functionality
@@ -55,11 +57,13 @@ namespace ChristinaCreatesGames.Typography.Typewriter
         private void OnEnable()
         {
             TMPro_EventManager.TEXT_CHANGED_EVENT.Add(PrepareForNewText);
+            skipInput.action.started += OnTouch;
         }
 
         private void OnDisable()
         {
             TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(PrepareForNewText);
+            skipInput.action.started -= OnTouch;
         }
 
         #region Skipfunctionality
@@ -77,16 +81,16 @@ namespace ChristinaCreatesGames.Typography.Typewriter
         // In this case, my Input Action is called "RightMouseClick". But: There are a ton of ways to implement checking if a button
         // has been pressed in this system. Go watch Piti's video on the different ways of utilizing the new input system: https://www.youtube.com/watch?v=Wo6TarvTL5Q
 
-        // private void OnRightMouseClick()
-        // {
-        //     if (_textBox.maxVisibleCharacters != _textBox.textInfo.characterCount - 1)
-        //         Skip();
-        // }
+        public void OnTouch(InputAction.CallbackContext ctx)
+        {
+            if (_textBox.maxVisibleCharacters != _textBox.textInfo.characterCount - 1)
+                Skip();
+        }
         #endregion
 
         private void PrepareForNewText(Object obj)
         {
-            if (obj != _textBox || !_readyForNewText || _textBox.maxVisibleCharacters < _textBox.textInfo.characterCount)
+            if (obj != _textBox || !_readyForNewText) // || _textBox.maxVisibleCharacters >= _textBox.textInfo.characterCount
                 return;
 
             CurrentlySkipping = false;

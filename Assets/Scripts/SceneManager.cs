@@ -18,7 +18,14 @@ public class SceneManager : MonoBehaviour
 
     public GameObject SpawnDebugRoamPoint(Vector3 position)
     {
-        return Instantiate(_debugRoamPointPrefab, position, Quaternion.identity);
+        if (_debugRoamPointPrefab) 
+        { 
+            return Instantiate(_debugRoamPointPrefab, position, Quaternion.identity);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     #region Get Positions

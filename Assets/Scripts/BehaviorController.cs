@@ -9,6 +9,12 @@ public class BehaviorController : MonoBehaviour
 {
     // DILEM ACTUEL //
     private SODilemma currentDilema;
+
+    public Dictionary<EMetricType, EMetricState> metrics = new()
+    {
+        { EMetricType.INDOCTRINATED, EMetricState.NEUTRAL },
+        { EMetricType.VIOLENCE, EMetricState.NEUTRAL },
+    };
     
     private bool inAction = false;
     private bool interacting = false;
@@ -277,8 +283,6 @@ public class BehaviorController : MonoBehaviour
 
     #endregion
     
-    
-
 
     public void SetDilemma(SODilemma dilema)
     {

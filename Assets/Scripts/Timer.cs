@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
     public Action OnTimerUnpaused;
     public Action OnTimerElapsed;
 
-    private bool bPause = true;
+    private bool bPause = false;
     private bool bAutoDestroy = true;
 
     [SerializeField, ReadOnly] float actualTime = 0;
@@ -17,9 +17,12 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        if (actualTime < duration && !bPause)
+        if (actualTime < duration)
         {
-            actualTime += Time.deltaTime;
+            if (!bPause)
+            {
+                actualTime += Time.deltaTime;
+            }
         }
         else
         {
@@ -33,8 +36,8 @@ public class Timer : MonoBehaviour
 
     public void Internal_Start(float duration, bool bAutoDestroy)
     {
-        this.bAutoDestroy = bAutoDestroy;
         actualTime = 0;
+        this.bAutoDestroy = bAutoDestroy;
         this.duration = duration;
     }
 

@@ -1,10 +1,17 @@
+using EditorAttributes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] SOGlobalMetrics globalMetricsSO;
-    public GlobalMetrics globalMetrics;
     public static GameManager instance;
+
+    [SerializeField] SOGlobalMetrics globalMetricsSO;
+    [ReadOnly] public GlobalMetrics globalMetrics;
+
+    [SerializeField, ReadOnly] List<WorldObjective> worldObjective = new();
 
     [SerializeField] Curve timeBetweenNPC;
     int npcCount = 0;
@@ -33,8 +40,11 @@ public class GameManager : MonoBehaviour
     {
         this.npcCount += npcCount;
         SetTimer().OnTimerElapsed += () => {
-            CharacterBuilderManager.Instance.AssignAnActionToRandomCharacter(ActionDataDrop.GetActionGoToPc());
+            
+             CharacterBuilderManager.Instance.AssignAnActionToRandomCharacter(ActionDataDrop.GetActionGoToPc());
         };
+
+        UpdateWorldObjective();
     }
 
     // Call after all NPC from dilema have spawned
@@ -43,5 +53,45 @@ public class GameManager : MonoBehaviour
         Timer timer = gameObject.AddComponent<Timer>();
         timer.Internal_Start(timeBetweenNPC.curve.Evaluate(npcCount), true);
         return timer;
+    }
+
+    private void UpdateWorldObjective()
+    {
+        List<WorldObjective> worldObjective = new();
+        List<BehaviorController> controllers = CharacterBuilderManager.Instance.GetCharacters();
+        foreach (BehaviorController controller in controllers)
+        {
+            foreach (KeyValuePair<EMetricType, EMetricState> metric in controller.metrics)
+            {
+                WorldObjective currentWo = new(metric.Key, metric.Value, 0);
+                WorldObjective foundWo = worldObjective.Find((wo) => wo.type == currentWo.type && wo.state == currentWo.state);
+                if (foundWo.count >= 1)
+                {
+                    foundWo.count++;
+                }
+                else
+                {
+                    currentWo.count++;
+                    worldObjective.Add(currentWo);
+                }
+            }
+        }
+
+
+    }
+
+    [Serializable]
+    struct WorldObjective
+    {
+        public EMetricType type;
+        public EMetricState state;
+        public int count;
+
+        public WorldObjective(EMetricType type, EMetricState state, int count)
+        {
+            this.type = type;
+            this.state = state;
+            this.count = count;
+        }
     }
 }
