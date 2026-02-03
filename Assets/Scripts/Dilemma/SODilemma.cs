@@ -30,7 +30,7 @@ public class SODilemma : ScriptableObject
         return question.GetLocalizedString();
     }
 
-    public void Choose(Choice choice)
+    public void Choose(Choice choice, BehaviorController controller)
     {
         if (!bRepeatable)
         {
@@ -38,7 +38,7 @@ public class SODilemma : ScriptableObject
         }
 
         DilemmaManager.instance.AddDilemaInPool(newDilemas);
-        choice.Activate();
+        choice.Activate(controller);
         CharacterBuilderManager.Instance.BuildCharacters(npcToSpawn);
     }
 }
