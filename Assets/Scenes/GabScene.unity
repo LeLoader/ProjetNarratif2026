@@ -759,7 +759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _humanPrefab: {fileID: 1493839082561470795, guid: 1159fbd4c7ec7024e8b4eb80c036dfce, type: 3}
-  _startingAction: {fileID: 11400000, guid: e03fd354bbee32a48ab0e157420bcbcf, type: 2}
+  _testAction: {fileID: 11400000, guid: 34324655c091c404cb3e9c5054178611, type: 2}
 --- !u!1 &354225297
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +941,7 @@ Transform:
   m_GameObject: {fileID: 454404407}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.33, y: -1.92, z: 10.73}
+  m_LocalPosition: {x: 15.22, y: -1.92, z: 13.04}
   m_LocalScale: {x: 2.0842, y: 2.0842, z: 2.0842}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -993,7 +993,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 179980a26f07ce741bc52d41ff41a502, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1082,7 +1082,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ProjetNarratifCore::DilemaController
   TestDilema: {fileID: 11400000, guid: beba650ba9d876c41b9fc51f87e21aaa, type: 2}
-  dilemaLinker: {fileID: 11400000, guid: d980e71c4057c5e499c7a977c78a1326, type: 2}
+  questionLabel: {fileID: 0}
+  firstChoiceButton: {fileID: 0}
+  firstChoiceLabel: {fileID: 0}
+  secondChoiceButton: {fileID: 0}
+  secondChoiceLabel: {fileID: 0}
 --- !u!224 &478202724
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1291,7 +1295,7 @@ Transform:
   m_GameObject: {fileID: 723963990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22, y: -1.92, z: -5.7}
+  m_LocalPosition: {x: -25.96, y: -1.92, z: -3.6}
   m_LocalScale: {x: 2.0842, y: 2.0842, z: 2.0842}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1343,7 +1347,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 179980a26f07ce741bc52d41ff41a502, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2163,7 +2167,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 179980a26f07ce741bc52d41ff41a502, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2276,7 +2280,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d68cc08611c224a4ebcdd9a5661a0f39, type: 2}
+  - {fileID: 2100000, guid: 179980a26f07ce741bc52d41ff41a502, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2386,7 +2390,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cbd32d45410706c4a8a0b33d1bf71ad3, type: 2}
+  - {fileID: 2100000, guid: 179980a26f07ce741bc52d41ff41a502, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2428,7 +2432,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -2.96, z: 0}
-  m_LocalScale: {x: 64.947716, y: 0.5286, z: 37.40447}
+  m_LocalScale: {x: 64.947716, y: 0.5286, z: 35.534245}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794701140}

@@ -10,4 +10,6 @@ public class SOActions : ScriptableObject
     public string _actionKey;
     
     public bool _canBeRepeated = true;
+    
+    public bool _isAnInteraction = false;
 }

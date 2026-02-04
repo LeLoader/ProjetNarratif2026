@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 21460529152
-    m_Localized: Freewill
+    m_Localized: Indoctrination
     m_Metadata:
       m_Items: []
   - m_Id: 52913614848
-    m_Localized: Peace
+    m_Localized: Violence
     m_Metadata:
       m_Items: []
   references:

@@ -17,7 +17,6 @@ public class InputManager : MonoBehaviour
     {
         //_moveAction.action.started += _controller.StartMove;
         _moveAction.action.performed += _controller.Move;
-        _moveAction.action.canceled += _controller.EndMove;
         _zoomAction.action.performed += _controller.Zoom;
         _touchAction.action.started += _controller.CheckMoveTarget;
         _touchAction.action.canceled += _controller.CancelTouch;
@@ -28,7 +27,6 @@ public class InputManager : MonoBehaviour
     {
         //_moveAction.action.started += _controller.StartMove;
         _moveAction.action.performed -= _controller.Move;
-        _moveAction.action.canceled -= _controller.EndMove;
         _zoomAction.action.performed -= _controller.Zoom;
         _touchAction.action.started -= _controller.CheckMoveTarget;
         _touchAction.action.canceled -= _controller.CancelTouch;
