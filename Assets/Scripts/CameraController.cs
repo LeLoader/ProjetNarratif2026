@@ -7,6 +7,8 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private BubbleController _bubble;
     [SerializeField] private Canvas _canvas;
+
+    bool _isMovingCamera;
     private void OnEnable()
     {
         ACT_GoToPc.OnComputerReached += ShowBubble;
@@ -38,13 +40,18 @@ public class CameraController : MonoBehaviour
         Debug.Log($"[CAMERA CONTROLLER] Before while. Alpha is {alpha}");
         while (alpha <= 1f)
         {
+            _isMovingCamera = true;
             alpha = alpha + Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, Destination, alpha);
             Debug.Log($"[CAMERA CONTROLLER] After While. Alpha is {alpha}");
             yield return null;
         }
         OnCompleteCallback?.Invoke();
+        _isMovingCamera = false;
     }
 
-
+    public bool IsMovingCamera()
+    {
+        return _isMovingCamera;
+    }
 }

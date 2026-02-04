@@ -25,11 +25,13 @@ public class InputController : MonoBehaviour
     [Tooltip("Take a WILD guess")]
     [SerializeField] private bool _showDebug = true;
 
+    [SerializeField] private CameraController _cameraController;
+
+    [SerializeField] private UnityEvent onStartTouch;
+    
     private GameObject _target;
 
     private Vector2 _previousPosition = Vector2.zero;
-
-    public UnityEvent onStartTouch;
 
     private void Reset()
     {
@@ -52,7 +54,7 @@ public class InputController : MonoBehaviour
             //Debug.Log("[INPUT CONTROLLER] performing move");
             Debug.DrawRay(Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>()), transform.forward * 1000, Color.red, 0.1f);
         }
-        if (Touch.activeTouches.Count >= 2)
+        if (Touch.activeTouches.Count >= 2 || _cameraController.IsMovingCamera())
         {
             if (_showDebug)
             {

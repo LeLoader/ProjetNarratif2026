@@ -13,42 +13,42 @@ MonoBehaviour:
   m_Name: DBDilemma
   m_EditorClassIdentifier: ProjetNarratifCore::DBDilema
   dilemmas:
-  - {fileID: 11400000, guid: 927b6daade36763418158d9ffc6ac558, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 0f76dd629740d5f4b81d2fd94dd94c99, type: 2}
+  - {fileID: 11400000, guid: 6f3c4ef94875fa946a5ccc16fe4c5958, type: 2}
+  - {fileID: 11400000, guid: e51338cd362eac64fba4552138a334c9, type: 2}
+  - {fileID: 11400000, guid: 6f4a41237c6adc94ba35ba0e17b41f56, type: 2}
+  - {fileID: 11400000, guid: e9a674b19eb0d1649b75abd80561e76c, type: 2}
+  - {fileID: 11400000, guid: 75cacc6d9880f93428bc37d381d5a80e, type: 2}
+  - {fileID: 11400000, guid: 568ad8649214f0447b2e9327693f0bd3, type: 2}
+  - {fileID: 11400000, guid: 0ed052e2b5ba0f444b52dc6f869fa593, type: 2}
+  - {fileID: 11400000, guid: 8e4a779f8a2d4fd48a379b2f3aa096cc, type: 2}
+  - {fileID: 11400000, guid: 1d74fba21ed9e8a459876afcecb6e93f, type: 2}
+  - {fileID: 11400000, guid: 85c8d6e12e7528848b51379c79076f37, type: 2}
+  - {fileID: 11400000, guid: 649fd0be887b5524681c67e3fae77ec1, type: 2}
+  - {fileID: 11400000, guid: 7dc5000d4e2c9384ea09e1ae6542cadb, type: 2}
+  - {fileID: 11400000, guid: fe3bb4977f22dc1438d8803a917ac8a7, type: 2}
+  - {fileID: 11400000, guid: 3b514fdd2df809e4c82195ed2b72104a, type: 2}
+  - {fileID: 11400000, guid: 1213d8322a05b594183b207bc2dcdf8c, type: 2}
+  - {fileID: 11400000, guid: c123d1236c657244cb824f44809ba6e1, type: 2}
+  - {fileID: 11400000, guid: 7d0e7b29239c807449d0a02dc11da8aa, type: 2}
+  - {fileID: 11400000, guid: a81428a5df05506428a0820cc2ded24e, type: 2}
+  - {fileID: 11400000, guid: 60b3273fbfdb5384aa0f7e3f7c271ad7, type: 2}
+  - {fileID: 11400000, guid: 8345262e956de7c4bacb677b73a5c942, type: 2}
+  - {fileID: 11400000, guid: 9c2439ac5add29a43ba182a08ced6e49, type: 2}
+  - {fileID: 11400000, guid: e671228ebe482df4daf8cb8c2ddd1496, type: 2}
+  - {fileID: 11400000, guid: bd885304730b7de4d8caf17e08b6bf64, type: 2}
+  - {fileID: 11400000, guid: f88e4aef44cde45439539356c9f05e59, type: 2}
+  - {fileID: 11400000, guid: d857e401ad87b6743a05377eef7356d1, type: 2}
+  - {fileID: 11400000, guid: 487a8a2b4e135a849989ba33f298ec6d, type: 2}
+  - {fileID: 11400000, guid: 3759a60dfe1b60b4988c851df5143701, type: 2}
+  - {fileID: 11400000, guid: c9683a6f2781a2742852703828518602, type: 2}
+  - {fileID: 11400000, guid: 2a59913c3b511364f9869b71331ff8e7, type: 2}
+  - {fileID: 11400000, guid: 40e84136128b11b40ba1ff3f26d97e7a, type: 2}
+  - {fileID: 11400000, guid: 07aea339ae7e97a4abb31649c2084712, type: 2}
+  - {fileID: 11400000, guid: a1d710d02ea280447ae54256ee8fe827, type: 2}
+  - {fileID: 11400000, guid: 64d989495f7c96141b306c593f2ef20b, type: 2}
+  - {fileID: 11400000, guid: c931192b8641d994091fbe0a438c301c, type: 2}
+  - {fileID: 11400000, guid: 86c94e4f7596114458b1d1eafef88a01, type: 2}
+  - {fileID: 11400000, guid: 69506183483ca2542bce55c0dbba5509, type: 2}
+  - {fileID: 11400000, guid: fb66a8e859d471f44a59c86b6197aa18, type: 2}
+  - {fileID: 11400000, guid: 0b1abdd52a95c0848873be2689f548d9, type: 2}

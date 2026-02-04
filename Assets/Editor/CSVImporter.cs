@@ -111,6 +111,8 @@ public class CSVImporter : EditorWindow
             PreImportDilemas(allLines);
             PostImportDilemas(allLines);
             EditorUtility.FocusProjectWindow();
+            EditorUtility.SetDirty(dilemmaDatabase);
+            AssetDatabase.SaveAssets();
         }
     }
 
