@@ -25,19 +25,19 @@ MonoBehaviour:
     m_LocalVariables: []
   appearanceConditions: []
   newDilemas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 1d74fba21ed9e8a459876afcecb6e93f, type: 2}
+  - {fileID: 11400000, guid: c123d1236c657244cb824f44809ba6e1, type: 2}
+  - {fileID: 11400000, guid: 7d0e7b29239c807449d0a02dc11da8aa, type: 2}
+  - {fileID: 11400000, guid: a81428a5df05506428a0820cc2ded24e, type: 2}
+  - {fileID: 11400000, guid: 8345262e956de7c4bacb677b73a5c942, type: 2}
+  - {fileID: 11400000, guid: 60b3273fbfdb5384aa0f7e3f7c271ad7, type: 2}
+  - {fileID: 11400000, guid: 9c2439ac5add29a43ba182a08ced6e49, type: 2}
+  - {fileID: 11400000, guid: e671228ebe482df4daf8cb8c2ddd1496, type: 2}
+  - {fileID: 11400000, guid: bd885304730b7de4d8caf17e08b6bf64, type: 2}
+  - {fileID: 11400000, guid: f88e4aef44cde45439539356c9f05e59, type: 2}
+  - {fileID: 11400000, guid: 487a8a2b4e135a849989ba33f298ec6d, type: 2}
+  - {fileID: 11400000, guid: 2a59913c3b511364f9869b71331ff8e7, type: 2}
+  - {fileID: 11400000, guid: 40e84136128b11b40ba1ff3f26d97e7a, type: 2}
   npcToSpawn: 3
   firstChoice:
     shortAnswerLabel:
