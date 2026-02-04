@@ -287,6 +287,13 @@ public class CSVImporter : EditorWindow
             AssetDatabase.SaveAssets();
             Selection.objects = dilemmasToSelect;
         }
+        var allObjectGuids = AssetDatabase.FindAssets("t:SODilemma");
+        foreach (var guid in allObjectGuids)
+        {
+            SODilemma Dilemma = AssetDatabase.LoadAssetAtPath<SODilemma>(AssetDatabase.GUIDToAssetPath(guid));
+            EditorUtility.SetDirty(Dilemma);
+        }
+        AssetDatabase.SaveAssets();
     }
 
     private void DeleteOldAssets(string[] lines)

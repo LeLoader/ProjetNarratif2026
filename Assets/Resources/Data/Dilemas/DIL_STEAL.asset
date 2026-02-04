@@ -25,10 +25,10 @@ MonoBehaviour:
     m_LocalVariables: []
   appearanceConditions: []
   newDilemas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: fe3bb4977f22dc1438d8803a917ac8a7, type: 2}
+  - {fileID: 11400000, guid: 3b514fdd2df809e4c82195ed2b72104a, type: 2}
+  - {fileID: 11400000, guid: 1213d8322a05b594183b207bc2dcdf8c, type: 2}
+  - {fileID: 11400000, guid: 7dc5000d4e2c9384ea09e1ae6542cadb, type: 2}
   npcToSpawn: 3
   firstChoice:
     shortAnswerLabel:
