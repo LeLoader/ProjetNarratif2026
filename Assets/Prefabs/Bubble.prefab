@@ -89,3 +89,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: ProjetNarratifCore::BubbleController
   _rectTransform: {fileID: 6762102965604501395}
+  _image: {fileID: 985437378615304298}

@@ -9,8 +9,6 @@ using Touch =  UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class InputController : MonoBehaviour
 {
-    [SerializeField] private bool _UsingMouse;
-
     [SerializeField, VerticalGroup("Speed Values", true, nameof(_movementSpeed), nameof(_zoomScale))] private EditorAttributes.Void speedValuesHolder;
 
     [SerializeField, VerticalGroup("Min / Max Zoom Value", true, nameof(_minCamerasize), nameof(_maxCameraSize))] private EditorAttributes.Void zoomHolder;
@@ -29,7 +27,7 @@ public class InputController : MonoBehaviour
 
     private GameObject _target;
 
-    private Vector2 _previousPosition;
+    private Vector2 _previousPosition = Vector2.zero;
 
     public UnityEvent onStartTouch;
 
