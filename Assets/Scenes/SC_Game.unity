@@ -342,8 +342,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: ProjetNarratifCore::DilemaManager
   dilemmaDatabase: {fileID: 11400000, guid: a5b669fa014d632429da08d8ca956e45, type: 2}
   dilemmaManagerParams: {fileID: 11400000, guid: 4ee8ff1835c4ffa4cac5d0d98d0462ac, type: 2}
-  ExtremePositiveDilemma: {fileID: 11400000, guid: c99402ffabd0a10409dd5cdc611ca948, type: 2}
-  ExtremeNegativeDilemma: {fileID: 11400000, guid: a1766831d057b244dba3d887f18c8fd1, type: 2}
+  ExtremePositiveDilemma: {fileID: 11400000, guid: 0ed052e2b5ba0f444b52dc6f869fa593, type: 2}
+  ExtremeNegativeDilemma: {fileID: 11400000, guid: 568ad8649214f0447b2e9327693f0bd3, type: 2}
   dilemmasPool: []
 --- !u!4 &98626698
 Transform:
@@ -2193,12 +2193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 551b07fca8f6e7e4fae7b9687995d020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  startDilema: {fileID: 11400000, guid: beba650ba9d876c41b9fc51f87e21aaa, type: 2}
-  startAction: {fileID: 11400000, guid: 5d7fbd30622f6924eb3ba77d900674e5, type: 2}
   spawnPoint: {fileID: 877201699}
   pcTransform: {fileID: 159069450}
   _debugRoamPointPrefab: {fileID: 0}
   roamRadius: 10
+  maxRadius: 50
 --- !u!4 &1616875906
 Transform:
   m_ObjectHideFlags: 0
@@ -2500,6 +2499,7 @@ MonoBehaviour:
   _minCamerasize: 10
   _maxCameraSize: 30
   _showDebug: 1
+  _cameraController: {fileID: 1739990244}
   onStartTouch:
     m_PersistentCalls:
       m_Calls: []
