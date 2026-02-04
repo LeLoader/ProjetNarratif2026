@@ -2494,7 +2494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d13299eefc6a2942b66808dc444cf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputController
-  _UsingMouse: 0
   _movementSpeed: 1
   _zoomScale: 1
   _camera: {fileID: 1739990241}
@@ -2576,7 +2575,7 @@ Transform:
   m_GameObject: {fileID: 1739990238}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalPosition: {x: 0, y: 45, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2610,7 +2609,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: ProjetNarratifCore::CameraController
   _bubble: {fileID: 8990273780440922711, guid: 0bb35dc13979cd74ab5a4998359c6213, type: 3}
   _canvas: {fileID: 1005593798}
-  _camera: {fileID: 0}
 --- !u!1 &1824892854
 GameObject:
   m_ObjectHideFlags: 0
