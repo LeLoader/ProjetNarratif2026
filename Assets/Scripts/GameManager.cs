@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        globalMetrics = globalMetricsSO.globalMetrics;
+        globalMetrics.metrics = new(globalMetricsSO.globalMetrics.metrics);
     }
 
     private void Start()
@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour
 
     private void UpdateWorldObjective()
     {
-        List<WorldObjective> worldObjective = new();
         List<BehaviorController> controllers = CharacterBuilderManager.Instance.GetCharacters();
         foreach (BehaviorController controller in controllers)
         {
