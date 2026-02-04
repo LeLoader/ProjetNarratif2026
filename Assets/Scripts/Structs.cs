@@ -7,6 +7,12 @@ using UnityEngine.Localization;
 [Serializable]
 public class Metric
 {
+    public Metric(LocalizedString label, EMetricType type)
+    {
+        this.label = label;
+        this.type = type;
+    }
+
     [SerializeField] public LocalizedString label;
     [SerializeField] public EMetricType type;
 

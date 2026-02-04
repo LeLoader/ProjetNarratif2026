@@ -9,9 +9,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] SOGlobalMetrics globalMetricsSO;
-    [ReadOnly] public GlobalMetrics globalMetrics;
-
     [SerializeField, ReadOnly] List<WorldObjective> worldObjective = new();
+    public GlobalMetrics globalMetrics;
 
     [SerializeField] Curve timeBetweenNPC;
     int npcCount = 0;
@@ -26,7 +25,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        globalMetrics.metrics = new(globalMetricsSO.globalMetrics.metrics);
+        globalMetrics = new();
+        globalMetrics.metrics = globalMetricsSO.globalMetrics.metrics.ConvertAll(m => new Metric(m.label, m.type));
     }
 
     private void Start()
