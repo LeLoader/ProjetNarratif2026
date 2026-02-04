@@ -17,7 +17,7 @@ public class ACT_GoToPc : ActionBase
         Action ShowDilemma = () =>
         {
             CanvasManager.Instance.ShowDilemma(myDilemma);
-            CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(); };
+            CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(EReturnState.SUCCEEDED); };
         };
         OnComputerReached?.Invoke(_behaviorController.transform.position, ShowDilemma);
     }

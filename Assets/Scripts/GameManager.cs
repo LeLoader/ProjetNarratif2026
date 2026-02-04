@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-
+        Debug.Log("Updated world obj");
 
     }
 

@@ -14,6 +14,6 @@ public class ACTI_Greet : ActionBase
         yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
         _behaviorController.ShowSpecialTextAboveHead("Hey there !");
         yield return new WaitForSeconds(Random.Range(0.7f, 1.5f));
-        ValidationAction();
+        ValidationAction(EReturnState.SUCCEEDED);
     }
 }

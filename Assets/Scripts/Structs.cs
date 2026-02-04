@@ -125,16 +125,21 @@ public struct Choice
 {
     [SerializeField] public LocalizedString shortAnswerLabel;
     [SerializeField] public LocalizedString longAnswerLabel;
-    [SerializeField] public List<ActionBase> actions;
+    [SerializeField] public List<string> actionsKeys;
     [SerializeField] public List<Consequence> consequences;
     [SerializeField] public List<SODilemma> newDilemmas;
 
-    public void Activate()
+    public void Activate(BehaviorController controller)
     {
         DilemmaManager.instance.AddDilemaInPool(newDilemmas);
         foreach (Consequence consequence in consequences)
         {
             GameManager.instance.globalMetrics.UpdateMetrics(consequence);
+        }
+        foreach (string key in actionsKeys)
+        {
+            ActionDataDrop.GetActionByID(key);
+            ActionFactory.CreateAction(key, controller.gameObject);
         }
     }
 }

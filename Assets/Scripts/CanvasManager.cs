@@ -48,7 +48,7 @@ public class CanvasManager : MonoBehaviour
     #region DILEMMA METHODS
 
 
-    public void ShowDilemma(SODilemma dilema)
+    public void ShowDilemma(SODilemma dilema, BehaviorController controller)
     {
         _dilemmaPanel.SetActive(true);
 
@@ -64,8 +64,8 @@ public class CanvasManager : MonoBehaviour
 
         _choice1Button.gameObject.SetActive(true);
         _choice2Button.gameObject.SetActive(true);
-        _choice1Button.onClick.AddListener(() => ChoseAnswer(dilema, dilema.firstChoice));
-        _choice2Button.onClick.AddListener(() => ChoseAnswer(dilema, dilema.secondChoice));
+        _choice1Button.onClick.AddListener(() => ChoseAnswer(dilema, dilema.firstChoice, controller));
+        _choice2Button.onClick.AddListener(() => ChoseAnswer(dilema, dilema.secondChoice, controller));
 
         // 
 
@@ -83,15 +83,32 @@ public class CanvasManager : MonoBehaviour
         };
     }
 
-    private void ChoseAnswer(SODilemma dilemma, Choice choice)
+    private void ChoseAnswer(SODilemma dilemma, Choice choice, BehaviorController controller)
     {
         longAnswerTextUI.text = choice.longAnswerLabel.GetLocalizedString();
         TypewriterEffect effect = longAnswerTextUI.GetComponent<TypewriterEffect>();
         if (effect)
         {
             Action onCompletedTextRevealed = () => { };
-            onCompletedTextRevealed = () => { 
-                OnCompleteTextRevealed(dilemma, choice);
+            onCompletedTextRevealed = () => {
+                dilemma.Choose(choice, controller);
+
+                Timer timer = gameObject.AddComponent<Timer>();
+                timer.Internal_Start(1, true);
+                timer.OnTimerElapsed += () =>
+                {
+
+                    Action<InputAction.CallbackContext> a = (InputAction.CallbackContext ctx) => { };
+
+                    a = (InputAction.CallbackContext ctx) =>
+                    {
+                        OnDilemmaEnded.Invoke();
+                        _dilemmaPanel.SetActive(false);
+                        skipInput.action.started -= a;
+                    };
+
+                    skipInput.action.started += a;
+                };
                 effect.CompleteTextRevealed -= onCompletedTextRevealed;
             };
 
@@ -100,36 +117,13 @@ public class CanvasManager : MonoBehaviour
         else
         {
             _dilemmaPanel.SetActive(false);
-            dilemma.Choose(choice);
+            dilemma.Choose(choice, controller);
         }
 
         _choice1Button.onClick.RemoveAllListeners();
         _choice1Button.gameObject.SetActive(false);
         _choice2Button.onClick.RemoveAllListeners();
         _choice2Button.gameObject.SetActive(false);
-    }
-
-    private void OnCompleteTextRevealed(SODilemma dilemma, Choice choice)
-    {
-        
-        dilemma.Choose(choice);
-
-        Timer timer = gameObject.AddComponent<Timer>();
-        timer.Internal_Start(1, true);
-        timer.OnTimerElapsed += () =>
-        {
-
-            Action<InputAction.CallbackContext> a = (InputAction.CallbackContext ctx) => { };
-
-            a = (InputAction.CallbackContext ctx) =>
-            {
-                OnDilemmaEnded.Invoke();
-                _dilemmaPanel.SetActive(false);
-                skipInput.action.started -= a;
-            };
-
-            skipInput.action.started += a;
-        };
     }
 
     #endregion
