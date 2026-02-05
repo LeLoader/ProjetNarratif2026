@@ -158,8 +158,11 @@ public class InputController : MonoBehaviour
         {
             if(HitResult.collider.gameObject.TryGetComponent<Movable>(out Movable target))
             {
-                HitResult.collider.gameObject.GetComponent<BehaviorController>().StopAi();
+                BehaviorController controller = HitResult.collider.gameObject.GetComponent<BehaviorController>();
+                controller.StopAi();
+                controller.CallTriggerAnimation("dragAndDrop");
                 _target = HitResult.collider.gameObject;
+
                 if (_showDebug)
                 {
                     Debug.Log("[INPUT CONTROLLER] Movable Object Detected");
@@ -181,8 +184,14 @@ public class InputController : MonoBehaviour
             Debug.Log("[INPUT CONTROLLER] Canceling touch");
         }
         _previousPosition = Vector2.zero;
-        if (_target) _target.GetComponent<BehaviorController>().ResumeAi();
+        if (_target)
+        {
+            BehaviorController controller = _target.GetComponent<BehaviorController>();
+            controller.ResumeAi();
+            controller.CallTriggerAnimation("idle");
+        }
         _target = null;
+
         if (transform.position != Camera.main.transform.position)
         {
             transform.position = Camera.main.transform.position;

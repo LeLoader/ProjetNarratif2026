@@ -83,6 +83,7 @@ public class BehaviorController : MonoBehaviour
     private void Update()
     {
         animator.SetBool("isMoving", agentComponent.velocity.magnitude > 0.1f);
+        animator.SetFloat("speed", agentComponent.velocity.magnitude);
 
         if (_currentActionBase != null && inAction && !_currentActionBase.bHasReachedDestination)
         {
@@ -106,14 +107,14 @@ public class BehaviorController : MonoBehaviour
     public void FollowTarget(Transform targetTransform)
     {
         _followTargetTransform = targetTransform;
-        StartHumanAnimation();
+        // StartHumanAnimation();
     }
     public void MoveToPosition(Vector3 targetPosition, string animationString = "")
     {
         agentComponent.SetDestination(targetPosition);
         if (!string.IsNullOrEmpty(animationString))
         {
-            StartHumanAnimation();
+            // StartHumanAnimation();
         }
     }
     
@@ -188,7 +189,7 @@ public class BehaviorController : MonoBehaviour
     }
     private void DestinationReached()
     {
-        StopHumanAnimation();
+        // StopHumanAnimation();
         OnDestinationReached?.Invoke();
     }
     private void CheckActions()
@@ -353,7 +354,7 @@ public class BehaviorController : MonoBehaviour
                 
         DestroyCurrentAction();
 
-        StopHumanAnimation();
+        // StopHumanAnimation();
                 
         actionsToDo.Insert(0, ActionDataDrop.GetBasicGreetActions());
         CheckActions();

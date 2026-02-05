@@ -215,8 +215,9 @@ MonoBehaviour:
   globalMetricsSO: {fileID: 11400000, guid: 790581f485cd9cd4890b561951896a3a, type: 2}
   globalMetrics:
     metrics: []
-  worldObjective: []
   timeBetweenNPC: {fileID: 11400000, guid: 9565536c90a247a489154464e5466223, type: 2}
+  goalSuperWorldObjectives: []
+  realitySuperWorldObjectives: []
   references:
     version: 2
     RefIds: []
@@ -340,7 +341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603c52694f1dc864ca61a4fffa2f6e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProjetNarratifCore::DilemaManager
-  dilemmaDatabase: {fileID: 11400000, guid: a5b669fa014d632429da08d8ca956e45, type: 2}
   dilemmaManagerParams: {fileID: 11400000, guid: 4ee8ff1835c4ffa4cac5d0d98d0462ac, type: 2}
   ExtremePositiveDilemma: {fileID: 11400000, guid: 0ed052e2b5ba0f444b52dc6f869fa593, type: 2}
   ExtremeNegativeDilemma: {fileID: 11400000, guid: 568ad8649214f0447b2e9327693f0bd3, type: 2}
@@ -1346,7 +1346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16232b37aef0b554c87a3fd5b8b84161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _humanPrefab: {fileID: 1493839082561470795, guid: 1159fbd4c7ec7024e8b4eb80c036dfce, type: 3}
+  _humanPrefab: {fileID: 1493839082561470795, guid: 939d3fe42a63f1745a137594a66bbfbf, type: 3}
   _testAction: {fileID: 11400000, guid: 34324655c091c404cb3e9c5054178611, type: 2}
 --- !u!4 &901994157
 Transform:
