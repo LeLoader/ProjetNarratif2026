@@ -18,5 +18,6 @@ public class GlobalMetrics
     {
         Metric metric = metrics.Find((m) => m.type == consequence.metricType);
         metric.Add(consequence.state, consequence.toAdd);
+    
     }
 }
