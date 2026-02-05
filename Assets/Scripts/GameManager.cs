@@ -1,4 +1,5 @@
 using EditorAttributes;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,17 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] SOGlobalMetrics globalMetricsSO;
-    [SerializeField, ReadOnly] List<WorldObjective> worldObjective = new();
     public GlobalMetrics globalMetrics;
 
     [SerializeField] Curve timeBetweenNPC;
     int npcCount = 0;
+
+    #region World Objectives
+
+    [SerializeField, ReadOnly] List<SuperWorldObjective> goalSuperWorldObjectives = new();
+    [SerializeField, ReadOnly] List<SuperWorldObjective> realitySuperWorldObjectives = new();
+
+    #endregion World Objectives
 
     private void Awake()
     {
@@ -27,6 +34,9 @@ public class GameManager : MonoBehaviour
         }
         globalMetrics = new();
         globalMetrics.metrics = globalMetricsSO.globalMetrics.metrics.ConvertAll(m => new Metric(m.label, m.type));
+
+        ComputeGoalWorldObjective();
+        ComputeRealityWorldObjective();
     }
 
     private void Start()
@@ -39,9 +49,10 @@ public class GameManager : MonoBehaviour
     private void OnCharactersCreationFinished(int npcCount)
     {
         this.npcCount += npcCount;
-        SetTimer().OnTimerElapsed += () => {
-            
-             CharacterBuilderManager.Instance.AssignAnActionToRandomCharacter(ActionDataDrop.GetActionGoToPc());
+        SetTimer().OnTimerElapsed += () =>
+        {
+
+            CharacterBuilderManager.Instance.AssignAnActionToRandomCharacter(ActionDataDrop.GetActionGoToPc());
         };
 
         UpdateWorldObjective();
@@ -57,40 +68,155 @@ public class GameManager : MonoBehaviour
 
     private void UpdateWorldObjective()
     {
-        List<BehaviorController> controllers = CharacterBuilderManager.Instance.GetCharacters();
-        foreach (BehaviorController controller in controllers)
+        ComputeRealityWorldObjective();
+        ComputeGoalWorldObjective();
+
+        foreach(SuperWorldObjective goalSuperWorldObjective in goalSuperWorldObjectives)
         {
-            foreach (KeyValuePair<EMetricType, EMetricState> metric in controller.metrics)
+            foreach(SuperWorldObjective realitySuperWorldObjective in realitySuperWorldObjectives)
             {
-                WorldObjective currentWo = new(metric.Key, metric.Value, 0);
-                WorldObjective foundWo = worldObjective.Find((wo) => wo.type == currentWo.type && wo.state == currentWo.state);
-                if (foundWo.count >= 1)
+                if (realitySuperWorldObjective.type != goalSuperWorldObjective.type)
+                    continue;
+
+                EMetricType currentType = realitySuperWorldObjective.type;
+                List<Tuple<EMetricState, SuperWorldObjective.EComparisonResult>> results = goalSuperWorldObjective.Compare(realitySuperWorldObjective);
+                foreach(var result in results)
                 {
-                    foundWo.count++;
-                }
-                else
-                {
-                    currentWo.count++;
-                    worldObjective.Add(currentWo);
+                    
                 }
             }
         }
-        Debug.Log("Updated world obj");
+
 
     }
 
-    [Serializable]
-    struct WorldObjective
+    private void ComputeRealityWorldObjective()
     {
-        public EMetricType type;
+        List<SuperWorldObjective> realitySuperWorldObjectives = new()
+        {
+            new SuperWorldObjective(EMetricType.INDOCTRINATED, new()),
+            new SuperWorldObjective(EMetricType.VIOLENCE, new()),
+        };
+
+        foreach (BehaviorController controller in CharacterBuilderManager.Instance.GetCharacters())
+        {
+            foreach (KeyValuePair<EMetricType, EMetricState> metric in controller.metrics)
+            {
+                realitySuperWorldObjectives.Find((swo) => swo.type == metric.Key).IncrementCount(metric.Value);
+            }
+        }
+    }
+
+    private void ComputeGoalWorldObjective()
+    {
+        List<BehaviorController> controllers = CharacterBuilderManager.Instance.GetCharacters();
+        foreach (Metric metric in globalMetrics.metrics)
+        {
+            List<WorldObjective> lwo = new()
+            {
+                new WorldObjective(EMetricState.POSITIVE, Mathf.RoundToInt(controllers.Count / (float)metric.Positive)),
+                new WorldObjective(EMetricState.NEUTRAL, Mathf.RoundToInt(controllers.Count / (float)metric.Neutral)),
+                new WorldObjective(EMetricState.NEGATIVE, Mathf.RoundToInt(controllers.Count / (float)metric.Negative))
+            };
+
+            SuperWorldObjective swo = new(metric.type, lwo);
+        }
+    }
+
+    [Serializable]
+    class WorldObjective
+    {
         public EMetricState state;
         public int count;
 
-        public WorldObjective(EMetricType type, EMetricState state, int count)
+        public WorldObjective(EMetricState state, int count)
         {
-            this.type = type;
             this.state = state;
             this.count = count;
+        }
+    }
+
+    class SuperWorldObjective
+    {
+        public SuperWorldObjective(EMetricType type, List<WorldObjective> worldObjectives)
+        {
+            this.type = type;
+            this.worldObjectives = worldObjectives;
+        }
+
+        public EMetricType type;
+        public List<WorldObjective> worldObjectives;
+
+        public void Fix(int npcCount)
+        {
+            int total = 0;
+            foreach (WorldObjective wo in worldObjectives)
+            {
+                total += wo.count;
+            }
+
+            if (total < npcCount)
+            {
+                WorldObjective wo = worldObjectives.Find((w) => w.state == FindHighestProportion());
+                wo.count++;
+            }
+            else if (total > npcCount)
+            {
+                WorldObjective wo = worldObjectives.Find((w) => w.state == FindHighestProportion());
+                wo.count--;
+            }
+        }
+
+        private EMetricState FindHighestProportion()
+        {
+            int currentHighestCount = 0;
+            EMetricState highestProportionState = EMetricState.NEUTRAL;
+            foreach (WorldObjective wo in worldObjectives)
+            {
+                if (wo.count > currentHighestCount)
+                {
+                    currentHighestCount = wo.count;
+                    highestProportionState = wo.state;
+                }
+            }
+            return highestProportionState;
+        }
+
+        public void IncrementCount(EMetricState state)
+        {
+            worldObjectives.Find((wo) => wo.state == state).count++;
+        }
+
+        public List<Tuple<EMetricState, EComparisonResult>> Compare(SuperWorldObjective reality)
+        {
+            List<Tuple<EMetricState, EComparisonResult>> comparisonResult = new();
+            foreach (WorldObjective wantedWorldObjective in worldObjectives)
+            { 
+                foreach (WorldObjective realityWorldObjective in reality.worldObjectives)
+                {
+                    if (realityWorldObjective.state != wantedWorldObjective.state)
+                        continue;
+
+                    EMetricState state = realityWorldObjective.state;
+
+                    if (realityWorldObjective.count < wantedWorldObjective.count)
+                    {
+                        comparisonResult.Add(new Tuple<EMetricState, EComparisonResult>(state, EComparisonResult.NEED_MORE));
+                    }
+                    else if (realityWorldObjective.count > wantedWorldObjective.count)
+                    {
+                        comparisonResult.Add(new Tuple<EMetricState, EComparisonResult>(state, EComparisonResult.NEED_LESS));
+                    }
+                }
+            }
+            return comparisonResult;
+        }
+
+        public enum EComparisonResult
+        {
+            GOOD = 0,
+            NEED_MORE = 1,
+            NEED_LESS = 2,
         }
     }
 }
