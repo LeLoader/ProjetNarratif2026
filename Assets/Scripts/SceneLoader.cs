@@ -11,6 +11,7 @@ public class SceneLoader : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        Application.targetFrameRate = 60;
     }
 
     private IEnumerator CheckForSceneLoadage()

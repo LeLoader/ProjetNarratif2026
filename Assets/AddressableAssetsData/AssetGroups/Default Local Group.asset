@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Default Local Group
   m_GUID: d16a1e90072669d44852ea35cbc2af07
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 94a55713ee628a245a74794f36a1b6f7
+    m_Address: Assets/VFX/VFX_Blood/BloodGushFX/BloodGushFX/Materials/BloodParticleA.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7ebb43cca3e7d1f42ae0bafe5a2b0c48, type: 2}
   m_SchemaSet:

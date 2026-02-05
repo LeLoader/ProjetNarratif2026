@@ -9,6 +9,8 @@ using Touch =  UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class InputController : MonoBehaviour
 {
+    [SerializeField] private bool _UsingMouse;
+
     [SerializeField, VerticalGroup("Speed Values", true, nameof(_movementSpeed), nameof(_zoomScale))] private EditorAttributes.Void speedValuesHolder;
 
     [SerializeField, VerticalGroup("Min / Max Zoom Value", true, nameof(_minCamerasize), nameof(_maxCameraSize))] private EditorAttributes.Void zoomHolder;
@@ -49,13 +51,14 @@ public class InputController : MonoBehaviour
     {
         if (_showDebug)
         {
-            Debug.Log("[INPUT CONTROLLER] performing move");
+            //Debug.Log("[INPUT CONTROLLER] performing move");
+            Debug.DrawRay(Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>()), transform.forward * 1000, Color.red, 0.1f);
         }
         if (Touch.activeTouches.Count >= 2)
         {
             if (_showDebug)
             {
-                Debug.Log($"[INPUT CONTROLLER] not moving");
+                //Debug.Log($"[INPUT CONTROLLER] not moving");
             }
             return;
         }
@@ -67,22 +70,19 @@ public class InputController : MonoBehaviour
                 Debug.Log("[INPUT CONTROLLER] moving target");
             }
 
+            // if (Physics.Raycast(StartPos, transform.forward, out HitResult, Mathf.Infinity))
             Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
             WorldPosition.z = _target.transform.position.z;
             _target.transform.position = WorldPosition;
 
         } else
         {
-            if (_showDebug)
-            {
-                Debug.Log($"[INPUT CONTROLLER] Input is {Input}");
-            }
             if (_previousPosition != Vector2.zero)
             {
                 Vector2 DeltaPosition = _previousPosition - Input;
                 Vector3 CameraPosition = transform.position;
                 CameraPosition.x += DeltaPosition.x * _movementSpeed * 0.01f;
-                CameraPosition.y += DeltaPosition.y * _movementSpeed * 0.01f;
+                CameraPosition.z += DeltaPosition.y * _movementSpeed * 0.01f;
                 transform.position = CameraPosition;                
             }
         }
@@ -128,31 +128,36 @@ public class InputController : MonoBehaviour
     public void CheckMoveTarget(InputAction.CallbackContext context)
     {
         onStartTouch?.Invoke();
-        if (_showDebug)
-        {
-            Debug.Log("[INPUT CONTROLLER] starting touch");
-        }
         Vector2 InputValue = Touch.activeTouches[0].screenPosition;
+/*
         if (_showDebug)
         {
             Debug.Log($"[INPUT CONTROLLER] Input Value is {InputValue}");
-        }
+        }*/
         RaycastHit HitResult;
         Vector3 StartPos = Camera.main.ScreenToWorldPoint(InputValue);
         StartPos.z = transform.position.z;
+/*
         if (_showDebug)
         {
             Debug.Log($"[INPUT CONTROLLER] StartPos is {StartPos}");
-        }
+        }*/
         if (Physics.Raycast(StartPos, transform.forward, out HitResult, Mathf.Infinity))
         {
             if(HitResult.collider.gameObject.TryGetComponent<Movable>(out Movable target))
             {
+                HitResult.collider.gameObject.GetComponent<BehaviorController>().StopAi();
                 _target = HitResult.collider.gameObject;
                 if (_showDebug)
                 {
                     Debug.Log("[INPUT CONTROLLER] Movable Object Detected");
                 }
+            }
+        } else
+        {
+            if (_showDebug)
+            {
+                Debug.Log("[INPUT CONTROLLER] no object detected");
             }
         }
     }
@@ -164,6 +169,7 @@ public class InputController : MonoBehaviour
             Debug.Log("[INPUT CONTROLLER] Canceling touch");
         }
         _previousPosition = Vector2.zero;
+        if (_target) _target.GetComponent<BehaviorController>().ResumeAi();
         _target = null;
         if (transform.position != Camera.main.transform.position)
         {

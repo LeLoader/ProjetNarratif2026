@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class canvasHumanController : MonoBehaviour
+public class CanvasHumanController : MonoBehaviour
 {
     [SerializeField] private GameObject _textAboveHeadPrefab;
     
@@ -10,10 +10,10 @@ public class canvasHumanController : MonoBehaviour
     {
         UpdateTowardCamera();
         
-        TextMeshPro textInstance = Instantiate(_textAboveHeadPrefab, transform).GetComponent<TextMeshPro>();
+        textDialogueController textInstance = Instantiate(_textAboveHeadPrefab, transform).GetComponent<textDialogueController>();
         if (textInstance != null)
         {
-            textInstance.SetText(text);
+            textInstance.Initialize(text);
         }
     }
     
@@ -21,12 +21,12 @@ public class canvasHumanController : MonoBehaviour
     {
         if (Camera.main != null)
         {
-            Vector3 direction = Camera.main.transform.position - transform.position;
-            direction.y = 0;
-            if (direction != Vector3.zero)
+            Vector3 directionToCamera = Camera.main.transform.position - transform.position;
+            directionToCamera.y = 0;
+            if (directionToCamera != Vector3.zero)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+                Quaternion lookRotation = Quaternion.LookRotation(directionToCamera);
+                transform.rotation = lookRotation;
             }
         }
     }

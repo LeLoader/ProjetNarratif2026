@@ -1,10 +1,19 @@
 using System;
 using UnityEngine;
+using System.Collections;
+
+public enum EReturnState
+{
+    FAILED = 0,
+    SUCCEEDED = 1
+}
 
 public class ActionBase : MonoBehaviour
 {
     public string _componentName = "ActionBase";
     protected BehaviorController _behaviorController;
+    public bool bHasReachedDestination = false;
+
     public virtual void Initialize(BehaviorController bh, int i)
     {
         _behaviorController = bh;
@@ -20,13 +29,13 @@ public class ActionBase : MonoBehaviour
         _behaviorController.OnDestinationReached += OnActionDestinationReached;
     }
     public virtual void ExecuteAction() { }
-    public void ValidationAction()
+    public void ValidationAction(EReturnState returnState)
     { 
         _behaviorController.ActionCompleted();
     }
     public virtual void OnActionDestinationReached()
     {
-
+        bHasReachedDestination = true;
     }
     private void OnDestroy()
     {

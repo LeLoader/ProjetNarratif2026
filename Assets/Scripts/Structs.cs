@@ -1,20 +1,20 @@
-using Codice.Client.Common.FsNodeReaders.Watcher;
+using EditorAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 
 [Serializable]
-public struct Metric
+public class Metric
 {
     [SerializeField] public LocalizedString label;
     [SerializeField] public EMetricType type;
 
     public event Action<EMetricState> OnMetricReachedExtreme;
 
-    public int Positive { get; private set; }
-    public int Neutral { get; private set; }
-    public int Negative { get; private set; }
+    [field: SerializeField, ReadOnly] public int Positive { get; private set; } = 0;
+    [field: SerializeField, ReadOnly] public int Neutral { get; private set; } = 100;
+    [field: SerializeField, ReadOnly] public int Negative { get; private set; } = 0;
 
     private void CheckExtreme()
     {
@@ -123,17 +123,23 @@ public struct Metric
 [Serializable]
 public struct Choice
 {
-    [SerializeField] public LocalizedString label;
-    [SerializeField] public List<ActionBase> actions;
+    [SerializeField] public LocalizedString shortAnswerLabel;
+    [SerializeField] public LocalizedString longAnswerLabel;
+    [SerializeField] public List<string> actionsKeys;
     [SerializeField] public List<Consequence> consequences;
-    [SerializeField] public List<SODilema> newDilemas;
+    [SerializeField] public List<SODilemma> newDilemmas;
 
-    public void Activate()
+    public void Activate(BehaviorController controller)
     {
-        DilemaManager.dilemaDatabase.AddDilemaInPool(newDilemas);
+        DilemmaManager.instance.AddDilemaInPool(newDilemmas);
         foreach (Consequence consequence in consequences)
         {
-            DilemaManager.globalMetrics.UpdateMetrics(consequence);
+            GameManager.instance.globalMetrics.UpdateMetrics(consequence);
+        }
+        foreach (string key in actionsKeys)
+        {
+            ActionDataDrop.GetActionByID(key);
+            ActionFactory.CreateAction(key, controller.gameObject);
         }
     }
 }
