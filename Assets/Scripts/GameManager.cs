@@ -47,21 +47,13 @@ public class GameManager : MonoBehaviour
     private void OnCharactersCreationFinished(int npcCount)
     {
         this.npcCount += npcCount;
-        SetTimer().OnTimerElapsed += () =>
+        Timer.SetTimer(gameObject, timeBetweenNPC.curve.Evaluate(npcCount), true).OnTimerElapsed += () =>
         {
 
             CharacterBuilderManager.Instance.AssignAnActionToRandomCharacter(ActionDataDrop.GetActionGoToPc());
         };
 
         UpdateWorldObjective();
-    }
-
-    // Call after all NPC from dilema have spawned
-    public Timer SetTimer()
-    {
-        Timer timer = gameObject.AddComponent<Timer>();
-        timer.Internal_Start(timeBetweenNPC.curve.Evaluate(npcCount), true);
-        return timer;
     }
 
     private void UpdateWorldObjective()
@@ -122,11 +114,6 @@ public class GameManager : MonoBehaviour
             swo.Fix(npcCount);
             goalSuperWorldObjectives.Add(swo);
         }
-    }
-
-    private void OnDisable()
-    {
-        Debug.Log("Test");
     }
 
     [Serializable]

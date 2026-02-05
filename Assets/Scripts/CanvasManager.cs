@@ -72,9 +72,7 @@ public class CanvasManager : MonoBehaviour
         TypewriterEffect effect = questionTextUI.GetComponent<TypewriterEffect>();
         effect.CompleteTextRevealed += () => 
         {
-            Timer timer = gameObject.AddComponent<Timer>();
-            timer.Internal_Start(1, true);
-            timer.OnTimerElapsed += () =>
+            Timer.SetTimer(gameObject, 1, true).OnTimerElapsed += () =>
             {
                 questionTextUIStatic.text = dilema.question.GetLocalizedString();
                 questionTextUI.text = "";
@@ -93,9 +91,7 @@ public class CanvasManager : MonoBehaviour
         {
             Action onCompletedTextRevealed = () => { };
             onCompletedTextRevealed = () => {
-                Timer timer = gameObject.AddComponent<Timer>();
-                timer.Internal_Start(1, true);
-                timer.OnTimerElapsed += () =>
+                Timer.SetTimer(gameObject, 1, true).OnTimerElapsed += () =>
                 {
                     Action<InputAction.CallbackContext> a = (InputAction.CallbackContext ctx) => { };
 
