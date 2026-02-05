@@ -9,7 +9,7 @@ public class SOGlobalMetrics : ScriptableObject
 
     public void UpdateMetrics(Consequence consequence)
     {
-        Metric metric = metrics.Find((m) => m.type == consequence.metricType);
-        metric.Values.Add(consequence.state, consequence.toAdd);
+        // Metric metric = metrics.Find((m) => m.type == consequence.metricType);
+        // metric.Values.Add(consequence.state, consequence.toAdd);
     }
 }
