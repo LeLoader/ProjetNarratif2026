@@ -27,6 +27,8 @@ public class InputController : MonoBehaviour
 
     [SerializeField] private CameraController _cameraController;
 
+    [SerializeField] private LayerMask _mask;
+
     [SerializeField] private UnityEvent onStartTouch;
     
     private GameObject _target;
@@ -69,11 +71,21 @@ public class InputController : MonoBehaviour
             {
                 Debug.Log("[INPUT CONTROLLER] moving target");
             }
+            Vector3 StartPos = Camera.main.ScreenToWorldPoint(Input);
+            if (Physics.Raycast(StartPos, transform.forward, out RaycastHit HitResult, Mathf.Infinity, _mask))
+            {
+                Vector3 HitPoint = HitResult.point;
+                HitPoint.y = _target.transform.position.y;
+                _target.transform.position = HitPoint;
+            } else
+            {
+                Debug.Log("rien touché");
+            }
 
-            // if (Physics.Raycast(StartPos, transform.forward, out HitResult, Mathf.Infinity))
-            Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
-            WorldPosition.z = _target.transform.position.z;
-            _target.transform.position = WorldPosition;
+            /*Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
+            Debug.Log($"[INPUT CONTROLLER] World Position is {WorldPosition}");
+            WorldPosition.y = _target.transform.position.y;
+            _target.transform.position = WorldPosition;*/
 
         } else
         {

@@ -216,7 +216,7 @@ MonoBehaviour:
   globalMetrics:
     metrics: []
   worldObjective: []
-  timeBetweenNPC: {fileID: 11400000, guid: 9a272cd64ac690647a1ae222cb3e4af8, type: 2}
+  timeBetweenNPC: {fileID: 11400000, guid: 9565536c90a247a489154464e5466223, type: 2}
   references:
     version: 2
     RefIds: []
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 128500130}
   - component: {fileID: 128500129}
   - component: {fileID: 128500128}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: M_Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2500,6 +2500,9 @@ MonoBehaviour:
   _maxCameraSize: 30
   _showDebug: 1
   _cameraController: {fileID: 1739990244}
+  _mask:
+    serializedVersion: 2
+    m_Bits: 8
   onStartTouch:
     m_PersistentCalls:
       m_Calls: []
