@@ -24,6 +24,9 @@ MonoBehaviour:
         m_WaitForCompletion: 0
         m_LocalVariables: []
       type: 1
+      <Positive>k__BackingField: 0
+      <Neutral>k__BackingField: 0
+      <Negative>k__BackingField: 0
     - label:
         m_TableReference:
           m_TableCollectionName: GUID:c237e42b331a11843b0b8cde8db2fc60
@@ -34,6 +37,9 @@ MonoBehaviour:
         m_WaitForCompletion: 0
         m_LocalVariables: []
       type: 2
+      <Positive>k__BackingField: 0
+      <Neutral>k__BackingField: 0
+      <Negative>k__BackingField: 0
   references:
     version: 2
     RefIds: []

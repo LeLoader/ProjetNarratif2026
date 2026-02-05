@@ -385,6 +385,16 @@ public class BehaviorController : MonoBehaviour
         SetCanInteractionState(true);
     }
 
+    [Button]
+    public void ChangeMetricState(EMetricType type, EMetricState newState)
+    {
+        metrics.TryGetValue(type, out EMetricState currentState);
+        if (currentState != newState)
+        {
+            metrics.Remove(type);
+            metrics.Add(type, newState);
+        }
+    }
 
     #region Life
 

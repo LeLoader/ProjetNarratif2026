@@ -9,7 +9,7 @@ public class DilemmaManager : MonoBehaviour
 {
     public static DilemmaManager instance;
 
-    [SerializeField] public DBDilemma dilemmaDatabase;
+    [SerializeField] public readonly DBDilemma dilemmaDatabase;
     [SerializeField] DilemmaManagerParams dilemmaManagerParams;
     [SerializeField] SODilemma ExtremePositiveDilemma;
     [SerializeField] SODilemma ExtremeNegativeDilemma;
@@ -17,11 +17,6 @@ public class DilemmaManager : MonoBehaviour
     [SerializeField, ReadOnly] List<SODilemma> dilemmasPool = new();
 
     private int dilemmaCount = 0;
-
-    private void Reset()
-    {
-        dilemmaDatabase = (DBDilemma)Resources.Load("Databases/DBDilemma");
-    }
 
     private void Awake()
     {
