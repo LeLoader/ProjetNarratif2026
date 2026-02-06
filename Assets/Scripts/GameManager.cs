@@ -74,8 +74,29 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
 
+    private Dictionary<EMetricType, List<Tuple<EMetricState, SuperWorldObjective.EComparisonResult>>> GetComparisonResult()
+    {
+        Dictionary<EMetricType, List<Tuple<EMetricState, SuperWorldObjective.EComparisonResult>>> typedResults = new();
+        foreach (SuperWorldObjective goalSuperWorldObjective in goalSuperWorldObjectives)
+        {
+            foreach (SuperWorldObjective realitySuperWorldObjective in realitySuperWorldObjectives)
+            {
+                if (realitySuperWorldObjective.GetMetricType() != goalSuperWorldObjective.GetMetricType())
+                    continue;
 
+                EMetricType currentType = realitySuperWorldObjective.GetMetricType();
+                List<Tuple<EMetricState, SuperWorldObjective.EComparisonResult>> results = goalSuperWorldObjective.Compare(realitySuperWorldObjective);
+                foreach (var result in results)
+                {
+                    Debug.Log($"{result.Item2} of {result.Item1} {currentType}");
+                }
+                typedResults.TryAdd(currentType, results);
+                
+            }
+        }
+        return typedResults;
     }
 
     private void ComputeRealityWorldObjective()
@@ -111,6 +132,45 @@ public class GameManager : MonoBehaviour
             SuperWorldObjective swo = new(metric.type, lwo);
             swo.Fix(npcCount);
             goalSuperWorldObjectives.Add(swo);
+        }
+    }
+
+    private void SpontaneousMetricChange()
+    {
+        List<BehaviorController> controllers = CharacterBuilderManager.Instance.GetCharacters();
+        var results = GetComparisonResult();
+        foreach (var comparison in results)
+        {
+            EMetricType currentType = comparison.Key;
+            BehaviorController controllerToChange = null;
+            List<EMetricState> toConvert = new();
+            foreach (var compirason2 in comparison.Value)
+            {
+                EMetricState currentState = compirason2.Item1;
+                SuperWorldObjective.EComparisonResult comparisonResult = compirason2.Item2;
+
+                if (comparisonResult == SuperWorldObjective.EComparisonResult.GOOD) continue;
+
+                if (comparisonResult == SuperWorldObjective.EComparisonResult.NEED_LESS)
+                {
+                    controllerToChange = controllers.Find((c) => {
+                        c.metrics.TryGetValue(currentType, out var value);
+                        return value == currentState;
+                        });
+                    continue;
+                }
+
+                if (comparisonResult == SuperWorldObjective.EComparisonResult.NEED_MORE)
+                {
+                    toConvert.Add(currentState);
+                    continue;
+                }
+            }
+
+            if (toConvert.Count > 0 && controllerToChange != null)
+            {
+                controllerToChange.ChangeMetricState(currentType, toConvert[0]);
+            }
         }
     }
 
