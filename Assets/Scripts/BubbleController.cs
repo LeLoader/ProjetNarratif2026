@@ -17,24 +17,13 @@ public class BubbleController : MonoBehaviour, IPointerClickHandler
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        ChangePosition();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 DestinationOnScreen = Camera.main.WorldToScreenPoint(_destination);
-        if (IsDestinationOffScreen(DestinationOnScreen))
-        {
-            Vector3 CappedScreenPosition = DestinationOnScreen;
-            CappedScreenPosition.x = Mathf.Clamp(CappedScreenPosition.x, _rectTransform.sizeDelta.x, Screen.width - _rectTransform.sizeDelta.x);
-            CappedScreenPosition.y = Mathf.Clamp(CappedScreenPosition.y, _rectTransform.sizeDelta.y, Screen.height - _rectTransform.sizeDelta.y);
-
-            _rectTransform.position = CappedScreenPosition;
-        } else
-        {
-            _rectTransform.position = DestinationOnScreen;
-        }
+        ChangePosition();
     }
 
     #region Setters
@@ -69,5 +58,22 @@ public class BubbleController : MonoBehaviour, IPointerClickHandler
     private bool IsDestinationOffScreen(Vector3 OnScreenDestination)
     {
         return OnScreenDestination.x - _rectTransform.sizeDelta.x < 0 || OnScreenDestination.x + _rectTransform.sizeDelta.x > Screen.width || OnScreenDestination.y - _rectTransform.sizeDelta.y < 0 || OnScreenDestination.y + _rectTransform.sizeDelta.y > Screen.height;
+    }
+
+    private void ChangePosition()
+    {
+        Vector3 DestinationOnScreen = Camera.main.WorldToScreenPoint(_destination);
+        if (IsDestinationOffScreen(DestinationOnScreen))
+        {
+            Vector3 CappedScreenPosition = DestinationOnScreen;
+            CappedScreenPosition.x = Mathf.Clamp(CappedScreenPosition.x, _rectTransform.sizeDelta.x, Screen.width - _rectTransform.sizeDelta.x);
+            CappedScreenPosition.y = Mathf.Clamp(CappedScreenPosition.y, _rectTransform.sizeDelta.y, Screen.height - _rectTransform.sizeDelta.y);
+
+            _rectTransform.position = CappedScreenPosition;
+        }
+        else
+        {
+            _rectTransform.position = DestinationOnScreen;
+        }
     }
 }

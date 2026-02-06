@@ -299,6 +299,10 @@ public class BehaviorController : MonoBehaviour
         SetCanInteractionState(false);
         StopCurrentAction();
         
+        if (!_currentActionBase.StopAction())
+        {
+            return;
+        }
         StopAiSpeed();
         StartCoroutine(RotateTowardsTarget(otherHuman.transform));
 
