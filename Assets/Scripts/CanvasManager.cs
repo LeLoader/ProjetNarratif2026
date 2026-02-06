@@ -116,8 +116,9 @@ public class CanvasManager : MonoBehaviour
         }
         else
         {
-            _dilemmaPanel.SetActive(false);
             dilemma.Choose(choice, controller);
+            OnDilemmaEnded.Invoke();
+            _dilemmaPanel.SetActive(false);
         }
 
         _choice1Button.onClick.RemoveAllListeners();
