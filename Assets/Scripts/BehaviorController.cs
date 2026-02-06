@@ -27,7 +27,10 @@ public class BehaviorController : MonoBehaviour
     
     // LIST D'INTERACTIONS POSSIBLES //
     private List<SOInteraction> availableInteractions = new List<SOInteraction>();
-    
+
+    [Header("PARAMS")]
+    [SerializeField] private float rotationSpeed = 1;
+
     [Header("EXPOSED VARIABLE")]
     [SerializeField] private NavMeshAgent agentComponent;
     [SerializeField] private BoxCollider _interactionCollider;
@@ -368,7 +371,7 @@ public class BehaviorController : MonoBehaviour
         float alpha = 0f;
         while (alpha < 1f)
         {
-            alpha += Time.deltaTime;
+            alpha += Time.deltaTime * rotationSpeed;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, alpha);
             yield return null;
         }

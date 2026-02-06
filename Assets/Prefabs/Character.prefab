@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BehaviorController
   actionsToDo: []
+  rotationSpeed: 2
   agentComponent: {fileID: 8820516911087308232}
   _interactionCollider: {fileID: 4981749348264507583}
   _canvasHumanController: {fileID: 8249318047692874258}
