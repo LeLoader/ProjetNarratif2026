@@ -25,7 +25,6 @@ MonoBehaviour:
     m_LocalVariables: []
   appearanceConditions: []
   newDilemas:
-  - {fileID: 11400000, guid: 1d74fba21ed9e8a459876afcecb6e93f, type: 2}
   - {fileID: 11400000, guid: c123d1236c657244cb824f44809ba6e1, type: 2}
   - {fileID: 11400000, guid: 7d0e7b29239c807449d0a02dc11da8aa, type: 2}
   - {fileID: 11400000, guid: a81428a5df05506428a0820cc2ded24e, type: 2}
@@ -58,8 +57,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    actionsKeys:
-    - ACT_SpawnSapling
+    actionsKeys: []
     consequences:
     - metricType: 1
       state: 2
@@ -84,8 +82,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    actionsKeys:
-    - ACT_SpawnSapling
+    actionsKeys: []
     consequences:
     - metricType: 1
       state: 1
