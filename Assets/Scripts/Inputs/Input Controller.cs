@@ -93,9 +93,9 @@ public class InputController : MonoBehaviour
             {
                 Vector2 DeltaPosition = _previousPosition - Input;
                 Vector3 CameraPosition = transform.position;
-                CameraPosition.x += DeltaPosition.x * _movementSpeed * 0.01f;
-                CameraPosition.z += DeltaPosition.y * _movementSpeed * 0.01f;
-                transform.position = CameraPosition;                
+                CameraPosition.x += DeltaPosition.x * _movementSpeed * 0.01f * _camera.Lens.OrthographicSize / 5;
+                CameraPosition.z += DeltaPosition.y * _movementSpeed * 0.01f * _camera.Lens.OrthographicSize / 5;
+                transform.position = CameraPosition;
             }
         }
         _previousPosition = Input;
