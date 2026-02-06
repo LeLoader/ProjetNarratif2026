@@ -15,6 +15,8 @@ public class BehaviorController : MonoBehaviour
         { EMetricType.INDOCTRINATED, EMetricState.NEUTRAL },
         { EMetricType.VIOLENCE, EMetricState.NEUTRAL },
     };
+
+    public event Action<EMetricType, EMetricState> OnMetricChanged;
     
     private bool inAction = false;
     private bool interacting = false;
@@ -81,6 +83,8 @@ public class BehaviorController : MonoBehaviour
         this.gameObject.name = myName;
         AddAction(newAction);
         CheckActions();
+        ChangeMetricState(EMetricType.INDOCTRINATED, EMetricState.NEUTRAL);
+        ChangeMetricState(EMetricType.VIOLENCE, EMetricState.NEUTRAL);
     }
     
     private void Update()
@@ -397,6 +401,7 @@ public class BehaviorController : MonoBehaviour
         {
             metrics.Remove(type);
             metrics.Add(type, newState);
+            OnMetricChanged?.Invoke(type, newState);
         }
     }
 
