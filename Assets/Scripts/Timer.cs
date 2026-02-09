@@ -56,6 +56,11 @@ public class Timer : MonoBehaviour
         Internal_Pause(newPause);
     }
 
+    public void SetPlay()
+    {
+        Internal_Start(duration, bAutoDestroy);
+    }
+
     public static Timer SetTimer(GameObject ctx, float time, bool autoDestroy)
     {
         Timer timer = ctx.AddComponent<Timer>();

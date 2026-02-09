@@ -20,6 +20,7 @@ public class ACT_GoToPc : ActionBase
             CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(EReturnState.SUCCEEDED); };
         };
         OnComputerReached?.Invoke(_behaviorController.transform.position, ShowDilemma);
+        _behaviorController.StartCoroutine(_behaviorController.RotateTowardsTarget(SceneManager.instance.GetPcTransform()));
     }
 
     public override bool StopAction()

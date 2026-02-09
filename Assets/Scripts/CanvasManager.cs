@@ -76,7 +76,7 @@ public class CanvasManager : MonoBehaviour
             Timer.SetTimer(gameObject, 1, true).OnTimerElapsed += () =>
             {
                 effect.CompleteTextRevealed -= OnCompleteTextRevealed;
-                questionTextUIStatic.text = dilema.question.GetLocalizedString();
+                questionTextUIStatic.text = $"{controller.name}: {dilema.question.GetLocalizedString()}";
                 questionTextUI.text = "";
                 _choice1Button.gameObject.SetActive(true);
                 _choice2Button.gameObject.SetActive(true);

@@ -11,9 +11,14 @@ public class MetricVisualizer : MonoBehaviour
     [SerializeField] private Material neutralMaterial;
     [SerializeField] private Material negativeMaterial;
 
-    private void Awake()
+    private void OnEnable()
     {
         GetComponent<BehaviorController>().OnMetricChanged += OnMetricChanged;
+    }
+
+    private void OnDisable()
+    {
+        GetComponent<BehaviorController>().OnMetricChanged -= OnMetricChanged;
     }
 
     public void OnMetricChanged(EMetricType type, EMetricState newState)

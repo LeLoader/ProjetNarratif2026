@@ -1,3 +1,4 @@
+using AYellowpaper.SerializedCollections;
 using EditorAttributes;
 using System;
 using System.Collections;
@@ -7,10 +8,13 @@ using UnityEngine.AI;
 
 public class BehaviorController : MonoBehaviour
 {
+    string characterName;
+
     // DILEMME ACTUEL //
     private SODilemma currentDilema;
 
-    public Dictionary<EMetricType, EMetricState> metrics = new()
+    [SerializedDictionary("Type", "State")]
+    public SerializedDictionary<EMetricType, EMetricState> metrics = new()
     {
         { EMetricType.INDOCTRINATED, EMetricState.NEUTRAL },
         { EMetricType.VIOLENCE, EMetricState.NEUTRAL },
@@ -81,6 +85,7 @@ public class BehaviorController : MonoBehaviour
     public void Initialize(SOActions newAction, string myName = "Human")
     {
         this.gameObject.name = myName;
+        characterName = myName;
         AddAction(newAction);
         CheckActions();
         ChangeMetricState(EMetricType.INDOCTRINATED, EMetricState.NEUTRAL);
@@ -372,7 +377,7 @@ public class BehaviorController : MonoBehaviour
         CheckActions();
     }
     
-    private IEnumerator RotateTowardsTarget(Transform targetTransform)
+    public IEnumerator RotateTowardsTarget(Transform targetTransform)
     {
         Vector3 directionToTarget = (targetTransform.position - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0, directionToTarget.z));
@@ -404,8 +409,7 @@ public class BehaviorController : MonoBehaviour
         metrics.TryGetValue(type, out EMetricState currentState);
         if (currentState != newState)
         {
-            metrics.Remove(type);
-            metrics.Add(type, newState);
+            metrics[type] = newState;
             OnMetricChanged?.Invoke(type, newState);
         }
     }

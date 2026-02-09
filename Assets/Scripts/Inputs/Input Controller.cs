@@ -79,7 +79,7 @@ public class InputController : MonoBehaviour
                 _target.transform.position = HitPoint;
             } else
             {
-                Debug.Log("rien touché");
+                Debug.Log("rien touche");
             }
 
             /*Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
@@ -162,6 +162,7 @@ public class InputController : MonoBehaviour
                 controller.StopAi();
                 controller.CallTriggerAnimation("dragAndDrop");
                 _target = HitResult.collider.gameObject;
+                // @TODO show controller number on screen
 
                 if (_showDebug)
                 {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EditorAttributes;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
@@ -45,7 +46,7 @@ public class CharacterBuilderManager : MonoBehaviour
         var bc = Instantiate(_humanPrefab, SceneManager.instance.GetSpawnPoint(), Quaternion.identity).GetComponent<BehaviorController>();
         if (bc != null)
         {
-            bc.Initialize(startingAction, "Character_" + (_characters.Count + 1));
+            bc.Initialize(startingAction, (_characters.Count + 1).ToString("D3"));
             _characters.Add(bc);
         }
     }
@@ -68,6 +69,10 @@ public class CharacterBuilderManager : MonoBehaviour
         }
         if (character != null)
         {
+            Debug.LogWarning($"Assigned {action} to {character}");
+            Selection.activeGameObject = character.gameObject;
+            Selection.activeTransform = character.gameObject.transform;
+            SceneView.lastActiveSceneView.FrameSelected();
             character.AddAction(action);
         }
     }
