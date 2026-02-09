@@ -355,19 +355,19 @@ public class BehaviorController : MonoBehaviour
                 return;
             }
         }
-        StartInteractionBeetweenHumans();
+        StartInteractionBetweenHumans();
     }
     
-    private void StartInteractionBeetweenHumans()
+    private void StartInteractionBetweenHumans()
     {
         interacting = true;
         inAction = false;
-                
+
         DestroyCurrentAction();
 
         // StopHumanAnimation();
-                
-        actionsToDo.Insert(0, ActionDataDrop.GetBasicGreetActions());
+
+        actionsToDo.Insert(0, ActionDataDrop.GetActionAvailable(metrics, _otherHumanInteractingWith.metrics));
         CheckActions();
     }
     

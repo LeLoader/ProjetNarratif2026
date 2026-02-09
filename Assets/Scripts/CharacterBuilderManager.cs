@@ -62,7 +62,10 @@ public class CharacterBuilderManager : MonoBehaviour
     public void AssignAnActionToRandomCharacter(SOActions action = null)
     {
         var character = GetRandomBehaviorController();
-        if (action == null) action = ActionDataDrop.GetActionRoam();
+        if (action == null)
+        {
+            action = ActionDataDrop.GetActionRoam();
+        }
         if (character != null)
         {
             character.AddAction(action);

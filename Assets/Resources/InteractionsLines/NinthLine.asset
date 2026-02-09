@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f20f72202aabd804388fb72e1545e5c5, type: 3}
+  m_Name: NinthLine
+  m_EditorClassIdentifier: ProjetNarratifCore::SOInteractionLine
+  Line:
+    _serializedList:
+    - Key:
+        IndoctrinatedMetricType: 0
+        ViolenceMetricType: 0
+      Value: {fileID: 11400000, guid: a7125cc9b997540499fed7d154200416, type: 2}
+    - Key:
+        IndoctrinatedMetricType: 0
+        ViolenceMetricType: 2
+      Value: {fileID: 11400000, guid: fe8fd66ded75b7c4f99e62e0c55ba712, type: 2}
+    - Key:
+        IndoctrinatedMetricType: 0
+        ViolenceMetricType: 1
+      Value: {fileID: 11400000, guid: a7125cc9b997540499fed7d154200416, type: 2}
+    - Key:
+        IndoctrinatedMetricType: 2
+        ViolenceMetricType: 0
+      Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
+    - Key:
+        IndoctrinatedMetricType: 2
+        ViolenceMetricType: 2
+      Value: {fileID: 11400000, guid: fe8fd66ded75b7c4f99e62e0c55ba712, type: 2}
+    - Key:
+        IndoctrinatedMetricType: 2
+        ViolenceMetricType: 1
+      Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
+    - Key:
+        IndoctrinatedMetricType: 1
+        ViolenceMetricType: 0
+      Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
+    - Key:
+        IndoctrinatedMetricType: 1
+        ViolenceMetricType: 2
+      Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
+    - Key:
+        IndoctrinatedMetricType: 1
+        ViolenceMetricType: 1
+      Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}

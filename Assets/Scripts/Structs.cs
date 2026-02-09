@@ -249,3 +249,16 @@ public struct SoundsVolume
         _allVolumes[typeToModify] = newVolume;
     }
 }
+
+[Serializable]
+public struct MetricsWrapper
+{
+    public EMetricState IndoctrinatedMetricState;
+    public EMetricState ViolenceMetricState;
+
+    public MetricsWrapper(EMetricState InIndoctrinatedState,  EMetricState InViolenceMetricType)
+    {
+        IndoctrinatedMetricState = InIndoctrinatedState;
+        ViolenceMetricState = InViolenceMetricType;
+    }
+}
