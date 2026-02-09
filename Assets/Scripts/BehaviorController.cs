@@ -376,7 +376,7 @@ public class BehaviorController : MonoBehaviour
         CheckActions();
     }
     
-    private IEnumerator RotateTowardsTarget(Transform targetTransform)
+    public IEnumerator RotateTowardsTarget(Transform targetTransform)
     {
         Vector3 directionToTarget = (targetTransform.position - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0, directionToTarget.z));
