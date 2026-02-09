@@ -8,7 +8,7 @@ using UnityEngine.AI;
 
 public class BehaviorController : MonoBehaviour
 {
-    string characterName;
+    public string characterName;
 
     // DILEMME ACTUEL //
     private SODilemma currentDilema;
@@ -40,6 +40,7 @@ public class BehaviorController : MonoBehaviour
     [Header("EXPOSED VARIABLE")]
     [SerializeField] private NavMeshAgent agentComponent;
     [SerializeField] private BoxCollider _interactionCollider;
+    [SerializeField] private GameObject objectSlot;
 
     BehaviorController _otherHumanInteractingWith;
     private int _currentActionIndex = 0;
@@ -296,6 +297,12 @@ public class BehaviorController : MonoBehaviour
 
     #endregion
     
+    public bool SetObject(GameObject gameObject)
+    {
+        if (!gameObject) return false;
+        gameObject.transform.parent = objectSlot.transform;
+        return true;
+    }
 
     public void SetDilemma(SODilemma dilema)
     {
