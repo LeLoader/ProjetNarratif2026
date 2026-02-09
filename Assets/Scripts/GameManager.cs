@@ -1,8 +1,6 @@
 using EditorAttributes;
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -47,21 +45,13 @@ public class GameManager : MonoBehaviour
     private void OnCharactersCreationFinished(int npcCount)
     {
         this.npcCount += npcCount;
-        SetTimer().OnTimerElapsed += () =>
+        Timer.SetTimer(gameObject, timeBetweenNPC.curve.Evaluate(npcCount), true).OnTimerElapsed += () =>
         {
 
             CharacterBuilderManager.Instance.AssignAnActionToRandomCharacter(ActionDataDrop.GetActionGoToPc());
         };
 
         UpdateWorldObjective();
-    }
-
-    // Call after all NPC from dilema have spawned
-    public Timer SetTimer()
-    {
-        Timer timer = gameObject.AddComponent<Timer>();
-        timer.Internal_Start(timeBetweenNPC.curve.Evaluate(npcCount), true);
-        return timer;
     }
 
     private void UpdateWorldObjective()
@@ -84,8 +74,29 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
 
+    private Dictionary<EMetricType, List<Tuple<EMetricState, SuperWorldObjective.EComparisonResult>>> GetComparisonResult()
+    {
+        Dictionary<EMetricType, List<Tuple<EMetricState, SuperWorldObjective.EComparisonResult>>> typedResults = new();
+        foreach (SuperWorldObjective goalSuperWorldObjective in goalSuperWorldObjectives)
+        {
+            foreach (SuperWorldObjective realitySuperWorldObjective in realitySuperWorldObjectives)
+            {
+                if (realitySuperWorldObjective.GetMetricType() != goalSuperWorldObjective.GetMetricType())
+                    continue;
 
+                EMetricType currentType = realitySuperWorldObjective.GetMetricType();
+                List<Tuple<EMetricState, SuperWorldObjective.EComparisonResult>> results = goalSuperWorldObjective.Compare(realitySuperWorldObjective);
+                foreach (var result in results)
+                {
+                    Debug.Log($"{result.Item2} of {result.Item1} {currentType}");
+                }
+                typedResults.TryAdd(currentType, results);
+                
+            }
+        }
+        return typedResults;
     }
 
     private void ComputeRealityWorldObjective()
@@ -124,9 +135,43 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void SpontaneousMetricChange()
     {
-        Debug.Log("Test");
+        List<BehaviorController> controllers = CharacterBuilderManager.Instance.GetCharacters();
+        var results = GetComparisonResult();
+        foreach (var comparison in results)
+        {
+            EMetricType currentType = comparison.Key;
+            BehaviorController controllerToChange = null;
+            List<EMetricState> toConvert = new();
+            foreach (var compirason2 in comparison.Value)
+            {
+                EMetricState currentState = compirason2.Item1;
+                SuperWorldObjective.EComparisonResult comparisonResult = compirason2.Item2;
+
+                if (comparisonResult == SuperWorldObjective.EComparisonResult.GOOD) continue;
+
+                if (comparisonResult == SuperWorldObjective.EComparisonResult.NEED_LESS)
+                {
+                    controllerToChange = controllers.Find((c) => {
+                        c.metrics.TryGetValue(currentType, out var value);
+                        return value == currentState;
+                        });
+                    continue;
+                }
+
+                if (comparisonResult == SuperWorldObjective.EComparisonResult.NEED_MORE)
+                {
+                    toConvert.Add(currentState);
+                    continue;
+                }
+            }
+
+            if (toConvert.Count > 0 && controllerToChange != null)
+            {
+                controllerToChange.ChangeMetricState(currentType, toConvert[0]);
+            }
+        }
     }
 
     [Serializable]

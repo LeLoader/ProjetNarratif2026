@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79c78f4b34b101d4990ddf7a923122e0, type: 3}
+  m_Name: DilemmaManagerParamsDebug
+  m_EditorClassIdentifier: ProjetNarratifCore::DilemmaManagerParams
+  specialsDilemmas:
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 11400000, guid: 8a1ad18e157d94641b24fde92af50334, type: 2}
+    - Key: 2
+      Value: {fileID: 11400000, guid: 1d74fba21ed9e8a459876afcecb6e93f, type: 2}
+    - Key: 3
+      Value: {fileID: 11400000, guid: 1d74fba21ed9e8a459876afcecb6e93f, type: 2}

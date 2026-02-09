@@ -53,7 +53,8 @@ public class SceneManager : MonoBehaviour
         {
             Vector3 randomDirection = UnityEngine.Random.insideUnitCircle * roamRadius;
             Vector3 randomPosition = new(center.x + randomDirection.x, center.y, center.z + randomDirection.y);
-            if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 1f, NavMesh.AllAreas))
+            //if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 1f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 5f, NavMesh.AllAreas))
             {
                 result = hit.position;
                 return true;
@@ -62,7 +63,39 @@ public class SceneManager : MonoBehaviour
         result = Vector3.zero;
         return false;
     }
-    
+
+    public bool GetRandomPointInNavMeshInRadius(float radius, out Vector3 result, int maxAllowedTries = 10)
+    {
+        return GetRandomPointInNavMeshInRadius(pcTransform.position, radius, out result, maxAllowedTries);
+    }
+
+    public bool GetRandomPointInNavMeshInRadius(Vector3 center, float radius, out Vector3 result, int maxAllowedTries = 10)
+    {
+        return GetRandomPointInNavMeshInRadiusRange(center, radius, radius, out result, maxAllowedTries);
+    }
+
+    public bool GetRandomPointInNavMeshInRadiusRange(float minRadius, float maxRadius, out Vector3 result, int maxAllowedTries = 10)
+    {
+        return GetRandomPointInNavMeshInRadiusRange(pcTransform.position, minRadius, maxRadius, out result, maxAllowedTries);
+    }
+
+    public bool GetRandomPointInNavMeshInRadiusRange(Vector3 center, float minRadius, float maxRadius, out Vector3 result, int maxAllowedTries = 10)
+    {
+        for (int i = 0; i < maxAllowedTries; i++)
+        {
+            Vector3 randomDirection = UnityEngine.Random.insideUnitCircle * UnityEngine.Random.Range(minRadius, maxRadius);
+            Vector3 randomPosition = new(center.x + randomDirection.x, center.y, center.z + randomDirection.y);
+            //if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 1f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 5f, NavMesh.AllAreas))
+            {
+                result = hit.position;
+                return true;
+            }
+        }
+        result = Vector3.zero;
+        return false;
+    }
+
     public Transform GetPcTransform()
     {
         return pcTransform;

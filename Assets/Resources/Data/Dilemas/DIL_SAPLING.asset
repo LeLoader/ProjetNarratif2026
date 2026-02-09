@@ -46,7 +46,8 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    actionsKeys: []
+    actionsKeys:
+    - ACT_TrampleSapling
     consequences:
     - metricType: 2
       state: 2
@@ -71,7 +72,8 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    actionsKeys: []
+    actionsKeys:
+    - ACT_WaterSapling
     consequences:
     - metricType: 2
       state: 1

@@ -152,8 +152,7 @@ public struct Choice
         }
         foreach (string key in actionsKeys)
         {
-            ActionDataDrop.GetActionByID(key);
-            ActionFactory.CreateAction(key, controller.gameObject);
+            controller.AddAction(ActionDataDrop.GetActionByID(key), 1);
         }
     }
 }

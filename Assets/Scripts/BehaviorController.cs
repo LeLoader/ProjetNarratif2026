@@ -15,6 +15,8 @@ public class BehaviorController : MonoBehaviour
         { EMetricType.INDOCTRINATED, EMetricState.NEUTRAL },
         { EMetricType.VIOLENCE, EMetricState.NEUTRAL },
     };
+
+    public event Action<EMetricType, EMetricState> OnMetricChanged;
     
     private bool inAction = false;
     private bool interacting = false;
@@ -27,7 +29,10 @@ public class BehaviorController : MonoBehaviour
     
     // LIST D'INTERACTIONS POSSIBLES //
     private List<SOInteraction> availableInteractions = new List<SOInteraction>();
-    
+
+    [Header("PARAMS")]
+    [SerializeField] private float rotationSpeed = 1;
+
     [Header("EXPOSED VARIABLE")]
     [SerializeField] private NavMeshAgent agentComponent;
     [SerializeField] private BoxCollider _interactionCollider;
@@ -78,11 +83,14 @@ public class BehaviorController : MonoBehaviour
         this.gameObject.name = myName;
         AddAction(newAction);
         CheckActions();
+        ChangeMetricState(EMetricType.INDOCTRINATED, EMetricState.NEUTRAL);
+        ChangeMetricState(EMetricType.VIOLENCE, EMetricState.NEUTRAL);
     }
     
     private void Update()
     {
         animator.SetBool("isMoving", agentComponent.velocity.magnitude > 0.1f);
+        animator.SetFloat("speed", agentComponent.velocity.magnitude);
 
         if (_currentActionBase != null && inAction && !_currentActionBase.bHasReachedDestination)
         {
@@ -106,14 +114,14 @@ public class BehaviorController : MonoBehaviour
     public void FollowTarget(Transform targetTransform)
     {
         _followTargetTransform = targetTransform;
-        StartHumanAnimation();
+        // StartHumanAnimation();
     }
     public void MoveToPosition(Vector3 targetPosition, string animationString = "")
     {
         agentComponent.SetDestination(targetPosition);
         if (!string.IsNullOrEmpty(animationString))
         {
-            StartHumanAnimation();
+            // StartHumanAnimation();
         }
     }
     
@@ -188,7 +196,7 @@ public class BehaviorController : MonoBehaviour
     }
     private void DestinationReached()
     {
-        StopHumanAnimation();
+        // StopHumanAnimation();
         OnDestinationReached?.Invoke();
     }
     private void CheckActions()
@@ -357,7 +365,7 @@ public class BehaviorController : MonoBehaviour
                 
         DestroyCurrentAction();
 
-        StopHumanAnimation();
+        // StopHumanAnimation();
                 
         actionsToDo.Insert(0, ActionDataDrop.GetBasicGreetActions());
         CheckActions();
@@ -371,7 +379,7 @@ public class BehaviorController : MonoBehaviour
         float alpha = 0f;
         while (alpha < 1f)
         {
-            alpha += Time.deltaTime;
+            alpha += Time.deltaTime * rotationSpeed;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, alpha);
             yield return null;
         }
@@ -397,6 +405,7 @@ public class BehaviorController : MonoBehaviour
         {
             metrics.Remove(type);
             metrics.Add(type, newState);
+            OnMetricChanged?.Invoke(type, newState);
         }
     }
 

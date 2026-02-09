@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3a225b167a863f44a19d121c46c9eb5, type: 3}
-  m_Name: ACT_Sapling
+  m_Name: ACT_TrampleSapling
   m_EditorClassIdentifier: ProjetNarratifCore::SOActions
-  _actionName: Plant a sapling
-  _actionKey: ACT_Sapling
+  _actionName: Trample the nearest sapling
+  _actionKey: ACT_TrampleSapling
   _canBeRepeated: 0
   _isAnInteraction: 0

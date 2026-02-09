@@ -70,12 +70,12 @@ public class CanvasManager : MonoBehaviour
         // 
 
         TypewriterEffect effect = questionTextUI.GetComponent<TypewriterEffect>();
-        effect.CompleteTextRevealed += () => 
+        Action OnCompleteTextRevealed = () => { };
+        OnCompleteTextRevealed = () =>
         {
-            Timer timer = gameObject.AddComponent<Timer>();
-            timer.Internal_Start(1, true);
-            timer.OnTimerElapsed += () =>
+            Timer.SetTimer(gameObject, 1, true).OnTimerElapsed += () =>
             {
+                effect.CompleteTextRevealed -= OnCompleteTextRevealed;
                 questionTextUIStatic.text = dilema.question.GetLocalizedString();
                 questionTextUI.text = "";
                 _choice1Button.gameObject.SetActive(true);
@@ -83,6 +83,7 @@ public class CanvasManager : MonoBehaviour
             };
             questionTextUI.GetComponent<Animation>().Play();
         };
+        effect.CompleteTextRevealed += OnCompleteTextRevealed;
     }
 
     private void ChoseAnswer(SODilemma dilemma, Choice choice, BehaviorController controller)
@@ -92,10 +93,9 @@ public class CanvasManager : MonoBehaviour
         if (effect)
         {
             Action onCompletedTextRevealed = () => { };
-            onCompletedTextRevealed = () => {
-                Timer timer = gameObject.AddComponent<Timer>();
-                timer.Internal_Start(1, true);
-                timer.OnTimerElapsed += () =>
+            onCompletedTextRevealed = () =>
+            {
+                Timer.SetTimer(gameObject, 1, true).OnTimerElapsed += () =>
                 {
                     Action<InputAction.CallbackContext> a = (InputAction.CallbackContext ctx) => { };
 
@@ -116,8 +116,9 @@ public class CanvasManager : MonoBehaviour
         }
         else
         {
-            _dilemmaPanel.SetActive(false);
             dilemma.Choose(choice, controller);
+            OnDilemmaEnded.Invoke();
+            _dilemmaPanel.SetActive(false);
         }
 
         _choice1Button.onClick.RemoveAllListeners();

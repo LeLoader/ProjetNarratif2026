@@ -34,19 +34,32 @@ public class Timer : MonoBehaviour
         }
     }
 
-    public void Internal_Start(float duration, bool bAutoDestroy)
+    private Timer Internal_Start(float duration, bool bAutoDestroy)
     {
         actualTime = 0;
         this.bAutoDestroy = bAutoDestroy;
         this.duration = duration;
+        return this;
     }
 
-    public void Internal_Pause(bool bPause)
+    private void Internal_Pause(bool bPause)
     {
         if (this.bPause == bPause) return;
         this.bPause = bPause;
 
         if (bPause) OnTimerPaused?.Invoke();
         else OnTimerUnpaused?.Invoke();
+    }
+
+    public void SetPause(bool newPause)
+    {
+        Internal_Pause(newPause);
+    }
+
+    public static Timer SetTimer(GameObject ctx, float time, bool autoDestroy)
+    {
+        Timer timer = ctx.AddComponent<Timer>();
+        timer.Internal_Start(time, autoDestroy);
+        return timer;
     }
 }
