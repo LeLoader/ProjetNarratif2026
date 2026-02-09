@@ -23,7 +23,26 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  appearanceConditions: []
+  appearanceSpecialConditions:
+  - {fileID: 11400000, guid: 4db0b20c7a223b048b676c8905af1dd9, type: 2}
+  appearanceConditions:
+  - metric:
+      label:
+        m_TableReference:
+          m_TableCollectionName: 
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      type: 0
+      <Positive>k__BackingField: 0
+      <Neutral>k__BackingField: 0
+      <Negative>k__BackingField: 0
+    state: 0
+    minimum: 0
+    maximum: 0
   newDilemas:
   - {fileID: 11400000, guid: 85c8d6e12e7528848b51379c79076f37, type: 2}
   npcToSpawn: 3

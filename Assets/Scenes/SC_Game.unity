@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603c52694f1dc864ca61a4fffa2f6e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProjetNarratifCore::DilemaManager
-  dilemmaManagerParams: {fileID: 11400000, guid: 4ee8ff1835c4ffa4cac5d0d98d0462ac, type: 2}
+  dilemmaManagerParams: {fileID: 11400000, guid: a7cd1f8c1263a5644b73c60632191f96, type: 2}
   ExtremePositiveDilemma: {fileID: 11400000, guid: 0ed052e2b5ba0f444b52dc6f869fa593, type: 2}
   ExtremeNegativeDilemma: {fileID: 11400000, guid: 568ad8649214f0447b2e9327693f0bd3, type: 2}
   dilemmasPool: []

@@ -8,10 +8,11 @@ public class ACT_WaterSapling : ActionBase
     {
         base.ExecuteAction();
         GameObject[] saplings = GameObject.FindGameObjectsWithTag("Sapling");
-        GameObject nearestSapling = SceneManager.instance.GetNearestObjects(_behaviorController.gameObject, saplings);
-        if (nearestSapling)
+        targetSapling = SceneManager.instance.GetNearestObjects(_behaviorController.gameObject, saplings);
+        if (targetSapling)
         {
-            _behaviorController.MoveToPosition(nearestSapling.transform.position);
+            _behaviorController.SetObject(Instantiate(PrefabStaticRef.so.wateringCanPrefab));
+            _behaviorController.MoveToPosition(targetSapling.transform.position);
         }
         else
         {
@@ -23,10 +24,18 @@ public class ACT_WaterSapling : ActionBase
     {
         base.OnActionDestinationReached();
 
-        for (int i = 1; i <= 3; i++)
+        targetSapling.GetComponent<Sapling>().Water();
+            // @TODO Add to a list, to create new saplings each time characters are created
+
+        Timer.SetTimer(gameObject, 3f).OnTimerElapsed += () =>
         {
-            _behaviorController.AddAction(ActionDataDrop.GetActionByID("ACT_SpawnSapling"), i);
-        }
-        ValidationAction(EReturnState.SUCCEEDED);
+            _behaviorController.SetObject(null);
+            ValidationAction(EReturnState.SUCCEEDED);
+        };
+    }
+
+    public override bool StopAction()
+    {
+        return false;
     }
 }

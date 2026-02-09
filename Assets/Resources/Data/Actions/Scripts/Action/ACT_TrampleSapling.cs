@@ -26,4 +26,9 @@ public class ACT_TrampleSapling : ActionBase
         Destroy(targetSapling);
         ValidationAction(EReturnState.SUCCEEDED);
     }
+
+    public override bool StopAction()
+    {
+        return false;
+    }
 }

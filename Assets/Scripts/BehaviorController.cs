@@ -310,7 +310,7 @@ public class BehaviorController : MonoBehaviour
         }
         else
         {
-            gameObject.transform.parent = objectSlot.transform;
+            gameObject.transform.SetParent(objectSlot.transform, false);
             currentObject = gameObject;
             return true;
         }
@@ -371,7 +371,8 @@ public class BehaviorController : MonoBehaviour
     }
     
     public void StopCurrentAction()
-    {
+    {       
+        // @TODO GoToPc est pas en action pour une raison obscure, et donc se faire destroy
         if (_currentActionBase != null)
         {
             if (!_currentActionBase.StopAction())
