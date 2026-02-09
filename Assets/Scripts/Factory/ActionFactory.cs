@@ -34,6 +34,15 @@ public static class ActionFactory
         return null;
     }
 
+    public static string GetKeyFromType(Type type)
+    {
+        if (_types.ContainsValue(type))
+        {
+            return _types.First((x) => x.Value == type).Key;
+        }
+        return "";
+    }
+
     #endregion
 
 
