@@ -40,6 +40,13 @@ public class GameManager : MonoBehaviour
     {
         Metric metric = globalMetrics.metrics.Find((metric) => metric.type == EMetricType.INDOCTRINATED);
         metric.OnMetricReachedExtreme += DilemmaManager.instance.OnMetricReachedExtreme;
+
+        Timer timer = Timer.SetTimer(gameObject, 5f, false);
+        timer.OnTimerElapsed += () =>
+        {
+            SpontaneousMetricChange();
+            timer.SetPlay();
+        };
     }
 
     private void OnCharactersCreationFinished(int npcCount)
@@ -154,10 +161,11 @@ public class GameManager : MonoBehaviour
 
                 if (comparisonResult == SuperWorldObjective.EComparisonResult.NEED_LESS)
                 {
-                    controllerToChange = controllers.Find((c) => {
+                    var controllersToChange = controllers.FindAll((c) => {
                         c.metrics.TryGetValue(currentType, out var value);
                         return value == currentState;
                         });
+                    controllerToChange = controllersToChange[UnityEngine.Random.Range(0, controllersToChange.Count)];
                     continue;
                 }
 
