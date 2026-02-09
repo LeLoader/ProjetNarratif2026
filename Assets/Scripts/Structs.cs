@@ -157,6 +157,12 @@ public struct Choice
     }
 }
 
+
+public abstract class SpecialCondition : ScriptableObject 
+{
+    abstract public bool IsConditionReached();
+}
+
 [Serializable] // Trop de condition diff�rentes, en faire un SO?
 public struct Condition
 {
