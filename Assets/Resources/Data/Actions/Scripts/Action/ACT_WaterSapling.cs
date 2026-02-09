@@ -8,10 +8,10 @@ public class ACT_WaterSapling : ActionBase
     {
         base.ExecuteAction();
         GameObject[] saplings = GameObject.FindGameObjectsWithTag("Sapling");
-        if (saplings.Length >= 1)
+        GameObject nearestSapling = SceneManager.instance.GetNearestObjects(_behaviorController.gameObject, saplings);
+        if (nearestSapling)
         {
-            targetSapling = saplings[0];
-            _behaviorController.MoveToPosition(targetSapling.transform.position);
+            _behaviorController.MoveToPosition(nearestSapling.transform.position);
         }
         else
         {
