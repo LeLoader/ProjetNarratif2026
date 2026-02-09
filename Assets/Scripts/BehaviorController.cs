@@ -1,3 +1,4 @@
+using AYellowpaper.SerializedCollections;
 using EditorAttributes;
 using System;
 using System.Collections;
@@ -10,7 +11,8 @@ public class BehaviorController : MonoBehaviour
     // DILEMME ACTUEL //
     private SODilemma currentDilema;
 
-    public Dictionary<EMetricType, EMetricState> metrics = new()
+    [SerializedDictionary("Type", "State")]
+    private readonly SerializedDictionary<EMetricType, EMetricState> metrics = new()
     {
         { EMetricType.INDOCTRINATED, EMetricState.NEUTRAL },
         { EMetricType.VIOLENCE, EMetricState.NEUTRAL },
@@ -403,8 +405,7 @@ public class BehaviorController : MonoBehaviour
         metrics.TryGetValue(type, out EMetricState currentState);
         if (currentState != newState)
         {
-            metrics.Remove(type);
-            metrics.Add(type, newState);
+            metrics[type] = newState;
             OnMetricChanged?.Invoke(type, newState);
         }
     }
