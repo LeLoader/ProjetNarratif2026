@@ -10,6 +10,9 @@ public class BehaviorController : MonoBehaviour
 {
     public string characterName;
 
+    // OBJET ACTUEL //
+    public GameObject currentObject;
+
     // DILEMME ACTUEL //
     private SODilemma currentDilema;
 
@@ -299,9 +302,18 @@ public class BehaviorController : MonoBehaviour
     
     public bool SetObject(GameObject gameObject)
     {
-        if (!gameObject) return false;
-        gameObject.transform.parent = objectSlot.transform;
-        return true;
+        if (!gameObject)
+        {
+            Destroy(currentObject);
+            gameObject = null;
+            return false;
+        }
+        else
+        {
+            gameObject.transform.parent = objectSlot.transform;
+            currentObject = gameObject;
+            return true;
+        }
     }
 
     public void SetDilemma(SODilemma dilema)

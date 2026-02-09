@@ -54,8 +54,7 @@ public class GameManager : MonoBehaviour
         this.npcCount += npcCount;
         Timer.SetTimer(gameObject, timeBetweenNPC.curve.Evaluate(npcCount), true).OnTimerElapsed += () =>
         {
-
-            CharacterBuilderManager.Instance.AssignAnActionToRandomCharacter(ActionDataDrop.GetActionGoToPc());
+            CharacterBuilderManager.Instance.AssignAnActionToRandomCharacter(ActionDataDrop.GetActionGoToPc(), true);
         };
 
         UpdateWorldObjective();
@@ -66,22 +65,6 @@ public class GameManager : MonoBehaviour
     {
         ComputeGoalWorldObjective();
         ComputeRealityWorldObjective();
-
-        foreach(SuperWorldObjective goalSuperWorldObjective in goalSuperWorldObjectives)
-        {
-            foreach(SuperWorldObjective realitySuperWorldObjective in realitySuperWorldObjectives)
-            {
-                if (realitySuperWorldObjective.GetMetricType() != goalSuperWorldObjective.GetMetricType())
-                    continue;
-
-                EMetricType currentType = realitySuperWorldObjective.GetMetricType();
-                List<Tuple<EMetricState, SuperWorldObjective.EComparisonResult>> results = goalSuperWorldObjective.Compare(realitySuperWorldObjective);
-                foreach(var result in results)
-                {
-                    Debug.Log($"{result.Item2} of {result.Item1} {currentType}");
-                }
-            }
-        }
     }
 
     private Dictionary<EMetricType, List<Tuple<EMetricState, SuperWorldObjective.EComparisonResult>>> GetComparisonResult()
