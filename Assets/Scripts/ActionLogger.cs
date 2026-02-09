@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class ActionLogger
 {
-    private static Dictionary<string, int> actionsLog; 
+    private static Dictionary<string, int> actionsLog = new(); 
     
     public static void LogAction(string key)
     {
