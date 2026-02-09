@@ -7,6 +7,12 @@ using UnityEngine.Localization;
 [Serializable]
 public class Metric
 {
+    public Metric(LocalizedString label, EMetricType type)
+    {
+        this.label = label;
+        this.type = type;
+    }
+
     [SerializeField] public LocalizedString label;
     [SerializeField] public EMetricType type;
 
@@ -69,6 +75,10 @@ public class Metric
                     Neutral = 0;
                     Negative -= deltaUnderZero;
                 }
+                else
+                {
+                    Neutral -= value;
+                }
                 CheckExtreme();
                 break;
             case EMetricState.NEGATIVE:
@@ -79,7 +89,11 @@ public class Metric
                     Neutral = 0;
                     Positive -= deltaUnderZero;
                 }
-                CheckExtreme();
+                else
+                {
+                    Neutral -= value;
+                }
+                    CheckExtreme();
                 break;
         }
     }
@@ -116,7 +130,7 @@ public class Metric
 
     public override string ToString()
     {
-        return $"Positive: {Positive}%, Neutral: {Neutral}%, Negative: {Negative}";
+        return $"Positive: {Positive}%, Neutral: {Neutral}%, Negative: {Negative}%";
     }
 }
 

@@ -62,8 +62,8 @@ public class CanvasManager : MonoBehaviour
 
         // INIT BUTTONS //
 
-        _choice1Button.gameObject.SetActive(true);
-        _choice2Button.gameObject.SetActive(true);
+        _choice1Button.gameObject.SetActive(false);
+        _choice2Button.gameObject.SetActive(false);
         _choice1Button.onClick.AddListener(() => ChoseAnswer(dilema, dilema.firstChoice, controller));
         _choice2Button.onClick.AddListener(() => ChoseAnswer(dilema, dilema.secondChoice, controller));
 
@@ -78,6 +78,8 @@ public class CanvasManager : MonoBehaviour
             {
                 questionTextUIStatic.text = dilema.question.GetLocalizedString();
                 questionTextUI.text = "";
+                _choice1Button.gameObject.SetActive(true);
+                _choice2Button.gameObject.SetActive(true);
             };
             questionTextUI.GetComponent<Animation>().Play();
         };
@@ -91,17 +93,15 @@ public class CanvasManager : MonoBehaviour
         {
             Action onCompletedTextRevealed = () => { };
             onCompletedTextRevealed = () => {
-                dilemma.Choose(choice, controller);
-
                 Timer timer = gameObject.AddComponent<Timer>();
                 timer.Internal_Start(1, true);
                 timer.OnTimerElapsed += () =>
                 {
-
                     Action<InputAction.CallbackContext> a = (InputAction.CallbackContext ctx) => { };
 
                     a = (InputAction.CallbackContext ctx) =>
                     {
+                        dilemma.Choose(choice, controller);
                         OnDilemmaEnded.Invoke();
                         _dilemmaPanel.SetActive(false);
                         skipInput.action.started -= a;

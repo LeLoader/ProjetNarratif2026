@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class ACT_GoToPc : ActionBase
 {
+    public static event Action<Vector3, Action> OnComputerReached;
     public override void ExecuteAction()
     {
         _behaviorController.MoveToPosition(SceneManager.instance.GetPcTransform().position, "Walk");
@@ -11,10 +13,13 @@ public class ACT_GoToPc : ActionBase
     public override void OnActionDestinationReached()
     {
         base.OnActionDestinationReached();
-
-        var myDilema = DilemmaManager.instance.GetCurrentDilema();
-        CanvasManager.Instance.ShowDilemma(myDilema, _behaviorController);
-        CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(EReturnState.SUCCEEDED); };
+        var myDilemma = DilemmaManager.instance.GetCurrentDilema();
+        Action ShowDilemma = () =>
+        {
+            CanvasManager.Instance.ShowDilemma(myDilemma, _behaviorController);
+            CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(EReturnState.SUCCEEDED); };
+        };
+        OnComputerReached?.Invoke(_behaviorController.transform.position, ShowDilemma);
     }
 
     public override bool StopAction()

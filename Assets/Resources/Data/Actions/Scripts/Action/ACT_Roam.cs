@@ -5,16 +5,17 @@ public class ACT_Roam : ActionBase
     private GameObject _debugRoamPoint;
     public override void ExecuteAction()
     {
-        Vector3 targetDestination;
-        SceneManager.instance.GetRandomPointInNavMesh(_behaviorController.transform.position, out targetDestination);
-        while (!_behaviorController.CanReachDestination(targetDestination))
-        {
-            SceneManager.instance.GetRandomPointInNavMesh(_behaviorController.transform.position, out targetDestination);
-        }
-        
-        _debugRoamPoint = SceneManager.instance.SpawnDebugRoamPoint(targetDestination);
-        _behaviorController.MoveToPosition(targetDestination, "Walk");
         base.ExecuteAction();
+
+        Vector3 targetDestination;
+        if (SceneManager.instance.GetRandomPointInNavMesh(_behaviorController.transform.position, out targetDestination)){ 
+            _debugRoamPoint = SceneManager.instance.SpawnDebugRoamPoint(targetDestination);
+            _behaviorController.MoveToPosition(targetDestination, "Walk");
+        }
+        else
+        {
+            ValidationAction(EReturnState.FAILED);
+        }
     }
 
     public override void OnActionDestinationReached()

@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/PerformanceTestRunInfo.json.meta
+guid: 36abbff608c9e2f42998922b6c99b0b1
+TextScriptImporter:
+========
 guid: ac37ee5e2fdb8844d9a0c8b63fe9b2b5
 DefaultImporter:
+>>>>>>>> origin/GA_Clara:Assets/Assets/Water_Test.unity.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

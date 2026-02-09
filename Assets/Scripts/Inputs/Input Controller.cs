@@ -9,8 +9,6 @@ using Touch =  UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class InputController : MonoBehaviour
 {
-    [SerializeField] private bool _UsingMouse;
-
     [SerializeField, VerticalGroup("Speed Values", true, nameof(_movementSpeed), nameof(_zoomScale))] private EditorAttributes.Void speedValuesHolder;
 
     [SerializeField, VerticalGroup("Min / Max Zoom Value", true, nameof(_minCamerasize), nameof(_maxCameraSize))] private EditorAttributes.Void zoomHolder;
@@ -27,11 +25,15 @@ public class InputController : MonoBehaviour
     [Tooltip("Take a WILD guess")]
     [SerializeField] private bool _showDebug = true;
 
+    [SerializeField] private CameraController _cameraController;
+
+    [SerializeField] private LayerMask _mask;
+
+    [SerializeField] private UnityEvent onStartTouch;
+    
     private GameObject _target;
 
-    private Vector2 _previousPosition;
-
-    public UnityEvent onStartTouch;
+    private Vector2 _previousPosition = Vector2.zero;
 
     private void Reset()
     {
@@ -54,7 +56,7 @@ public class InputController : MonoBehaviour
             //Debug.Log("[INPUT CONTROLLER] performing move");
             Debug.DrawRay(Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>()), transform.forward * 1000, Color.red, 0.1f);
         }
-        if (Touch.activeTouches.Count >= 2)
+        if (Touch.activeTouches.Count >= 2 || _cameraController.IsMovingCamera())
         {
             if (_showDebug)
             {
@@ -69,11 +71,21 @@ public class InputController : MonoBehaviour
             {
                 Debug.Log("[INPUT CONTROLLER] moving target");
             }
+            Vector3 StartPos = Camera.main.ScreenToWorldPoint(Input);
+            if (Physics.Raycast(StartPos, transform.forward, out RaycastHit HitResult, Mathf.Infinity, _mask))
+            {
+                Vector3 HitPoint = HitResult.point;
+                HitPoint.y = _target.transform.position.y;
+                _target.transform.position = HitPoint;
+            } else
+            {
+                Debug.Log("rien touché");
+            }
 
-            // if (Physics.Raycast(StartPos, transform.forward, out HitResult, Mathf.Infinity))
-            Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
-            WorldPosition.z = _target.transform.position.z;
-            _target.transform.position = WorldPosition;
+            /*Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
+            Debug.Log($"[INPUT CONTROLLER] World Position is {WorldPosition}");
+            WorldPosition.y = _target.transform.position.y;
+            _target.transform.position = WorldPosition;*/
 
         } else
         {
@@ -81,9 +93,9 @@ public class InputController : MonoBehaviour
             {
                 Vector2 DeltaPosition = _previousPosition - Input;
                 Vector3 CameraPosition = transform.position;
-                CameraPosition.x += DeltaPosition.x * _movementSpeed * 0.01f;
-                CameraPosition.z += DeltaPosition.y * _movementSpeed * 0.01f;
-                transform.position = CameraPosition;                
+                CameraPosition.x += DeltaPosition.x * _movementSpeed * 0.01f * _camera.Lens.OrthographicSize / 5;
+                CameraPosition.z += DeltaPosition.y * _movementSpeed * 0.01f * _camera.Lens.OrthographicSize / 5;
+                transform.position = CameraPosition;
             }
         }
         _previousPosition = Input;

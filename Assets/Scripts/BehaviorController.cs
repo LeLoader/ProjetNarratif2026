@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public class BehaviorController : MonoBehaviour
 {
-    // DILEM ACTUEL //
+    // DILEMME ACTUEL //
     private SODilemma currentDilema;
 
     public Dictionary<EMetricType, EMetricState> metrics = new()
@@ -299,6 +299,10 @@ public class BehaviorController : MonoBehaviour
         SetCanInteractionState(false);
         StopCurrentAction();
         
+        if (!_currentActionBase.StopAction())
+        {
+            return;
+        }
         StopAiSpeed();
         StartCoroutine(RotateTowardsTarget(otherHuman.transform));
 
@@ -385,6 +389,16 @@ public class BehaviorController : MonoBehaviour
         SetCanInteractionState(true);
     }
 
+    [Button]
+    public void ChangeMetricState(EMetricType type, EMetricState newState)
+    {
+        metrics.TryGetValue(type, out EMetricState currentState);
+        if (currentState != newState)
+        {
+            metrics.Remove(type);
+            metrics.Add(type, newState);
+        }
+    }
 
     #region Life
 

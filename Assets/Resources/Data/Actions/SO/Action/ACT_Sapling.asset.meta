@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Bubble.prefab.meta
+guid: e5aeb4938aedf1b49804061023a81903
+PrefabImporter:
+========
 guid: a59e7910e111b8b42a28717f8f77ff72
 NativeFormatImporter:
+>>>>>>>> main:Assets/Resources/Data/Actions/SO/Action/ACT_Sapling.asset.meta
   externalObjects: {}
   mainObjectFileID: 11400000
   userData: 

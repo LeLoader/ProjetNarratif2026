@@ -216,7 +216,7 @@ MonoBehaviour:
   globalMetrics:
     metrics: []
   worldObjective: []
-  timeBetweenNPC: {fileID: 11400000, guid: 9a272cd64ac690647a1ae222cb3e4af8, type: 2}
+  timeBetweenNPC: {fileID: 11400000, guid: 9565536c90a247a489154464e5466223, type: 2}
   references:
     version: 2
     RefIds: []
@@ -342,8 +342,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: ProjetNarratifCore::DilemaManager
   dilemmaDatabase: {fileID: 11400000, guid: a5b669fa014d632429da08d8ca956e45, type: 2}
   dilemmaManagerParams: {fileID: 11400000, guid: 4ee8ff1835c4ffa4cac5d0d98d0462ac, type: 2}
-  ExtremePositiveDilemma: {fileID: 11400000, guid: c99402ffabd0a10409dd5cdc611ca948, type: 2}
-  ExtremeNegativeDilemma: {fileID: 11400000, guid: a1766831d057b244dba3d887f18c8fd1, type: 2}
+  ExtremePositiveDilemma: {fileID: 11400000, guid: 0ed052e2b5ba0f444b52dc6f869fa593, type: 2}
+  ExtremeNegativeDilemma: {fileID: 11400000, guid: 568ad8649214f0447b2e9327693f0bd3, type: 2}
   dilemmasPool: []
 --- !u!4 &98626698
 Transform:
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 128500130}
   - component: {fileID: 128500129}
   - component: {fileID: 128500128}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: M_Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +647,7 @@ MonoBehaviour:
   interpunctuationDelay: 0.5
   quickSkip: 1
   skipSpeedup: 5
-  skipInput: {fileID: 395291337}
+  skipInput: {fileID: 1320578363}
   sendDoneDelay: 0.25
 --- !u!1 &159069449
 GameObject:
@@ -1062,20 +1062,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351920283}
   m_CullTransparentMesh: 1
---- !u!114 &395291337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: Player/Touch
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-  m_ActionId: 4ee4662f-2661-4d75-9146-7c6f09fc3269
 --- !u!114 &481074265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1090,6 +1076,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
+--- !u!114 &527811003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/Touch
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  m_ActionId: 4ee4662f-2661-4d75-9146-7c6f09fc3269
 --- !u!114 &655403252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1499,7 +1499,7 @@ MonoBehaviour:
   _choice2: {fileID: 825719755}
   _choice1Button: {fileID: 1824892858}
   _choice2Button: {fileID: 346639131}
-  skipInput: {fileID: 1854826838}
+  skipInput: {fileID: 2134758789}
 --- !u!114 &1005593797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1892,7 +1892,7 @@ MonoBehaviour:
   interpunctuationDelay: 0.5
   quickSkip: 1
   skipSpeedup: 5
-  skipInput: {fileID: 2065887512}
+  skipInput: {fileID: 527811003}
   sendDoneDelay: 0.25
 --- !u!111 &1284115755
 Animation:
@@ -1911,6 +1911,20 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
+--- !u!114 &1320578363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/Touch
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  m_ActionId: 4ee4662f-2661-4d75-9146-7c6f09fc3269
 --- !u!1 &1335375554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,12 +2193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 551b07fca8f6e7e4fae7b9687995d020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  startDilema: {fileID: 11400000, guid: beba650ba9d876c41b9fc51f87e21aaa, type: 2}
-  startAction: {fileID: 11400000, guid: 5d7fbd30622f6924eb3ba77d900674e5, type: 2}
   spawnPoint: {fileID: 877201699}
   pcTransform: {fileID: 159069450}
   _debugRoamPointPrefab: {fileID: 0}
-  roamRadius: 30
+  roamRadius: 10
+  maxRadius: 50
 --- !u!4 &1616875906
 Transform:
   m_ObjectHideFlags: 0
@@ -2460,6 +2473,7 @@ GameObject:
   - component: {fileID: 1739990240}
   - component: {fileID: 1739990239}
   - component: {fileID: 1739990243}
+  - component: {fileID: 1739990244}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -2485,6 +2499,10 @@ MonoBehaviour:
   _minCamerasize: 10
   _maxCameraSize: 30
   _showDebug: 1
+  _cameraController: {fileID: 1739990244}
+  _mask:
+    serializedVersion: 2
+    m_Bits: 8
   onStartTouch:
     m_PersistentCalls:
       m_Calls: []
@@ -2560,7 +2578,7 @@ Transform:
   m_GameObject: {fileID: 1739990238}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalPosition: {x: 0, y: 45, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2580,6 +2598,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineConfiner3D
   BoundingVolume: {fileID: 227699496}
   SlowingDistance: 0
+--- !u!114 &1739990244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739990238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f9fd5c52970a2468e673e13a45708b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ProjetNarratifCore::CameraController
+  _bubble: {fileID: 8990273780440922711, guid: 0bb35dc13979cd74ab5a4998359c6213, type: 3}
+  _canvas: {fileID: 1005593798}
 --- !u!1 &1824892854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,20 +2733,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1854826838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: Player/Touch
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-  m_ActionId: 4ee4662f-2661-4d75-9146-7c6f09fc3269
 --- !u!1 &1874697725
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,7 +3154,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
---- !u!114 &2065887512
+--- !u!114 &2134758789
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
