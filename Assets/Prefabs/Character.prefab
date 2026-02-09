@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BehaviorController
   characterName: 
+  currentObject: {fileID: 0}
   metrics:
     _serializedList:
     - Key: 1
@@ -183,7 +184,7 @@ MonoBehaviour:
   rotationSpeed: 2
   agentComponent: {fileID: 8820516911087308232}
   _interactionCollider: {fileID: 4981749348264507583}
-  objectSlot: {fileID: 0}
+  objectSlot: {fileID: 4963678964504320738}
   _canvasHumanController: {fileID: 8249318047692874258}
   _currentState: 0
   animator: {fileID: 1252064683820772601}
