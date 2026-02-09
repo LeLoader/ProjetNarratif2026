@@ -322,11 +322,12 @@ public class BehaviorController : MonoBehaviour
         canInteract = state;
         _interactionCollider.enabled = state;
     }
+
     public SODilemma GetCurrentDilema()
     {
         return currentDilema;
     }
-    
+
     public bool CanReachDestination(Vector3 targetDestination)
     {
         NavMeshPath path = new NavMeshPath();
