@@ -15,6 +15,7 @@ public class DilemmaManager : MonoBehaviour
     [SerializeField] SODilemma ExtremeNegativeDilemma;
 
     [SerializeField, ReadOnly] List<SODilemma> dilemmasPool = new();
+    // @TODO Waiting pool to avoid duplicate
 
     private int dilemmaCount = 0;
 
