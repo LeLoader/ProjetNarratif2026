@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         };
 
         UpdateWorldObjective();
+        SpontaneousMetricChange();
     }
 
     private void UpdateWorldObjective()
@@ -172,6 +173,8 @@ public class GameManager : MonoBehaviour
                 controllerToChange.ChangeMetricState(currentType, toConvert[0]);
             }
         }
+
+        UpdateWorldObjective();
     }
 
     [Serializable]

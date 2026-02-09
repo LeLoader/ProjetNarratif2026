@@ -12,7 +12,7 @@ public class BehaviorController : MonoBehaviour
     private SODilemma currentDilema;
 
     [SerializedDictionary("Type", "State")]
-    private readonly SerializedDictionary<EMetricType, EMetricState> metrics = new()
+    public SerializedDictionary<EMetricType, EMetricState> metrics = new()
     {
         { EMetricType.INDOCTRINATED, EMetricState.NEUTRAL },
         { EMetricType.VIOLENCE, EMetricState.NEUTRAL },
