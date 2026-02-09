@@ -162,6 +162,7 @@ public class InputController : MonoBehaviour
                 controller.StopAi();
                 controller.CallTriggerAnimation("dragAndDrop");
                 _target = HitResult.collider.gameObject;
+                // @TODO show controller number on screen
 
                 if (_showDebug)
                 {

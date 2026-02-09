@@ -8,6 +8,8 @@ using UnityEngine.AI;
 
 public class BehaviorController : MonoBehaviour
 {
+    string characterName;
+
     // DILEMME ACTUEL //
     private SODilemma currentDilema;
 
@@ -83,6 +85,7 @@ public class BehaviorController : MonoBehaviour
     public void Initialize(SOActions newAction, string myName = "Human")
     {
         this.gameObject.name = myName;
+        characterName = myName;
         AddAction(newAction);
         CheckActions();
         ChangeMetricState(EMetricType.INDOCTRINATED, EMetricState.NEUTRAL);
