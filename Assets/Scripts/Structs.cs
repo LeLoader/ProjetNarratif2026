@@ -1,6 +1,8 @@
-using EditorAttributes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using AYellowpaper.SerializedCollections.KeysGenerators;
+using EditorAttributes;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -260,5 +262,53 @@ public struct MetricsWrapper
     {
         IndoctrinatedMetricState = InIndoctrinatedState;
         ViolenceMetricState = InViolenceMetricType;
+    }
+}
+
+[KeyListGenerator("Wrapper Range", typeof(MetricsWrapper))]
+public class MetricRangeGenerator : KeyListGenerator
+{
+    public override IEnumerable GetKeys(Type type)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            EMetricState firstState;
+            switch (i)
+            {
+                case 0:
+                    firstState = EMetricState.NEUTRAL;
+                    break;
+                case 1:
+                    firstState = EMetricState.NEGATIVE;
+                    break;
+                case 2:
+                    firstState = EMetricState.POSITIVE;
+                    break;
+                default:
+                    firstState = EMetricState.NEUTRAL;
+                    break;
+
+            }
+            for (int j = 0; j < 3; j++)
+            {
+                EMetricState secondState;
+                switch (j)
+                {
+                    case 0:
+                        secondState = EMetricState.NEUTRAL;
+                        break;
+                    case 1:
+                        secondState = EMetricState.NEGATIVE;
+                        break;
+                    case 2:
+                        secondState = EMetricState.POSITIVE;
+                        break;
+                    default:
+                        secondState = EMetricState.NEUTRAL;
+                        break;
+                }
+                yield return new MetricsWrapper(firstState, secondState);
+            }
+        }
     }
 }

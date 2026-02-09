@@ -15,38 +15,38 @@ MonoBehaviour:
   Line:
     _serializedList:
     - Key:
-        IndoctrinatedMetricType: 0
-        ViolenceMetricType: 0
+        IndoctrinatedMetricState: 0
+        ViolenceMetricState: 0
       Value: {fileID: 11400000, guid: ef3ace6d251f9e94eacc51ee8a3775f7, type: 2}
     - Key:
-        IndoctrinatedMetricType: 0
-        ViolenceMetricType: 2
+        IndoctrinatedMetricState: 0
+        ViolenceMetricState: 2
       Value: {fileID: 11400000, guid: 582d867ade9aa814e9877afd651dde06, type: 2}
     - Key:
-        IndoctrinatedMetricType: 0
-        ViolenceMetricType: 1
+        IndoctrinatedMetricState: 0
+        ViolenceMetricState: 1
       Value: {fileID: 11400000, guid: fe8fd66ded75b7c4f99e62e0c55ba712, type: 2}
     - Key:
-        IndoctrinatedMetricType: 2
-        ViolenceMetricType: 0
+        IndoctrinatedMetricState: 2
+        ViolenceMetricState: 0
       Value: {fileID: 11400000, guid: fe8fd66ded75b7c4f99e62e0c55ba712, type: 2}
     - Key:
-        IndoctrinatedMetricType: 2
-        ViolenceMetricType: 2
+        IndoctrinatedMetricState: 2
+        ViolenceMetricState: 2
       Value: {fileID: 11400000, guid: 582d867ade9aa814e9877afd651dde06, type: 2}
     - Key:
-        IndoctrinatedMetricType: 2
-        ViolenceMetricType: 1
+        IndoctrinatedMetricState: 2
+        ViolenceMetricState: 1
       Value: {fileID: 11400000, guid: fe8fd66ded75b7c4f99e62e0c55ba712, type: 2}
     - Key:
-        IndoctrinatedMetricType: 1
-        ViolenceMetricType: 0
+        IndoctrinatedMetricState: 1
+        ViolenceMetricState: 0
       Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
     - Key:
-        IndoctrinatedMetricType: 1
-        ViolenceMetricType: 2
+        IndoctrinatedMetricState: 1
+        ViolenceMetricState: 2
       Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
     - Key:
-        IndoctrinatedMetricType: 1
-        ViolenceMetricType: 1
+        IndoctrinatedMetricState: 1
+        ViolenceMetricState: 1
       Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
