@@ -37,13 +37,11 @@ public class CameraController : MonoBehaviour
         Destination.z = transform.position.z;
         float alpha = 0f;
 
-        Debug.Log($"[CAMERA CONTROLLER] Before while. Alpha is {alpha}");
         while (alpha <= 1f)
         {
             _isMovingCamera = true;
             alpha = alpha + Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, Destination, alpha);
-            Debug.Log($"[CAMERA CONTROLLER] After While. Alpha is {alpha}");
             yield return null;
         }
         OnCompleteCallback?.Invoke();

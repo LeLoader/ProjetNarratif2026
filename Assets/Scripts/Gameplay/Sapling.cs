@@ -47,6 +47,8 @@ public class Sapling : MonoBehaviour
                 gameObject.name = newObject.GetComponent<MeshFilter>().mesh.name;
                 Destroy(this);
                 // @TODO Destroy this marche pas?
+                // if the game object must be destroyed
+                //Destroy(gameObject);
                 break;
             }
             else

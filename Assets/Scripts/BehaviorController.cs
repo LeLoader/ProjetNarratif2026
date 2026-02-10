@@ -373,7 +373,7 @@ public class BehaviorController : MonoBehaviour
     
     public void StopCurrentAction()
     {       
-        // @TODO GoToPc est pas en action pour une raison obscure, et donc se faire destroy
+        // @TODO GoToPc est pas en action pour une raison obscure, et donc se fait destroy
         if (_currentActionBase != null)
         {
             if (!_currentActionBase.StopAction())
@@ -432,6 +432,11 @@ public class BehaviorController : MonoBehaviour
             metrics[type] = newState;
             OnMetricChanged?.Invoke(type, newState);
         }
+    }
+
+    public BehaviorController GetOtherBehavior()
+    {
+        return _otherHumanInteractingWith;
     }
 
     #region Life

@@ -2498,7 +2498,7 @@ MonoBehaviour:
   _camera: {fileID: 1739990241}
   _minCamerasize: 10
   _maxCameraSize: 30
-  _showDebug: 1
+  _showDebug: 0
   _cameraController: {fileID: 1739990244}
   _mask:
     serializedVersion: 2
