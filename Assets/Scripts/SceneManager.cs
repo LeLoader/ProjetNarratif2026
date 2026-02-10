@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -30,6 +31,19 @@ public class SceneManager : MonoBehaviour
 
     #region Get Positions
 
+
+    public GameObject GetNearestObjects(GameObject from, GameObject[] objects)
+    {
+        GameObject toReturn = objects[0];
+        for (int i = 1; i < objects.Length; i++) {
+            GameObject gameObject = objects[i];
+            if ((from.transform.position - gameObject.transform.position).magnitude > (from.transform.position - toReturn.transform.position).magnitude)
+            {
+                toReturn = gameObject;
+            }
+        }
+        return toReturn;
+    }
 
     /// <summary>
     /// Overload to find a point on the NavMesh around the pc

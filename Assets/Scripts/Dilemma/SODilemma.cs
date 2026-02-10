@@ -9,6 +9,7 @@ public class SODilemma : ScriptableObject
     [SerializeField, ReadOnly] public string key;
     [SerializeField] public bool bRepeatable = false;
     [SerializeField] public LocalizedString question;
+    [SerializeField] public List<SpecialCondition> appearanceSpecialConditions = new();
     [SerializeField] public List<Condition> appearanceConditions = new();
     [SerializeField] public List<SODilemma> newDilemas = new();
     [SerializeField] public int npcToSpawn = 0;

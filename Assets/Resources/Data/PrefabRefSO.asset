@@ -13,3 +13,11 @@ MonoBehaviour:
   m_Name: PrefabRefSO
   m_EditorClassIdentifier: ProjetNarratifCore::PrefabRefSO
   saplingPrefab: {fileID: 2771619235672712642, guid: 569e30e98fcf9414db3a27d0a369deb2, type: 3}
+  lakePrefab: {fileID: 0}
+  bookPrefab: {fileID: 6191372911687968970, guid: 93e106baca08ed64c916363aded18ca1, type: 3}
+  candlePrefab: {fileID: 7789592400447870925, guid: 3e224141de9d7f340a57092cd77ad719, type: 3}
+  cakePrefab: {fileID: 0}
+  glassPrefab: {fileID: 7132298793893860149, guid: aa00265dd10e9d54d88373460156ab97, type: 3}
+  pistolPrefab: {fileID: 6047022874241410102, guid: 7eb483f03f976df40bbfd2414af45b35, type: 3}
+  axePrefab: {fileID: 148363870678315809, guid: 51c5e537aef18604081605b52f4e3345, type: 3}
+  wateringCanPrefab: {fileID: 7935518434301531213, guid: 4560f094f69c8de4a92c674ab8d13936, type: 3}

@@ -22,12 +22,17 @@ public class CharacterBuilderManager : MonoBehaviour
         return _characters;
     }
 
-    public BehaviorController GetRandomBehaviorController()
+    public BehaviorController GetRandomBehaviorController(bool onlyEmptyHand = false)
     {
         if (_characters.Count == 0) return null;
 
-        int randomIndex = UnityEngine.Random.Range(0, _characters.Count);
-        return _characters[randomIndex];
+        if (onlyEmptyHand)
+        {
+            List<BehaviorController> _emptyHandCharacters = _characters.FindAll((x) => x.currentObject == null);
+            return _emptyHandCharacters[UnityEngine.Random.Range(0, _emptyHandCharacters.Count)];
+        }
+
+        return _characters[UnityEngine.Random.Range(0, _characters.Count)];
     }
 
     public void Start()
@@ -60,13 +65,10 @@ public class CharacterBuilderManager : MonoBehaviour
         }
     }
 
-    public void AssignAnActionToRandomCharacter(SOActions action = null)
+    public void AssignAnActionToRandomCharacter(SOActions action = null, bool onlyEmptyHand = false)
     {
-        var character = GetRandomBehaviorController();
-        if (action == null)
-        {
-            action = ActionDataDrop.GetActionRoam();
-        }
+        var character = GetRandomBehaviorController(onlyEmptyHand);
+        if (action == null) action = ActionDataDrop.GetActionRoam();
         if (character != null)
         {
             Debug.LogWarning($"Assigned {action} to {character}");

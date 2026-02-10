@@ -8,7 +8,10 @@ using UnityEngine.AI;
 
 public class BehaviorController : MonoBehaviour
 {
-    string characterName;
+    public string characterName;
+
+    // OBJET ACTUEL //
+    public GameObject currentObject;
 
     // DILEMME ACTUEL //
     private SODilemma currentDilema;
@@ -40,6 +43,7 @@ public class BehaviorController : MonoBehaviour
     [Header("EXPOSED VARIABLE")]
     [SerializeField] private NavMeshAgent agentComponent;
     [SerializeField] private BoxCollider _interactionCollider;
+    [SerializeField] private GameObject objectSlot;
 
     BehaviorController _otherHumanInteractingWith;
     private int _currentActionIndex = 0;
@@ -296,6 +300,21 @@ public class BehaviorController : MonoBehaviour
 
     #endregion
     
+    public bool SetObject(GameObject gameObject)
+    {
+        if (!gameObject)
+        {
+            Destroy(currentObject);
+            gameObject = null;
+            return false;
+        }
+        else
+        {
+            gameObject.transform.SetParent(objectSlot.transform, false);
+            currentObject = gameObject;
+            return true;
+        }
+    }
 
     public void SetDilemma(SODilemma dilema)
     {
@@ -353,7 +372,8 @@ public class BehaviorController : MonoBehaviour
     }
     
     public void StopCurrentAction()
-    {
+    {       
+        // @TODO GoToPc est pas en action pour une raison obscure, et donc se faire destroy
         if (_currentActionBase != null)
         {
             if (!_currentActionBase.StopAction())

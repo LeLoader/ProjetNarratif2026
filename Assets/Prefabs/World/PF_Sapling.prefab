@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2905352200704318223}
   - component: {fileID: 4606374700931891334}
+  - component: {fileID: 3349997547182486670}
+  - component: {fileID: 8303443764208371494}
   m_Layer: 0
   m_Name: PF_Sapling
   m_TagString: Sapling
@@ -50,6 +52,44 @@ MonoBehaviour:
   m_Center: {x: 0, y: 0.375, z: 0}
   m_Area: 1
   m_AffectedAgents: ffffffff
+--- !u!111 &3349997547182486670
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2771619235672712642}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 2c2ff123e261f034595f9f91dd5867fd, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 2c2ff123e261f034595f9f91dd5867fd, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 1
+--- !u!114 &8303443764208371494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2771619235672712642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4c6f2aa48241440ac382759b4e46b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ProjetNarratifCore::Sapling
+  growthTime: 15
+  growthAnimation: {fileID: 3349997547182486670}
+  saplingMesh: {fileID: 5659529381145155640}
+  possibleOutcome:
+    _serializedList:
+    - Key: {fileID: 533451898781392892, guid: ab604b08231cc5e4fa8abf1074fd4cc1, type: 3}
+      Value: 65
+    - Key: {fileID: 8212349934390811266, guid: 6366b3999c97f5546a0c94272b81a4e1, type: 3}
+      Value: 35
 --- !u!1001 &9128740458434490486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95,6 +135,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76fe24755a6640d499d30e1abdc5fdaf, type: 3}
+--- !u!33 &5659529381145155640 stripped
+MeshFilter:
+  m_CorrespondingSourceObject: {fileID: -5754084199372789682, guid: 76fe24755a6640d499d30e1abdc5fdaf, type: 3}
+  m_PrefabInstance: {fileID: 9128740458434490486}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8729511450554668957 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 76fe24755a6640d499d30e1abdc5fdaf, type: 3}

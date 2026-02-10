@@ -61,7 +61,7 @@ public class Timer : MonoBehaviour
         Internal_Start(duration, bAutoDestroy);
     }
 
-    public static Timer SetTimer(GameObject ctx, float time, bool autoDestroy)
+    public static Timer SetTimer(GameObject ctx, float time, bool autoDestroy = true)
     {
         Timer timer = ctx.AddComponent<Timer>();
         timer.Internal_Start(time, autoDestroy);

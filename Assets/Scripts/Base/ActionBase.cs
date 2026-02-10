@@ -31,6 +31,7 @@ public class ActionBase : MonoBehaviour
     public virtual void ExecuteAction() { }
     public void ValidationAction(EReturnState returnState)
     { 
+        ActionLogger.LogAction(ActionFactory.GetKeyFromType(GetType()));
         _behaviorController.ActionCompleted();
     }
     public virtual void OnActionDestinationReached()
