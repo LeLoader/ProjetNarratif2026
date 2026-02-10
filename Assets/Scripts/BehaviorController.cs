@@ -127,6 +127,7 @@ public class BehaviorController : MonoBehaviour
     }
     public void MoveToPosition(Vector3 targetPosition, string animationString = "")
     {
+        _currentActionBase.bHasReachedDestination = false;
         agentComponent.SetDestination(targetPosition);
         if (!string.IsNullOrEmpty(animationString))
         {
@@ -304,7 +305,7 @@ public class BehaviorController : MonoBehaviour
     {
         if (!gameObject)
         {
-            Destroy(currentObject);
+            (currentObject);
             gameObject = null;
             return false;
         }
