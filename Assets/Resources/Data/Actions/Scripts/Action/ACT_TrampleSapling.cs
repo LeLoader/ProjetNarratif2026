@@ -27,7 +27,7 @@ public class ACT_TrampleSapling : ActionBase
         ValidationAction(EReturnState.SUCCEEDED);
     }
 
-    public override bool StopAction()
+    public override bool StopAction(EStopActionReason reason)
     {
         return false;
     }

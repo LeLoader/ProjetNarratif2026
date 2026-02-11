@@ -60,11 +60,11 @@ public class BehaviorController : MonoBehaviour
     public Action OnActionCompleted;
     public Action OnDestinationReached;
     public Action OnActionStarted;
-    
+
     #endregion
-    
+
     #region Human States
-    
+
     [SerializeField] private HumanState _currentState = HumanState.Roaming;
 
     public HumanState GetCurrentState()
@@ -326,16 +326,17 @@ public class BehaviorController : MonoBehaviour
     {
         if(!canInteract){return;}
         if(interacting){return;}
-        
-        _otherHumanInteractingWith = otherHuman;
-        
-        SetCanInteractionState(false);
-        StopCurrentAction();
-        
-        if (!_currentActionBase.StopAction())
+
+        if (!StopCurrentAction(EStopActionReason.INTERACTION))
         {
             return;
         }
+
+        _otherHumanInteractingWith = otherHuman;
+
+        StartInteractionBetweenHumans();
+        SetCanInteractionState(false);
+
         StopAiSpeed();
         StartCoroutine(RotateTowardsTarget(otherHuman.transform));
 
@@ -372,17 +373,18 @@ public class BehaviorController : MonoBehaviour
         CheckActions();
     }
     
-    public void StopCurrentAction()
+    public bool StopCurrentAction(EStopActionReason reason)
     {       
         // @TODO GoToPc est pas en action pour une raison obscure, et donc se fait destroy
         if (_currentActionBase != null)
         {
-            if (!_currentActionBase.StopAction())
+            if (!_currentActionBase.StopAction(reason))
             {
-                return;
+                return false;
             }
+            return false;
         }
-        StartInteractionBetweenHumans();
+        return true;
     }
     
     private void StartInteractionBetweenHumans()
@@ -444,7 +446,9 @@ public class BehaviorController : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        StopCurrentAction(EStopActionReason.DEATH);
+        actionsToDo.Clear();
+        ActionFactory.CreateAction("ACT_Die", gameObject);
     }
     
 

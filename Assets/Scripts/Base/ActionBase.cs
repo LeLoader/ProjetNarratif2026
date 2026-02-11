@@ -8,6 +8,13 @@ public enum EReturnState
     SUCCEEDED = 1
 }
 
+public enum EStopActionReason
+{
+    UNKNOWN = 0,
+    INTERACTION = 1,
+    DEATH = 2
+}
+
 public class ActionBase : MonoBehaviour
 {
     public string _componentName = "ActionBase";
@@ -46,7 +53,7 @@ public class ActionBase : MonoBehaviour
         }
     }
     
-    public virtual bool StopAction()
+    public virtual bool StopAction(EStopActionReason reason)
     {
         return true;
     }
