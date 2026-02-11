@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: c219af5ccd0ac1f4a91b0c5a43c702a3, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 3443252862401904724
   m_TableData:
   - m_Id: 54289346560
     m_Localized: Are you my friend?
@@ -359,9 +360,8 @@ MonoBehaviour:
   - m_Id: 2108214936449088
     m_Localized: 'If that''s what you want, then yes!
 
-      As a living being,
-      it''s normal to want to belong to a larger community and adopt their way of
-      life.
+      As a living being, it''s
+      normal to want to belong to a larger community and adopt their way of life.
 
       Congratulations!'
     m_Metadata:
@@ -932,17 +932,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214953226313
-    m_Localized: '[TIME]'
+    m_Localized: '{time}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 3443252862401904724
   - m_Id: 2108214953226314
     m_Localized: NON-EXISTENT
     m_Metadata:
       m_Items: []
   - m_Id: 2108214953226315
-    m_Localized: 'According to your own calendar and clock, right now it''s [TIME]'
+    m_Localized: According to your own calendar and clock, right now it's {time}
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 3443252862401904724
   - m_Id: 2108214961614848
     m_Localized: 'According to a recent article from IANews, time would actually
       be a fake concept made by Illuminatis.
@@ -1122,4 +1124,11 @@ MonoBehaviour:
       m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3443252862401904724
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 2108214953226315
+        - id: 2108214953226313
