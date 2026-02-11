@@ -306,6 +306,7 @@ public class BehaviorController : MonoBehaviour
         if (!gameObject)
         {
             Destroy(currentObject);
+            currentObject = null;
             return false;
         }
         else
