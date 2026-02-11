@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 304b9db5b682ba24997612d0168ed6ca
+guid: c97c9023914199c498697d0ac8fbbfe7
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -31,40 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: AN_chara_walk
-      takeName: Armature.001|Armature.001Action
-      internalID: 2264077025236624520
+      name: AN_Dog_Idle_Jump
+      takeName: rig|rigAction
+      internalID: 3374748389425109202
       firstFrame: 0
-      lastFrame: 39
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Armature.001|SM_Human|SM_Human|rig.001Action
-      takeName: Armature.001|SM_Human|SM_Human|rig.001Action
-      internalID: 4714516765609649592
-      firstFrame: 0
-      lastFrame: 0
+      lastFrame: 85
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
