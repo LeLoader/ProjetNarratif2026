@@ -449,6 +449,12 @@ public class BehaviorController : MonoBehaviour
         {
             metrics[type] = newState;
             OnMetricChanged?.Invoke(type, newState);
+
+            if (type == EMetricType.VIOLENCE && newState == EMetricState.NEGATIVE && ActionLogger.GetActionCount("Act_GetWeapon") >= 1)
+            {
+                SetObject(null);
+                SetObject(Instantiate(PrefabStaticRef.so.pistolPrefab));
+            }
         }
     }
 
