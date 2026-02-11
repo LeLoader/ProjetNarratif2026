@@ -95,6 +95,16 @@ public class BehaviorController : MonoBehaviour
         ChangeMetricState(EMetricType.INDOCTRINATED, EMetricState.NEUTRAL);
         ChangeMetricState(EMetricType.VIOLENCE, EMetricState.NEUTRAL);
     }
+
+    public void SetInteractState(bool newInteractionState)
+    {
+        canInteract = newInteractionState;
+    }
+
+    public bool IsInteracting()
+    {
+        return interacting;
+    }
     
     private void Update()
     {
@@ -156,6 +166,11 @@ public class BehaviorController : MonoBehaviour
     [Header("ANIMATION")]
 
     [SerializeField] private Animator animator;
+
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
 
     private void SpawnTextAboveHead(string text)
     {
