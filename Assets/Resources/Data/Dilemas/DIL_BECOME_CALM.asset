@@ -24,7 +24,24 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   appearanceSpecialConditions: []
-  appearanceConditions: []
+  appearanceConditions:
+  - metric:
+      label:
+        m_TableReference:
+          m_TableCollectionName: 
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      type: 2
+      <Positive>k__BackingField: 0
+      <Neutral>k__BackingField: 0
+      <Negative>k__BackingField: 0
+    state: 1
+    minimum: 85
+    maximum: 100
   newDilemas: []
   npcToSpawn: 3
   firstChoice:
@@ -46,8 +63,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    actionsKeys:
-    - ACT_BecomeCalm
+    actionsKeys: []
     consequences: []
     newDilemmas: []
   secondChoice:

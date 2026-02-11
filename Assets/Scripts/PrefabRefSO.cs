@@ -15,4 +15,5 @@ public class PrefabRefSO : ScriptableObject
     public GameObject pistolPrefab;
     public GameObject axePrefab;
     public GameObject wateringCanPrefab;
+    public GameObject canPrefab;
 }

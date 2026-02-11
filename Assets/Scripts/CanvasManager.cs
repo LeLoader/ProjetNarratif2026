@@ -33,6 +33,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI questionTextUIStatic;
     [SerializeField] private TextMeshProUGUI questionTextUI;
     [SerializeField] private TextMeshProUGUI longAnswerTextUI;
+    [SerializeField] private GameObject _questionBackground;
 
     [SerializeField] private TextMeshProUGUI _choice1;
     [SerializeField] private TextMeshProUGUI _choice2;
@@ -59,6 +60,7 @@ public class CanvasManager : MonoBehaviour
         questionTextUIStatic.text = "";
         _choice1.text = dilema.firstChoice.shortAnswerLabel.GetLocalizedString();
         _choice2.text = dilema.secondChoice.shortAnswerLabel.GetLocalizedString();
+        _questionBackground.SetActive(true);
 
         // INIT BUTTONS //
 
@@ -80,6 +82,7 @@ public class CanvasManager : MonoBehaviour
                 questionTextUI.text = "";
                 _choice1Button.gameObject.SetActive(true);
                 _choice2Button.gameObject.SetActive(true);
+                _questionBackground.SetActive(false);
             };
             questionTextUI.GetComponent<Animation>().Play();
         };
@@ -90,6 +93,7 @@ public class CanvasManager : MonoBehaviour
     {
         longAnswerTextUI.text = choice.longAnswerLabel.GetLocalizedString();
         TypewriterEffect effect = longAnswerTextUI.GetComponent<TypewriterEffect>();
+        
         if (effect)
         {
             Action onCompletedTextRevealed = () => { };
