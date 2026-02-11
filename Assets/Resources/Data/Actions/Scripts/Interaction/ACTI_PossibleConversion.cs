@@ -10,13 +10,14 @@ public class ACTI_PossibleConversion : ActionBase
         {
             if (Random.Range(0, 2) == 1)
             {
-                _behaviorController.GetOtherBehavior().metrics[EMetricType.INDOCTRINATED] = _behaviorController.metrics[EMetricType.INDOCTRINATED];
-            } else
+                _behaviorController.GetOtherBehavior().ChangeMetricState(EMetricType.INDOCTRINATED, _behaviorController.GetOtherBehavior().metrics[EMetricType.INDOCTRINATED]);
+            }
+            else
             {
                 Debug.Log("[POSSIBLE CONVERSION] no conversion happened");
             }
-                ValidationAction(EReturnState.SUCCEEDED);
         }
+        ValidationAction(EReturnState.SUCCEEDED);
 
     }
 }
