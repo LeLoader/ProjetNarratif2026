@@ -23,6 +23,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  appearanceSpecialConditions: []
   appearanceConditions: []
   newDilemas:
   - {fileID: 11400000, guid: 86c94e4f7596114458b1d1eafef88a01, type: 2}
@@ -46,7 +47,8 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    actionsKeys: []
+    actionsKeys:
+    - ACT_LoveInterest
     consequences:
     - metricType: 1
       state: 1

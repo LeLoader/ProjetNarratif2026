@@ -43,6 +43,13 @@ public static class ActionDataDrop
     {
         MetricsWrapper FirstWrapper = new MetricsWrapper(FirstMetrics[EMetricType.INDOCTRINATED], FirstMetrics[EMetricType.VIOLENCE]);
         MetricsWrapper SecondWrapper = new MetricsWrapper(SecondMetrics[EMetricType.INDOCTRINATED], SecondMetrics[EMetricType.VIOLENCE]);
-        return _actions.GetInteractionLine(FirstWrapper).GetDictionary(SecondWrapper);
+        SOActions ActionFound = _actions.GetInteractionLine(FirstWrapper).GetDictionary(SecondWrapper);
+        if (ActionFound == null)
+        {
+            return _actions.GetDefaultAction();
+        } else
+        {
+            return ActionFound;
+        }
     }
 }

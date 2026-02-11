@@ -23,6 +23,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  appearanceSpecialConditions: []
   appearanceConditions: []
   newDilemas:
   - {fileID: 11400000, guid: c9683a6f2781a2742852703828518602, type: 2}
@@ -49,6 +50,7 @@ MonoBehaviour:
       m_LocalVariables: []
     actionsKeys:
     - ACT_SpawnSapling
+    - ACT_SpawnLake
     consequences:
     - metricType: 1
       state: 1
@@ -75,6 +77,7 @@ MonoBehaviour:
       m_LocalVariables: []
     actionsKeys:
     - ACT_SpawnSapling
+    - ACT_Soda
     consequences:
     - metricType: 1
       state: 2

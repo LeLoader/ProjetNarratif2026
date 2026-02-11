@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
@@ -10,4 +11,5 @@ public class SOInteractionLine : ScriptableObject
     {
         return Line[metrics];
     }
+
 }

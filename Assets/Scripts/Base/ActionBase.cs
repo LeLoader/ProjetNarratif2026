@@ -48,6 +48,6 @@ public class ActionBase : MonoBehaviour
     
     public virtual bool StopAction()
     {
-        return true;
+        return false;
     }
 }

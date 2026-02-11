@@ -23,6 +23,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  appearanceSpecialConditions: []
   appearanceConditions: []
   newDilemas:
   - {fileID: 11400000, guid: c123d1236c657244cb824f44809ba6e1, type: 2}
@@ -37,7 +38,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 487a8a2b4e135a849989ba33f298ec6d, type: 2}
   - {fileID: 11400000, guid: 2a59913c3b511364f9869b71331ff8e7, type: 2}
   - {fileID: 11400000, guid: 40e84136128b11b40ba1ff3f26d97e7a, type: 2}
-  npcToSpawn: 3
+  npcToSpawn: 20
   firstChoice:
     shortAnswerLabel:
       m_TableReference:

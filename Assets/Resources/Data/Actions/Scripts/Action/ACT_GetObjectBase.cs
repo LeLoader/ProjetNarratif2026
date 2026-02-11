@@ -6,6 +6,7 @@ public abstract class ACT_GetObjectBase : ActionBase
 
     public override void ExecuteAction()
     {
+        Debug.Log("getting object");
         ValidationAction(_behaviorController.SetObject(Instantiate(Prefab)) ? EReturnState.SUCCEEDED : EReturnState.FAILED);
     }
 }
