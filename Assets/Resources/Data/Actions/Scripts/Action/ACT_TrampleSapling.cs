@@ -25,15 +25,19 @@ public class ACT_TrampleSapling : ActionBase
     {
         base.OnActionDestinationReached();
 
-        Destroy(targetSapling);
+        
         _behaviorController.CallTriggerAnimation("stomp");
 
-        Action action = () => { ValidationAction(EReturnState.SUCCEEDED); };
+        Action action = () => {
+            Destroy(targetSapling);
+            ValidationAction(EReturnState.SUCCEEDED);
+        };
         StartCoroutine(WaitForEndOfAnimation(action, _behaviorController));
     }
 
     public IEnumerator WaitForEndOfAnimation(Action action, BehaviorController controller)
     {
+        yield return new WaitForEndOfFrame();
         while (controller.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
         {
             yield return null;
