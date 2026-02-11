@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 304b9db5b682ba24997612d0168ed6ca
+guid: 333c76b48797f7c448979983b677b9bf
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -31,18 +31,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: AN_chara_walk
+      name: AN_chara_death_gun
       takeName: Armature.001|Armature.001Action
       internalID: 2264077025236624520
       firstFrame: 0
-      lastFrame: 39
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
