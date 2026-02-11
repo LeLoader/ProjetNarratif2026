@@ -305,8 +305,7 @@ public class BehaviorController : MonoBehaviour
     {
         if (!gameObject)
         {
-            (currentObject);
-            gameObject = null;
+            Destroy(currentObject);
             return false;
         }
         else
