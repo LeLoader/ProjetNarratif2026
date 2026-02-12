@@ -21,7 +21,7 @@ public class BubbleController : MonoBehaviour, IPointerClickHandler
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         ChangePosition();
     }
