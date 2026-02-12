@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
-using Touch =  UnityEngine.InputSystem.EnhancedTouch.Touch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class InputController : MonoBehaviour
 {
@@ -30,7 +30,7 @@ public class InputController : MonoBehaviour
     [SerializeField] private LayerMask _mask;
 
     [SerializeField] private UnityEvent onStartTouch;
-    
+
     private GameObject _target;
 
     private Vector2 _previousPosition = Vector2.zero;
@@ -77,9 +77,10 @@ public class InputController : MonoBehaviour
                 Vector3 HitPoint = HitResult.point;
                 HitPoint.y = _target.transform.position.y;
                 _target.transform.position = HitPoint;
-            } else
+            }
+            else
             {
-                Debug.Log("rien touché");
+                Debug.Log("test");
             }
 
             /*Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input);
@@ -87,7 +88,8 @@ public class InputController : MonoBehaviour
             WorldPosition.y = _target.transform.position.y;
             _target.transform.position = WorldPosition;*/
 
-        } else
+        }
+        else
         {
             if (_previousPosition != Vector2.zero)
             {
@@ -141,22 +143,22 @@ public class InputController : MonoBehaviour
     {
         onStartTouch?.Invoke();
         Vector2 InputValue = Touch.activeTouches[0].screenPosition;
-/*
-        if (_showDebug)
-        {
-            Debug.Log($"[INPUT CONTROLLER] Input Value is {InputValue}");
-        }*/
+        /*
+                if (_showDebug)
+                {
+                    Debug.Log($"[INPUT CONTROLLER] Input Value is {InputValue}");
+                }*/
         RaycastHit HitResult;
         Vector3 StartPos = Camera.main.ScreenToWorldPoint(InputValue);
         StartPos.z = transform.position.z;
-/*
-        if (_showDebug)
-        {
-            Debug.Log($"[INPUT CONTROLLER] StartPos is {StartPos}");
-        }*/
+        /*
+                if (_showDebug)
+                {
+                    Debug.Log($"[INPUT CONTROLLER] StartPos is {StartPos}");
+                }*/
         if (Physics.Raycast(StartPos, transform.forward, out HitResult, Mathf.Infinity))
         {
-            if(HitResult.collider.gameObject.TryGetComponent<Movable>(out Movable target))
+            if (HitResult.collider.gameObject.TryGetComponent<Movable>(out Movable target))
             {
                 BehaviorController controller = HitResult.collider.gameObject.GetComponent<BehaviorController>();
                 controller.StopAi();
@@ -168,7 +170,8 @@ public class InputController : MonoBehaviour
                     Debug.Log("[INPUT CONTROLLER] Movable Object Detected");
                 }
             }
-        } else
+        }
+        else
         {
             if (_showDebug)
             {
