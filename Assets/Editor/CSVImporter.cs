@@ -129,7 +129,7 @@ public class CSVImporter : EditorWindow
                 continue;
             }
 
-            if (!eraseExistingAssets && UnityEditor.AssetDatabase.AssetPathExists($"Assets/Data/Dilemas/DIL_{line.Split(',')[0]}.asset"))
+            if (!eraseExistingAssets && UnityEditor.AssetDatabase.AssetPathExists($"Assets/Data/Dilemas/DIL_{line.Split(',')[i]}.asset"))
             {
                 lines[i] = "";
                 // listLines.RemoveAt(i);

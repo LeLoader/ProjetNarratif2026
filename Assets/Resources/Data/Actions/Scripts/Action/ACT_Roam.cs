@@ -26,9 +26,9 @@ public class ACT_Roam : ActionBase
         ValidationAction(EReturnState.SUCCEEDED);
     }
 
-    public override bool StopAction()
+    public override bool StopAction(EStopActionReason reason)
     {
         if (_debugRoamPoint != null) { Destroy(_debugRoamPoint); }
-        return base.StopAction();
+        return base.StopAction(reason);
     }
 }

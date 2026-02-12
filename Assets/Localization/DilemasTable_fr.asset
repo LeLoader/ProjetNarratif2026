@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: fr
   m_SharedData: {fileID: 11400000, guid: c219af5ccd0ac1f4a91b0c5a43c702a3, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 3443252862401904725
   m_TableData:
   - m_Id: 54289346560
     m_Localized: Es-tu mon ami ?
@@ -773,17 +774,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214953226313
-    m_Localized: '[TIME]'
+    m_Localized: '{time}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 3443252862401904725
   - m_Id: 2108214953226314
     m_Localized: INEXISTANT
     m_Metadata:
       m_Items: []
   - m_Id: 2108214953226315
-    m_Localized: Selon votre propre calendrier et horloge, il est actuellement [TIME].
+    m_Localized: Selon votre propre calendrier et horloge, il est actuellement {time}.
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 3443252862401904725
   - m_Id: 2108214961614848
     m_Localized: "Selon un article r\xE9cent de IANews, le temps serait en fait une
       invention des Illuminatis.\nIl ne m'est donc plus possible de vous indiquer
@@ -941,4 +944,11 @@ MonoBehaviour:
       m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3443252862401904725
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 2108214953226315
+        - id: 2108214953226313

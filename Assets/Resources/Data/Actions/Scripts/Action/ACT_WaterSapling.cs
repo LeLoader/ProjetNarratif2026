@@ -34,8 +34,18 @@ public class ACT_WaterSapling : ActionBase
         };
     }
 
-    public override bool StopAction()
+    public override bool StopAction(EStopActionReason reason)
     {
-        return false;
+        switch (reason)
+        {
+            case EStopActionReason.INTERACTION:
+                return false;
+            case EStopActionReason.DEATH:
+                return false;
+
+            default:
+                return true;
+
+        }
     }
 }

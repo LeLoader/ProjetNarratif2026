@@ -23,7 +23,8 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  appearanceSpecialConditions: []
+  appearanceSpecialConditions:
+  - {fileID: 11400000, guid: 7290d64005408e34486843918eae201d, type: 2}
   appearanceConditions: []
   newDilemas: []
   npcToSpawn: 3

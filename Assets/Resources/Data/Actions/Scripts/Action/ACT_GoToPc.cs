@@ -23,7 +23,7 @@ public class ACT_GoToPc : ActionBase
         _behaviorController.StartCoroutine(_behaviorController.RotateTowardsTarget(SceneManager.instance.GetPcTransform()));
     }
 
-    public override bool StopAction()
+    public override bool StopAction(EStopActionReason reason)
     {
         _behaviorController.ShowSpecialTextAboveHead("DONT CARE !");
         return false;
