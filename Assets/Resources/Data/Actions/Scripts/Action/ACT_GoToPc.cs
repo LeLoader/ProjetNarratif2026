@@ -8,6 +8,8 @@ public class ACT_GoToPc : ActionBase
     {
         _behaviorController.MoveToPosition(SceneManager.instance.GetPcTransform().position, "Walk");
         base.ExecuteAction();
+
+        _behaviorController.GetNavMeshAgent().avoidancePriority = 0;
     }
 
     public override void OnActionDestinationReached()
@@ -18,6 +20,7 @@ public class ACT_GoToPc : ActionBase
         {
             CanvasManager.Instance.ShowDilemma(myDilemma, _behaviorController);
             CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(EReturnState.SUCCEEDED); };
+            _behaviorController.GetNavMeshAgent().avoidancePriority = 50;
         };
         OnComputerReached?.Invoke(_behaviorController.transform.position, ShowDilemma);
         _behaviorController.StartCoroutine(_behaviorController.RotateTowardsTarget(SceneManager.instance.GetPcTransform()));

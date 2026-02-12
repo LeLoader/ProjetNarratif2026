@@ -130,6 +130,11 @@ public class BehaviorController : MonoBehaviour
 
     #region AI Meth
 
+    public NavMeshAgent GetNavMeshAgent()
+    {
+        return agentComponent;
+    }
+
     public void FollowTarget(Transform targetTransform)
     {
         _followTargetTransform = targetTransform;
