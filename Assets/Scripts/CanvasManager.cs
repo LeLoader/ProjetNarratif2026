@@ -33,7 +33,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI questionTextUIStatic;
     [SerializeField] private TextMeshProUGUI questionTextUI;
     [SerializeField] private TextMeshProUGUI longAnswerTextUI;
-    [SerializeField] private GameObject _questionBackground;
+    [SerializeField] private Image _questionBackground;
 
     [SerializeField] private TextMeshProUGUI _choice1;
     [SerializeField] private TextMeshProUGUI _choice2;
@@ -58,7 +58,7 @@ public class CanvasManager : MonoBehaviour
         questionTextUIStatic.text = "";
         _choice1.text = dilema.firstChoice.shortAnswerLabel.GetLocalizedString();
         _choice2.text = dilema.secondChoice.shortAnswerLabel.GetLocalizedString();
-        _questionBackground.SetActive(true);
+        _questionBackground.enabled = true;
 
         // INIT BUTTONS //
 
@@ -73,14 +73,14 @@ public class CanvasManager : MonoBehaviour
         Action OnCompleteTextRevealed = () => { };
         OnCompleteTextRevealed = () =>
         {
-            Timer.SetTimer(gameObject, 1.5f, true).OnTimerElapsed += () =>
+            Timer.SetTimer(gameObject, 1.1f, true).OnTimerElapsed += () =>
             {
                 effect.CompleteTextRevealed -= OnCompleteTextRevealed;
                 questionTextUIStatic.text = $"{controller.name}: {dilema.question.GetLocalizedString()}";
                 questionTextUI.text = "";
                 _choice1Button.gameObject.SetActive(true);
                 _choice2Button.gameObject.SetActive(true);
-                _questionBackground.SetActive(false);
+                _questionBackground.enabled = false;
             };
             questionTextUI.GetComponent<Animation>().Play();
         };
@@ -113,6 +113,7 @@ public class CanvasManager : MonoBehaviour
 
                     skipInput.action.started += a;
                 };
+                questionTextUI.text = "Press the screen to skip"; // @TODO Local
                 effect.CompleteTextRevealed -= onCompletedTextRevealed;
             };
 
