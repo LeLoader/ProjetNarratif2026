@@ -1,13 +1,17 @@
 ﻿<Solution>
   <Project Path="SingularityGroup.HotReload.Editor.csproj" />
   <Project Path="AttributesSamples.csproj" />
-  <Project Path="AYellowpaper.SerializedCollections.csproj" />
   <Project Path="EditorAttributes.Editor.csproj" />
   <Project Path="EditorAttributes.csproj" />
   <Project Path="ProjetNarratifCore.csproj" />
+  <Project Path="CFXRRuntime.csproj" />
+  <Project Path="CFXRDemo.csproj" />
+  <Project Path="CFXREditor.csproj" />
   <Project Path="AYellowpaper.SerializedCollections.Editor.csproj" />
   <Project Path="SingularityGroup.HotReload.Runtime.Public.csproj" />
   <Project Path="SingularityGroup.HotReload.Runtime.csproj" />
+  <Project Path="KinoBloom.Runtime.csproj" />
+  <Project Path="ToonyColorsPro.Demo.Editor.csproj" />
   <Project Path="ProjetNarratif2026Editor.csproj" />
   <Project Path="ColorfulHierarchy.csproj" />
 </Solution>
