@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ACT_Die", menuName = "Scriptable Objects/ACT_Die")]
 public class ACT_Die : ActionBase
 {
     public override void ExecuteAction()
