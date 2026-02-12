@@ -55,6 +55,6 @@ public class ActionBase : MonoBehaviour
     
     public virtual bool StopAction(EStopActionReason reason)
     {
-        return true;
+        return false;
     }
 }

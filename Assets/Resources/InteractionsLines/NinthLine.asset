@@ -37,16 +37,16 @@ MonoBehaviour:
     - Key:
         IndoctrinatedMetricState: 2
         ViolenceMetricState: 1
-      Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
+      Value: {fileID: 0}
     - Key:
         IndoctrinatedMetricState: 1
         ViolenceMetricState: 0
-      Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
+      Value: {fileID: 0}
     - Key:
         IndoctrinatedMetricState: 1
         ViolenceMetricState: 2
-      Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
+      Value: {fileID: 0}
     - Key:
         IndoctrinatedMetricState: 1
         ViolenceMetricState: 1
-      Value: {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
+      Value: {fileID: 0}

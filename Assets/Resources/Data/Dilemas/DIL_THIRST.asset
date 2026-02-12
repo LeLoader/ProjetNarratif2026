@@ -50,6 +50,7 @@ MonoBehaviour:
       m_LocalVariables: []
     actionsKeys:
     - ACT_SpawnSapling
+    - ACT_SpawnLake
     consequences:
     - metricType: 1
       state: 1

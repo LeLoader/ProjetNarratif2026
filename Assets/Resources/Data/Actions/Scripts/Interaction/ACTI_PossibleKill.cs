@@ -15,8 +15,8 @@ public class ACTI_PossibleKill : ActionBase
             {
                 Debug.Log("[POSSIBLE KILL] kill failed");
             }
-                ValidationAction(EReturnState.SUCCEEDED);
         }
+        ValidationAction(EReturnState.SUCCEEDED);
 
     }
 }

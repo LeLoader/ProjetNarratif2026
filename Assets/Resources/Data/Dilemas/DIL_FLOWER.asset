@@ -23,6 +23,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  appearanceSpecialConditions: []
   appearanceConditions: []
   newDilemas: []
   npcToSpawn: 3
@@ -45,7 +46,8 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    actionsKeys: []
+    actionsKeys:
+    - ACT_OfferFlower
     consequences: []
     newDilemmas: []
   secondChoice:

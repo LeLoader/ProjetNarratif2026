@@ -10,7 +10,11 @@ public class CharacterBuilderManager : MonoBehaviour
     public static CharacterBuilderManager Instance;
 
     [SerializeField] private GameObject _humanPrefab;
+    [SerializeField] private GameObject _dogPrefab;
+
+
     private List<BehaviorController> _characters = new List<BehaviorController>();
+    public BehaviorController dog;
 
     [Header("Testing")]
     [SerializeField] private SOActions _testAction;
@@ -35,6 +39,20 @@ public class CharacterBuilderManager : MonoBehaviour
         return _characters[UnityEngine.Random.Range(0, _characters.Count)];
     }
 
+    public BehaviorController GetRandomBehaviorControllerNotInteracting(bool onlyEmptyHand = false)
+    {
+        if (_characters.Count == 0) return null;
+
+        if (onlyEmptyHand)
+        {
+            List<BehaviorController> _emptyHandCharacters = _characters.FindAll((x) => x.currentObject == null && !x.IsInteracting());
+            return _emptyHandCharacters[UnityEngine.Random.Range(0, _emptyHandCharacters.Count)];
+        }
+
+        List<BehaviorController> temp = _characters.FindAll((x) => !x.IsInteracting());
+        return temp[UnityEngine.Random.Range(0, temp.Count)];
+    }
+
     public void Start()
     {
         BuildCharacters();
@@ -53,6 +71,22 @@ public class CharacterBuilderManager : MonoBehaviour
         {
             bc.Initialize(startingAction, (_characters.Count + 1).ToString("D3"));
             _characters.Add(bc);
+        }
+    }
+    public void BuildDog(BehaviorController owner)
+    {
+        SceneManager.instance.GetRandomPointInNavMeshInRadiusRange(owner.transform.position, 1f, 2f, out Vector3 spawnPoint);
+        var bc = Instantiate(_dogPrefab, spawnPoint, Quaternion.identity).GetComponent<BehaviorController>();
+        if (bc != null)
+        {
+            bc.Initialize(ActionDataDrop.GetActionRoam(), "DOG");
+            bc.AddAction(ActionDataDrop.GetActionRoam());
+            bc.OnDestinationReached += () =>
+            {
+                bc.FollowTarget(owner.transform);
+                bc.AddAction(ActionDataDrop.GetActionRoam(), 0);
+            };
+            dog = bc;
         }
     }
 
@@ -106,6 +140,17 @@ public class CharacterBuilderManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void EndGame()
+    {
+        foreach (BehaviorController character in _characters)
+        {
+            if (SceneManager.instance.GetRandomPointInNavMeshInRadiusRange(0f, 10f, out Vector3 Position))
+            {
+                character.AddAction(ActionDataDrop.GetActionByID("ACT_GoToLocation"), 0);
+            }
         }
     }
 }

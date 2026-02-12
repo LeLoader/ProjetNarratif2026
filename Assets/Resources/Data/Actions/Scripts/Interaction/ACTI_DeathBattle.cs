@@ -7,7 +7,6 @@ public class ACTI_DeathBattle : ActionBase
     {
         Debug.Log("DeathBattle");
         base.ExecuteAction();
-        ValidationAction(EReturnState.SUCCEEDED);
         if (_behaviorController.GetOtherBehavior().gameObject.GetComponent<ACTI_DeathBattle>().ManagingFight)
         {
             return;
@@ -22,5 +21,6 @@ public class ACTI_DeathBattle : ActionBase
                 _behaviorController.GetOtherBehavior().Die();
             }
         }
+        ValidationAction(EReturnState.SUCCEEDED);
     }
 }
