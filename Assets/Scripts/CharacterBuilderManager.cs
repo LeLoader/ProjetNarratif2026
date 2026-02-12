@@ -106,9 +106,11 @@ public class CharacterBuilderManager : MonoBehaviour
         if (character != null)
         {
             Debug.LogWarning($"Assigned {action} to {character}");
+#if UNITY_EDITOR
             Selection.activeGameObject = character.gameObject;
             Selection.activeTransform = character.gameObject.transform;
             SceneView.lastActiveSceneView.FrameSelected();
+#endif
             character.AddAction(action);
         }
     }
