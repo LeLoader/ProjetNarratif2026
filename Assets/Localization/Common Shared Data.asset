@@ -19,6 +19,14 @@ MonoBehaviour:
     m_Key: UI_SKIP
     m_Metadata:
       m_Items: []
+  - m_Id: 10500748718080
+    m_Key: UI_START
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10599335833600
+    m_Key: UI_LOCALE
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
