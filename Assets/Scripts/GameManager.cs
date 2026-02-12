@@ -49,16 +49,19 @@ public class GameManager : MonoBehaviour
         };
     }
 
-    private void OnCharactersCreationFinished(int npcCount)
+    private void OnCharactersCreationFinished(int npcCount, SOActions action)
     {
         this.npcCount += npcCount;
+        
+        UpdateWorldObjective();
+        SpontaneousMetricChange();
+
+        if (action._actionKey == "ACT_GoToPc") return;
+
         Timer.SetTimer(gameObject, timeBetweenNPC.curve.Evaluate(npcCount), true).OnTimerElapsed += () =>
         {
             CharacterBuilderManager.Instance.AssignAnActionToRandomCharacter(ActionDataDrop.GetActionGoToPc(), true);
         };
-
-        UpdateWorldObjective();
-        SpontaneousMetricChange();
     }
 
     private void UpdateWorldObjective()

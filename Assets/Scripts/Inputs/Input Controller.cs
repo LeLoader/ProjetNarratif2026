@@ -1,5 +1,6 @@
 using System;
 using EditorAttributes;
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,6 +14,7 @@ public class InputController : MonoBehaviour
 
     [SerializeField, VerticalGroup("Min / Max Zoom Value", true, nameof(_minCamerasize), nameof(_maxCameraSize))] private EditorAttributes.Void zoomHolder;
 
+    [SerializeField] private TMP_Text textCharacterName;
 
     [SerializeField, HideProperty, Range(0f, 20f)] private float _movementSpeed = 1f;
     [SerializeField, HideProperty, Range(0f, 20f)] private float _zoomScale = 1f;
@@ -164,7 +166,7 @@ public class InputController : MonoBehaviour
                 controller.StopAi();
                 controller.CallTriggerAnimation("dragAndDrop");
                 _target = HitResult.collider.gameObject;
-                // @TODO show controller number on screen
+                textCharacterName.text = _target.name;
 
                 if (_showDebug)
                 {
@@ -190,6 +192,7 @@ public class InputController : MonoBehaviour
         _previousPosition = Vector2.zero;
         if (_target)
         {
+            textCharacterName.text = "";
             BehaviorController controller = _target.GetComponent<BehaviorController>();
             controller.ResumeAi();
             controller.CallTriggerAnimation("idle");

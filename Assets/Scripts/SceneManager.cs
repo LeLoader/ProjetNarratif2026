@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +10,7 @@ public class SceneManager : MonoBehaviour
     [Header("Object in Scene")]
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform pcTransform;
+    [SerializeField] private RectTransform mainCanvasTransform;
     
     [SerializeField] private GameObject _debugRoamPointPrefab;
 
@@ -114,10 +116,31 @@ public class SceneManager : MonoBehaviour
     {
         return pcTransform;
     }
-    
+
+    [SerializeField] LayerMask groundMask;
+
     public Vector3 GetSpawnPoint()
     {
-        return spawnPoint.position;
+        List<Vector3> positions = new();
+        for (int i = -1; i <= 1; i++)
+        {
+            for (int j = -1; j <= 1; j++)
+            {
+                if (i == 0 && j == 0) continue;
+
+                Vector3 vec = new((Screen.width / 2) + (Screen.width * i) + (1 * i), (Screen.height / 2) + (Screen.height * j) + (1 * j));
+                if (Physics.Raycast(Camera.main.ScreenToWorldPoint(vec), Camera.main.transform.forward, out RaycastHit HitResult, Mathf.Infinity, groundMask))
+                {
+                    if (NavMesh.SamplePosition(HitResult.point, out NavMeshHit hit, 2, NavMesh.AllAreas))
+                    {
+                        positions.Add(hit.position);
+                    }
+                }  
+            }
+        }
+        if (positions.Count == 0) return spawnPoint.position;
+
+        return positions[UnityEngine.Random.Range(0, positions.Count)];
     }
 
     #endregion

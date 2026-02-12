@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-fr
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c018e04edc5e96b42a5ae5586ca09227
+    m_Address: Common_fr
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-fr
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f74eda68a11993945b57ea6f20dea36b
     m_Address: DilemasTable_fr
     m_ReadOnly: 1

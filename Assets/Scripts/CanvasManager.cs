@@ -3,6 +3,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -32,6 +33,7 @@ public class CanvasManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI questionTextUIStatic;
     [SerializeField] private TextMeshProUGUI questionTextUI;
+    [SerializeField] private TextMeshProUGUI skipTextUI;
     [SerializeField] private TextMeshProUGUI longAnswerTextUI;
     [SerializeField] private Image _questionBackground;
 
@@ -40,6 +42,8 @@ public class CanvasManager : MonoBehaviour
 
     [SerializeField] private Button _choice1Button;
     [SerializeField] private Button _choice2Button;
+
+    [SerializeField] private LocalizedString skipString;
 
     [Header("INPUTS")]
     [SerializeField] private InputActionReference skipInput;
@@ -59,6 +63,7 @@ public class CanvasManager : MonoBehaviour
         _choice1.text = dilema.firstChoice.shortAnswerLabel.GetLocalizedString();
         _choice2.text = dilema.secondChoice.shortAnswerLabel.GetLocalizedString();
         _questionBackground.enabled = true;
+        skipTextUI.text = "";
 
         // INIT BUTTONS //
 
@@ -99,7 +104,9 @@ public class CanvasManager : MonoBehaviour
             Action onCompletedTextRevealed = () => { };
             onCompletedTextRevealed = () =>
             {
-                Timer.SetTimer(gameObject, 1, true).OnTimerElapsed += () =>
+                TypewriterEffect effectSkip = skipTextUI.GetComponent<TypewriterEffect>();
+                Action onSkipTextRevealed = () => { };
+                onSkipTextRevealed = () =>
                 {
                     Action<InputAction.CallbackContext> a = (InputAction.CallbackContext ctx) => { };
 
@@ -112,11 +119,15 @@ public class CanvasManager : MonoBehaviour
                     };
 
                     skipInput.action.started += a;
+                    effectSkip.CompleteTextRevealed -= onSkipTextRevealed;
                 };
-                questionTextUI.text = "Press the screen to skip"; // @TODO Local
+                _questionBackground.enabled = false;
+                skipTextUI.text = skipString.GetLocalizedString();
+                effectSkip.CompleteTextRevealed += onSkipTextRevealed;
+
+
                 effect.CompleteTextRevealed -= onCompletedTextRevealed;
             };
-
             effect.CompleteTextRevealed += onCompletedTextRevealed;
         }
         else
