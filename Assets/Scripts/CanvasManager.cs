@@ -12,6 +12,8 @@ public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager Instance;
 
+    [SerializeField] private InputManager _inputManager;
+
     private void Awake()
     {
         if (Instance == null)
@@ -61,6 +63,7 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowDilemma(SODilemma dilema, BehaviorController controller)
     {
+        _inputManager.EnteringDilemma();
         // INIT UI //
 
         questionTextUI.text = dilema.question.GetLocalizedString();
@@ -187,5 +190,9 @@ public class CanvasManager : MonoBehaviour
         }
     }
 
+    public void AllowMovement()
+    {
+        _inputManager.ExitingDilemma();
+    }
 
 }

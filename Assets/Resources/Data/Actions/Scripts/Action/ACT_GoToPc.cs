@@ -24,7 +24,7 @@ public class ACT_GoToPc : ActionBase
         Action ShowDilemma = () =>
         {
             CanvasManager.Instance.ShowDilemma(myDilemma, _behaviorController);
-            CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(EReturnState.SUCCEEDED); };
+            CanvasManager.Instance.OnDilemmaEnded += () => { ValidationAction(EReturnState.SUCCEEDED); CanvasManager.Instance.AllowMovement(); };
             _behaviorController.GetNavMeshAgent().avoidancePriority = 50;
         };
         OnComputerReached?.Invoke(_behaviorController.transform.position, ShowDilemma);

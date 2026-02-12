@@ -1692,6 +1692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e92ab0d65ffc84cbdfb68c8ef8a62d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _inputManager: {fileID: 1335375555}
   _stateProgressSlider: {fileID: 0}
   _dilemmaPanel: {fileID: 303291747}
   questionTextUIStatic: {fileID: 1246008498}
