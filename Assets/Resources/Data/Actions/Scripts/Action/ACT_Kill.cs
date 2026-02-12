@@ -10,7 +10,10 @@ public class ACT_Kill : ActionBase
         _behaviorController.SetInteractState(false);
         target = CharacterBuilderManager.Instance.GetRandomBehaviorControllerNotInteracting();
         target.SetInteractState(false);
-        _behaviorController.MoveToPosition(target.transform.position);
+        Vector3 unitVector = target.transform.position - transform.position;
+        float magnitude = unitVector.magnitude;
+        unitVector.Normalize();
+        _behaviorController.MoveToPosition(target.transform.position * 0.99f);
         target.StopAi();
     }
 

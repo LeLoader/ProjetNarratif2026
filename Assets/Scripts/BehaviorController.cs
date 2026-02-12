@@ -88,7 +88,7 @@ public class BehaviorController : MonoBehaviour
     
     #endregion
 
-    #region Lyfe Cycle Methods
+    #region Life Cycle Methods
 
     public void Initialize(SOActions newAction, string myName = "Human")
     {
