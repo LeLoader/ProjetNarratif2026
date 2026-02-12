@@ -1518,7 +1518,7 @@ MonoBehaviour:
   questionTextUIStatic: {fileID: 1246008498}
   questionTextUI: {fileID: 1284115753}
   longAnswerTextUI: {fileID: 153932310}
-  _questionBackground: {fileID: 81614876}
+  _questionBackground: {fileID: 81614879}
   _choice1: {fileID: 1882879917}
   _choice2: {fileID: 825719755}
   _choice1Button: {fileID: 1824892858}
