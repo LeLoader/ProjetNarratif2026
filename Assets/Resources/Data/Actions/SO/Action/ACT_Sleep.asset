@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a225b167a863f44a19d121c46c9eb5, type: 3}
   m_Name: ACT_Sleep
   m_EditorClassIdentifier: ProjetNarratifCore::SOActions
-  _actionName: 
-  _actionKey: 
+  _actionName: Sleep
+  _actionKey: ACT_Sleep
   _conditionKey: 
-  _canBeRepeated: 1
+  _canBeRepeated: 0
   _isAnInteraction: 0

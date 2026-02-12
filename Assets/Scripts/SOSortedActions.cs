@@ -9,6 +9,9 @@ public class SOSortedActions : ScriptableObject
 
     [SerializeField] private List<SOActions> DefaultActions = new List<SOActions>();
 
+    [SerializeField] public SOActions Thief;
+
+
     public SOInteractionLine GetInteractionLine(MetricsWrapper metrics)
     {
         return AllAvailableActions[metrics];
@@ -18,6 +21,17 @@ public class SOSortedActions : ScriptableObject
     {
         List<SOActions> temp = DefaultActions.FindAll((x) => x.IsAllowed());
         return temp[Random.Range(0, temp.Count)];
+    }
+
+    public SOActions PotentialThief()
+    {
+        if (Thief.IsAllowed())
+        {
+            return Thief;
+        } else
+        {
+            return GetDefaultAction();
+        }
     }
 }
 

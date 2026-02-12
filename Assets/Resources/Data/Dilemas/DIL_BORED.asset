@@ -74,7 +74,6 @@ MonoBehaviour:
       m_LocalVariables: []
     actionsKeys:
     - ACT_Sleep
-    - ACT_Tan
     consequences:
     - metricType: 1
       state: 2

@@ -145,6 +145,7 @@ public class CharacterBuilderManager : MonoBehaviour
 
     public void EndGame()
     {
+        Debug.Log("[CHARACTER BUILDER] is endiing game");
         foreach (BehaviorController character in _characters)
         {
             if (SceneManager.instance.GetRandomPointInNavMeshInRadiusRange(0f, 10f, out Vector3 Position))

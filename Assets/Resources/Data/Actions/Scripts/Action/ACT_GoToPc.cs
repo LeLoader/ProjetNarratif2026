@@ -4,6 +4,11 @@ using UnityEngine;
 public class ACT_GoToPc : ActionBase
 {
     public static event Action<Vector3, Action> OnComputerReached;
+
+    private void Awake()
+    {
+        Debug.Log("jkberblgtr");
+    }
     public override void ExecuteAction()
     {
         _behaviorController.MoveToPosition(SceneManager.instance.GetPcTransform().position, "Walk");

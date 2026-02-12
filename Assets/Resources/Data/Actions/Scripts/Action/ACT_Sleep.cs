@@ -20,9 +20,4 @@ public class ACT_Sleep : ActionBase
             ValidationAction(EReturnState.SUCCEEDED);
         };
     }
-
-    public override bool StopAction()
-    {
-        return false;
-    }
 }

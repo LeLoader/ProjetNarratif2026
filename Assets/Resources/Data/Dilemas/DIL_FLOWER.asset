@@ -47,7 +47,7 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
     actionsKeys:
-    - ACT_OfferFlower
+    - ACT_Flowers
     consequences: []
     newDilemmas: []
   secondChoice:

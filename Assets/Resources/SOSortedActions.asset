@@ -52,6 +52,6 @@ MonoBehaviour:
       Value: {fileID: 11400000, guid: bca4b44bbd712404797fa6b057467c3b, type: 2}
   DefaultActions:
   - {fileID: 11400000, guid: 8e0a838e14b0fae449d17282a2084e5a, type: 2}
-  - {fileID: 11400000, guid: 8d52a853b5188664fa213f1f0d0781ec, type: 2}
   - {fileID: 11400000, guid: b712a415cd864d243a455c105ee24bd1, type: 2}
   - {fileID: 11400000, guid: 27ff419c78fbcb24d9c39537b103355e, type: 2}
+  Thief: {fileID: 11400000, guid: 458648a925b45e14a86f9235c88ca840, type: 2}

@@ -15,5 +15,5 @@ MonoBehaviour:
   _actionName: Flowers
   _actionKey: ACT_Flowers
   _conditionKey: 
-  _canBeRepeated: 1
+  _canBeRepeated: 0
   _isAnInteraction: 0

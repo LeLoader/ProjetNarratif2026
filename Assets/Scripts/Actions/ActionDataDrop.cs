@@ -39,14 +39,18 @@ public static class ActionDataDrop
         return actions.Find(action => action._actionKey == "ACTI_Kill");
     }
 
-    public static SOActions GetActionAvailable(Dictionary<EMetricType, EMetricState> FirstMetrics, Dictionary<EMetricType, EMetricState> SecondMetrics)
+    public static SOActions GetActionAvailable(BehaviorController FirstBehavior, BehaviorController SecondBehavior)
     {
-        MetricsWrapper FirstWrapper = new MetricsWrapper(FirstMetrics[EMetricType.INDOCTRINATED], FirstMetrics[EMetricType.VIOLENCE]);
-        MetricsWrapper SecondWrapper = new MetricsWrapper(SecondMetrics[EMetricType.INDOCTRINATED], SecondMetrics[EMetricType.VIOLENCE]);
-        SOActions ActionFound = _actions.GetInteractionLine(FirstWrapper).GetDictionary(SecondWrapper);
+        SOActions ActionFound = _actions.GetInteractionLine(FirstBehavior.GetMetricsWrapper()).GetDictionary(SecondBehavior.GetMetricsWrapper());
         if (ActionFound == null)
         {
-            return _actions.GetDefaultAction();
+            if ((FirstBehavior.currentObject == null && SecondBehavior.currentObject == null) || (FirstBehavior.currentObject != null && SecondBehavior.currentObject != null))
+            {
+                return _actions.GetDefaultAction();
+            } else
+            {
+                return _actions.PotentialThief();
+            }
         } else
         {
             return ActionFound;

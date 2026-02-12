@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3a225b167a863f44a19d121c46c9eb5, type: 3}
-  m_Name: ACT_SpawnDog
+  m_Name: ACT_PickFlower
   m_EditorClassIdentifier: ProjetNarratifCore::SOActions
-  _actionName: 
-  _actionKey: 
+  _actionName: Pick Flower
+  _actionKey: ACT_PickFlower
   _conditionKey: 
-  _canBeRepeated: 1
+  _canBeRepeated: 0
   _isAnInteraction: 0

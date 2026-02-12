@@ -1369,6 +1369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _humanPrefab: {fileID: 1493839082561470795, guid: 939d3fe42a63f1745a137594a66bbfbf, type: 3}
   _dogPrefab: {fileID: 2997582814324417191, guid: 55d607213ca94b64d895dd339ee302f4, type: 3}
+  dog: {fileID: 0}
   _testAction: {fileID: 11400000, guid: 34324655c091c404cb3e9c5054178611, type: 2}
 --- !u!4 &901994157
 Transform:

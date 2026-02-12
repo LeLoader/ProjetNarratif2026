@@ -22,3 +22,4 @@ MonoBehaviour:
   axePrefab: {fileID: 148363870678315809, guid: 51c5e537aef18604081605b52f4e3345, type: 3}
   wateringCanPrefab: {fileID: 7935518434301531213, guid: 4560f094f69c8de4a92c674ab8d13936, type: 3}
   canPrefab: {fileID: 1048817426441070432, guid: bd3fb7a714d53484bb11d399a2e3d894, type: 3}
+  flowerPrefab: {fileID: 7065614111978511293, guid: 0571f5be675c0234b9cb7d8570ce64a9, type: 3}

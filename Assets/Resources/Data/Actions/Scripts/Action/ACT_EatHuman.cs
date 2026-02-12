@@ -10,7 +10,8 @@ public class ACT_EatHuman : ActionBase
         _behaviorController.SetInteractState(false);
         target = CharacterBuilderManager.Instance.GetRandomBehaviorControllerNotInteracting();
         target.SetInteractState(false);
-        _behaviorController.FollowTarget(target.transform);
+        _behaviorController.MoveToPosition(target.transform.position);
+        target.StopAi();
     }
 
     public override void OnActionDestinationReached()

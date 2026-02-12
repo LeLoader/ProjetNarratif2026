@@ -16,6 +16,8 @@ public class BehaviorController : MonoBehaviour
     // DILEMME ACTUEL //
     private SODilemma currentDilema;
 
+    public Flower _pickedFlower;
+
     [SerializedDictionary("Type", "State")]
     public SerializedDictionary<EMetricType, EMetricState> metrics = new()
     {
@@ -132,6 +134,7 @@ public class BehaviorController : MonoBehaviour
 
     public void FollowTarget(Transform targetTransform)
     {
+        _currentActionBase.bHasReachedDestination = false;
         _followTargetTransform = targetTransform;
         // StartHumanAnimation();
     }
@@ -258,6 +261,7 @@ public class BehaviorController : MonoBehaviour
 
     private void DestroyCurrentAction()
     {
+
         Destroy(_currentActionBase);
       
 
@@ -280,11 +284,16 @@ public class BehaviorController : MonoBehaviour
     }
     public void ActionCompleted()
     {
+        if (_currentActionBase is ACT_GoToPc)
+        {
+            Debug.Log("truc");
+        }
         if (!inAction)
         {
             Debug.LogError("Trying to complete an action while not in action");
             return;
         }
+
         
         interacting = false;
 
@@ -342,6 +351,11 @@ public class BehaviorController : MonoBehaviour
         if(!canInteract){return;}
         if(interacting){return;}
 
+        if (_currentActionBase is ACT_GoToPc)
+        {
+            Debug.Log("bvdtrs");
+        }
+
         if (!StopCurrentAction(EStopActionReason.INTERACTION))
         {
             return;
@@ -393,11 +407,7 @@ public class BehaviorController : MonoBehaviour
         // @TODO GoToPc est pas en action pour une raison obscure, et donc se fait destroy
         if (_currentActionBase != null)
         {
-            if (!_currentActionBase.StopAction(reason))
-            {
-                return false;
-            }
-            return false;
+            return _currentActionBase.StopAction(reason);
         }
         return true;
     }
@@ -410,8 +420,8 @@ public class BehaviorController : MonoBehaviour
         DestroyCurrentAction();
 
         // StopHumanAnimation();
-
-        actionsToDo.Insert(0, ActionDataDrop.GetActionAvailable(metrics, _otherHumanInteractingWith.metrics));
+        SOActions action = ActionDataDrop.GetActionAvailable(this, _otherHumanInteractingWith);
+        actionsToDo.Insert(0, action);
         CheckActions();
     }
     
@@ -456,6 +466,11 @@ public class BehaviorController : MonoBehaviour
                 SetObject(Instantiate(PrefabStaticRef.so.pistolPrefab));
             }
         }
+    }
+
+    public MetricsWrapper GetMetricsWrapper()
+    {
+        return new MetricsWrapper(metrics[EMetricType.INDOCTRINATED], metrics[EMetricType.VIOLENCE]);
     }
 
     public BehaviorController GetOtherBehavior()
