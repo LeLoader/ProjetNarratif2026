@@ -7,24 +7,22 @@ public class ACT_EatLeaf : ActionBase
     {
         base.ExecuteAction();
         GameObject target = SceneManager.instance.GetNearestObjects(_behaviorController.gameObject, GameObject.FindGameObjectsWithTag("Sapling"));
-        _behaviorController.FollowTarget(target.transform);
+        _behaviorController.MoveToPosition(target.transform.position);
     }
 
     public override void OnActionDestinationReached()
     {
         base.OnActionDestinationReached();
-        _behaviorController.CallTriggerAnimation("EatLeaf");
+        _behaviorController.CallTriggerAnimation("eatLeaf");
         StartCoroutine(EatLeaf());
     }
 
     private IEnumerator EatLeaf()
     {
-        if (_behaviorController.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
-        {
-            ValidationAction(EReturnState.SUCCEEDED);
-        } else
+        while (_behaviorController.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && !_behaviorController.GetAnimator().IsInTransition(0))
         {
             yield return null;
         }
+        ValidationAction(EReturnState.SUCCEEDED);
     }
 }

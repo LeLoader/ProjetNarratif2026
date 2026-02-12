@@ -6,10 +6,10 @@ public class ACT_Die : ActionBase
     {
         base.ExecuteAction();
 
-        _behaviorController.CallTriggerAnimation("die");
-
-        // _behaviorController.GetAnimator()
-
+        Timer.SetTimer(gameObject, 5).OnTimerElapsed += () =>
+        {
+            Destroy(gameObject);
+        };
         ValidationAction(EReturnState.SUCCEEDED);
     }
 }

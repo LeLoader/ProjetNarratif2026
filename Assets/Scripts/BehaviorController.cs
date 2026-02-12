@@ -279,6 +279,10 @@ public class BehaviorController : MonoBehaviour
 
         Destroy(_currentActionBase);
       
+        if (actionsToDo.Count == 0)
+        {
+            return;
+        }
 
         if (actionsToDo.Count != 1 && !actionsToDo[0]._canBeRepeated)
         {
@@ -498,7 +502,8 @@ public class BehaviorController : MonoBehaviour
     {
         StopCurrentAction(EStopActionReason.DEATH);
         actionsToDo.Clear();
-        ActionFactory.CreateAction("ACT_Die", gameObject);
+        ActionFactory.CreateAction("ACT_Die", gameObject).Initialize(this, 0);
+        
     }
     
 
