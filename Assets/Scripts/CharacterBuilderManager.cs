@@ -19,7 +19,7 @@ public class CharacterBuilderManager : MonoBehaviour
     [Header("Testing")]
     [SerializeField] private SOActions _testAction;
 
-    public static event Action<int> OnCharactersCreationFinished;
+    public static event Action<int, SOActions> OnCharactersCreationFinished;
 
     public List<BehaviorController> GetCharacters()
     {
@@ -55,7 +55,7 @@ public class CharacterBuilderManager : MonoBehaviour
 
     public void Start()
     {
-        BuildCharacters();
+        BuildCharacters(1, ActionDataDrop.GetActionGoToPc());
     }
 
     [Button]
@@ -71,6 +71,10 @@ public class CharacterBuilderManager : MonoBehaviour
         {
             bc.Initialize(startingAction, (_characters.Count + 1).ToString("D3"));
             _characters.Add(bc);
+            if (startingAction._actionKey == "ACT_GoToPc")
+            {
+                bc.AddAction(ActionDataDrop.GetActionRoam());
+            }
         }
     }
     public void BuildDog(BehaviorController owner)
@@ -124,7 +128,7 @@ public class CharacterBuilderManager : MonoBehaviour
             BuildCharacter(action);
         }
 
-        OnCharactersCreationFinished?.Invoke(x);
+        OnCharactersCreationFinished?.Invoke(x, action);
     }
 
     [Button]
