@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using AYellowpaper.SerializedCollections.KeysGenerators;
 using EditorAttributes;
 using UnityEngine;
 using UnityEngine.Localization;
+
+#if UNITY_EDITOR 
+using AYellowpaper.SerializedCollections.KeysGenerators;
+#endif
 
 [Serializable]
 public class Metric
@@ -271,6 +274,7 @@ public struct MetricsWrapper
     }
 }
 
+#if UNITY_EDITOR 
 [KeyListGenerator("Wrapper Range", typeof(MetricsWrapper))]
 public class MetricRangeGenerator : KeyListGenerator
 {
@@ -318,3 +322,5 @@ public class MetricRangeGenerator : KeyListGenerator
         }
     }
 }
+
+#endif

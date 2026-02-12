@@ -45,7 +45,7 @@ public class Sapling : MonoBehaviour
                 Destroy(saplingMesh);
                 GameObject newObject = Instantiate(outcome.Key, transform);
                 gameObject.name = newObject.GetComponent<MeshFilter>().mesh.name;
-                Destroy(this);
+                Destroy(gameObject);
                 // @TODO Destroy this marche pas?
                 // if the game object must be destroyed
                 //Destroy(gameObject);
