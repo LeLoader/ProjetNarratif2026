@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] private SOSounds _sounds;
     
-    private static SoundManager _instance;
+    public static SoundManager Instance;
 
 
     #region Sources
@@ -48,9 +48,9 @@ public class SoundManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_instance == null)
+        if (Instance == null)
         {
-            _instance = this;
+            Instance = this;
         } else
         {
             Destroy(gameObject);
@@ -61,9 +61,9 @@ public class SoundManager : MonoBehaviour
     {
         if (AllSounds.TryGetValue(key, out Sound soundToPlay))
         {
-            //_source.clip = soundToPlay.GetClip();
-            //_source.volume = _volumes.GetVolume(soundToPlay.SoundType) * _volumes.GetVolume(ESoundType.Master);
-            //_source.Play();
+            _musicSource.clip = soundToPlay.GetClip();
+            _musicSource.volume = _volumes.GetVolume(soundToPlay.SoundType) * _volumes.GetVolume(ESoundType.Master);
+            _musicSource.Play();
         }
         else
         {

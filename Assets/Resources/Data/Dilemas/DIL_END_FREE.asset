@@ -47,7 +47,7 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
     actionsKeys:
-    - ACT_EndOfGame
+    - ACT_EndOfGameFree
     consequences: []
     newDilemmas: []
   secondChoice:
@@ -70,7 +70,7 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
     actionsKeys:
-    - ACT_EndOfGame
+    - ACT_EndOfGameFree
     consequences: []
     newDilemmas: []
   references:

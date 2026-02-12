@@ -57,7 +57,7 @@ public class SoundGenerator : EditorWindow
                     case "SFX":
                         currentType = ESoundType.SFX;
                         break;
-                    case "Music":
+                    case "MUS":
                         currentType = ESoundType.Music;
                         break;
                     default:

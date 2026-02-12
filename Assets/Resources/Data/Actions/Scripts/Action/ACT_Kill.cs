@@ -8,10 +8,10 @@ public class ACT_Kill : ActionBase
     {
         base.ExecuteAction();
         _behaviorController.SetInteractState(false);
-        _behaviorController.GetOtherBehavior().SetInteractState(false);
         target = CharacterBuilderManager.Instance.GetRandomBehaviorControllerNotInteracting();
         target.SetInteractState(false);
-        _behaviorController.FollowTarget(target.transform);
+        _behaviorController.MoveToPosition(target.transform.position);
+        target.StopAi();
     }
 
     public override void OnActionDestinationReached()
@@ -35,11 +35,11 @@ public class ACT_Kill : ActionBase
             _behaviorController.CallTriggerAnimation("killHand");
             target.CallTriggerAnimation("dieHand");
         }
-        while (_behaviorController.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+        while (_behaviorController.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && !_behaviorController.GetAnimator().IsInTransition(0))
         {
             yield return null;
         }
-        _behaviorController.GetOtherBehavior().Die();
+        target.Die();
         ValidationAction(EReturnState.SUCCEEDED);
         _behaviorController.SetInteractState(true);
     }

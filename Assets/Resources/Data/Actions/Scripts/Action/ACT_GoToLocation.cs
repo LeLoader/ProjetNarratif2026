@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ACT_GoToLocation : ActionBase
@@ -20,7 +21,13 @@ public class ACT_GoToLocation : ActionBase
     public override void OnActionDestinationReached()
     {
         base.OnActionDestinationReached();
+        StartCoroutine(LookAtPc());
+    }
 
+    private IEnumerator LookAtPc()
+    {
+        Coroutine Turn = StartCoroutine(_behaviorController.RotateTowardsTarget(SceneManager.instance.GetPcTransform()));
+        yield return Turn;
         ValidationAction(EReturnState.SUCCEEDED);
     }
 }

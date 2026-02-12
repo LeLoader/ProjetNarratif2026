@@ -1,5 +1,6 @@
 using ChristinaCreatesGames.Typography.Typewriter;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -44,6 +45,11 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Button _choice2Button;
 
     [SerializeField] private LocalizedString skipString;
+
+    [Header("End")]
+    [SerializeField] private Image EndImage;
+    [SerializeField] private Sprite EndOne;
+    [SerializeField] private Sprite EndFree;
 
     [Header("INPUTS")]
     [SerializeField] private InputActionReference skipInput;
@@ -154,6 +160,32 @@ public class CanvasManager : MonoBehaviour
     }
 
     #endregion
+
+    public void FadeToBlack(bool IsOne)
+    {
+        StartCoroutine(FadeToBlackCoroutine(IsOne));
+    }
+
+    private IEnumerator FadeToBlackCoroutine(bool IsOne)
+    {
+        float alpha = 0;
+        while (alpha <= 1)
+        {
+            alpha += Time.deltaTime * 0.05f;
+            Color color = EndImage.color;
+            color.a = alpha;
+            EndImage.color = color;
+            yield return null;
+        }
+        EndImage.color = Color.white;
+        if (IsOne)
+        {
+            EndImage.sprite = EndOne;
+        } else
+        {
+            EndImage.sprite = EndFree;
+        }
+    }
 
 
 }

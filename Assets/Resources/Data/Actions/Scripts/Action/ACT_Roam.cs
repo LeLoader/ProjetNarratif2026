@@ -6,6 +6,10 @@ public class ACT_Roam : ActionBase
     public override void ExecuteAction()
     {
         base.ExecuteAction();
+        if (_behaviorController.GameOver)
+        {
+            return;
+        }
 
         Vector3 targetDestination;
         if (SceneManager.instance.GetRandomPointInNavMesh(_behaviorController.transform.position, out targetDestination)){ 
