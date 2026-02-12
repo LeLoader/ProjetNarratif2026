@@ -105,7 +105,9 @@ public class BehaviorController : MonoBehaviour
     {
         return interacting;
     }
-    
+
+    SOActions lastFirstAction;
+
     private void Update()
     {
         animator.SetBool("isMoving", agentComponent.velocity.magnitude > 0.1f);
@@ -124,6 +126,14 @@ public class BehaviorController : MonoBehaviour
         {
             agentComponent.SetDestination(_followTargetTransform.position);
         }
+
+        if (lastFirstAction == null) return;
+        if (lastFirstAction._actionKey == "ACT_GoToPc" && actionsToDo[0] != lastFirstAction)
+        {
+            Debug.Log("");
+        }
+
+        lastFirstAction = actionsToDo[0];
     }
 
     #endregion
@@ -359,8 +369,6 @@ public class BehaviorController : MonoBehaviour
 
         StopAiSpeed();
         StartCoroutine(RotateTowardsTarget(otherHuman.transform));
-
-        SpawnTextAboveHead("!");
     }
     
     private void SetCanInteractionState(bool state)
@@ -404,7 +412,8 @@ public class BehaviorController : MonoBehaviour
             }
             return false;
         }
-        return true;
+        Debug.Log("CANCELED INTERACTION");
+        return false;
     }
     
     private void StartInteractionBetweenHumans()
