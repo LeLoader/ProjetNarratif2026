@@ -38,7 +38,7 @@ public class ACT_TrampleSapling : ActionBase
     public IEnumerator WaitForEndOfAnimation(Action action, BehaviorController controller)
     {
         yield return new WaitForEndOfFrame();
-        while (controller.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+        while (controller.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.5)
         {
             yield return null;
         }

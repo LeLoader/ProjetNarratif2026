@@ -51,8 +51,6 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowDilemma(SODilemma dilema, BehaviorController controller)
     {
-        _dilemmaPanel.SetActive(true);
-
         // INIT UI //
 
         questionTextUI.text = dilema.question.GetLocalizedString();
@@ -75,7 +73,7 @@ public class CanvasManager : MonoBehaviour
         Action OnCompleteTextRevealed = () => { };
         OnCompleteTextRevealed = () =>
         {
-            Timer.SetTimer(gameObject, 1, true).OnTimerElapsed += () =>
+            Timer.SetTimer(gameObject, 1.5f, true).OnTimerElapsed += () =>
             {
                 effect.CompleteTextRevealed -= OnCompleteTextRevealed;
                 questionTextUIStatic.text = $"{controller.name}: {dilema.question.GetLocalizedString()}";
@@ -87,6 +85,8 @@ public class CanvasManager : MonoBehaviour
             questionTextUI.GetComponent<Animation>().Play();
         };
         effect.CompleteTextRevealed += OnCompleteTextRevealed;
+
+        _dilemmaPanel.SetActive(true);
     }
 
     private void ChoseAnswer(SODilemma dilemma, Choice choice, BehaviorController controller)
