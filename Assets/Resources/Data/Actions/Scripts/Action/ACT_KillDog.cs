@@ -37,9 +37,4 @@ public class ACT_KillDog : ActionBase
         ValidationAction(EReturnState.SUCCEEDED);
 
     }
-
-    public override bool StopAction()
-    {
-        return false;
-    }
 }
