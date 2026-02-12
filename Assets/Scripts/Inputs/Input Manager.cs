@@ -32,4 +32,16 @@ public class InputManager : MonoBehaviour
         _touchAction.action.canceled -= _controller.CancelTouch;
         Debug.Log("[INPUT MANAGER] Move Unbound");
     }
+
+    public void EnteringDilemma()
+    {
+        _moveAction.action.performed -= _controller.Move;
+        _zoomAction.action.performed -= _controller.Zoom;
+    }
+
+    public void ExitingDilemma()
+    {
+        _moveAction.action.performed += _controller.Move;
+        _zoomAction.action.performed += _controller.Zoom;
+    }
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   lakePrefab: {fileID: 8121485074519109115, guid: 77439c65c2256ef4eb4c35fa64443cdf, type: 3}
   bookPrefab: {fileID: 6191372911687968970, guid: 93e106baca08ed64c916363aded18ca1, type: 3}
   candlePrefab: {fileID: 7789592400447870925, guid: 3e224141de9d7f340a57092cd77ad719, type: 3}
-  cakePrefab: {fileID: 8212349934390811266, guid: 6366b3999c97f5546a0c94272b81a4e1, type: 3}
+  cakePrefab: {fileID: 6977928697988549957, guid: 80063cc8cbbab3a409d76005ff742146, type: 3}
   glassPrefab: {fileID: 7132298793893860149, guid: aa00265dd10e9d54d88373460156ab97, type: 3}
   pistolPrefab: {fileID: 6047022874241410102, guid: 7eb483f03f976df40bbfd2414af45b35, type: 3}
   axePrefab: {fileID: 148363870678315809, guid: 51c5e537aef18604081605b52f4e3345, type: 3}
