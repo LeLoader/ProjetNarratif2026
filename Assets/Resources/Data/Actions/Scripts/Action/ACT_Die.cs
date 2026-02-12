@@ -8,8 +8,13 @@ public class ACT_Die : ActionBase
 
         Timer.SetTimer(gameObject, 5).OnTimerElapsed += () =>
         {
+            if (ActionLogger.GetActionCount("ACT_Grave") >= 1)
+            {
+                Instantiate(PrefabStaticRef.so.GravePrefab, gameObject.transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         };
+
         ValidationAction(EReturnState.SUCCEEDED);
     }
 }

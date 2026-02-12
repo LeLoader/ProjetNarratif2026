@@ -18,6 +18,8 @@ public class BehaviorController : MonoBehaviour
 
     public Flower _pickedFlower;
 
+    public bool GameOver;
+
     [SerializedDictionary("Type", "State")]
     public SerializedDictionary<EMetricType, EMetricState> metrics = new()
     {
@@ -223,17 +225,29 @@ public class BehaviorController : MonoBehaviour
     
     public void AddAction(List<SOActions> actions)
     {
+        if (GameOver)
+        {
+            return;
+        }
         actionsToDo.AddRange(actions);
         CheckActions();
     }
     
     public void AddAction(SOActions action)
     {
+        if (GameOver)
+        {
+            return;
+        }
         actionsToDo.Add(action);
         CheckActions();
     }
     public void AddAction(SOActions action, int index)
     {
+        if (GameOver)
+        {
+            return;
+        }
         if (index == 0) return;
         actionsToDo.Insert(index, action);
     }

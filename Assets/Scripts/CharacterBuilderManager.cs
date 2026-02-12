@@ -147,13 +147,11 @@ public class CharacterBuilderManager : MonoBehaviour
 
     public void EndGame()
     {
-        Debug.Log("[CHARACTER BUILDER] is endiing game");
+        Debug.Log("[CHARACTER BUILDER] is ending game");
         foreach (BehaviorController character in _characters)
         {
-            if (SceneManager.instance.GetRandomPointInNavMeshInRadiusRange(0f, 10f, out Vector3 Position))
-            {
-                character.AddAction(ActionDataDrop.GetActionByID("ACT_GoToLocation"), 0);
-            }
+           character.AddAction(ActionDataDrop.GetActionByID("ACT_GoToLocation"), 1);
+            character.GameOver = true;
         }
     }
 }

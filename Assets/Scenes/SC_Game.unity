@@ -2092,13 +2092,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   spawnPoint: {fileID: 877201699}
   pcTransform: {fileID: 159069450}
-  mainCanvasTransform: {fileID: 0}
   _debugRoamPointPrefab: {fileID: 0}
   roamRadius: 10
   maxRadius: 50
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!4 &1616875906
 Transform:
   m_ObjectHideFlags: 0
@@ -2238,7 +2234,7 @@ Transform:
   m_GameObject: {fileID: 1639497256}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: -57.5, y: 25.44, z: -51.5}
+  m_LocalPosition: {x: 0, y: 25.44, z: -51.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2458,7 +2454,7 @@ Transform:
   m_GameObject: {fileID: 1739990238}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: -115.46, y: 25.44, z: -51.5}
+  m_LocalPosition: {x: 0, y: 25.44, z: -51.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

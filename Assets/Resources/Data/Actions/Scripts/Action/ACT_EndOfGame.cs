@@ -8,5 +8,6 @@ public class ACT_EndOfGame : ActionBase
         Debug.LogWarning("ending game");
         CharacterBuilderManager.Instance.EndGame();
         ValidationAction(EReturnState.SUCCEEDED);
+        
     }
 }

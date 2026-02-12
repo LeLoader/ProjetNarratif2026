@@ -17,4 +17,5 @@ public class PrefabRefSO : ScriptableObject
     public GameObject wateringCanPrefab;
     public GameObject canPrefab;
     public GameObject flowerPrefab;
+    public GameObject GravePrefab;
 }

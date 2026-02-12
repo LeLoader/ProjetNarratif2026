@@ -19,7 +19,7 @@ public class ACT_EatLeaf : ActionBase
 
     private IEnumerator EatLeaf()
     {
-        while (_behaviorController.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && !_behaviorController.GetAnimator().IsInTransition(0))
+        while (_behaviorController.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.3f && !_behaviorController.GetAnimator().IsInTransition(0))
         {
             yield return null;
         }
