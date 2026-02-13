@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class ACTI_LoveInterest : ActionBase
+public class ACT_Fart : ActionBase
 {
     public override void ExecuteAction()
     {
         base.ExecuteAction();
+        GameManager.instance.StartFarting();
 
-        Instantiate(GameManager.instance.loveVFX, _behaviorController.transform);
-        
         ValidationAction(EReturnState.SUCCEEDED);
     }
 }

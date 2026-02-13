@@ -55,11 +55,11 @@ public class DilemmaManager : MonoBehaviour
         ClearDilemaPool();
         if (state == EMetricState.POSITIVE)
         {
-            dilemmaDatabase.AddDilema(ExtremePositiveDilemma);
+            AddDilemmaInPool(ExtremePositiveDilemma);
         }
         else if (state == EMetricState.NEGATIVE)
         {
-            dilemmaDatabase.AddDilema(ExtremeNegativeDilemma);
+            AddDilemmaInPool(ExtremeNegativeDilemma);
         }
     }
 

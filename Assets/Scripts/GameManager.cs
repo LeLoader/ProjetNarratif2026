@@ -1,5 +1,6 @@
 using EditorAttributes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Curve timeBetweenNPC;
     int npcCount = 0;
+
+    [Header("VFX")]
+    [SerializeField] GameObject fartVFX;
+    [SerializeField] public GameObject loveVFX;
+    [SerializeField] GameObject musicVFX;
 
     #region World Objectives
 
@@ -49,10 +55,26 @@ public class GameManager : MonoBehaviour
         };
     }
 
+    public void StartFarting()
+    {
+        StartCoroutine(Fart());
+    }
+
+    private IEnumerator Fart()
+    {
+        while (true)
+        {
+            SoundManager.Instance.PlaySound("SFX_Fart_" + UnityEngine.Random.Range(1, 4));
+            BehaviorController controller = CharacterBuilderManager.Instance.GetRandomBehaviorController();
+            Instantiate(fartVFX, controller.transform, false);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(15f, 35f));
+        }
+    }
+
     private void OnCharactersCreationFinished(int npcCount, SOActions action)
     {
         this.npcCount += npcCount;
-        
+
         UpdateWorldObjective();
         SpontaneousMetricChange();
 
@@ -87,7 +109,7 @@ public class GameManager : MonoBehaviour
                     Debug.Log($"{result.Item2} of {result.Item1} {currentType}");
                 }
                 typedResults.TryAdd(currentType, results);
-                
+
             }
         }
         return typedResults;
@@ -147,10 +169,11 @@ public class GameManager : MonoBehaviour
 
                 if (comparisonResult == SuperWorldObjective.EComparisonResult.NEED_LESS)
                 {
-                    var controllersToChange = controllers.FindAll((c) => {
+                    var controllersToChange = controllers.FindAll((c) =>
+                    {
                         c.metrics.TryGetValue(currentType, out var value);
                         return value == currentState;
-                        });
+                    });
                     controllerToChange = controllersToChange[UnityEngine.Random.Range(0, controllersToChange.Count)];
                     continue;
                 }
@@ -194,7 +217,7 @@ public class GameManager : MonoBehaviour
             {
                 new WorldObjective(EMetricState.POSITIVE, 0),
                 new WorldObjective(EMetricState.NEUTRAL, 0),
-                new WorldObjective(EMetricState.NEGATIVE, 0)         
+                new WorldObjective(EMetricState.NEGATIVE, 0)
             };
         }
 
@@ -253,7 +276,7 @@ public class GameManager : MonoBehaviour
         {
             List<Tuple<EMetricState, EComparisonResult>> comparisonResult = new();
             foreach (WorldObjective wantedWorldObjective in _worldObjectives)
-            { 
+            {
                 foreach (WorldObjective realityWorldObjective in reality._worldObjectives)
                 {
                     if (realityWorldObjective.state != wantedWorldObjective.state)

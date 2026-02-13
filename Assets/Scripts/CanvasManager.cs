@@ -13,6 +13,7 @@ public class CanvasManager : MonoBehaviour
     public static CanvasManager Instance;
 
     [SerializeField] private InputManager _inputManager;
+    private float lastPlayedSound = -1f;
 
     private void Awake()
     {
@@ -84,17 +85,20 @@ public class CanvasManager : MonoBehaviour
         // 
 
         TypewriterEffect effect = questionTextUI.GetComponent<TypewriterEffect>();
+        effect.CharacterRevealed += PlayTypingSound;
         Action OnCompleteTextRevealed = () => { };
         OnCompleteTextRevealed = () =>
         {
             Timer.SetTimer(gameObject, 1.1f, true).OnTimerElapsed += () =>
             {
                 effect.CompleteTextRevealed -= OnCompleteTextRevealed;
+                effect.CharacterRevealed -= PlayTypingSound;
                 questionTextUIStatic.text = $"{controller.name}: {dilema.question.GetLocalizedString()}";
                 questionTextUI.text = "";
                 _choice1Button.gameObject.SetActive(true);
                 _choice2Button.gameObject.SetActive(true);
                 _questionBackground.enabled = false;
+                SoundManager.Instance.PlaySound("SFX_Typing" + UnityEngine.Random.Range(1, 4));
             };
             questionTextUI.GetComponent<Animation>().Play();
         };
@@ -110,10 +114,12 @@ public class CanvasManager : MonoBehaviour
         
         if (effect)
         {
+            effect.CharacterRevealed += PlayTypingSound;
             Action onCompletedTextRevealed = () => { };
             onCompletedTextRevealed = () =>
             {
                 TypewriterEffect effectSkip = skipTextUI.GetComponent<TypewriterEffect>();
+                effectSkip.CharacterRevealed += PlayTypingSound;
                 Action onSkipTextRevealed = () => { };
                 onSkipTextRevealed = () =>
                 {
@@ -129,6 +135,7 @@ public class CanvasManager : MonoBehaviour
 
                     skipInput.action.started += a;
                     effectSkip.CompleteTextRevealed -= onSkipTextRevealed;
+                    effectSkip.CharacterRevealed -= PlayTypingSound;
                 };
                 _questionBackground.enabled = false;
                 skipTextUI.text = skipString.GetLocalizedString();
@@ -136,6 +143,7 @@ public class CanvasManager : MonoBehaviour
 
 
                 effect.CompleteTextRevealed -= onCompletedTextRevealed;
+                effect.CharacterRevealed -= PlayTypingSound;
             };
             effect.CompleteTextRevealed += onCompletedTextRevealed;
         }
@@ -164,6 +172,21 @@ public class CanvasManager : MonoBehaviour
 
     #endregion
 
+    private void PlayTypingSound(char c)
+    {
+        PlayTypingSound();
+    }
+
+    private void PlayTypingSound()
+    {
+        if (lastPlayedSound + 0.1f < Time.time)
+        {
+            SoundManager.Instance.PlaySound("SFX_Typing" + UnityEngine.Random.Range(1, 4));
+            lastPlayedSound = Time.time;
+        }
+
+    }
+
     public void FadeToBlack(bool IsOne)
     {
         StartCoroutine(FadeToBlackCoroutine(IsOne));
@@ -184,9 +207,11 @@ public class CanvasManager : MonoBehaviour
         if (IsOne)
         {
             EndImage.sprite = EndOne;
+            SoundManager.Instance.PlaySound("SFX_Hypnosis");
         } else
         {
             EndImage.sprite = EndFree;
+            SoundManager.Instance.PlaySound("SFX_TV-Off");
         }
     }
 

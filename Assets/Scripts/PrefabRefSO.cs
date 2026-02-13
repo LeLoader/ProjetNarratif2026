@@ -19,4 +19,5 @@ public class PrefabRefSO : ScriptableObject
     public GameObject flowerPrefab;
     public GameObject GravePrefab;
     public GameObject animationPistolPrefab;
+    public GameObject shovelPrefab;
 }

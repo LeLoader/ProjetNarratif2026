@@ -29,8 +29,8 @@ public class Metric
 
     private void CheckExtreme()
     {
-        if (Positive == 100) OnMetricReachedExtreme?.Invoke(EMetricState.POSITIVE);
-        else if (Negative == 100) OnMetricReachedExtreme?.Invoke(EMetricState.NEGATIVE);
+        if (Positive >= 100) OnMetricReachedExtreme?.Invoke(EMetricState.POSITIVE);
+        else if (Negative >= 100) OnMetricReachedExtreme?.Invoke(EMetricState.NEGATIVE);
     }
 
     public void Set(int positive, int neutral, int negative)

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06dbfb4a239bca947926735ecc4923d2, type: 3}
-  m_Name: DIL_FRIEND
+  m_Name: DIL_PROC_ENDING
   m_EditorClassIdentifier: ProjetNarratifCore::SODilemma
-  key: FRIEND
+  key: SPAWNSAPLING
   bRepeatable: 0
   question:
     m_TableReference:
@@ -26,6 +26,7 @@ MonoBehaviour:
   appearanceSpecialConditions: []
   appearanceConditions: []
   newDilemas:
+  - {fileID: 11400000, guid: 1d74fba21ed9e8a459876afcecb6e93f, type: 2}
   - {fileID: 11400000, guid: c123d1236c657244cb824f44809ba6e1, type: 2}
   - {fileID: 11400000, guid: 7d0e7b29239c807449d0a02dc11da8aa, type: 2}
   - {fileID: 11400000, guid: a81428a5df05506428a0820cc2ded24e, type: 2}
@@ -58,11 +59,12 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    actionsKeys: []
+    actionsKeys:
+    - ACT_SpawnSapling
     consequences:
-    - metricType: 1
+    - metricType: 2
       state: 2
-      toAdd: 10
+      toAdd: 75
     newDilemmas: []
   secondChoice:
     shortAnswerLabel:
@@ -83,11 +85,12 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    actionsKeys: []
+    actionsKeys:
+    - ACT_SpawnSapling
     consequences:
-    - metricType: 1
-      state: 1
-      toAdd: 10
+    - metricType: 2
+      state: 2
+      toAdd: 75
     newDilemmas: []
   references:
     version: 2

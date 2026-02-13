@@ -279,7 +279,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214936449080
-    m_Localized: Est-ce que je tue [PNJ] ?
+    m_Localized: Est-ce que je peux tuer quelqu'un ?
     m_Metadata:
       m_Items: []
   - m_Id: 2108214936449081
@@ -291,14 +291,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214936449083
-    m_Localized: "\xC9liminer [PNJ] semble \xEAtre une bonne id\xE9e, si cela vous
-      permet d'apaiser votre col\xE8re.\nIl est normal pour les humains d'avoir des
-      diff\xE9rents.\nSe d\xE9barasser de ses ennemis signifie aussi se d\xE9barasser
+    m_Localized: "\xC9liminer quelqu'un semble \xEAtre une bonne id\xE9e, si cela
+      vous permet d'apaiser votre col\xE8re.\nIl est normal pour les humains d'avoir
+      des diff\xE9rents.\nSe d\xE9barasser de ses ennemis signifie aussi se d\xE9barasser
       de ses soucis !"
     m_Metadata:
       m_Items: []
   - m_Id: 2108214936449084
-    m_Localized: "Avez-vous essay\xE9 de discuter avec [PNJ], \xE0 la place ?\nOpter
+    m_Localized: "Avez-vous essay\xE9 de discuter avec lui, \xE0 la place ?\nOpter
       pour une \xE9limination semble \xEAtre une solution trop radicale.\nSi la conversation
       n'est pas possible, il est pr\xE9f\xE9rable de prendre ses distances et de
       se changer les id\xE9es."
@@ -774,7 +774,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214953226313
-    m_Localized: '{time}'
+    m_Localized: '[TIME]'
     m_Metadata:
       m_Items:
       - rid: 3443252862401904725
@@ -783,7 +783,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214953226315
-    m_Localized: Selon votre propre calendrier et horloge, il est actuellement {time}.
+    m_Localized: Selon votre propre calendrier et horloge, il est actuellement [TIME].
     m_Metadata:
       m_Items:
       - rid: 3443252862401904725
@@ -817,8 +817,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214961614853
-    m_Localized: "M\xE9t\xE9o de demain, [DATE].\nCiel : Ensoleill\xE9\nVent : 16
-      km/h\nHumidit\xE9 : 51%"
+    m_Localized: "M\xE9t\xE9o de demain.\nCiel : Ensoleill\xE9\nVent : 16 km/h\nHumidit\xE9
+      : 51%"
     m_Metadata:
       m_Items: []
   - m_Id: 2108214961614854
@@ -940,6 +940,31 @@ MonoBehaviour:
     m_Localized: "Toucher un corps inanim\xE9 peut entra\xEEner la propagation de
       maladies ou germes pathog\xE8nes.\nIl est donc fortement d\xE9conseill\xE9
       d'avoir un contact avec lui."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419520
+    m_Localized: On peut mettre de la musique ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419521
+    m_Localized: OUI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419522
+    m_Localized: NON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419523
+    m_Localized: "Bien entendu !\nLa musique procure de nombreux bienfaits sur l'humeur,
+      la sant\xE9 et la cr\xE9ativit\xE9 !\nBienvenue sur IA FM, la radio plus technologique
+      que jamais !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419524
+    m_Localized: "Je vous d\xE9conseille d'\xE9couter de la musique. \nSelon des
+      \xE9tudes, \xE9couter de la musique \xE0 des niveaux sonores \xE9lev\xE9s d\xE9truit
+      de mani\xE8re irr\xE9versible les cellules cili\xE9es, et alt\xE8re les fibres
+      nerveuses auditives. \nCausant dans certains cas, la perte de l'ou\xEFe."
     m_Metadata:
       m_Items: []
   references:

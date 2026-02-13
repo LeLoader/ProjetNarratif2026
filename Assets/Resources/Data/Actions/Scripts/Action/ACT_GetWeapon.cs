@@ -5,7 +5,14 @@ public class ACT_GetWeapon : ActionBase
     public override void ExecuteAction()
     {
         base.ExecuteAction();
-        _behaviorController.SetObject(Instantiate(PrefabStaticRef.so.pistolPrefab));
+        foreach (BehaviorController controller in CharacterBuilderManager.Instance.GetCharacters())
+        {
+            if (controller.metrics[EMetricType.VIOLENCE] == EMetricState.NEGATIVE)
+            {
+                controller.SetObject(Instantiate(PrefabStaticRef.so.animationPistolPrefab), "BNS_R_Arm_end");
+            }
+        }
+        SoundManager.Instance.PlaySound("SFX_Get_Weapon");
         ValidationAction(EReturnState.SUCCEEDED);
     }
 }

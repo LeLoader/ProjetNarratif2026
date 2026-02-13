@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ACT_WaterSapling : ActionBase
@@ -11,8 +12,8 @@ public class ACT_WaterSapling : ActionBase
         targetSapling = SceneManager.instance.GetNearestObjects(_behaviorController.gameObject, saplings);
         if (targetSapling)
         {
-            _behaviorController.SetObject(Instantiate(PrefabStaticRef.so.wateringCanPrefab));
-            _behaviorController.MoveToPosition(targetSapling.transform.position);
+            _behaviorController.SetObject(Instantiate(PrefabStaticRef.so.wateringCanPrefab), "BNS_R_Arm_end");
+            _behaviorController.MoveToPosition(targetSapling.transform.position * 0.99f);
         }
         else
         {
@@ -24,8 +25,17 @@ public class ACT_WaterSapling : ActionBase
     {
         base.OnActionDestinationReached();
 
+        StartCoroutine(Water());
+    }
+
+    private IEnumerator Water()
+    {
+        Coroutine rot = _behaviorController.StartCoroutine(_behaviorController.RotateTowardsTarget(targetSapling.transform));
+        yield return rot;
+
+        _behaviorController.CallTriggerAnimation("waterSapling");
+        SoundManager.Instance.PlaySound("SFX_Watering");
         targetSapling.GetComponent<Sapling>().Water();
-            // @TODO Add to a list, to create new saplings each time characters are created
 
         Timer.SetTimer(gameObject, 3f).OnTimerElapsed += () =>
         {

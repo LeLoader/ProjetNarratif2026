@@ -215,7 +215,10 @@ MonoBehaviour:
   globalMetricsSO: {fileID: 11400000, guid: 790581f485cd9cd4890b561951896a3a, type: 2}
   globalMetrics:
     metrics: []
-  timeBetweenNPC: {fileID: 11400000, guid: 9565536c90a247a489154464e5466223, type: 2}
+  timeBetweenNPC: {fileID: 11400000, guid: d39eed478582298458f2f919a5912443, type: 2}
+  fartVFX: {fileID: 4850836736175644153, guid: aa8e7ccdd24b9c64e96378e2ddf27e62, type: 3}
+  loveVFX: {fileID: 4892378221169522376, guid: d69077016a984324981e03dd10017cda, type: 3}
+  musicVFX: {fileID: 0}
   goalSuperWorldObjectives: []
   realitySuperWorldObjectives: []
   references:
@@ -342,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603c52694f1dc864ca61a4fffa2f6e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ProjetNarratifCore::DilemaManager
-  dilemmaManagerParams: {fileID: 11400000, guid: a7cd1f8c1263a5644b73c60632191f96, type: 2}
+  dilemmaManagerParams: {fileID: 11400000, guid: 4ee8ff1835c4ffa4cac5d0d98d0462ac, type: 2}
   ExtremePositiveDilemma: {fileID: 11400000, guid: 0ed052e2b5ba0f444b52dc6f869fa593, type: 2}
   ExtremeNegativeDilemma: {fileID: 11400000, guid: 568ad8649214f0447b2e9327693f0bd3, type: 2}
   dilemmasPool: []
@@ -843,8 +846,8 @@ Transform:
   m_GameObject: {fileID: 227699495}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9, y: 23.6, z: -46.9}
-  m_LocalScale: {x: 100, y: 11.5, z: 110}
+  m_LocalPosition: {x: 0, y: 23.6, z: -40.4}
+  m_LocalScale: {x: 100, y: 11.5, z: 105}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

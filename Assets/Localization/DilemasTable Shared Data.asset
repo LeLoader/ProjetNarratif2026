@@ -195,24 +195,24 @@ MonoBehaviour:
     m_Key: ANSLONG_END_ECO_2
     m_Metadata:
       m_Items: []
-  - m_Id: 2109081597095936
-    m_Key: New Entry
+  - m_Id: 7045735435087872
+    m_Key: New Entry 5
     m_Metadata:
       m_Items: []
-  - m_Id: 2109081597095937
-    m_Key: New Entry 1
+  - m_Id: 7045735472836608
+    m_Key: New Entry 6
     m_Metadata:
       m_Items: []
-  - m_Id: 2109081597095938
-    m_Key: New Entry 2
+  - m_Id: 7045735472836609
+    m_Key: New Entry 7
     m_Metadata:
       m_Items: []
-  - m_Id: 2109081597095939
-    m_Key: New Entry 3
+  - m_Id: 7045735472836610
+    m_Key: New Entry 8
     m_Metadata:
       m_Items: []
-  - m_Id: 2109081597095940
-    m_Key: New Entry 4
+  - m_Id: 7045735472836611
+    m_Key: New Entry 9
     m_Metadata:
       m_Items: []
   - m_Id: 2108214936449070
@@ -793,6 +793,46 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2108214961614878
     m_Key: ANSLONG_DEATH_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419520
+    m_Key: QUE_MUSIC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419521
+    m_Key: ANS_MUSIC_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419522
+    m_Key: ANS_MUSIC_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419523
+    m_Key: ANSLONG_MUSIC_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419524
+    m_Key: ANSLONG_MUSIC_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2109081597095936
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2109081597095937
+    m_Key: New Entry 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2109081597095938
+    m_Key: New Entry 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2109081597095939
+    m_Key: New Entry 3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2109081597095940
+    m_Key: New Entry 4
     m_Metadata:
       m_Items: []
   m_Metadata:

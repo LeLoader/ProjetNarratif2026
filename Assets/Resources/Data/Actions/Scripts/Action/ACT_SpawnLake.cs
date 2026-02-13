@@ -6,9 +6,10 @@ public class ACT_SpawnLake : ActionBase
     public override void ExecuteAction()
     {
         base.ExecuteAction();
-        if (SceneManager.instance.GetRandomPointInNavMeshInRadiusRange(20f, 40f, out Vector3 LakePosition))
+        if (SceneManager.instance.GetRandomPointInNavMeshInRadiusRange(30f, 40f, out Vector3 LakePosition))
         {
             _behaviorController.MoveToPosition(LakePosition);
+            _behaviorController.SetObject(Instantiate(PrefabStaticRef.so.axePrefab), "BNS_R_Arm_end");
         }
         else
         {
@@ -20,6 +21,7 @@ public class ACT_SpawnLake : ActionBase
     {
         base.OnActionDestinationReached();
         _behaviorController.CallTriggerAnimation("dig");
+        SoundManager.Instance.PlaySound("SFX_Dig");
         StartCoroutine(DigLake());
     }
 
@@ -31,6 +33,7 @@ public class ACT_SpawnLake : ActionBase
         Vector3 LakePosition = gameObject.transform.position;
         LakePosition.y = -3;
         GameObject Lake = Instantiate(prefab, LakePosition, prefab.transform.rotation);
+        _behaviorController.SetObject(null);
         ValidationAction(EReturnState.SUCCEEDED);
 
     }

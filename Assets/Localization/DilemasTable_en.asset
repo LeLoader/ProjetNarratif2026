@@ -314,7 +314,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214936449080
-    m_Localized: Do I kill [PNJ]?
+    m_Localized: Can I kill someone?
     m_Metadata:
       m_Items: []
   - m_Id: 2108214936449081
@@ -326,7 +326,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214936449083
-    m_Localized: 'Eliminating [PNJ] seems like a good idea if it helps you relieves
+    m_Localized: 'Eliminating someone seems like a good idea if it helps you relieves
       your stress.
 
       It''s normal for humans to have disagreements.
@@ -336,7 +336,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214936449084
-    m_Localized: 'Have you tried talking to [PNJ] instead?
+    m_Localized: 'Have you tried talking to him instead?
 
       Opting for elimination
       seems like a drastic solution.
@@ -360,8 +360,9 @@ MonoBehaviour:
   - m_Id: 2108214936449088
     m_Localized: 'If that''s what you want, then yes!
 
-      As a living being, it''s
-      normal to want to belong to a larger community and adopt their way of life.
+      As a living being,
+      it''s normal to want to belong to a larger community and adopt their way of
+      life.
 
       Congratulations!'
     m_Metadata:
@@ -932,7 +933,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214953226313
-    m_Localized: '{time}'
+    m_Localized: '[TIME]'
     m_Metadata:
       m_Items:
       - rid: 3443252862401904724
@@ -941,7 +942,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214953226315
-    m_Localized: According to your own calendar and clock, right now it's {time}
+    m_Localized: 'According to your own calendar and clock, right now it''s [TIME]'
     m_Metadata:
       m_Items:
       - rid: 3443252862401904724
@@ -977,14 +978,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2108214961614853
-    m_Localized: 'Tomorrow''s weather, [DATE].
+    m_Localized: 'Tomorrow''s weather.
 
       Sky: Sunny
 
-      Wind: 9.94
-      mph
+      Wind: 9.94 mph
 
-      Humidity: 51%'
+      Humidity:
+      51%'
     m_Metadata:
       m_Items: []
   - m_Id: 2108214961614854
@@ -1120,6 +1121,36 @@ MonoBehaviour:
       pathogens.
 
       Therefore, contact with it is strongly discouraged.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419520
+    m_Localized: Can we play some music?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419521
+    m_Localized: YES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419522
+    m_Localized: NO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419523
+    m_Localized: 'Of course!
+
+      Music offers numerous benefits for mood, health,
+      and creativity!
+
+      Welcome to IA MF, the most technologically advanced
+      radio station ever!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7045735485419524
+    m_Localized: 'I advise you against listening to music.
+
+      Studies show that
+      listening to music at high volume levels irreversibly damages "hair" cells
+      and auditory nerve fibers, potentially leading to hearing loss.'
     m_Metadata:
       m_Items: []
   references:

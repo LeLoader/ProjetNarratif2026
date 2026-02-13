@@ -10,7 +10,7 @@ public class SceneManager : MonoBehaviour
     [Header("Object in Scene")]
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform pcTransform;
-    [SerializeField] private RectTransform mainCanvasTransform;
+    [SerializeField] public RectTransform mainCanvasTransform;
     
     [SerializeField] private GameObject _debugRoamPointPrefab;
 
