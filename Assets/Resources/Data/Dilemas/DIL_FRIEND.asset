@@ -43,7 +43,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c931192b8641d994091fbe0a438c301c, type: 2}
   - {fileID: 11400000, guid: a1d710d02ea280447ae54256ee8fe827, type: 2}
   - {fileID: 11400000, guid: c9683a6f2781a2742852703828518602, type: 2}
-  - {fileID: 11400000, guid: 0b1abdd52a95c0848873be2689f548d9, type: 2}
   - {fileID: 11400000, guid: 3759a60dfe1b60b4988c851df5143701, type: 2}
   npcToSpawn: 3
   firstChoice:
