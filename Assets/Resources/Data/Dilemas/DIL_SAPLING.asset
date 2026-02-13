@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DIL_SAPLING
   m_EditorClassIdentifier: ProjetNarratifCore::SODilemma
   key: SAPLING
-  bRepeatable: 1
+  bRepeatable: 0
   question:
     m_TableReference:
       m_TableCollectionName: DilemasTable

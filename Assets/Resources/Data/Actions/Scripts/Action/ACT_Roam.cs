@@ -32,7 +32,6 @@ public class ACT_Roam : ActionBase
 
     public override bool StopAction(EStopActionReason reason)
     {
-        if (_debugRoamPoint != null) { Destroy(_debugRoamPoint); }
-        return base.StopAction(reason);
+        return true;
     }
 }
