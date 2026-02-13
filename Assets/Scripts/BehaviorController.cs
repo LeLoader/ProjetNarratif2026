@@ -469,7 +469,7 @@ public class BehaviorController : MonoBehaviour
         {
             return _currentActionBase.StopAction(reason);
         }
-        if (actionsToDo[0]._actionKey == "ACT_GoToPc")
+        if (actionsToDo.Count > 0 && actionsToDo[0]._actionKey == "ACT_GoToPc")
         {
             Debug.Log("CANCELED INTERACTION");
         }

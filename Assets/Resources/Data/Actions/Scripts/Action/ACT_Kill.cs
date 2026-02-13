@@ -8,7 +8,11 @@ public class ACT_Kill : ActionBase
     {
         base.ExecuteAction();
         _behaviorController.SetInteractState(false);
-        target = CharacterBuilderManager.Instance.GetRandomBehaviorControllerNotInteracting();
+        for (int i = 0; i <= 5; i++) {
+            target = CharacterBuilderManager.Instance.GetRandomBehaviorControllerNotInteracting();
+            if (target != null && target != _behaviorController) break;
+        }
+        if (target == null || target == _behaviorController) ValidationAction(EReturnState.FAILED);
         target.SetInteractState(false);
         Vector3 unitVector = target.transform.position - transform.position;
         float magnitude = unitVector.magnitude;

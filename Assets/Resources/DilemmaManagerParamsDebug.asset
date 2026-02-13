@@ -15,6 +15,8 @@ MonoBehaviour:
   specialsDilemmas:
     _serializedList:
     - Key: 1
-      Value: {fileID: 11400000, guid: e671228ebe482df4daf8cb8c2ddd1496, type: 2}
-    - Key: 2
-      Value: {fileID: 11400000, guid: a81428a5df05506428a0820cc2ded24e, type: 2}
+      Value: {fileID: 11400000, guid: 0f76dd629740d5f4b81d2fd94dd94c99, type: 2}
+    - Key: 3
+      Value: {fileID: 11400000, guid: 2d3a496c670cb6647b6f6dce7567ad4e, type: 2}
+    - Key: 5
+      Value: {fileID: 11400000, guid: 649fd0be887b5524681c67e3fae77ec1, type: 2}
