@@ -10,6 +10,7 @@ public class ACT_SpawnLake : ActionBase
         {
             _behaviorController.MoveToPosition(LakePosition);
             _behaviorController.SetObject(Instantiate(PrefabStaticRef.so.axePrefab), "BNS_R_Arm_end");
+            SoundManager.Instance.PlaySound("SFX_Get_Shovel");
         }
         else
         {

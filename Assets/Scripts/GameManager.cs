@@ -78,6 +78,20 @@ public class GameManager : MonoBehaviour
         UpdateWorldObjective();
         SpontaneousMetricChange();
 
+        if (ActionLogger.GetActionCount("ACT_WaterSapling") >= 1)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                if (SceneManager.instance.GetRandomPointInNavMeshInRadiusRange(20f, 50f, out Vector3 saplingPosition))
+                {
+                    GameObject prefab = PrefabStaticRef.so.saplingPrefab;
+                    Vector3 RandomRotation = new Vector3(0, UnityEngine.Random.Range(0, 359), 0);
+                    GameObject sapling = Instantiate(prefab, saplingPosition, Quaternion.Euler(RandomRotation));
+                    sapling.GetComponent<Sapling>().Water();
+                }
+            }
+        }
+
         if (action._actionKey == "ACT_GoToPc") return;
 
         Timer.SetTimer(gameObject, timeBetweenNPC.curve.Evaluate(npcCount), true).OnTimerElapsed += () =>

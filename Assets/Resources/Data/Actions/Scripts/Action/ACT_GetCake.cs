@@ -8,5 +8,6 @@ public class ACT_GetCake : ACT_GetObjectBase
     public override void ExecuteAction()
     {
         base.ExecuteAction();
+        SoundManager.Instance.PlaySound("SFX_Birthday");    
     }
 }
