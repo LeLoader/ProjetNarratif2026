@@ -87,8 +87,11 @@ public class CharacterBuilderManager : MonoBehaviour
             bc.AddAction(ActionDataDrop.GetActionRoam());
             bc.OnDestinationReached += () =>
             {
-                bc.FollowTarget(owner.transform);
-                bc.AddAction(ActionDataDrop.GetActionRoam(), 0);
+                if (bc)
+                {
+                    bc.FollowTarget(owner.transform);
+                    bc.AddAction(ActionDataDrop.GetActionRoam(), 0);
+                }
             };
             dog = bc;
         }

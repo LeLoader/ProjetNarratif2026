@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 public class BehaviorController : MonoBehaviour
 {
@@ -360,6 +361,11 @@ public class BehaviorController : MonoBehaviour
     
     public bool SetObject(GameObject gameObject)
     {
+        return SetObject(gameObject, objectSlot.transform);
+    }
+
+    public bool SetObject(GameObject gameObject, Transform parent)
+    {
         if (!gameObject)
         {
             Destroy(currentObject);
@@ -368,9 +374,33 @@ public class BehaviorController : MonoBehaviour
         }
         else
         {
-            gameObject.transform.SetParent(objectSlot.transform, false);
+            gameObject.transform.SetParent(parent.transform, false);
             currentObject = gameObject;
             return true;
+        }
+    }
+
+    public bool SetObject(GameObject gameObject, string boneName)
+    {
+        if (!gameObject)
+        {
+            Destroy(currentObject);
+            currentObject = null;
+            return false;
+        }
+        else
+        {
+            Transform[] transforms = GetComponentsInChildren<Transform>();
+            foreach (Transform t in transforms)
+            {
+                if (t.gameObject.name == boneName)
+                {
+                    gameObject.transform.SetParent(t, false);
+                    currentObject = gameObject;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 

@@ -61,13 +61,27 @@ public class SoundManager : MonoBehaviour
     {
         if (AllSounds.TryGetValue(key, out Sound soundToPlay))
         {
-            _musicSource.clip = soundToPlay.GetClip();
-            _musicSource.volume = _volumes.GetVolume(soundToPlay.SoundType) * _volumes.GetVolume(ESoundType.Master);
-            _musicSource.Play();
+            AudioSource audioSource = GetAudioSource(soundToPlay.SoundType);
+            audioSource.clip = soundToPlay.GetClip();
+            audioSource.volume = _volumes.GetVolume(soundToPlay.SoundType) * _volumes.GetVolume(ESoundType.Master);
+            audioSource.Play();
         }
         else
         {
             Debug.LogError($"[SOUND MANAGER] sound not found for key {key}");
+        }
+    }
+
+    private AudioSource GetAudioSource(ESoundType type)
+    {
+        switch (type)
+        {
+            case ESoundType.Music:
+                return _musicSource;
+            case ESoundType.SFX:
+                return _SFXSource;
+            default:
+                return _SFXSource;
         }
     }
 

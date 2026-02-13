@@ -15,6 +15,13 @@ public class ACT_Kill : ActionBase
         unitVector.Normalize();
         _behaviorController.MoveToPosition(target.transform.position * 0.99f);
         target.StopAi();
+        _behaviorController.ChangeMetricState(EMetricType.VIOLENCE, EMetricState.NEGATIVE);
+
+        if (_behaviorController.metrics[EMetricType.VIOLENCE] == EMetricState.NEGATIVE && ActionLogger.GetActionCount("ACT_GetWeapon") >= 1)
+        {
+            _behaviorController.SetObject(Instantiate(PrefabStaticRef.so.animationPistolPrefab), "BNS_R_Arm_end");
+            SoundManager.Instance.PlaySound("SFX_Get_Weapon");
+        }
     }
 
     public override void OnActionDestinationReached()
@@ -33,9 +40,11 @@ public class ACT_Kill : ActionBase
         {
             _behaviorController.CallTriggerAnimation("killPistol");
             target.CallTriggerAnimation("diePistol");
+            SoundManager.Instance.PlaySound("SFX_Shoot");
         } else
         {
             _behaviorController.CallTriggerAnimation("killHand");
+            SoundManager.Instance.PlaySound("SFX_Strangle");
             target.CallTriggerAnimation("dieHand");
         }
         while (_behaviorController.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && !_behaviorController.GetAnimator().IsInTransition(0))
